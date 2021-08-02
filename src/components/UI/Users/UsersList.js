@@ -13,7 +13,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        maxWidth: 752,
+        [theme.breakpoints.up('md')]: {
+            // maxWidth: 752, // maybe change later
+            margin: '0 auto'
+        }
     },
 }));
 
