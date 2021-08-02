@@ -1,11 +1,8 @@
 import React from 'react'
+import UsersList from './../components/UI/Users/UsersList'
 
 const Home = () => {
-    return (
-        <div>
-            Hello from Home
-        </div>
-    )
+    return <UsersList />
 }
 
 export default Home
