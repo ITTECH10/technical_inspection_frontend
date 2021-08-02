@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-  const {logout} = useData()
+  const {logout, user, loading} = useData()
 
   return (
     <div className={classes.root}>
@@ -34,9 +34,9 @@ export default function Navbar() {
             <HomeIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Welcome
+            Home
           </Typography>
-          <NewUserCreation />
+            {user.role === 'admin' && <NewUserCreation />}
           <Button onClick={() => logout()} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useCallback} from 'react'
 import axios from 'axios'
 
 const DataContext = React.createContext()
@@ -10,19 +10,38 @@ export const useData = () => {
 const DataContextProvider = ({children}) => {
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [user, setUser] = useState({})
 
-    const logout = () => {
+    // console.log(loading)
+
+    const logout = useCallback(() => {
         localStorage.removeItem('token')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
-    }
+    }, [])
+
+    const getUserData = useCallback(() => {
+        setLoading(true)
+        axios('/users/me').then(res => {
+            if(res.status === 200) {
+                setUser(res.data.user)
+                setLoading(false)
+            }
+        })
+        .catch(err => {
+            setLoading(false)
+            console.log(err.response)
+        })
+    }, [])
 
     const value = {
         authenticated,
         setAuthenticated,
         loading,
         setLoading,
-        logout
+        logout,
+        getUserData,
+        user
     }
 
     return (
