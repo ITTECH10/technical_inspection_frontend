@@ -1,7 +1,10 @@
-import React from 'react'
-import { Typography, Grid, Paper, Box, TextField } from '@material-ui/core'
+import React, {useState} from 'react'
+import { Typography, Grid, Paper, Box, TextField, Button } from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import AppLogo from './../assets/images/car-insurance.svg'
+import axios from 'axios'
+import {setAuthorizationHeader} from './../utils/setAuthorizationHeader'
+import { useData } from '../contexts/DataContext'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -46,10 +49,48 @@ const useStyles = makeStyles(theme => ({
     logo: {
         height: '100%',
         width: '100%'
+    },
+    btnSubmit: {
+        marginTop: 10,
+        width: 80,
+        margin: '0 auto'
     }
 }))
 
-const Login = () => {
+const Login = (props) => {
+    const [fields, setFields] = useState({
+        email: '',
+        password: ''
+    })
+    const {setAuthenticated, setLoading} = useData()
+
+    const handleChange = (e) => {
+        setFields({
+            ...fields,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const data = {...fields}
+        axios.post('/users/login', data).then(res => {
+            setLoading(true)
+            if(res.status === 201) {
+                setAuthorizationHeader(res.data.token)
+                setAuthenticated(true)
+                setLoading(false)
+                props.history.push('/')
+                //fix loader later
+            }
+        })
+        .catch(err => {
+            setLoading(false)
+            console.log(err.response)
+        })
+    }
+
     const classes = useStyles()
 
     return (
@@ -64,9 +105,11 @@ const Login = () => {
                         </Box>
                         <Typography style={{fontWeight: '500'}} variant="h4" align="center">Login</Typography>
                         <Box className={classes.inputContainer}>
-                            <form className={classes.inputForm}>
-                                <TextField autoFocus className={classes.input} id="standard-basic" label="E-Mail" />
-                                <TextField className={classes.input} id="standard-basic" label="Password" />
+                            <form className={classes.inputForm} onSubmit={handleSubmit}>
+                                <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" />
+                                <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" />
+
+                                <Button className={classes.btnSubmit} color="primary" variant="contained" type="submit">Submit</Button>
                             </form>
                         </Box>
                     </Box>

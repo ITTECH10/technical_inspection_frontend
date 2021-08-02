@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 // import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import NewUserCreation from './NewUserCreation'
+import { useData } from '../../contexts/DataContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
+  const {logout} = useData()
 
   return (
     <div className={classes.root}>
@@ -35,7 +37,7 @@ export default function Navbar() {
             Welcome
           </Typography>
           <NewUserCreation />
-          <Button color="inherit">Logout</Button>
+          <Button onClick={() => logout()} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>
