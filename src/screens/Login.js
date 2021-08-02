@@ -54,10 +54,10 @@ const Login = () => {
 
     return (
         <Grid container className={classes.mainContainer}>
-            <Grid xs={0} sm={3} className={classes.gridChildOne} />
+            <Grid item xs={false} sm={3} className={classes.gridChildOne} />
 
-            <Grid xs={12} sm={6} className={classes.gridChildTwo}>
-                <Paper elevation="2" className={classes.mainPaper}>
+            <Grid item xs={12} sm={6} className={classes.gridChildTwo}>
+                <Paper elevation={2} className={classes.mainPaper}>
                     <Box className={classes.mainBox}>
                         <Box className={classes.logoBox}>
                             <img src={AppLogo} alt="Logo" className={classes.logo} />
@@ -65,7 +65,7 @@ const Login = () => {
                         <Typography style={{fontWeight: '500'}} variant="h4" align="center">Login</Typography>
                         <Box className={classes.inputContainer}>
                             <form className={classes.inputForm}>
-                                <TextField className={classes.input} id="standard-basic" label="E-Mail" />
+                                <TextField autoFocus className={classes.input} id="standard-basic" label="E-Mail" />
                                 <TextField className={classes.input} id="standard-basic" label="Password" />
                             </form>
                         </Box>
@@ -73,7 +73,7 @@ const Login = () => {
                 </Paper>
             </Grid>
 
-            <Grid xs={0} sm={3} className={classes.gridChildThree} />
+            <Grid item xs={false} sm={3} className={classes.gridChildThree} />
         </Grid>
     )
 }
