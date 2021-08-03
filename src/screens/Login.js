@@ -74,13 +74,14 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setLoading(true)
 
         const data = {...fields}
         axios.post('/users/login', data).then(res => {
+            setLoading(true)
             if(res.status === 201) {
                 setAuthorizationHeader(res.data.token)
                 setAuthenticated(true)
+                setLoading(false)
                 props.history.push('/')
             }
         })
@@ -88,6 +89,7 @@ const Login = (props) => {
             setErrors({
                 message: err.response.data.message
             })
+            setLoading(false)
             console.log(err.response)
         })
     }
@@ -107,8 +109,8 @@ const Login = (props) => {
                         <Typography style={{fontWeight: '500'}} variant="h4" align="center">Login</Typography>
                         <Box className={classes.inputContainer}>
                             <form className={classes.inputForm} onSubmit={handleSubmit}>
-                                <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message} helperText={errors.message && errors.message} />
-                                <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message} helperText={errors.message && errors.message} />
+                                <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
+                                <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
 
                                 <Button className={classes.btnSubmit} color="primary" variant="contained" type="submit">Submit</Button>
                             </form>

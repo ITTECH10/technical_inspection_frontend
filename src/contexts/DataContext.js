@@ -11,13 +11,22 @@ const DataContextProvider = ({children}) => {
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState({})
-
-    // console.log(loading)
+    const [users, setUsers] = useState([])
 
     const logout = useCallback(() => {
         localStorage.removeItem('token')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
+        window.location.replace('/') //replace later with actual history api
+    }, [])
+
+    const getAllUsers = useCallback(() => {
+        axios('/users').then(res => {
+            setUsers(res.data.users)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
     }, [])
 
     const getUserData = useCallback(() => {
@@ -41,7 +50,9 @@ const DataContextProvider = ({children}) => {
         setLoading,
         logout,
         getUserData,
-        user
+        user,
+        getAllUsers,
+        users
     }
 
     return (

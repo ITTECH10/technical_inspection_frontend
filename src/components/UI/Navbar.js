@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
 import NewUserCreation from './NewUserCreation'
 import { useData } from '../../contexts/DataContext';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,13 +25,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-  const {logout, user, loading} = useData()
+  const {logout, user} = useData()
+  const history = useHistory()
 
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton onClick={() => history.push('/')} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <HomeIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>

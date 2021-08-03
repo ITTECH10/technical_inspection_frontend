@@ -7,14 +7,16 @@ import theme from './utils/theme'
 
 import Navbar from './components/UI/Navbar';
 import Home from './screens/Home'
-// import HomeUser from './screens/HomeUser';
+import HomeUser from './screens/HomeUser';
 import Login from './screens/Login'
+import UserDetails from './screens/UserDetails'
+
 import { useData } from './contexts/DataContext';
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
 function App() {
-  const { authenticated, loading, setAuthenticated, logout, getUserData } = useData()
+  const { authenticated, loading, setAuthenticated, logout, getUserData, user, getAllUsers } = useData()
 
   let token = localStorage.token
 
@@ -34,9 +36,16 @@ function App() {
     }
   }, [token, logout, setAuthenticated, getUserData])
 
+  useEffect(() => {
+    if(user && user.role === 'admin') {
+      getAllUsers()
+    }
+  }, [getAllUsers, user])
+
   const authRoutes = (
     <Switch>
-      <Route exact path="/" component={Home} />
+     {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />}
+     <Route path="/user" exact component={UserDetails} />
     </Switch>
   )
 
@@ -48,6 +57,7 @@ function App() {
 
   const RouterCmp = () => (
     <Router>
+      {authenticated && <Navbar />}
       {authenticated ? authRoutes : routes}
     </Router>
   )
@@ -59,7 +69,6 @@ function App() {
 
   const app = !loading ? (
     <div style={authenticated ? navbarFix : null} className="App">
-      {authenticated && <Navbar />}
       <RouterCmp />
     </div>
   ) : <Loader />

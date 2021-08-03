@@ -48,8 +48,8 @@ export default function Signup(props) {
     const data = { ...fields }
     axios.post('/users/signup', data).then(res => {
       if (res.status === 201) {
-        setAuthorizationHeader(res.data.token)
-        setAuthenticated(true)
+        // setAuthorizationHeader(res.data.token)
+        // setAuthenticated(true)
         setBtnLoading(false)
         setOpen(false)
         alert('Uspješno ste napravili novog korisnika...')
