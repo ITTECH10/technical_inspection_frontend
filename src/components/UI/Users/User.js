@@ -18,7 +18,7 @@ const User = ({ userInfo }) => {
     }
 
     return (
-        <ListItem onClick={() => onHandleNavigate()}>
+        <ListItem style={{cursor: 'pointer', borderBottom: '1px solid #eee', marginBottom: '10px'}} onClick={() => onHandleNavigate()}>
             <ListItemAvatar>
                 <Avatar>
                     <AssignmentIndIcon />

@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, TextField, Button, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import EditIcon from '@material-ui/icons/Edit';
+import EditUserDetails from './EditUserDetails';
 
 const useStyles = makeStyles({
     root: {},
@@ -39,10 +40,6 @@ const UserInfoTab = ({ userInfo }) => {
                 <Typography className={classes.emailText}>Your email address is <span style={{ fontWeight: 'bold' }}>{email}</span></Typography>
             </Box>
             <Box className={classes.box}>
-                <Typography className={classes.emailTitle}>Password</Typography>
-                <Typography className={classes.emailText}>Your password is <span style={{ fontWeight: 'bold' }}>123456</span></Typography>
-            </Box>
-            <Box className={classes.box}>
                 <Typography className={classes.emailTitle}>Tehnical inspection</Typography>
                 <Typography className={classes.emailText}>Your last technical inspection was on <span style={{ fontWeight: 'bold' }}>{formatedLastInspected}</span></Typography>
             </Box>
@@ -51,12 +48,13 @@ const UserInfoTab = ({ userInfo }) => {
                 <Typography className={classes.emailText}>Your vehicle model <span style={{ fontWeight: 'bold' }}>{vehicleModel}</span></Typography>
             </Box>
 
-            <Box className={classes.editBtnBox}>
+            {/* <Box className={classes.editBtnBox}>
                 <Button variant="contained" color="secondary" size="small">
                         Edit
                     <EditIcon style={{height: '.8em'}}/>
                 </Button>
-            </Box>
+            </Box> */}
+            <EditUserDetails />
         </Box>
     )
 }
