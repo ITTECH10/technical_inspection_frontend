@@ -10,14 +10,17 @@ export const useData = () => {
 const DataContextProvider = ({children}) => {
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [appLoading, setAppLoading] = useState(false)
     const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
+    const [selectedUser, setSelectedUser] = useState({})
 
-    const logout = useCallback(() => {
+    const logout = useCallback((history) => {
         localStorage.removeItem('token')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
-        window.location.replace('/') //replace later with actual history api
+        history.push('/')
+        history.go(0)
     }, [])
 
     const getAllUsers = useCallback(() => {
@@ -30,18 +33,33 @@ const DataContextProvider = ({children}) => {
     }, [])
 
     const getUserData = useCallback(() => {
-        setLoading(true)
+        setAppLoading(true)
         axios('/users/me').then(res => {
             if(res.status === 200) {
                 setUser(res.data.user)
+                setAppLoading(false)
+            }
+        })
+        .catch(err => {
+            setAppLoading(false)
+            console.log(err.response)
+        })
+    }, [])
+
+    const getSelectedUser = (id) => {
+        setLoading(true)
+        
+        axios(`/users/${id}`).then(res => {
+            if(res.status === 200) {
                 setLoading(false)
+                setSelectedUser(res.data.user)
             }
         })
         .catch(err => {
             setLoading(false)
             console.log(err.response)
         })
-    }, [])
+    }
 
     const value = {
         authenticated,
@@ -52,7 +70,11 @@ const DataContextProvider = ({children}) => {
         getUserData,
         user,
         getAllUsers,
-        users
+        users,
+        getSelectedUser,
+        selectedUser,
+        setSelectedUser,
+        appLoading
     }
 
     return (

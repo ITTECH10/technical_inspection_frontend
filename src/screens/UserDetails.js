@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -6,6 +6,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import UserInfoTab from '../components/UI/Users/UserInfoTab';
+import { useData } from '../contexts/DataContext';
+import Loader from './../utils/Loader'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -74,34 +76,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserDetails(props) {
     const classes = useStyles();
+    const { loading, getSelectedUser } = useData()
+    
     const [value, setValue] = React.useState(0);
-
-    const userInfo = props.history.location.state
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    const userId = props.location.pathname.split('/')[2]
+    useEffect(() => {
+        getSelectedUser(userId)
+    }, [])
+
     return (
-        <div className={classes.root}>
-            <Tabs
-                orientation="vertical"
-                variant="scrollable"
-                value={value}
-                onChange={handleChange}
-                aria-label="Vertical tabs example"
-                className={classes.tabs}
-                indicatorColor="primary"
-            >
-                <Tab label="User" {...a11yProps(0)} />
-                <Tab label="History" {...a11yProps(1)} />
-            </Tabs>
-            <TabPanel className={classes.tabPanel} value={value} index={0}>
-                <UserInfoTab userInfo={userInfo} />
-            </TabPanel>
-            <TabPanel className={classes.tabPanel} value={value} index={1}>
-                Lorem ipsum dolor sir amet.
-            </TabPanel>
-        </div>
+        !loading ?
+            <div className={classes.root}>
+                <Tabs
+                    orientation="vertical"
+                    variant="scrollable"
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="Vertical tabs example"
+                    className={classes.tabs}
+                    indicatorColor="primary"
+                >
+                    <Tab label="User" {...a11yProps(0)} />
+                    <Tab label="History" {...a11yProps(1)} />
+                </Tabs>
+                <TabPanel className={classes.tabPanel} value={value} index={0}>
+                    <UserInfoTab userId={userId} />
+                </TabPanel>
+                <TabPanel className={classes.tabPanel} value={value} index={1}>
+                    Lorem ipsum dolor sir amet.
+                </TabPanel>
+            </div> : <Loader />
     );
 }

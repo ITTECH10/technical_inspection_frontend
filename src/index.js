@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
 import DataContextProvider from './contexts/DataContext'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 // axios.defaults.baseURL = 'http://localhost:8000/api/v1'
 axios.defaults.baseURL = 'https://technical-inspection.herokuapp.com/api/v1'
@@ -12,7 +13,9 @@ axios.defaults.baseURL = 'https://technical-inspection.herokuapp.com/api/v1'
 ReactDOM.render(
   <React.StrictMode>
     <DataContextProvider>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </DataContextProvider>
   </React.StrictMode>,
   document.getElementById('root')

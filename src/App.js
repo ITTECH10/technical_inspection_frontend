@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './App.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Loader from './utils/Loader'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
 
 import Navbar from './components/UI/Navbar';
@@ -16,7 +16,8 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
 function App() {
-  const { authenticated, loading, setAuthenticated, logout, getUserData, user, getAllUsers } = useData()
+  const { authenticated, appLoading, setAuthenticated, logout, getUserData, user, getAllUsers } = useData()
+  const history = useHistory()
 
   let token = localStorage.token
 
@@ -27,14 +28,14 @@ function App() {
 
       // 2) Check if the token is expired
       if (new Date(decodedToken.exp * 1000) < new Date()) {
-        logout()
+        logout(history)
       }
 
       setAuthenticated(true)
       axios.defaults.headers.common['Authorization'] = token
       getUserData()
     }
-  }, [token, logout, setAuthenticated, getUserData])
+  }, [token, logout, setAuthenticated, getUserData, history])
 
   useEffect(() => {
     if(user && user.role === 'admin') {
@@ -45,7 +46,7 @@ function App() {
   const authRoutes = (
     <Switch>
      {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />}
-     <Route path="/user" exact component={UserDetails} />
+     <Route path="/user/:id" component={UserDetails} />
     </Switch>
   )
 
@@ -55,21 +56,15 @@ function App() {
     </Switch>
   )
 
-  const RouterCmp = () => (
-    <Router>
-      {authenticated && <Navbar />}
-      {authenticated ? authRoutes : routes}
-    </Router>
-  )
-
   const navbarFix = {
     position: 'relative',
     top: '64px'
   }
 
-  const app = !loading ? (
+  const app = !appLoading ?(
     <div style={authenticated ? navbarFix : null} className="App">
-      <RouterCmp />
+        {authenticated && <Navbar />}
+        {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />
 

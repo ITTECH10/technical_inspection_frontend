@@ -8,14 +8,16 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EditIcon from '@material-ui/icons/Edit';
 import CircularProgress from '@material-ui/core/CircularProgress'
+import axios from 'axios'
+import {useData} from './../../../contexts/DataContext'
 
-export default function EditUserDetails(props) {
+export default function EditUserDetails({userId}) {
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = useState(false)
+    const {setSelectedUser} = useData()
 
     const [fields, setFields] = useState({
         email: '',
-        lastInspected: '',
         vehicleModel: '',
         password: '',
         confirmPassword: ''
@@ -25,6 +27,31 @@ export default function EditUserDetails(props) {
         setFields({
             ...fields,
             [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(Object.values(fields).every(val => val === '')) return
+        
+        setBtnLoading(true)
+
+        const data = {...fields}
+
+        axios.patch(`/users/${userId}`, data).then(res => {
+            // console.log(res.data)
+            if(res.status === 202) {
+                setSelectedUser(res.data.user)
+                setTimeout(() => {
+                    setBtnLoading(false)
+                    setOpen(false)
+                    alert('You have successfuly changed users data.')
+                }, 2000)
+            }
+        })
+        .catch(err => {
+            setBtnLoading(false)
+            console.log(err.response)
         })
     }
 
@@ -48,7 +75,7 @@ export default function EditUserDetails(props) {
                     <DialogContentText>
                         To edit user information, simply fill the fields you want to change.
                     </DialogContentText>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <TextField
                             name="email"
                             autoFocus
@@ -57,15 +84,6 @@ export default function EditUserDetails(props) {
                             label="Email Address"
                             onChange={handleChange}
                             type="email"
-                            fullWidth
-                        />
-                        <TextField
-                            name="lastInspected"
-                            margin="dense"
-                            id="last-inspected"
-                            label="Last inspected"
-                            type="text"
-                            onChange={handleChange}
                             fullWidth
                         />
                         <TextField
@@ -99,7 +117,7 @@ export default function EditUserDetails(props) {
                             <Button onClick={handleClose} color="secondary" variant="contained">
                                 Cancel
                             </Button>
-                            <Button onClick={handleClose} color="primary" variant="contained">
+                            <Button type="submit" color="primary" variant="contained">
                                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#000' }} /> : 'Submit'}
                             </Button>
                         </DialogActions>

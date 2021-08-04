@@ -39,7 +39,7 @@ export default function Navbar() {
             Home
           </Typography>
             {user.role === 'admin' && <NewUserCreation />}
-          <Button onClick={() => logout()} color="inherit">Logout</Button>
+          <Button onClick={() => logout(history)} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </div>

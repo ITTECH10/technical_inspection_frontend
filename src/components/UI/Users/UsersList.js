@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UsersList() {
     const classes = useStyles();
-    const {users} = useData()
+    const {users, user} = useData()
 
-    const content = users && users.map(u => {
+    const content = users && users.filter(el => el._id !== user._id).map(u => {
         return <User key={u._id} userInfo={u}/>
     })
 

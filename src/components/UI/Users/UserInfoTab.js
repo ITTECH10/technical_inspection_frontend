@@ -1,8 +1,8 @@
-import React from 'react'
-import { Typography, TextField, Button, Box } from '@material-ui/core'
+import React, {useEffect} from 'react'
+import { Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import EditIcon from '@material-ui/icons/Edit';
 import EditUserDetails from './EditUserDetails';
+import { useData } from '../../../contexts/DataContext';
 
 const useStyles = makeStyles({
     root: {},
@@ -26,11 +26,15 @@ const useStyles = makeStyles({
     }
 })
 
-const UserInfoTab = ({ userInfo }) => {
+const UserInfoTab = ({userId}) => {
     const classes = useStyles()
-    const { email, password, lastInspected, vehicleModel } = userInfo
+    const {selectedUser} = useData()
+    const { email, _id , lastInspected, vehicleModel } = selectedUser
 
-    const formatedLastInspected = lastInspected.split('T')[0].split('-').reverse().join('-')
+    let formatedLastInspected
+    if(lastInspected) {
+        formatedLastInspected = lastInspected.split('T')[0].split('-').reverse().join('-')
+    }
 
     return (
         <Box className={classes.root}>
@@ -41,20 +45,14 @@ const UserInfoTab = ({ userInfo }) => {
             </Box>
             <Box className={classes.box}>
                 <Typography className={classes.emailTitle}>Tehnical inspection</Typography>
-                <Typography className={classes.emailText}>Your last technical inspection was on <span style={{ fontWeight: 'bold' }}>{formatedLastInspected}</span></Typography>
+                <Typography className={classes.emailText}>Your last technical inspection was on <span style={{ fontWeight: 'bold' }}>{lastInspected && formatedLastInspected}</span></Typography>
             </Box>
             <Box className={classes.box}>
                 <Typography className={classes.emailTitle}>Vehicle details</Typography>
                 <Typography className={classes.emailText}>Your vehicle model <span style={{ fontWeight: 'bold' }}>{vehicleModel}</span></Typography>
             </Box>
 
-            {/* <Box className={classes.editBtnBox}>
-                <Button variant="contained" color="secondary" size="small">
-                        Edit
-                    <EditIcon style={{height: '.8em'}}/>
-                </Button>
-            </Box> */}
-            <EditUserDetails />
+            <EditUserDetails userId={_id} />
         </Box>
     )
 }

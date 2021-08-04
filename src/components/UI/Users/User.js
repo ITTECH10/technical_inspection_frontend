@@ -8,17 +8,20 @@ import IconButton from '@material-ui/core/IconButton';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router-dom';
+import { useData } from '../../../contexts/DataContext';
 
 const User = ({ userInfo }) => {
+    const {getSelectedUser} = useData()
     const history = useHistory()
-    const { email } = userInfo
+    const { _id, email } = userInfo    
 
-    const onHandleNavigate = () => {
-        history.push('/user', userInfo)
+    const onSelectUser = () => {
+        getSelectedUser(_id)
+        history.push(`/user/${_id}`)
     }
 
     return (
-        <ListItem style={{cursor: 'pointer', borderBottom: '1px solid #eee', marginBottom: '10px'}} onClick={() => onHandleNavigate()}>
+        <ListItem style={{cursor: 'pointer', borderBottom: '1px solid #eee', marginBottom: '10px'}} onClick={() => onSelectUser()}>
             <ListItemAvatar>
                 <Avatar>
                     <AssignmentIndIcon />
