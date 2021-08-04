@@ -10,9 +10,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import {useData} from './../../../contexts/DataContext'
+import Alerts from '../Alerts';
 
-export default function EditUserDetails({userId}) {
+export default function EditUserDetails({userId, handleAlertOpening}) {
     const [open, setOpen] = React.useState(false);
+    const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const {setSelectedUser, users, setUsers} = useData()
 
@@ -49,9 +51,9 @@ export default function EditUserDetails({userId}) {
                 foundUser.email = res.data.user.email
                 setUsers(copyUsers)
                 setTimeout(() => {
+                    setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)
-                    alert('You have successfuly changed users data.')
                 }, 2000)
             }
         })
@@ -75,6 +77,7 @@ export default function EditUserDetails({userId}) {
                 Edit
                 <EditIcon style={{ height: '.8em' }} />
             </Button>
+            <Alerts message="User successfully updated!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Edit User Information</DialogTitle>
                 <DialogContent>
@@ -124,7 +127,7 @@ export default function EditUserDetails({userId}) {
                                 Cancel
                             </Button>
                             <Button type="submit" color="primary" variant="contained">
-                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#000' }} /> : 'Submit'}
+                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
                             </Button>
                         </DialogActions>
                     </form>

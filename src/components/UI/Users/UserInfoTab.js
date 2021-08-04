@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import EditUserDetails from './EditUserDetails';
 import DeleteUser from './DeleteUser'
 import { useData } from '../../../contexts/DataContext';
+import Alerts from './../Alerts'
 
 const useStyles = makeStyles({
     root: {},
@@ -56,7 +57,7 @@ const UserInfoTab = ({userId}) => {
 
             <Box className={classes.actionButtonBoxFLex}>
                 <EditUserDetails userId={_id} />
-                <DeleteUser userId={_id}/>
+                <DeleteUser userId={_id} />
             </Box>
         </Box>
     )

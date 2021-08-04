@@ -13,7 +13,7 @@ import {useData} from './../../contexts/DataContext'
 import { useHistory } from 'react-router-dom';
 import FloatingButton from './FloatingButton';
 
-export default function Signup(props) {
+export default function Signup({handleAlertOpening}) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
   const history = useHistory()
@@ -54,8 +54,11 @@ export default function Signup(props) {
         // setAuthenticated(true)
         setBtnLoading(false)
         setOpen(false)
-        alert('Uspješno ste napravili novog korisnika...')
-        history.go(0)
+        handleAlertOpening(true)
+        
+        setTimeout(() => {
+          history.go(0)
+        }, 2000)
         //fix loader later
       }
     })

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,13 +6,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {useData} from './../../../contexts/DataContext'
+import { useData } from './../../../contexts/DataContext'
 import axios from 'axios'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import Alerts from '../Alerts';
 
-export default function DeleteUser({ userId }) {
-  const [open, setOpen] = React.useState(false);
-  const {user, logout, users, setUsers} = useData()
+export default function DeleteUser({ userId, handleAlertOpening }) {
+  const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false)
+  const { user, logout, users, setUsers } = useData()
   const history = useHistory()
 
   const handleClickOpen = () => {
@@ -29,20 +31,28 @@ export default function DeleteUser({ userId }) {
     const copyUsers = [...users]
 
     axios.delete(`/users/${userId}`).then(res => {
-      if(res.status === 204) {
-        alert('User successfuly deleted.')
-        if(user.role === 'user') {
-          logout(history)
+      if (res.status === 204) {
+        setAlertOpen(true)
+
+        if (user.role === 'user') {
+          setTimeout(() => {
+            setAlertOpen(false)
+            logout(history)
+          }, 3000)
         }
 
         const newUsers = copyUsers.filter(user => user._id !== userId)
         setUsers(newUsers)
-        history.push('/')
+
+        setTimeout(() => {
+          setAlertOpen(false)
+          history.push('/')
+        }, 3000)
       }
     })
-    .catch(err => {
-      console.log(err.response)
-    })
+      .catch(err => {
+        console.log(err.response)
+      })
   }
 
   return (
@@ -51,6 +61,7 @@ export default function DeleteUser({ userId }) {
         Delete
         <DeleteIcon style={{ height: '.8em' }} />
       </Button>
+      <Alerts message="User successfully deleted!" open={alertOpen} handleOpening={setAlertOpen} severity="error" />
       <Dialog
         open={open}
         onClose={handleClose}
