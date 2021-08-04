@@ -1,11 +1,8 @@
 import React from 'react'
+import UserDetailsInformation from '../components/UI/Users/UserDetailsInformation'
 
-const HomeUser = () => {
-    return (
-        <div>
-            <h1>Hello from HomeUser</h1>
-        </div>
-    )
+const HomeUser = (props) => {
+    return <UserDetailsInformation location={props.location} />
 }
 
 export default HomeUser

@@ -72,6 +72,7 @@ const DataContextProvider = ({children}) => {
         getAllUsers,
         users,
         setUsers,
+        setUser,
         getSelectedUser,
         selectedUser,
         setSelectedUser,

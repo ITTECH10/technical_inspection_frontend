@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,11 +11,15 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import Alerts from '../Alerts';
 
-export default function DeleteUser({ userId, handleAlertOpening }) {
+export default function DeleteUser({ userId }) {
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false)
   const { user, logout, users, setUsers } = useData()
   const history = useHistory()
+
+  if (user.role === 'user') {
+    userId = user._id
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,7 +65,7 @@ export default function DeleteUser({ userId, handleAlertOpening }) {
         Delete
         <DeleteIcon style={{ height: '.8em' }} />
       </Button>
-      <Alerts message="User successfully deleted!" open={alertOpen} handleOpening={setAlertOpen} severity="error" />
+      <Alerts message="Successfully deleted!" open={alertOpen} handleOpening={setAlertOpen} severity="error" />
       <Dialog
         open={open}
         onClose={handleClose}

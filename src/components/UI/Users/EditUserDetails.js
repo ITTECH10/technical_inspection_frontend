@@ -9,14 +9,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EditIcon from '@material-ui/icons/Edit';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
-import {useData} from './../../../contexts/DataContext'
+import { useData } from './../../../contexts/DataContext'
 import Alerts from '../Alerts';
 
-export default function EditUserDetails({userId, handleAlertOpening}) {
+export default function EditUserDetails({ userId }) {
     const [open, setOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const {setSelectedUser, users, setUsers} = useData()
+    const { setSelectedUser, users, setUsers, setUser, user } = useData()
+
+    if (user.role === 'user') {
+        userId = user._id
+    }
 
     const [fields, setFields] = useState({
         email: '',
@@ -34,22 +38,27 @@ export default function EditUserDetails({userId, handleAlertOpening}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(Object.values(fields).every(val => val === '')) return
-        
+        if (Object.values(fields).every(val => val === '')) return
+
         setBtnLoading(true)
 
-        const data = {...fields}
-
-        const copyUsers = [...users]
-        const foundUserIndex = copyUsers.findIndex(u => u._id === userId)
-        const foundUser = copyUsers[foundUserIndex]
+        const data = { ...fields }
 
         axios.patch(`/users/${userId}`, data).then(res => {
             // console.log(res.data)
-            if(res.status === 202) {
-                setSelectedUser(res.data.user)
-                foundUser.email = res.data.user.email
-                setUsers(copyUsers)
+            if (res.status === 202) {
+                setUser(res.data.user)
+                
+                if(user.role === 'admin') {
+                    setSelectedUser(res.data.user)
+                    const copyUsers = [...users]
+                    const foundUserIndex = copyUsers.findIndex(u => u._id === userId)
+                    const foundUser = copyUsers[foundUserIndex]
+                    foundUser.email = res.data.user.email
+    
+                    setUsers(copyUsers)
+                }
+
                 setTimeout(() => {
                     setAlertOpen(true)
                     setBtnLoading(false)
@@ -57,10 +66,10 @@ export default function EditUserDetails({userId, handleAlertOpening}) {
                 }, 2000)
             }
         })
-        .catch(err => {
-            setBtnLoading(false)
-            console.log(err.response)
-        })
+            .catch(err => {
+                setBtnLoading(false)
+                console.log(err.response)
+            })
     }
 
     const handleClickOpen = () => {
@@ -77,7 +86,7 @@ export default function EditUserDetails({userId, handleAlertOpening}) {
                 Edit
                 <EditIcon style={{ height: '.8em' }} />
             </Button>
-            <Alerts message="User successfully updated!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message="Successfully updated!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Edit User Information</DialogTitle>
                 <DialogContent>
