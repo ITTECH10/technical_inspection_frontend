@@ -14,7 +14,7 @@ import {useData} from './../../../contexts/DataContext'
 export default function EditUserDetails({userId}) {
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = useState(false)
-    const {setSelectedUser} = useData()
+    const {setSelectedUser, users, setUsers} = useData()
 
     const [fields, setFields] = useState({
         email: '',
@@ -38,10 +38,16 @@ export default function EditUserDetails({userId}) {
 
         const data = {...fields}
 
+        const copyUsers = [...users]
+        const foundUserIndex = copyUsers.findIndex(u => u._id === userId)
+        const foundUser = copyUsers[foundUserIndex]
+
         axios.patch(`/users/${userId}`, data).then(res => {
             // console.log(res.data)
             if(res.status === 202) {
                 setSelectedUser(res.data.user)
+                foundUser.email = res.data.user.email
+                setUsers(copyUsers)
                 setTimeout(() => {
                     setBtnLoading(false)
                     setOpen(false)

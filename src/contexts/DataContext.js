@@ -46,7 +46,7 @@ const DataContextProvider = ({children}) => {
         })
     }, [])
 
-    const getSelectedUser = (id) => {
+    const getSelectedUser = useCallback((id) => {
         setLoading(true)
         
         axios(`/users/${id}`).then(res => {
@@ -59,7 +59,7 @@ const DataContextProvider = ({children}) => {
             setLoading(false)
             console.log(err.response)
         })
-    }
+    }, [])
 
     const value = {
         authenticated,
@@ -71,6 +71,7 @@ const DataContextProvider = ({children}) => {
         user,
         getAllUsers,
         users,
+        setUsers,
         getSelectedUser,
         selectedUser,
         setSelectedUser,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import { useData } from '../../../contexts/DataContext';
@@ -18,7 +18,7 @@ export default function UsersList() {
     const classes = useStyles();
     const {users, user} = useData()
 
-    const content = users && users.filter(el => el._id !== user._id).map(u => {
+    const content = users && [...users].reverse().filter(el => el._id !== user._id).map(u => {
         return <User key={u._id} userInfo={u}/>
     })
 

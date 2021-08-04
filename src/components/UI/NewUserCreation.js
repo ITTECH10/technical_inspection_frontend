@@ -10,14 +10,16 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import {setAuthorizationHeader} from './../../utils/setAuthorizationHeader'
 import {useData} from './../../contexts/DataContext'
+import { useHistory } from 'react-router-dom';
+import FloatingButton from './FloatingButton';
 
 export default function Signup(props) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
+  const history = useHistory()
 
   const [fields, setFields] = useState({
     email: '',
-    lastInspected: '',
     vehicleModel: '',
     password: '',
     confirmPassword: ''
@@ -32,7 +34,7 @@ export default function Signup(props) {
   }
   const [errors, setErrors] = useState(errObj)
 
-  const { setAuthenticated } = useData()
+  const { setUsers } = useData()
 
   const handleChange = (e) => {
     setFields({
@@ -53,6 +55,7 @@ export default function Signup(props) {
         setBtnLoading(false)
         setOpen(false)
         alert('Uspješno ste napravili novog korisnika...')
+        history.go(0)
         //fix loader later
       }
     })
@@ -76,9 +79,7 @@ export default function Signup(props) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>
-        New User
-      </Button>
+      <FloatingButton onHandleClick={handleClickOpen}/>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">New User</DialogTitle>
         <DialogContent>
@@ -99,7 +100,7 @@ export default function Signup(props) {
               fullWidth
             />
             <TextField
-              name="lastInspected"
+              // name="lastInspected"
               error={errors.lastInspected && errors.lastInspected.message}
               helperText={errors.lastInspected && errors.lastInspected.message}
               margin="dense"

@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import EditUserDetails from './EditUserDetails';
+import DeleteUser from './DeleteUser'
 import { useData } from '../../../contexts/DataContext';
 
 const useStyles = makeStyles({
@@ -21,8 +22,9 @@ const useStyles = makeStyles({
             marginBottom: 25
         }
     },
-    editBtnBox: {
-
+    actionButtonBoxFLex: {
+        display: 'flex',
+        justifyContent: 'space-between'
     }
 })
 
@@ -52,7 +54,10 @@ const UserInfoTab = ({userId}) => {
                 <Typography className={classes.emailText}>Your vehicle model <span style={{ fontWeight: 'bold' }}>{vehicleModel}</span></Typography>
             </Box>
 
-            <EditUserDetails userId={_id} />
+            <Box className={classes.actionButtonBoxFLex}>
+                <EditUserDetails userId={_id} />
+                <DeleteUser userId={_id}/>
+            </Box>
         </Box>
     )
 }

@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
-        minHeight: 'calc(100vh - 64px)',
+        minHeight: 'calc(100vh - 56px)',
         width: '30%',
         [theme.breakpoints.up('sm')]: {
             width: '25%'
@@ -87,7 +87,7 @@ export default function UserDetails(props) {
     const userId = props.location.pathname.split('/')[2]
     useEffect(() => {
         getSelectedUser(userId)
-    }, [])
+    }, [getSelectedUser, userId])
 
     return (
         !loading ?

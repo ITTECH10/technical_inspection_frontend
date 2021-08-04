@@ -38,7 +38,7 @@ export default function Navbar() {
           <Typography variant="h6" className={classes.title}>
             Home
           </Typography>
-            {user.role === 'admin' && <NewUserCreation />}
+            {/* {user.role === 'admin' && <NewUserCreation />} */}
           <Button onClick={() => logout(history)} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>

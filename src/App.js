@@ -58,7 +58,8 @@ function App() {
 
   const navbarFix = {
     position: 'relative',
-    top: '64px'
+    top: '56px',
+    height: 'calc(100vh - 56px)'
   }
 
   const app = !appLoading ?(
