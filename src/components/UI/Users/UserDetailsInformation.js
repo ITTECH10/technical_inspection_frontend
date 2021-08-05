@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import UserInfoTab from './UserInfoTab'
+import UserCarTab from './UserCarsTab';
 import { useData } from '../../../contexts/DataContext';
 import Loader from './../../../utils/Loader'
 
@@ -104,13 +105,13 @@ export default function UserDetailsInformation({location}) {
                     indicatorColor="primary"
                 >
                     <Tab label="User" {...a11yProps(0)} />
-                    <Tab label="History" {...a11yProps(1)} />
+                    <Tab label="Meine Fahrzeuge" {...a11yProps(1)} />
                 </Tabs>
                 <TabPanel className={classes.tabPanel} value={value} index={0}>
                     <UserInfoTab userId={userId} />
                 </TabPanel>
                 <TabPanel className={classes.tabPanel} value={value} index={1}>
-                    Lorem ipsum dolor sir amet.
+                    <UserCarTab />
                 </TabPanel>
             </div> : <Loader />
     );
