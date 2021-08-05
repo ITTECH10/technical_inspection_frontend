@@ -47,8 +47,6 @@ export default function EditUserDetails({ userId }) {
         axios.patch(`/users/${userId}`, data).then(res => {
             // console.log(res.data)
             if (res.status === 202) {
-                setUser(res.data.user)
-                
                 if(user.role === 'admin') {
                     setSelectedUser(res.data.user)
                     const copyUsers = [...users]
@@ -57,6 +55,10 @@ export default function EditUserDetails({ userId }) {
                     foundUser.email = res.data.user.email
     
                     setUsers(copyUsers)
+                }
+
+                if(user.role === 'user') {
+                    setUser(res.data.user)
                 }
 
                 setTimeout(() => {
