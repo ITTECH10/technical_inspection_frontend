@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
   fab: {}
 }));
 
-export default function FloatingButton({onHandleClick}) {
+export default function FloatingButton({onHandleClick, children, color="primary"}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Fab onClick={onHandleClick} color="primary" aria-label="add" className={classes.fab}>
-        <AddIcon />
+      <Fab onClick={onHandleClick} color={color} aria-label="add" className={classes.fab}>
+        {children}
       </Fab>
     </div>
   );

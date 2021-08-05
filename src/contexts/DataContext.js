@@ -8,12 +8,18 @@ export const useData = () => {
 }
 
 const DataContextProvider = ({children}) => {
+    // GENERAL
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
     const [appLoading, setAppLoading] = useState(false)
+
+    // USERS
     const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
     const [selectedUser, setSelectedUser] = useState({})
+    
+    // VEHICLES
+    const [myVehicles, setMyVehicles] = useState([])
 
     const logout = useCallback((history) => {
         localStorage.removeItem('token')
@@ -61,6 +67,21 @@ const DataContextProvider = ({children}) => {
         })
     }, [])
 
+    const getUserVehicles = useCallback((id) => {
+        // setLoading(true)
+        
+        axios(`/cars/${id}`).then(res => {
+            if(res.status === 200) {
+                setMyVehicles(res.data.userVehicles)
+            }
+        })
+        .catch(err => {
+            // setLoading(false)
+            console.log(err.response)
+        })
+    }, [])
+
+
     const value = {
         authenticated,
         setAuthenticated,
@@ -72,11 +93,14 @@ const DataContextProvider = ({children}) => {
         getAllUsers,
         users,
         setUsers,
+        myVehicles,
+        setMyVehicles,
         setUser,
         getSelectedUser,
         selectedUser,
         setSelectedUser,
-        appLoading
+        appLoading,
+        getUserVehicles
     }
 
     return (

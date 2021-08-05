@@ -59,8 +59,8 @@ const useStyles = makeStyles(theme => ({
 
 const Login = (props) => {
     const [fields, setFields] = useState({
-        email: '',
-        password: ''
+        email: 'admin@testing.com',
+        password: '123456'
     })
     const [errors, setErrors] = useState({})
     const {setAuthenticated, setLoading} = useData()

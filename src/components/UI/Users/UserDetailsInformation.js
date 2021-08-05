@@ -9,6 +9,7 @@ import UserInfoTab from './UserInfoTab'
 import UserCarTab from './UserCarsTab';
 import { useData } from '../../../contexts/DataContext';
 import Loader from './../../../utils/Loader'
+import { useHistory } from 'react-router-dom';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -77,7 +78,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserDetailsInformation({location}) {
     const classes = useStyles();
-    const { loading, getSelectedUser, user } = useData()
+    const { loading, getSelectedUser, user, getUserVehicles } = useData()
+    const history = useHistory()
     
     const [value, setValue] = React.useState(0);
 
@@ -85,12 +87,15 @@ export default function UserDetailsInformation({location}) {
         setValue(newValue);
     };
 
-    const userId = location.pathname.split('/')[2]
+    let userId = user._id
+    if(user && user.role === 'admin') {
+        userId = location.pathname.split('/')[2]
+    }
+
     useEffect(() => {
-        if(user && user.role === 'admin') {
-            getSelectedUser(userId)
-        }
-    }, [getSelectedUser, userId])
+        getSelectedUser(userId)
+        getUserVehicles(userId)
+    }, [getSelectedUser, getUserVehicles, userId])
 
     return (
         !loading ?
@@ -105,7 +110,7 @@ export default function UserDetailsInformation({location}) {
                     indicatorColor="primary"
                 >
                     <Tab label="User" {...a11yProps(0)} />
-                    <Tab label="Meine Fahrzeuge" {...a11yProps(1)} />
+                    <Tab label="Fahrzeuge" {...a11yProps(1)} />
                 </Tabs>
                 <TabPanel className={classes.tabPanel} value={value} index={0}>
                     <UserInfoTab userId={userId} />

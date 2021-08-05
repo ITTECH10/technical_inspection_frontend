@@ -12,6 +12,7 @@ import {setAuthorizationHeader} from './../../utils/setAuthorizationHeader'
 import {useData} from './../../contexts/DataContext'
 import { useHistory } from 'react-router-dom';
 import FloatingButton from './FloatingButton';
+import AddIcon from '@material-ui/icons/Add';
 
 export default function Signup({handleAlertOpening}) {
   const [open, setOpen] = React.useState(false);
@@ -34,7 +35,7 @@ export default function Signup({handleAlertOpening}) {
   }
   const [errors, setErrors] = useState(errObj)
 
-  const { setUsers } = useData()
+  const { users, setUsers } = useData()
 
   const handleChange = (e) => {
     setFields({
@@ -49,16 +50,16 @@ export default function Signup({handleAlertOpening}) {
 
     const data = { ...fields }
     axios.post('/users/signup', data).then(res => {
+      console.log(res.data)
       if (res.status === 201) {
         // setAuthorizationHeader(res.data.token)
         // setAuthenticated(true)
+        const updatedUsers = [...users, {...res.data.newUser}]
+        setUsers(updatedUsers)
+
         setBtnLoading(false)
         setOpen(false)
         handleAlertOpening(true)
-        
-        setTimeout(() => {
-          history.go(0)
-        }, 2000)
         //fix loader later
       }
     })
@@ -82,7 +83,9 @@ export default function Signup({handleAlertOpening}) {
 
   return (
     <div>
-      <FloatingButton onHandleClick={handleClickOpen}/>
+      <FloatingButton onHandleClick={handleClickOpen}>
+        <AddIcon />
+      </FloatingButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">New User</DialogTitle>
         <DialogContent>
@@ -100,28 +103,6 @@ export default function Signup({handleAlertOpening}) {
               label="Email Address"
               onChange={handleChange}
               type="email"
-              fullWidth
-            />
-            <TextField
-              // name="lastInspected"
-              error={errors.lastInspected && errors.lastInspected.message}
-              helperText={errors.lastInspected && errors.lastInspected.message}
-              margin="dense"
-              id="last-inspected"
-              label="Last inspected"
-              type="text"
-              onChange={handleChange}
-              fullWidth
-            />
-            <TextField
-              name="vehicleModel"
-              error={errors.vehicleModel && errors.vehicleModel.message}
-              helperText={errors.vehicleModel && errors.vehicleModel.message}
-              margin="dense"
-              id="vehicle-model"
-              label="Vehicle Model"
-              type="text"
-              onChange={handleChange}
               fullWidth
             />
             <TextField
