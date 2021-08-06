@@ -10,7 +10,7 @@ import Home from './screens/Home'
 import HomeUser from './screens/HomeUser';
 import Login from './screens/Login'
 import UserDetails from './screens/UserDetails'
-import CarDetails from './screens/CarDetails'
+import CarDetailsScreen from './screens/CarDetailsScreen'
 
 import { useData } from './contexts/DataContext';
 import jwtDecode from 'jwt-decode'
@@ -48,7 +48,7 @@ function App() {
     <Switch>
      {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />}
      <Route exact path="/user/:id" component={UserDetails} />
-     <Route exact path="/cars/:id" component={CarDetails}/>
+     <Route exact path="/cars/:id" component={CarDetailsScreen}/>
     </Switch>
   )
 

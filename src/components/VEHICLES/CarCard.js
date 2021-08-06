@@ -8,7 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
-import CarTest from './../../assets/images/car-test.webp'
 
 const useStyles = makeStyles({
     root: {
@@ -26,14 +25,14 @@ const useStyles = makeStyles({
 const CarCard = ({car}) => {
     const classes = useStyles();
     const history = useHistory()
-    const {image, model, modelDetails} = car
+    const {image, model, modelDetails, _id} = car
 
     return (
         <Card className={classes.root}>
-        <CardActionArea>
+        <CardActionArea onClick={() => history.push(`/cars/${_id}`)}>
             <CardMedia
                 className={classes.media}
-                image={CarTest}
+                image={image}
                 title="Car"
             />
             <CardContent>
