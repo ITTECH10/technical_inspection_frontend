@@ -46,17 +46,14 @@ const UploadCarData = () => {
             if(res.status === 201) {
                 // DO LATER
                 const updatedVehicles = [...myVehicles, {...res.data.newVehicle}]
-                setMyVehicles(updatedVehicles)
 
-                // FOR NOW 
-                // history.go(0)
+                setTimeout(() => {
+                    setMyVehicles(updatedVehicles)
+                    setAlertOpen(true)
+                    setBtnLoading(false)
+                    setOpen(false)
+                }, 2000)
             }
-
-            setTimeout(() => {
-                setAlertOpen(true)
-                setBtnLoading(false)
-                setOpen(false)
-            }, 2000)
         })
         .catch(err => {
             console.log(err.response)

@@ -57,9 +57,11 @@ export default function Signup({handleAlertOpening}) {
         const updatedUsers = [...users, {...res.data.newUser}]
         setUsers(updatedUsers)
 
-        setBtnLoading(false)
-        setOpen(false)
-        handleAlertOpening(true)
+        setTimeout(() => {
+          setBtnLoading(false)
+          setOpen(false)
+          handleAlertOpening(true)
+        }, 2000)
         //fix loader later
       }
     })
@@ -132,7 +134,7 @@ export default function Signup({handleAlertOpening}) {
                 Cancel
               </Button>
               <Button type="submit" color="primary" variant="contained">
-                {btnLoading ? <CircularProgress style={{height: 25, width: 25, color: '#000'}} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{height: 25, width: 25, color: '#fff'}} /> : 'Submit'}
               </Button>
             </DialogActions>
           </form>
