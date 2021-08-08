@@ -29,19 +29,31 @@ const UploadCarData = () => {
     const classes = useStyles()
 
     const [fields, setFields] = useState({
+        photo: '',
         model: '',
         modelDetails: '',
         lastTechnicalInspection: ''
     })
+
+    const formData = new FormData()
+
+    formData.append('photo', fields.photo)
+    formData.append('model', fields.model)
+    formData.append('modelDetails', fields.modelDetails)
+    formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(fields).every(val => val === '')) return
 
         setBtnLoading(true)
-        const data = {...fields}
 
-        axios.post(`/cars/${selectedUser._id}`, data).then(res => {
+        axios({
+            method: "post",
+            url: `/cars/${selectedUser._id}`,
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+        }).then(res => {
             // console.log(res.data)
             if(res.status === 201) {
                 // DO LATER
@@ -60,9 +72,17 @@ const UploadCarData = () => {
         })
     }
 
-    const handleImageChange = () => {
+    const handleImageClick = () => {
         const file = document.getElementById('photo')
         file.click()
+    }
+
+    const handleImageChange = (e) => {
+        const photo = e.target.files[0]
+        setFields({
+            ...fields,
+            photo
+        })
     }
 
     const handleChange = (e) => {
@@ -92,9 +112,9 @@ const UploadCarData = () => {
                     <DialogContentText>
                         To add user vehicles, simply fill the fields bellow.
                     </DialogContentText>
-                    <form onSubmit={handleSubmit}>
-                        <input id="photo" type="file" hidden />
-                        <Button variant="contained" color="primary" size="small" onClick={handleImageChange} >Add Photo/s</Button>
+                    <form onSubmit={handleSubmit} encType="multipart/form-data">
+                        <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
+                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Add Photo/s</Button>
                         <TextField
                             name="model"
                             autoFocus
