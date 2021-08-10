@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import UserInfoTab from './UserInfoTab'
-import UserCarTab from './UserCarsTab';
+import UserCarsTab from './UserCarsTab';
 import { useData } from '../../../contexts/DataContext';
 import Loader from './../../../utils/Loader'
 import { useHistory } from 'react-router-dom';
@@ -109,14 +109,10 @@ export default function UserDetailsInformation({location}) {
                     className={classes.tabs}
                     indicatorColor="primary"
                 >
-                    <Tab label="User" {...a11yProps(0)} />
-                    <Tab label="Fahrzeuge" {...a11yProps(1)} />
+                    <Tab label="Fahrzeuge" {...a11yProps(0)} />
                 </Tabs>
                 <TabPanel className={classes.tabPanel} value={value} index={0}>
-                    <UserInfoTab userId={userId} />
-                </TabPanel>
-                <TabPanel className={classes.tabPanel} value={value} index={1}>
-                    <UserCarTab />
+                    <UserCarsTab />
                 </TabPanel>
             </div> : <Loader />
     );
