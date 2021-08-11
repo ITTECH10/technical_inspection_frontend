@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import { useData } from '../../contexts/DataContext';
-import CarRow from './CarRow';
+import InsuranceRow from './InsuranceRow';
 
 const useStyles = makeStyles({
   table: {
@@ -16,13 +16,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CarTable({onHandleCarNavigation}) {
+export default function InsuranceTable() {
   const classes = useStyles();
-  const {myVehicles} = useData()
-  console.log(myVehicles)
+  const {insurances} = useData()
 
-  const cars = myVehicles.map(mv => (
-    <CarRow onHandleCarNavigation={onHandleCarNavigation} key={mv._id} car={mv} />
+  const insurancesContent = insurances.map(insurance => (
+    <InsuranceRow key={insurance._id} insurance={insurance} />
   ))
 
   return (
@@ -30,14 +29,12 @@ export default function CarTable({onHandleCarNavigation}) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Mark</TableCell>
-            <TableCell>Model</TableCell>
-            <TableCell>Last Service</TableCell>
-            <TableCell>Next Service</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Address</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {cars}
+          {insurancesContent}
         </TableBody>
       </Table>
     </TableContainer>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import UsersList from './../components/UI/Users/UsersList'
 import NewUserCreation from './../components/UI/NewUserCreation'
 import Alerts from '../components/UI/Alerts'

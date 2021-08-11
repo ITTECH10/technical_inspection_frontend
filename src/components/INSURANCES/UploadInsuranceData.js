@@ -8,31 +8,26 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
-import {setAuthorizationHeader} from './../../utils/setAuthorizationHeader'
 import {useData} from './../../contexts/DataContext'
 import { useHistory } from 'react-router-dom';
-import FloatingButton from './FloatingButton';
+import FloatingButton from './../UI/FloatingButton';
 import AddIcon from '@material-ui/icons/Add';
+import Alerts from './../UI/Alerts'
 
-export default function Signup({handleAlertOpening}) {
+export default function UploadInsuranceData() {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
-  const history = useHistory()
+  const [alertOpen, setAlertOpen] = useState(false)
+  const {insurances, setInsurances} = useData()
 
   const [fields, setFields] = useState({
-    email: '',
-    password: '',
-    confirmPassword: ''
+    name: '',
+    street: '',
+    number: '',
+    postNumber: '',
+    city: '',
+    phoneNumber: ''
   })
-
-  const errObj = {
-    email: '',
-    password: '',
-    confirmPassword: ''
-  }
-  const [errors, setErrors] = useState(errObj)
-
-  const { users, setUsers } = useData()
 
   const handleChange = (e) => {
     setFields({
@@ -46,25 +41,22 @@ export default function Signup({handleAlertOpening}) {
     setBtnLoading(true)
 
     const data = { ...fields }
-    axios.post('/users/signup', data).then(res => {
+    axios.post('/insuranceHouse', data).then(res => {
       console.log(res.data)
       if (res.status === 201) {
-        // setAuthorizationHeader(res.data.token)
-        // setAuthenticated(true)
-        const updatedUsers = [...users, {...res.data.newUser}]
+        const updatedInsurances = [...insurances, res.data.newInsuranceHouse]
 
         setTimeout(() => {
-          setUsers(updatedUsers)
+          setInsurances(updatedInsurances)
           setBtnLoading(false)
           setOpen(false)
-          handleAlertOpening(true)
+          setAlertOpen(true)
         }, 2000)
         //fix loader later
       }
     })
       .catch(err => {
         setBtnLoading(false)
-        setErrors(err.response.data.error.errors) 
         console.log(err.response)
       })
   }
@@ -75,9 +67,6 @@ export default function Signup({handleAlertOpening}) {
 
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => {
-      setErrors(errObj)
-    }, 200)
   };
 
   return (
@@ -85,44 +74,66 @@ export default function Signup({handleAlertOpening}) {
       <FloatingButton onHandleClick={handleClickOpen}>
         <AddIcon />
       </FloatingButton>
+      <Alerts message="New insurance house added!" open={alertOpen} handleOpening={setAlertOpen} />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
+        <DialogTitle id="form-dialog-title">New Insurance House</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To create a new customer, simply fill the fields below.
+            To create a new insurance house, simply fill the fields below.
           </DialogContentText>
           <form onSubmit={handleSubmit}>
             <TextField
-              name="email"
-              error={errors.email && errors.email.message}
-              helperText={errors.email && errors.email.message}
+              name="name"
               autoFocus
               margin="dense"
-              id="mail"
-              label="Email Address"
+              id="nameId"
+              label="Insurance house name"
               onChange={handleChange}
-              type="email"
+              type="text"
               fullWidth
             />
             <TextField
-              name="password"
-              error={errors.password && errors.password.message}
-              helperText={errors.password && errors.password.message}
+              name="street"
               margin="dense"
-              id="pwd"
-              label="Password"
-              type="password"
+              id="streetId"
+              label="Street"
+              type="text"
               onChange={handleChange}
               fullWidth
             />
             <TextField
-              name="confirmPassword"
-              error={errors.confirmPassword && errors.confirmPassword.message}
-              helperText={errors.confirmPassword && errors.confirmPassword.message}
+              name="number"
               margin="dense"
-              id="confirm-pwd"
-              label="Confirm Password"
-              type="password"
+              id="numberAdressId"
+              label="Address number"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              name="postNumber"
+              margin="dense"
+              id="postNumber"
+              label="Post number"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              name="city"
+              margin="dense"
+              id="city"
+              label="City"
+              type="text"
+              onChange={handleChange}
+              fullWidth
+            />
+            <TextField
+              name="phoneNumber"
+              margin="dense"
+              id="phoneNumber"
+              label="Phone number"
+              type="text"
               onChange={handleChange}
               fullWidth
             />

@@ -2,12 +2,20 @@ import React from 'react'
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
+import { useData } from '../../contexts/DataContext';
 
-const CarRow = ({ car }) => {
+const CarRow = ({ car, onHandleCarNavigation }) => {
     const history = useHistory()
+    const {myVehicles, setSelectedCar} = useData()
+
+    const onHandleCarRender = () => {
+        const selectedCar = myVehicles.find(v => v._id === car._id)
+        setSelectedCar(selectedCar)
+        onHandleCarNavigation(5)
+    }
 
     return (
-        <TableRow onClick={() => history.push(`/cars/${car._id}`)} key={car._id}>
+        <TableRow onClick={() => onHandleCarRender()} key={car._id}>
             <TableCell component="th" scope="row">
                 {car.mark}
             </TableCell>

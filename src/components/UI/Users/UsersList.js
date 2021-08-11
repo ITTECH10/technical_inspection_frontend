@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import { useData } from '../../../contexts/DataContext';
 import User from './User'
+import NewUserCreation from './../NewUserCreation'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,17 +15,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function UsersList() {
+export default function UsersList({onHandleTabChange}) {
     const classes = useStyles();
     const {users, user} = useData()
 
     const content = users && [...users].reverse().filter(el => el._id !== user._id).map(u => {
-        return <User key={u._id} userInfo={u}/>
+        return <User onHandleTabChange={onHandleTabChange} key={u._id} userInfo={u}/>
     })
 
     return (
         <div className={classes.root}>
-            <List>
+            <List dissablePadding>
                 {content}
             </List>
         </div>

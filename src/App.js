@@ -18,7 +18,7 @@ import axios from 'axios'
 import UploadGuideScreen from './screens/UploadGuideScreen'
 
 function App() {
-  const { authenticated, appLoading, setAuthenticated, logout, getUserData, user, getAllUsers } = useData()
+  const { authenticated, appLoading, setAuthenticated, logout, getUserData, user, getAllUsers, getInsurances, getBanks } = useData()
   const history = useHistory()
 
   let token = localStorage.token
@@ -42,12 +42,15 @@ function App() {
   useEffect(() => {
     if(user && user.role === 'admin') {
       getAllUsers()
+      getInsurances()
+      getBanks()
     }
-  }, [getAllUsers, user])
+  }, [getAllUsers, user, getInsurances, getBanks])
 
   const authRoutes = (
     <Switch>
-     {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />}
+     {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
+     <Route exact path="/" component={HomeUser} />
      <Route exact path="/user/:id" component={UserDetails} />
      <Route exact path="/cars/:id" component={CarDetailsScreen}/>
      <Route exact path="/upload" component={UploadGuideScreen}/>

@@ -10,14 +10,15 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../../contexts/DataContext';
 
-const User = ({ userInfo }) => {
+const User = ({ userInfo, onHandleTabChange }) => {
     const {getSelectedUser} = useData()
     const history = useHistory()
     const { _id, email } = userInfo    
 
     const onSelectUser = () => {
         getSelectedUser(_id)
-        history.push(`/user/${_id}`)
+        // history.push(`/user/${_id}`)
+        onHandleTabChange(0)
     }
 
     return (
@@ -29,6 +30,7 @@ const User = ({ userInfo }) => {
             </ListItemAvatar>
             <ListItemText
                 primary={email}
+                primaryTypographyProps={{noWrap: true}}
             />
             <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">

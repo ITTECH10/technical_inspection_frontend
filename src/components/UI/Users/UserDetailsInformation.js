@@ -10,6 +10,11 @@ import UserCarsTab from './UserCarsTab';
 import { useData } from '../../../contexts/DataContext';
 import Loader from './../../../utils/Loader'
 import { useHistory } from 'react-router-dom';
+import UsersList from './UsersList';
+import InsurancesTab from '../../INSURANCES/InsurancesTab';
+import BanksTab from '../../BANKS/BanksTab';
+import CarDetails from './../../VEHICLES/CarDetails'
+import UsersProfile from './UsersProfile';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,25 +76,25 @@ const useStyles = makeStyles((theme) => ({
             width: '85%'
         },
         '& .MuiBox-root': {
-            // padding: '5px 24px',
+            padding: '6px',
         },
     }
 }));
 
 export default function UserDetailsInformation({location}) {
     const classes = useStyles();
-    const { loading, getSelectedUser, user, getUserVehicles } = useData()
+    const { loading, getSelectedUser, user, getUserVehicles, selectedCar, selectedUser } = useData()
     const history = useHistory()
     
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     let userId = user._id
-    if(user && user.role === 'admin') {
-        userId = location.pathname.split('/')[2]
+    if(user && user.role === 'admin' && selectedUser) {
+        userId = selectedUser._id
     }
 
     useEffect(() => {
@@ -109,11 +114,32 @@ export default function UserDetailsInformation({location}) {
                     className={classes.tabs}
                     indicatorColor="primary"
                 >
-                    <Tab label="Fahrzeuge" {...a11yProps(0)} />
+                    <Tab label="User" {...a11yProps(0)} />
+                    <Tab label="Customers" {...a11yProps(1)} />
+                    <Tab label="Fahrzeuge" {...a11yProps(2)} />
+                    <Tab label="Insurances" {...a11yProps(3)} />
+                    <Tab label="Banks" {...a11yProps(4)} />
+                   {value === 5 && <Tab label="Selected Car" {...a11yProps(5)} />}
                 </Tabs>
                 <TabPanel className={classes.tabPanel} value={value} index={0}>
-                    <UserCarsTab />
+                    <UsersProfile />
                 </TabPanel>
+                <TabPanel className={classes.tabPanel} value={value} index={1}>
+                    <UsersList onHandleTabChange={setValue} />
+                </TabPanel>
+                <TabPanel className={classes.tabPanel} value={value} index={2}>
+                    <UserCarsTab onHandleCarNavigation={setValue} />
+                </TabPanel>
+                <TabPanel className={classes.tabPanel} value={value} index={3}>
+                    <InsurancesTab />
+                </TabPanel>
+                <TabPanel className={classes.tabPanel} value={value} index={4}>
+                    <BanksTab />
+                </TabPanel>
+                {value === 5 &&
+                <TabPanel className={classes.tabPanel} value={value} index={5}>
+                    <CarDetails />
+                </TabPanel>}
             </div> : <Loader />
     );
 }

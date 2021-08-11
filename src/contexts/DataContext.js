@@ -20,6 +20,13 @@ const DataContextProvider = ({children}) => {
     
     // VEHICLES
     const [myVehicles, setMyVehicles] = useState([])
+    const [selectedCar, setSelectedCar] = useState([])
+    
+    // INSURANCES
+    const [insurances, setInsurances] = useState([])
+
+    // BANKS
+    const [banks, setBanks] = useState([])
 
     const logout = useCallback((history) => {
         localStorage.removeItem('token')
@@ -81,6 +88,27 @@ const DataContextProvider = ({children}) => {
         })
     }, [])
 
+    const getInsurances = useCallback(() => {
+        axios.get('/insuranceHouse').then(res => {
+            if(res.status === 200) {
+                setInsurances(res.data.insurances)
+            }
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    }, [])
+
+    const getBanks = useCallback(() => {
+        axios.get('/payment').then(res => {
+            if(res.status === 200) {
+                setBanks(res.data.banks)
+            }
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    }, [])
 
     const value = {
         authenticated,
@@ -100,7 +128,15 @@ const DataContextProvider = ({children}) => {
         selectedUser,
         setSelectedUser,
         appLoading,
-        getUserVehicles
+        getUserVehicles,
+        insurances,
+        getInsurances,
+        setInsurances,
+        banks,
+        setBanks,
+        getBanks,
+        selectedCar,
+        setSelectedCar
     }
 
     return (
