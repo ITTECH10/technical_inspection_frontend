@@ -10,6 +10,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import NewUserCreation from './NewUserCreation'
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom';
+import Menu from './Menu'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +30,17 @@ export default function Navbar() {
   const classes = useStyles();
   const {logout, user} = useData()
   const history = useHistory()
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" style={{width: matches && 'calc(100% - 240px)'}}>
         <Toolbar>
-          <IconButton onClick={() => history.push('/')} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <HomeIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
+         <Menu />
+          <Typography onClick={() => history.push('/')} variant="h6" className={classes.title}>
             Home
           </Typography>
+          <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>
           <Button onClick={() => logout(history)} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>

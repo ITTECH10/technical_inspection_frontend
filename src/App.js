@@ -6,20 +6,24 @@ import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
 
 import Navbar from './components/UI/Navbar';
-import Home from './screens/Home'
-import HomeUser from './screens/HomeUser';
 import Login from './screens/Login'
-import UserDetails from './screens/UserDetails'
 import CarDetailsScreen from './screens/CarDetailsScreen'
+import CustomersScreen from './screens/CustomersScreen';
 
 import { useData } from './contexts/DataContext';
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
-import UploadGuideScreen from './screens/UploadGuideScreen'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import SelectedUserDetailed from './components/UI/Users/SelectedUserDetailed';
+import CarScreen from './screens/CarScreen';
+import InsuranceScreen from './screens/InsuranceScreen';
+import BankScreen from './screens/BankScreen';
+import Profile from './screens/Profile';
 
 function App() {
-  const { authenticated, appLoading, setAuthenticated, logout, getUserData, user, getAllUsers, getInsurances, getBanks } = useData()
+  const { authenticated, appLoading, setAuthenticated, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks } = useData()
   const history = useHistory()
+  const matches = useMediaQuery('(min-width:600px)');
 
   let token = localStorage.token
 
@@ -40,20 +44,41 @@ function App() {
   }, [token, logout, setAuthenticated, getUserData, history])
 
   useEffect(() => {
-    if(user && user.role === 'admin') {
+    if (user && user.role === 'admin') {
       getAllUsers()
       getInsurances()
       getBanks()
     }
   }, [getAllUsers, user, getInsurances, getBanks])
 
+  let userId = user._id
+  if (user && user.role === 'admin' && selectedUser) {
+    userId = selectedUser._id
+  }
+
+  useEffect(() => {
+    if(userId) {
+      getSelectedUser(userId)
+      getUserVehicles(userId)
+    }
+  }, [getSelectedUser, getUserVehicles, userId])
+
   const authRoutes = (
+    user.role === 'admin' ?
     <Switch>
-     {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
-     <Route exact path="/" component={HomeUser} />
-     <Route exact path="/user/:id" component={UserDetails} />
-     <Route exact path="/cars/:id" component={CarDetailsScreen}/>
-     <Route exact path="/upload" component={UploadGuideScreen}/>
+      {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
+      {/* <Route exact path="/" component={HomeUser} /> */}
+      <Route exact path="/" component={CustomersScreen} />
+      <Route exact path="/user/:id" component={SelectedUserDetailed} />
+      <Route exact path="/cars" component={CarScreen} />
+      <Route exact path="/cars/:id" component={CarDetailsScreen} />
+      <Route exact path="/insurances" component={InsuranceScreen} />
+      <Route exact path="/banks" component={BankScreen} /> 
+      <Route exact path="/profile" component={Profile} /> 
+    </Switch> :
+    <Switch>
+      <Route exact path="/" component={CarScreen} />
+      <Route exact path="/cars/:id" component={CarDetailsScreen} />
     </Switch>
   )
 
@@ -65,14 +90,15 @@ function App() {
 
   const navbarFix = {
     position: 'relative',
-    top: '56px',
-    height: 'calc(100vh - 56px)'
+    top: '64px',
+    height: 'calc(100vh - 64px)',
+    marginLeft: matches && 240,
   }
 
-  const app = !appLoading ?(
+  const app = !appLoading ? (
     <div style={authenticated ? navbarFix : null} className="App">
-        {authenticated && <Navbar />}
-        {authenticated ? authRoutes : routes}
+      {authenticated && <Navbar />}
+      {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />
 

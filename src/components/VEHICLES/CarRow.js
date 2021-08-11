@@ -4,14 +4,14 @@ import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 
-const CarRow = ({ car, onHandleCarNavigation }) => {
+const CarRow = ({ car }) => {
     const history = useHistory()
     const {myVehicles, setSelectedCar} = useData()
 
     const onHandleCarRender = () => {
         const selectedCar = myVehicles.find(v => v._id === car._id)
         setSelectedCar(selectedCar)
-        onHandleCarNavigation(5)
+        history.push(`/cars/${selectedCar._id}`)
     }
 
     return (

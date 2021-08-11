@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InsuranceTable() {
+export default function BanksTable() {
   const classes = useStyles();
   const {banks} = useData()
 

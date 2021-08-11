@@ -6,6 +6,7 @@ import { useData } from '../../../contexts/DataContext'
 const useStyles = makeStyles(theme => ({
     root: {
         borderBottom: '1px solid #ccc',
+        padding: 15
     },
     emailBox: {
         marginBottom: 10
@@ -47,6 +48,7 @@ const SelectedUserDetailed = () => {
     const {email} = selectedUser
 
     return (
+        selectedUser ?
         <Box className={classes.root}>
             <Box className={classes.emailBox}>
                 <Typography style={{fontWeight: 500}}>Email:</Typography>
@@ -75,7 +77,7 @@ const SelectedUserDetailed = () => {
                     </Box>
                 </Box>
             </Box>
-        </Box>
+        </Box> : <Typography>No user selected</Typography>
     )
 }
 

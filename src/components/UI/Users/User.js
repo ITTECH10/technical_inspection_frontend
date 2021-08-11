@@ -10,15 +10,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../../contexts/DataContext';
 
-const User = ({ userInfo, onHandleTabChange }) => {
+const User = ({ userInfo }) => {
     const {getSelectedUser} = useData()
     const history = useHistory()
     const { _id, email } = userInfo    
 
     const onSelectUser = () => {
         getSelectedUser(_id)
-        // history.push(`/user/${_id}`)
-        onHandleTabChange(0)
+        history.push(`/cars`)
     }
 
     return (

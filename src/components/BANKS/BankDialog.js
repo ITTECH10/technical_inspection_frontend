@@ -7,7 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import { blue } from '@material-ui/core/colors';
 
 import { useData } from '../../contexts/DataContext';
-import InsuranceList from './InsuranceList';
+import BankList from './BankList';
 
 const useStyles = makeStyles({
     avatar: {
@@ -19,19 +19,19 @@ const useStyles = makeStyles({
 function SimpleDialog(props) {
     const classes = useStyles();
     const { onClose, selectedValue, open } = props;
-    const {insurances} = useData()
+    const {banks} = useData()
 
     const handleClose = () => {
         onClose(selectedValue);
     };
 
-    const content = insurances.map(insurance => (
-        <InsuranceList key={insurance._id} insurance={insurance} />
+    const content = banks.map(bank => (
+        <BankList key={bank._id} bank={bank} />
     ))
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle>Connect vehicle to insurance</DialogTitle>
+            <DialogTitle>Connect vehicle to bank</DialogTitle>
                 {content}
         </Dialog>
     );
@@ -59,7 +59,7 @@ export default function SimpleDialogDemo() {
     return (
         <div>
             <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>
-                Change Insurance
+                Change Bank
             </Button>
             <SimpleDialog open={open} onClose={handleClose} />
         </div>

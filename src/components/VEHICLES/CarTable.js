@@ -16,13 +16,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CarTable({onHandleCarNavigation}) {
+export default function CarTable() {
   const classes = useStyles();
   const {myVehicles} = useData()
-  console.log(myVehicles)
 
   const cars = myVehicles.map(mv => (
-    <CarRow onHandleCarNavigation={onHandleCarNavigation} key={mv._id} car={mv} />
+    <CarRow key={mv._id} car={mv} />
   ))
 
   return (

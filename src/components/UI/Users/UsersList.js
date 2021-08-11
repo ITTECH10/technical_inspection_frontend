@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import { useData } from '../../../contexts/DataContext';
 import User from './User'
-import NewUserCreation from './../NewUserCreation'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,16 +10,16 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             // maxWidth: 752, // maybe change later
             margin: '0 auto'
-        }
+        },
     },
 }));
 
-export default function UsersList({onHandleTabChange}) {
+export default function UsersList() {
     const classes = useStyles();
     const {users, user} = useData()
 
     const content = users && [...users].reverse().filter(el => el._id !== user._id).map(u => {
-        return <User onHandleTabChange={onHandleTabChange} key={u._id} userInfo={u}/>
+        return <User key={u._id} userInfo={u}/>
     })
 
     return (
