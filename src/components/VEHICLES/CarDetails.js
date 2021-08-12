@@ -69,12 +69,9 @@ const CarDetails = () => {
     }
     
     // let carId = history.location.pathname.split('/')[2]
-    useEffect(() => {
-        if(!selectedCar._id) {
-            history.push('/')
-        }
-        // getSelectedCar(carId)
-    }, [])
+    // useEffect(() => {
+    //     getSelectedCar(carId)
+    // }, [])
 
 
     useEffect(() => {

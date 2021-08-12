@@ -28,6 +28,12 @@ function App() {
   let token = localStorage.token
 
   useEffect(() => {
+    if(!selectedUser._id) {
+      history.push('/')
+    }
+  }, [])
+
+  useEffect(() => {
     if (token) {
       // 1) If there is a token, decode it
       const decodedToken = jwtDecode(token)
