@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
-import {useData} from './../../contexts/DataContext'
+import { useData } from './../../contexts/DataContext'
 import { useHistory } from 'react-router-dom';
 import FloatingButton from './../UI/FloatingButton';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,7 +18,7 @@ export default function UploadInsuranceData() {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
   const [alertOpen, setAlertOpen] = useState(false)
-  const {insurances, setInsurances} = useData()
+  const { insurances, setInsurances } = useData()
 
   const [fields, setFields] = useState({
     name: '',
@@ -42,7 +42,7 @@ export default function UploadInsuranceData() {
 
     const data = { ...fields }
     axios.post('/insuranceHouse', data).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       if (res.status === 201) {
         const updatedInsurances = [...insurances, res.data.newInsuranceHouse]
 
@@ -142,7 +142,7 @@ export default function UploadInsuranceData() {
                 Cancel
               </Button>
               <Button type="submit" color="primary" variant="contained">
-                {btnLoading ? <CircularProgress style={{height: 25, width: 25, color: '#fff'}} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
               </Button>
             </DialogActions>
           </form>
