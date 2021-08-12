@@ -10,7 +10,7 @@ const CarScreen = () => {
     return (
         !loading ?
             <React.Fragment>
-                {selectedUser._id && user.role === 'admin' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
+                {selectedUser._id && user.role === 'admin' ? <CarTable /> : user.role === 'user' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
                 {user.role === 'admin' && <UploadCarData />}
             </React.Fragment> : <Loader />
     )
