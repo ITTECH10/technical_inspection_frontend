@@ -23,24 +23,25 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    cursor: 'pointer'
   },
 }));
 
 export default function Navbar() {
   const classes = useStyles();
-  const {logout, user} = useData()
+  const { logout, user } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" style={{width: matches && 'calc(100% - 240px)'}}>
+      <AppBar position="fixed" style={{ width: matches && 'calc(100% - 240px)' }}>
         <Toolbar>
-         <Menu />
+          <Menu />
           <Typography onClick={() => history.push('/')} variant="h6" className={classes.title}>
             Home
           </Typography>
-          <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>
+          {history.location.pathname !== '/' && <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
           <Button onClick={() => logout(history)} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
