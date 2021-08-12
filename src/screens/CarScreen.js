@@ -11,7 +11,7 @@ const CarScreen = () => {
         !loading ?
             <React.Fragment>
                 {selectedUser._id && user.role === 'admin' ? <CarTable /> : user.role === 'user' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
-                {user.role === 'admin' && <UploadCarData />}
+                {user.role === 'admin' && selectedUser._id && <UploadCarData />}
             </React.Fragment> : <Loader />
     )
 }
