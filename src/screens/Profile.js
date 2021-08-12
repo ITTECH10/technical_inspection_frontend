@@ -1,10 +1,11 @@
 import React from 'react'
+import SelectedUserDetailed from './../components/UI/Users/SelectedUserDetailed'
 
 const Profile = () => {
     return (
-        <div>
-            <h1>Hello from Profile</h1>
-        </div>
+        <React.Fragment>
+            <SelectedUserDetailed />
+        </React.Fragment>
     )
 }
 
