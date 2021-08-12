@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = () => {
-    const { selectedCar, getSelectedCar, insurances, banks, user, setSelectedCarInsurance, setSelectedCarBank, selectedCarInsurance, selectedCarBank } = useData()
+    const { selectedCar, insurances, banks, user, setSelectedCarInsurance, setSelectedCarBank, selectedCarInsurance, selectedCarBank } = useData()
     const classes = useStyles()
     const { AU, HSN, insuranceHouse, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, vehiclePaymentType, yearlyTax, lastTechnicalInspection } = selectedCar
     const history = useHistory()
@@ -68,9 +68,12 @@ const CarDetails = () => {
             .catch(err => console.log(err.response))
     }
     
-    let carId = history.location.pathname.split('/')[2]
+    // let carId = history.location.pathname.split('/')[2]
     useEffect(() => {
-        getSelectedCar(carId)
+        if(!selectedCar._id) {
+            history.push('/')
+        }
+        // getSelectedCar(carId)
     }, [])
 
 
