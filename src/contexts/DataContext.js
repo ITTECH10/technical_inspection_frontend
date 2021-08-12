@@ -38,7 +38,7 @@ const DataContextProvider = ({ children }) => {
         setTimeout(() => {
             setAppLoading(false)
             history.push('/')
-            // history.go(0) // optional
+            history.go(0) //non optional :/
         }, 2000)
     }, [])
 

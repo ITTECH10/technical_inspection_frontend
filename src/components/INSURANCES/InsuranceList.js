@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -7,16 +7,29 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useData } from './../../contexts/DataContext'
 import axios from 'axios'
+import { CircularProgress } from '@material-ui/core';
 
-const InsuranceList = ({ insurance }) => {
-    const { selectedCar } = useData()
+const InsuranceList = ({ insurance, handleAlertOpening, handleDialogClosing }) => {
+    const { selectedCar, setSelectedCar } = useData()
+    const [buttonLoading, setButtonLoading] = useState(false)
+
     const { name, _id } = insurance
     const data = { insuranceHouse: _id }
 
     const handleInsuranceSelection = () => {
+        setButtonLoading(true)
+
         axios.patch(`/cars/${selectedCar._id}`, data)
             .then(res => {
-                // console.log(res.data)
+                if (res.status === 202) {
+                    setTimeout(() => {
+                        setSelectedCar(res.data.vehicle)
+
+                        setButtonLoading(false)
+                        handleAlertOpening(true)
+                        handleDialogClosing(false)
+                    }, 2000)
+                }
             })
             .catch(err => {
                 console.log(err.response)
@@ -33,7 +46,9 @@ const InsuranceList = ({ insurance }) => {
                 <Typography>{name}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Button onClick={() => handleInsuranceSelection()} color="primary" variant="contained">Select</Button>
+                <Button onClick={() => handleInsuranceSelection()} color="primary" variant="contained">
+                    {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Select'}
+                </Button>
             </AccordionDetails>
         </Accordion>
     )
