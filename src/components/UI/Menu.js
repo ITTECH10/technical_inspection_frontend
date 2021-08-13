@@ -17,6 +17,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import { useData } from '../../contexts/DataContext';
+import { SwipeableDrawer } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -33,11 +34,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function TemporaryDrawer() {
-    const [open, setOpen] = useState(true)
+    const matches = useMediaQuery('(min-width:600px)');
+    const [open, setOpen] = useState(matches ? true : false)
+    const [swipeableOpen, setSwipeableOpen] = useState(!matches ? true : false)
     const history = useHistory()
     const classes = useStyles()
-    const matches = useMediaQuery('(min-width:600px)');
-    const {user} = useData()
+    const { user } = useData()
 
     useEffect(() => {
         if (!matches) {
@@ -51,14 +53,17 @@ export default function TemporaryDrawer() {
 
     const handleOpening = () => {
         setOpen(prevState => !prevState)
+        setSwipeableOpen(prevState => !prevState)
     }
 
     const handleClosing = () => {
         setOpen(false)
+        setSwipeableOpen(false)
     }
 
     const onHandleNavigation = (route) => {
         history.push(route)
+        setSwipeableOpen(false)
         if (!matches) {
             setOpen(false)
         }
@@ -66,41 +71,82 @@ export default function TemporaryDrawer() {
 
     return (
         <div>
-            <React.Fragment>
-                {!matches && <IconButton onClick={handleOpening}><MenuIcon /></IconButton>}
-                <Drawer style={{zIndex: 0, width: 240}} elevation={1} PaperProps={{ className: classes.root, style: {paddingTop: !matches && 56} }} BackdropProps={{ invisible: true, open: matches ? false : true, className: classes.backdropRoot }} anchor="left" open={open} onClose={handleClosing}>
-                    {user.role === 'admin' ?
-                    <List>
-                        <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation(`/profile`)}>
-                            <ListItemIcon><AccountCircleIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="User" />
-                        </ListItem>
-                        <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
-                            <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Customers" />
-                        </ListItem>
-                        <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
-                            <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Fahrzeuge" />
-                        </ListItem>
-                        <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances')}>
-                            <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Insurances" />
-                        </ListItem>
-                        <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks')}>
-                            <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Banks" />
-                        </ListItem>
-                    </List>
-                    : 
-                    <List>
-                        <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
-                            <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Fahrzeuge" />
-                        </ListItem>
-                    </List> }
-                </Drawer>
-            </React.Fragment>
+            {matches ? (
+                <React.Fragment>
+                    {!matches && <IconButton><MenuIcon /></IconButton>}
+                    <Drawer style={{ zIndex: 0, width: 240 }} elevation={1} PaperProps={{ className: classes.root, style: { paddingTop: !matches && 56 } }} BackdropProps={{ invisible: true, open: matches ? false : true, className: classes.backdropRoot }} anchor="left" open={open} onClose={handleClosing}>
+                        {user.role === 'admin' ?
+                            <List>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation(`/profile`)}>
+                                    <ListItemIcon><AccountCircleIcon color="primary" /></ListItemIcon>
+                                    <ListItemText primary="User" />
+                                </ListItem>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
+                                    <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
+                                    <ListItemText primary="Customers" />
+                                </ListItem>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
+                                    <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
+                                    <ListItemText primary="Fahrzeuge" />
+                                </ListItem>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances')}>
+                                    <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
+                                    <ListItemText primary="Insurances" />
+                                </ListItem>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks')}>
+                                    <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
+                                    <ListItemText primary="Banks" />
+                                </ListItem>
+                            </List>
+                            :
+                            <List>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
+                                    <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
+                                    <ListItemText primary="Fahrzeuge" />
+                                </ListItem>
+                            </List>}
+                    </Drawer>
+                </React.Fragment>
+            )
+                :
+                (
+                    <React.Fragment>
+                        {!matches && <IconButton onClick={() => setSwipeableOpen(prevState => !prevState)}><MenuIcon /></IconButton>}
+                        <SwipeableDrawer style={{ zIndex: 0, width: 240 }} elevation={1} PaperProps={{ className: classes.root, style: { paddingTop: !matches && 56 } }} BackdropProps={{ open: matches ? false : true, className: classes.backdropRoot }} anchor="left" open={swipeableOpen} onClose={handleClosing}>
+                            {user.role === 'admin' ?
+                                <List>
+                                    <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation(`/profile`)}>
+                                        <ListItemIcon><AccountCircleIcon color="primary" /></ListItemIcon>
+                                        <ListItemText primary="User" />
+                                    </ListItem>
+                                    <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
+                                        <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
+                                        <ListItemText primary="Customers" />
+                                    </ListItem>
+                                    <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
+                                        <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
+                                        <ListItemText primary="Fahrzeuge" />
+                                    </ListItem>
+                                    <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances')}>
+                                        <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
+                                        <ListItemText primary="Insurances" />
+                                    </ListItem>
+                                    <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks')}>
+                                        <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
+                                        <ListItemText primary="Banks" />
+                                    </ListItem>
+                                </List>
+                                :
+                                <List>
+                                    <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
+                                        <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
+                                        <ListItemText primary="Fahrzeuge" />
+                                    </ListItem>
+                                </List>}
+                        </SwipeableDrawer>
+                    </React.Fragment>
+                )
+            }
         </div>
     );
 }
