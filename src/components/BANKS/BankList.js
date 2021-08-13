@@ -22,7 +22,7 @@ const BankList = ({ bank, handleAlertOpening, handleDialogClosing }) => {
             .then(res => {
                 // console.log(res.data)
                 if (res.status === 202) {
-                    console.log(res.data)
+                    // console.log(res.data)
                     setTimeout(() => {
                         setSelectedCar(res.data.vehicle)
 

@@ -4,7 +4,7 @@ import { Grid, Typography, Box, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import InsuranceDialog from './InsuranceDialog'
 import Alerts from '../UI/Alerts'
-import { objectIsEmpty } from './../../utils/helpers'
+// import { objectIsEmpty } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {

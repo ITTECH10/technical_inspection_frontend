@@ -29,7 +29,7 @@ function GalleryCmp() {
             src: image.url,
             height: 3,
             width: 5,
-            title: formatedTitle
+            title: `Uploaded on: ${formatedTitle}`
         }
     })
 

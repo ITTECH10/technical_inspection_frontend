@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Typography, Box, TextField } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import BankDialog from './BankDialog'
 import { makeStyles } from '@material-ui/core/styles'
 import Alerts from '../UI/Alerts'
-import { objectIsEmpty } from './../../utils/helpers'
+// import { objectIsEmpty } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -20,12 +20,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const BankGrid = () => {
-    const { banks, selectedCarBank, user, selectedCar } = useData()
+    const { banks, selectedCarBank, user, selectedCar, setSelectedCarBank } = useData()
     const selectedBank = banks.find(el => el._id === selectedCar.vehiclePaymentType)
     const classes = useStyles()
     const [alertOpen, setAlertOpen] = useState(false)
 
-    // console.log(selectedCarBank)
+    // console.log(selectedCar.vehiclePaymentType.toLowerCase())
 
     return (
         <>
@@ -60,7 +60,9 @@ const BankGrid = () => {
                                 <Typography className={classes.inputTitle}>Phone</Typography>
                                 <TextField className={classes.input} label={selectedCarBank && selectedCarBank.phoneNumber} disabled />
                             </Box>
-                        </Box> : <Typography variant="h4">No bank details yet.</Typography>}
+                        </Box> : selectedCar.vehiclePaymentType && selectedCar.vehiclePaymentType.toLowerCase() === 'cash' ? <Typography variant="h4">
+                            Customer payed with cash.
+                        </Typography> : <Typography variant="h4">No bank details yet.</Typography>}
                 {user.role === 'admin' &&
                     <Box style={{ margin: '10px 0' }}>
                         <BankDialog handleAlertOpening={setAlertOpen} />

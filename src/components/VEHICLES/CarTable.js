@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,11 +18,15 @@ const useStyles = makeStyles({
 
 export default function CarTable() {
   const classes = useStyles();
-  const {myVehicles} = useData()
+  const { myVehicles, setSelectedCarBank } = useData()
 
   const cars = myVehicles.map(mv => (
     <CarRow key={mv._id} car={mv} />
   ))
+
+  useEffect(() => {
+    setSelectedCarBank({})
+  }, [])
 
   return (
     <TableContainer component={Paper}>
