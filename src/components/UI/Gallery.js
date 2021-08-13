@@ -24,11 +24,12 @@ function GalleryCmp() {
     const { carImages } = useData()
 
     const formatedPhotos = carImages.map(image => {
+        const formatedTitle = `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
         return {
             src: image.url,
             height: 3,
             width: 5,
-            title: `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
+            title: formatedTitle
         }
     })
 
