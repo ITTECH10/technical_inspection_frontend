@@ -28,7 +28,7 @@ function GalleryCmp() {
             src: image.url,
             height: 1,
             width: 2,
-            title: image.createdAt
+            title: `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
         }
     })
 
