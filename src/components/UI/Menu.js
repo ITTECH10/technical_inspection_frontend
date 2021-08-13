@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 export default function TemporaryDrawer() {
     const matches = useMediaQuery('(min-width:600px)');
     const [open, setOpen] = useState(matches ? true : false)
-    const [swipeableOpen, setSwipeableOpen] = useState(!matches ? true : false)
+    const [swipeableOpen, setSwipeableOpen] = useState(false)
     const history = useHistory()
     const classes = useStyles()
     const { user } = useData()
