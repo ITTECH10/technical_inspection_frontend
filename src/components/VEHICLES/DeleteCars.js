@@ -33,15 +33,15 @@ export default function DeleteUser({ carId, handleAlertOpening }) {
         const updatedVehicles = [...myVehicles].filter(v => v._id !== carId)
 
         setTimeout(() => {
-            setMyVehicles(updatedVehicles)
-            handleAlertOpening(true)
-            setBtnLoading(false)
-            setOpen(false)
+          setMyVehicles(updatedVehicles)
+          handleAlertOpening(true)
+          setBtnLoading(false)
+          setOpen(false)
         }, 2000)
       }
     })
       .catch(err => {
-        console.log(err.response)
+        // console.log(err.response)
       })
   }
 
@@ -68,7 +68,7 @@ export default function DeleteUser({ carId, handleAlertOpening }) {
                 Cancel
               </Button>
               <Button type="submit" variant="contained" color="primary" autoFocus>
-                {btnLoading ? <CircularProgress style={{height: 25, width: 25, color: '#fff'}} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
               </Button>
             </DialogActions>
           </form>

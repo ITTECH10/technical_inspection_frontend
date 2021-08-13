@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,24 +8,28 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
-import {setAuthorizationHeader} from './../../utils/setAuthorizationHeader'
-import {useData} from './../../contexts/DataContext'
+import { setAuthorizationHeader } from './../../utils/setAuthorizationHeader'
+import { useData } from './../../contexts/DataContext'
 import { useHistory } from 'react-router-dom';
 import FloatingButton from './FloatingButton';
 import AddIcon from '@material-ui/icons/Add';
 
-export default function Signup({handleAlertOpening}) {
+export default function Signup({ handleAlertOpening }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
   const history = useHistory()
 
   const [fields, setFields] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: ''
   })
 
   const errObj = {
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -47,11 +51,11 @@ export default function Signup({handleAlertOpening}) {
 
     const data = { ...fields }
     axios.post('/users/signup', data).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       if (res.status === 201) {
         // setAuthorizationHeader(res.data.token)
         // setAuthenticated(true)
-        const updatedUsers = [...users, {...res.data.newUser}]
+        const updatedUsers = [...users, { ...res.data.newUser }]
 
         setTimeout(() => {
           setUsers(updatedUsers)
@@ -64,8 +68,8 @@ export default function Signup({handleAlertOpening}) {
     })
       .catch(err => {
         setBtnLoading(false)
-        setErrors(err.response.data.error.errors) 
-        console.log(err.response)
+        setErrors(err.response.data.error.errors)
+        // console.log(err.response)
       })
   }
 
@@ -93,10 +97,33 @@ export default function Signup({handleAlertOpening}) {
           </DialogContentText>
           <form onSubmit={handleSubmit}>
             <TextField
+              autoFocus
+              name="firstName"
+              error={errors.firstName && errors.firstName.message}
+              helperText={errors.firstName && errors.firstName.message}
+              autoFocus
+              margin="dense"
+              id="firstName"
+              label="First name"
+              onChange={handleChange}
+              type="text"
+              fullWidth
+            />
+            <TextField
+              name="lastName"
+              error={errors.lastName && errors.lastName.message}
+              helperText={errors.lastName && errors.lastName.message}
+              margin="dense"
+              id="lastName"
+              label="Last name"
+              onChange={handleChange}
+              type="text"
+              fullWidth
+            />
+            <TextField
               name="email"
               error={errors.email && errors.email.message}
               helperText={errors.email && errors.email.message}
-              autoFocus
               margin="dense"
               id="mail"
               label="Email Address"
@@ -131,7 +158,7 @@ export default function Signup({handleAlertOpening}) {
                 Cancel
               </Button>
               <Button type="submit" color="primary" variant="contained">
-                {btnLoading ? <CircularProgress style={{height: 25, width: 25, color: '#fff'}} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
               </Button>
             </DialogActions>
           </form>

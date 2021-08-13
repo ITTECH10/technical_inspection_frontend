@@ -36,7 +36,7 @@ const CarDetails = () => {
                     setSelectedCarInsurance(res.data.insurance)
                 }
             })
-            .catch(err => console.log(err.response))
+        // .catch(err => console.log(err.response))
     }
 
     const getCarBankInfo = () => {

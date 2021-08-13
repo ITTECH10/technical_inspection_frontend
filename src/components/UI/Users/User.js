@@ -11,9 +11,9 @@ import { useHistory } from 'react-router-dom';
 import { useData } from '../../../contexts/DataContext';
 
 const User = ({ userInfo }) => {
-    const {getSelectedUser} = useData()
+    const { getSelectedUser } = useData()
     const history = useHistory()
-    const { _id, email } = userInfo    
+    const { _id, email, firstName, lastName } = userInfo
 
     const onSelectUser = () => {
         getSelectedUser(_id)
@@ -21,15 +21,15 @@ const User = ({ userInfo }) => {
     }
 
     return (
-        <ListItem style={{cursor: 'pointer', borderBottom: '1px solid #eee', marginBottom: '10px'}} onClick={() => onSelectUser()}>
+        <ListItem style={{ cursor: 'pointer', borderBottom: '1px solid #eee', marginBottom: '10px' }} onClick={() => onSelectUser()}>
             <ListItemAvatar>
                 <Avatar>
                     <AssignmentIndIcon />
                 </Avatar>
             </ListItemAvatar>
             <ListItemText
-                primary={email}
-                primaryTypographyProps={{noWrap: true}}
+                primary={`${firstName} ${lastName}`}
+                primaryTypographyProps={{ noWrap: true }}
             />
             <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">

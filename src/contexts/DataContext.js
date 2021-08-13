@@ -36,7 +36,7 @@ const DataContextProvider = ({ children }) => {
             setCarImages(res.data.images)
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -57,7 +57,7 @@ const DataContextProvider = ({ children }) => {
             setUsers(res.data.users)
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -71,7 +71,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 setAppLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -86,7 +86,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 setLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -97,7 +97,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -111,7 +111,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // setLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -122,7 +122,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -133,7 +133,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 

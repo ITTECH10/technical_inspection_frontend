@@ -41,6 +41,9 @@ export default function Navbar() {
           <Typography onClick={() => history.push('/')} variant="h6" className={classes.title}>
             Home
           </Typography>
+          <Typography>
+            Logged in as {user.role === 'user' ? `${user.firstName} ${user.lastName}` : 'ADMIN'}
+          </Typography>
           {history.location.pathname !== '/' && <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
           <Button onClick={() => logout(history)} color="inherit">Logout</Button>
         </Toolbar>
