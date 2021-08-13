@@ -7,6 +7,7 @@ import axios from 'axios'
 import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
 import BankGrid from '../BANKS/BankGrid'
+import Gallery from './../UI/Gallery'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -54,7 +55,6 @@ const CarDetails = () => {
     //     getSelectedCar(carId)
     // }, [])
 
-
     useEffect(() => {
         if (selectedCar.insuranceHouse !== undefined && user.role === 'user') {
             getCarInsurance()
@@ -73,11 +73,12 @@ const CarDetails = () => {
 
     return (
         <Grid container className={classes.mainContainer} direction="column">
-            {selectedCar.image && (
+            {/* {selectedCar.thumbnail && (
                 <Box className={classes.imageBox}>
-                    <img src={selectedCar.image} style={{ height: '100%', width: '100%' }} alt="car" />
+                    <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
-            )}
+            )} */}
+            <Gallery />
             <VehicleDetailsGrid />
             <InsuranceHouseGrid />
             <BankGrid />

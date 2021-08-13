@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Typography, Grid, Paper, Box, TextField, Button } from '@material-ui/core'
-import {makeStyles} from '@material-ui/core/styles'
-import AppLogo from './../assets/images/car-insurance.svg'
+import { makeStyles } from '@material-ui/core/styles'
+import AppLogo from './../assets/images/logo.svg'
 import axios from 'axios'
-import {setAuthorizationHeader} from './../utils/setAuthorizationHeader'
+import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { useData } from '../contexts/DataContext'
 
 const useStyles = makeStyles(theme => ({
@@ -42,9 +42,10 @@ const useStyles = makeStyles(theme => ({
         }
     },
     logoBox: {
-        height: 130,
-        width: 130,
-        margin: '0 auto'
+        // height: 200,
+        width: 280,
+        margin: '0 auto',
+        marginTop: 50
     },
     logo: {
         height: '100%',
@@ -63,7 +64,7 @@ const Login = (props) => {
         password: '123456'
     })
     const [errors, setErrors] = useState({})
-    const {setAuthenticated, setLoading} = useData()
+    const { setAuthenticated, setLoading } = useData()
 
     const handleChange = (e) => {
         setFields({
@@ -75,23 +76,23 @@ const Login = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const data = {...fields}
+        const data = { ...fields }
         axios.post('/users/login', data).then(res => {
             setLoading(true)
-            if(res.status === 201) {
+            if (res.status === 201) {
                 setAuthorizationHeader(res.data.token)
                 setAuthenticated(true)
                 setLoading(false)
                 props.history.push('/')
             }
         })
-        .catch(err => {
-            setErrors({
-                message: err.response.data.message
+            .catch(err => {
+                setErrors({
+                    message: err.response.data.message
+                })
+                setLoading(false)
+                console.log(err.response)
             })
-            setLoading(false)
-            console.log(err.response)
-        })
     }
 
     const classes = useStyles()
@@ -106,7 +107,7 @@ const Login = (props) => {
                         <Box className={classes.logoBox}>
                             <img src={AppLogo} alt="Logo" className={classes.logo} />
                         </Box>
-                        <Typography style={{fontWeight: '500'}} variant="h4" align="center">Login</Typography>
+                        <Typography style={{ fontWeight: '500' }} variant="h4" align="center">Login</Typography>
                         <Box className={classes.inputContainer}>
                             <form className={classes.inputForm} onSubmit={handleSubmit}>
                                 <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />

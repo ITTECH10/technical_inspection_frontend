@@ -11,7 +11,7 @@ const UploadCarImages = () => {
     const [open, setOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { myVehicles, setMyVehicles } = useData()
+    const { myVehicles, setMyVehicles, carImages, setCarImages } = useData()
     const history = useHistory()
 
     const carId = history.location.pathname.split('/')[2]
@@ -31,19 +31,21 @@ const UploadCarImages = () => {
 
         axios({
             method: "post",
-            url: `/cars/upload/${carId}`,
+            url: `/cars/images/${carId}`,
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         }).then(res => {
-            // console.log(res.data)        
+            // console.log(res.data)
             if (res.status === 201) {
-                const updatedVehicles = [...myVehicles]
-                const updatedVehicleIndex = updatedVehicles.findIndex(v => v._id === carId)
-                const updatedVehicle = updatedVehicles[updatedVehicleIndex]
-                updatedVehicle.image = res.data.updatedVehicle.image
+                // const updatedVehicles = [...myVehicles]
+                // const updatedVehicleIndex = updatedVehicles.findIndex(v => v._id === carId)
+                // const updatedVehicle = updatedVehicles[updatedVehicleIndex]
+                // updatedVehicle.images = res.data.vehicle.images
+                const updatedImages = [...carImages, { ...res.data.newImage }]
 
                 setTimeout(() => {
-                    setMyVehicles(updatedVehicles)
+                    // setMyVehicles(updatedVehicles)
+                    setCarImages(updatedImages)
                     setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)
@@ -82,7 +84,7 @@ const UploadCarImages = () => {
             <FloatingButton onHandleClick={handleClickOpen}>
                 <AddIcon />
             </FloatingButton>
-            <Alerts message="Photo updated successfuly!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message="Photo added successfuly!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Photos</DialogTitle>
                 <DialogContent>

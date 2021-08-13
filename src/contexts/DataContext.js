@@ -21,6 +21,7 @@ const DataContextProvider = ({ children }) => {
     // VEHICLES
     const [myVehicles, setMyVehicles] = useState([])
     const [selectedCar, setSelectedCar] = useState([])
+    const [carImages, setCarImages] = useState([])
 
     // INSURANCES
     const [insurances, setInsurances] = useState([])
@@ -29,6 +30,15 @@ const DataContextProvider = ({ children }) => {
     // BANKS
     const [banks, setBanks] = useState([])
     const [selectedCarBank, setSelectedCarBank] = useState({})
+
+    const getCarImages = useCallback((id) => {
+        axios(`/cars/images/${id}`).then(res => {
+            setCarImages(res.data.images)
+        })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }, [])
 
     const logout = useCallback((history) => {
         setAppLoading(true)
@@ -158,7 +168,10 @@ const DataContextProvider = ({ children }) => {
         selectedCarInsurance,
         setSelectedCarInsurance,
         selectedCarBank,
-        setSelectedCarBank
+        setSelectedCarBank,
+        getCarImages,
+        carImages,
+        setCarImages
     }
 
     return (
