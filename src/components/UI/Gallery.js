@@ -26,8 +26,8 @@ function GalleryCmp() {
     const formatedPhotos = carImages.map(image => {
         return {
             src: image.url,
-            height: 1,
-            width: 2,
+            height: 3,
+            width: 5,
             title: `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
         }
     })
@@ -45,7 +45,7 @@ function GalleryCmp() {
     const classes = useStyles();
     return (
         <div>
-            <Gallery photos={formatedPhotos} onClick={openLightbox} />
+            <Gallery direction="column" columns={2} photos={formatedPhotos} onClick={openLightbox} />
             <ModalGateway>
                 {viewerIsOpen ? (
                     <Modal onClose={closeLightbox}>
