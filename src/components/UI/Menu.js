@@ -51,10 +51,10 @@ export default function TemporaryDrawer() {
         }
     }, [matches])
 
-    const handleOpening = () => {
-        setOpen(prevState => !prevState)
-        setSwipeableOpen(prevState => !prevState)
-    }
+    // const handleOpening = () => {
+    //     setOpen(prevState => !prevState)
+    //     setSwipeableOpen(prevState => !prevState)
+    // }
 
     const handleClosing = () => {
         setOpen(false)
@@ -112,7 +112,7 @@ export default function TemporaryDrawer() {
                 (
                     <React.Fragment>
                         {!matches && <IconButton onClick={() => setSwipeableOpen(prevState => !prevState)}><MenuIcon /></IconButton>}
-                        <SwipeableDrawer style={{ zIndex: 0, width: 240 }} elevation={1} PaperProps={{ className: classes.root, style: { paddingTop: !matches && 56 } }} BackdropProps={{ open: matches ? false : true, className: classes.backdropRoot }} anchor="left" open={swipeableOpen} onClose={handleClosing}>
+                        <SwipeableDrawer onOpen={() => setSwipeableOpen(true)} style={{ zIndex: 0, width: 240 }} elevation={1} PaperProps={{ className: classes.root, style: { paddingTop: !matches && 56 } }} BackdropProps={{ open: matches ? false : true, className: classes.backdropRoot }} anchor="left" open={swipeableOpen} onClose={handleClosing}>
                             {user.role === 'admin' ?
                                 <List>
                                     <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation(`/profile`)}>
