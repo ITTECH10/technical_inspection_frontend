@@ -31,8 +31,6 @@ const DataContextProvider = ({ children }) => {
     const [banks, setBanks] = useState([])
     const [selectedCarBank, setSelectedCarBank] = useState({})
 
-    console.log(carImages)
-
     const getCarImages = (id) => {
         axios(`/cars/images/${id}`).then(res => {
             setCarImages(res.data.images)

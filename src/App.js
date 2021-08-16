@@ -26,16 +26,16 @@ function App() {
   const matches = useMediaQuery('(min-width:600px)');
 
   let token = localStorage.token
-  let storageUser = JSON.parse(localStorage.user)
-  let storageSelectedUser = JSON.parse(localStorage.selectedUser)
+  let storageUser = localStorage.user
+  let storageSelectedUser = localStorage.selectedUser
 
   useEffect(() => {
     if (storageUser) {
-      setUser(storageUser)
+      setUser(JSON.parse(storageUser))
     }
 
     if (storageSelectedUser) {
-      setSelectedUser(storageSelectedUser)
+      setSelectedUser(JSON.parse(storageSelectedUser))
     }
   }, [])
 
