@@ -95,7 +95,7 @@ const UploadCarData = () => {
             }
         })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
     }
 
@@ -141,7 +141,7 @@ const UploadCarData = () => {
                     </DialogContentText>
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Add Photo/s</Button>
+                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Add Photo</Button>
                         <TextField
                             name="mark"
                             autoFocus

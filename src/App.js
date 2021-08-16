@@ -21,15 +21,21 @@ import BankScreen from './screens/BankScreen';
 import Profile from './screens/Profile';
 
 function App() {
-  const { authenticated, appLoading, setAuthenticated, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks } = useData()
+  const { authenticated, appLoading, setAuthenticated, setSelectedCar, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
 
   let token = localStorage.token
+  let storageUser = JSON.parse(localStorage.user)
+  let storageSelectedUser = JSON.parse(localStorage.selectedUser)
 
   useEffect(() => {
-    if(!selectedUser._id) {
-      history.push('/')
+    if (storageUser) {
+      setUser(storageUser)
+    }
+
+    if (storageSelectedUser) {
+      setSelectedUser(storageSelectedUser)
     }
   }, [])
 
@@ -63,7 +69,7 @@ function App() {
   }
 
   useEffect(() => {
-    if(userId) {
+    if (userId) {
       getSelectedUser(userId)
       getUserVehicles(userId)
     }
@@ -71,21 +77,21 @@ function App() {
 
   const authRoutes = (
     user.role === 'admin' ?
-    <Switch>
-      {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
-      {/* <Route exact path="/" component={HomeUser} /> */}
-      <Route exact path="/" component={CustomersScreen} />
-      <Route exact path="/user/:id" component={SelectedUserDetailed} />
-      <Route exact path="/cars" component={CarScreen} />
-      <Route exact path="/cars/:id" component={CarDetailsScreen} />
-      <Route exact path="/insurances" component={InsuranceScreen} />
-      <Route exact path="/banks" component={BankScreen} /> 
-      <Route exact path="/profile" component={Profile} /> 
-    </Switch> :
-    <Switch>
-      <Route exact path="/" component={CarScreen} />
-      <Route exact path="/cars/:id" component={CarDetailsScreen} />
-    </Switch>
+      <Switch>
+        {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
+        {/* <Route exact path="/" component={HomeUser} /> */}
+        <Route exact path="/" component={CustomersScreen} />
+        <Route exact path="/user/:id" component={SelectedUserDetailed} />
+        <Route exact path="/cars" component={CarScreen} />
+        <Route exact path="/cars/:id" component={CarDetailsScreen} />
+        <Route exact path="/insurances" component={InsuranceScreen} />
+        <Route exact path="/banks" component={BankScreen} />
+        <Route exact path="/profile" component={Profile} />
+      </Switch> :
+      <Switch>
+        <Route exact path="/" component={CarScreen} />
+        <Route exact path="/cars/:id" component={CarDetailsScreen} />
+      </Switch>
   )
 
   const routes = (

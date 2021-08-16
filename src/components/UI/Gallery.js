@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
-import { render } from "react-dom";
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
+import { Typography } from "@material-ui/core";
 import { useData } from './../../contexts/DataContext'
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,9 +43,9 @@ function GalleryCmp() {
         setViewerIsOpen(false);
     };
 
-    const classes = useStyles();
     return (
         <div>
+            <Typography variant="h5" align="center">Images</Typography>
             <Gallery direction="column" columns={2} photos={formatedPhotos} onClick={openLightbox} />
             <ModalGateway>
                 {viewerIsOpen ? (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FloatingButton from '../UI/FloatingButton'
 import AddIcon from '@material-ui/icons/Add';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, CircularProgress } from '@material-ui/core';
@@ -20,6 +20,14 @@ const UploadCarImages = () => {
         photo: '',
     })
 
+    const submitBtn = document.getElementById('imgSubmitBtn')
+
+    useEffect(() => {
+        if (submitBtn && fields.photo !== '') {
+            submitBtn.click()
+        }
+    }, [fields])
+
     const formData = new FormData()
     formData.append('photo', fields.photo)
 
@@ -27,6 +35,7 @@ const UploadCarImages = () => {
         e.preventDefault()
         if (Object.values(fields).every(val => val === '')) return
 
+        console.log('submiting...')
         setBtnLoading(true)
 
         axios({
@@ -71,40 +80,18 @@ const UploadCarImages = () => {
         })
     }
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     return (
         <div>
-            <FloatingButton onHandleClick={handleClickOpen}>
+            <FloatingButton onHandleClick={handleImageClick}>
                 <AddIcon />
             </FloatingButton>
             <Alerts message="Photo added successfuly!" open={alertOpen} handleOpening={setAlertOpen} />
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Photos</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        To upload vehicle photos, simply click the button bellow.
-                    </DialogContentText>
-                    <form encType="multipart/form-data" onSubmit={handleSubmit}>
-                        <input onChange={handleImageChange} name="photo" id="photo" type="file" hidden />
-                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Add Photo/s</Button>
-                        <DialogActions>
-                            <Button onClick={handleClose} color="secondary" variant="contained">
-                                Cancel
-                            </Button>
-                            <Button type="submit" color="primary" variant="contained">
-                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
-                            </Button>
-                        </DialogActions>
-                    </form>
-                </DialogContent>
-            </Dialog>
+            <form encType="multipart/form-data" onSubmit={handleSubmit}>
+                <input onChange={handleImageChange} name="photo" id="photo" type="file" hidden />
+                <Button id="imgSubmitBtn" style={{ position: 'absolute', visibility: 'hidden' }} type="submit" color="primary" variant="contained">
+                    Submit
+                </Button>
+            </form>
         </div >
     )
 }

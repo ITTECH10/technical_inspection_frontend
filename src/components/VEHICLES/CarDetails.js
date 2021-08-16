@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useData } from '../../contexts/DataContext'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Box } from '@material-ui/core'
@@ -8,6 +8,7 @@ import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
 import BankGrid from '../BANKS/BankGrid'
 import Gallery from './../UI/Gallery'
+import GalleryAlternative from './../UI/GalleryAlternative'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -25,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = () => {
-    const { selectedCar, user, setSelectedCarInsurance, setSelectedCarBank, carImages } = useData()
+    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages } = useData()
     const classes = useStyles()
-    // const history = useHistory()
+    const history = useHistory()
 
     const getCarInsurance = () => {
         axios.get(`/insuranceHouse/${selectedCar.insuranceHouse}`)
@@ -36,7 +37,7 @@ const CarDetails = () => {
                     setSelectedCarInsurance(res.data.insurance)
                 }
             })
-        // .catch(err => console.log(err.response))
+            .catch(err => console.log(err.response))
     }
 
     const getCarBankInfo = () => {
@@ -50,10 +51,10 @@ const CarDetails = () => {
     }
 
     // OPTIONAL
-    // let carId = history.location.pathname.split('/')[2]
-    // useEffect(() => {
-    //     getSelectedCar(carId)
-    // }, [])
+    let carId = history.location.pathname.split('/')[2]
+    useEffect(() => {
+        getSelectedCar(carId)
+    }, [])
 
     useEffect(() => {
         if (selectedCar.insuranceHouse !== undefined && user.role === 'user') {
@@ -78,10 +79,10 @@ const CarDetails = () => {
                     <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
             )} */}
-            {carImages.length > 0 && <Gallery />}
             <VehicleDetailsGrid />
             <InsuranceHouseGrid />
             <BankGrid />
+            {carImages.length > 0 && <GalleryAlternative />}
         </Grid>
     )
 }

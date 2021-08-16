@@ -69,7 +69,7 @@ export default function Signup({ handleAlertOpening }) {
       .catch(err => {
         setBtnLoading(false)
         setErrors(err.response.data.error.errors)
-        // console.log(err.response)
+        console.log(err.response)
       })
   }
 

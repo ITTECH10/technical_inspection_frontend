@@ -16,15 +16,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UsersList() {
     const classes = useStyles();
-    const {users, user} = useData()
+    const { users, user } = useData()
 
     const content = users && [...users].reverse().filter(el => el._id !== user._id).map(u => {
-        return <User key={u._id} userInfo={u}/>
+        return <User key={u._id} userInfo={u} />
     })
 
     return (
         <div className={classes.root}>
-            <List dissablePadding>
+            <List>
                 {content}
             </List>
         </div>

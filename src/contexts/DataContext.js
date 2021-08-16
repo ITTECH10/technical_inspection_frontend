@@ -31,18 +31,20 @@ const DataContextProvider = ({ children }) => {
     const [banks, setBanks] = useState([])
     const [selectedCarBank, setSelectedCarBank] = useState({})
 
-    const getCarImages = useCallback((id) => {
+    console.log(carImages)
+
+    const getCarImages = (id) => {
         axios(`/cars/images/${id}`).then(res => {
             setCarImages(res.data.images)
         })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
-    }, [])
+    }
 
     const logout = useCallback((history) => {
         setAppLoading(true)
-        localStorage.removeItem('token')
+        localStorage.clear()
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
         setTimeout(() => {
@@ -57,7 +59,7 @@ const DataContextProvider = ({ children }) => {
             setUsers(res.data.users)
         })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 
@@ -66,12 +68,13 @@ const DataContextProvider = ({ children }) => {
         axios('/users/me').then(res => {
             if (res.status === 200) {
                 setUser(res.data.user)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
                 setAppLoading(false)
             }
         })
             .catch(err => {
                 setAppLoading(false)
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 
@@ -82,11 +85,12 @@ const DataContextProvider = ({ children }) => {
             if (res.status === 200) {
                 setLoading(false)
                 setSelectedUser(res.data.user)
+                localStorage.setItem('selectedUser', JSON.stringify(res.data.user))
             }
         })
             .catch(err => {
                 setLoading(false)
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 
@@ -94,10 +98,11 @@ const DataContextProvider = ({ children }) => {
         axios(`/cars/car/${id}`).then(res => {
             if (res.status === 200) {
                 setSelectedCar(res.data.vehicle)
+                getCarImages(id)
             }
         })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 
@@ -111,7 +116,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // setLoading(false)
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 
@@ -122,7 +127,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 
@@ -133,7 +138,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
     }, [])
 

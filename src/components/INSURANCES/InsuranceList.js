@@ -32,7 +32,7 @@ const InsuranceList = ({ insurance, handleAlertOpening, handleDialogClosing }) =
                 }
             })
             .catch(err => {
-                // console.log(err.response)
+                console.log(err.response)
             })
     }
 

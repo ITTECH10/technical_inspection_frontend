@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
+import { Typography } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import CarRow from './CarRow';
 
@@ -30,6 +31,7 @@ export default function CarTable() {
 
   return (
     <TableContainer component={Paper}>
+      <Typography variant="h4" style={{ padding: '0 5px' }}>Customer Vehicles</Typography>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
