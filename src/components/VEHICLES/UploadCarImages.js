@@ -44,13 +44,13 @@ const UploadCarImages = () => {
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         }).then(res => {
-            // console.log(res.data)
+            console.log(res.data)
             if (res.status === 201) {
                 // const updatedVehicles = [...myVehicles]
                 // const updatedVehicleIndex = updatedVehicles.findIndex(v => v._id === carId)
                 // const updatedVehicle = updatedVehicles[updatedVehicleIndex]
                 // updatedVehicle.images = res.data.vehicle.images
-                const updatedImages = [...carImages, { ...res.data.newImage }]
+                const updatedImages = [...carImages, { ...res.data.newFile }]
 
                 setTimeout(() => {
                     // setMyVehicles(updatedVehicles)
