@@ -26,6 +26,7 @@ export default function FormDialog({ onDisableLoginForm }) {
 
     const handleClose = () => {
         setOpen(false);
+        onDisableLoginForm(false)
     };
 
     const handleChange = e => {

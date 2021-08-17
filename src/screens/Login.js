@@ -116,8 +116,8 @@ const Login = (props) => {
                                 <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
 
                                 <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
-                                <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
                             </form>
+                            <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
                         </Box>
                     </Box>
                 </Paper>
