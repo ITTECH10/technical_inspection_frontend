@@ -66,6 +66,7 @@ const Login = (props) => {
     })
     const [errors, setErrors] = useState({})
     const { setAuthenticated, setLoading } = useData()
+    const [disableSubmiting, setDisableSubmiting] = useState(false)
 
     const handleChange = (e) => {
         setFields({
@@ -76,7 +77,6 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (Object.values(fields).every(val => val === '')) return
 
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
@@ -115,8 +115,8 @@ const Login = (props) => {
                                 <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
                                 <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
 
-                                <Button className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
-                                <ForgotPasswordForm />
+                                <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
+                                <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
                             </form>
                         </Box>
                     </Box>

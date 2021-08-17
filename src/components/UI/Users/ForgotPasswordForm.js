@@ -11,7 +11,7 @@ import axios from 'axios'
 import Alerts from '../Alerts';
 import { CircularProgress } from '@material-ui/core';
 
-export default function FormDialog() {
+export default function FormDialog({ onDisableLoginForm }) {
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = React.useState()
     const [alertOpen, setAlertOpen] = React.useState(false)
@@ -21,6 +21,7 @@ export default function FormDialog() {
 
     const handleClickOpen = () => {
         setOpen(true);
+        onDisableLoginForm(true)
     };
 
     const handleClose = () => {
