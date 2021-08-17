@@ -42,7 +42,7 @@ export default function FormDialog({ onDisableLoginForm }) {
 
         setButtonLoading(true)
 
-        const data = { email: fields.email }
+        const data = { email: fields.emailForgot }
         axios.post('/users/forgotPassword', data).then(res => {
             if (res.data.message === 'success') {
                 setTimeout(() => {
