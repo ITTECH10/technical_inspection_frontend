@@ -76,6 +76,7 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (Object.values(fields).every(val => val === '')) return
 
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
