@@ -19,6 +19,7 @@ import CarScreen from './screens/CarScreen';
 import InsuranceScreen from './screens/InsuranceScreen';
 import BankScreen from './screens/BankScreen';
 import Profile from './screens/Profile';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 function App() {
   const { authenticated, appLoading, setAuthenticated, setSelectedCar, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
@@ -97,6 +98,7 @@ function App() {
   const routes = (
     <Switch>
       <Route exact path="/" component={Login} />
+      <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
     </Switch>
   )
 

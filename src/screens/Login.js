@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Typography, Grid, Paper, Box, TextField, Button } from '@material-ui/core'
+import { IconButton, Grid, Paper, Box, TextField, Button, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import AppLogo from './../assets/images/logo.svg'
 import axios from 'axios'
 import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { useData } from '../contexts/DataContext'
+import ForgotPasswordForm from './../components/UI/Users/ForgotPasswordForm'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -60,8 +61,8 @@ const useStyles = makeStyles(theme => ({
 
 const Login = (props) => {
     const [fields, setFields] = useState({
-        email: 'admin@testing.com',
-        password: '123456'
+        email: '',
+        password: ''
     })
     const [errors, setErrors] = useState({})
     const { setAuthenticated, setLoading } = useData()
@@ -109,11 +110,12 @@ const Login = (props) => {
                         </Box>
                         {/* <Typography style={{ fontWeight: '500' }} variant="h4" align="center">Login</Typography> */}
                         <Box className={classes.inputContainer}>
-                            <form className={classes.inputForm} onSubmit={handleSubmit}>
+                            <form className={classes.inputForm} onSubmit={handleSubmit} id="form__login">
                                 <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
                                 <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
 
                                 <Button className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
+                                <ForgotPasswordForm />
                             </form>
                         </Box>
                     </Box>

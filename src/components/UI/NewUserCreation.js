@@ -14,6 +14,7 @@ import { useData } from './../../contexts/DataContext'
 import FloatingButton from './FloatingButton';
 import { makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import { generateId } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -37,7 +38,7 @@ export default function Signup({ handleAlertOpening }) {
     address: '',
     birthDate: '',
     password: '123456',
-    confirmPassword: '123456'
+    confirmPassword: ''
   })
 
   const errObj = {
@@ -65,7 +66,7 @@ export default function Signup({ handleAlertOpening }) {
     e.preventDefault()
     setBtnLoading(true)
 
-    const data = { ...fields }
+    const data = { ...fields, confirmPassword: fields.password }
     axios.post('/users/signup', data).then(res => {
       // console.log(res.data)
       if (res.status === 201) {
