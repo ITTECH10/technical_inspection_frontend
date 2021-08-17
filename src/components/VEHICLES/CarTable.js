@@ -27,7 +27,7 @@ export default function CarTable() {
 
   useEffect(() => {
     setSelectedCarBank({})
-  }, [])
+  }, [setSelectedCarBank])
 
   return (
     <TableContainer component={Paper}>

@@ -3,7 +3,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 const InsuranceRow = ({ insurance }) => {
-    const {city, postNumber, streetAddress, phoneNumber, numberAddress} = insurance
+    const { postNumber, streetAddress, numberAddress } = insurance
     const formatedAddress = `${streetAddress} ${numberAddress}, ${postNumber}`
     return (
         <TableRow key={insurance._id}>

@@ -56,7 +56,7 @@ const ResetPasswordScreen = () => {
     })
     const [buttonLoading, setButtonLoading] = React.useState(false)
     const [alertOpen, setAlertOpen] = React.useState(false)
-    const [errorMessage, setErrorMessage] = React.useState('Something went wrong!')
+    const [errorMessage, setErrorMessage] = React.useState()
     const [errorAlertOpen, setErrorAlertOpen] = React.useState(false)
 
     const history = useHistory()
@@ -91,6 +91,7 @@ const ResetPasswordScreen = () => {
         })
             .catch(err => {
                 console.log(err.response)
+                setErrorMessage('Something went wrong!')
                 setErrorAlertOpen(true)
             })
     }

@@ -37,6 +37,13 @@ const UserInfoBlock = () => {
             </Box>
             <Box className={classes.userRow}>
                 <TextField
+                    value={`E-mail: ${selectedUser.email}`}
+                    disabled
+                    fullWidth
+                />
+            </Box>
+            <Box className={classes.userRow}>
+                <TextField
                     value={`Phone: ${selectedUser.phoneNumber}`}
                     disabled
                     fullWidth

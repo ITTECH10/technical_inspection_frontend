@@ -37,7 +37,7 @@ export default function Signup({ handleAlertOpening }) {
     phoneNumber: '',
     address: '',
     birthDate: '',
-    password: '123456',
+    password: generateId(),
     confirmPassword: ''
   })
 
@@ -118,7 +118,6 @@ export default function Signup({ handleAlertOpening }) {
               name="firstName"
               error={errors.firstName && errors.firstName.message}
               helperText={errors.firstName && errors.firstName.message}
-              autoFocus
               margin="dense"
               id="firstName"
               label="First name"

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Alerts({open, handleOpening, message, severity = 'success'}) {
+export default function Alerts({ open, handleOpening, message, severity = 'success' }) {
   const classes = useStyles();
 
   const handleClose = (event, reason) => {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useData } from '../../contexts/DataContext'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Box } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import axios from 'axios'
 import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
@@ -10,6 +10,7 @@ import BankGrid from '../BANKS/BankGrid'
 // import Gallery from './../UI/Gallery'
 import GalleryAlternative from './../UI/GalleryAlternative'
 import UserInfoBlock from '../UI/Users/UserInfoBlock'
+import Loader from './../../utils/Loader'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -27,63 +28,66 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = () => {
-    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages } = useData()
+    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, loading } = useData()
     const classes = useStyles()
     const history = useHistory()
+    const { insuranceHouse, vehiclePaymentType } = selectedCar
+    const { role } = user
 
-    const getCarInsurance = () => {
-        axios.get(`/insuranceHouse/${selectedCar.insuranceHouse}`)
+    const getCarInsurance = React.useCallback(() => {
+        axios.get(`/insuranceHouse/${insuranceHouse}`)
             .then(res => {
                 if (res.status === 200) {
                     setSelectedCarInsurance(res.data.insurance)
                 }
             })
             .catch(err => console.log(err.response))
-    }
+    }, [insuranceHouse, setSelectedCarInsurance])
 
-    const getCarBankInfo = () => {
-        axios.get(`/payment/${selectedCar.vehiclePaymentType}`)
+    const getCarBankInfo = React.useCallback(() => {
+        axios.get(`/payment/${vehiclePaymentType}`)
             .then(res => {
                 if (res.status === 200) {
                     setSelectedCarBank(res.data.bank)
                 }
             })
             .catch(err => console.log(err.response))
-    }
+    }, [setSelectedCarBank, vehiclePaymentType])
 
     // OPTIONAL
     let carId = history.location.pathname.split('/')[2]
     useEffect(() => {
         getSelectedCar(carId)
-    }, [])
+    }, [carId, getSelectedCar])
 
     useEffect(() => {
-        if (selectedCar.insuranceHouse !== undefined && user.role === 'user') {
+        if (selectedCar.insuranceHouse !== undefined && role === 'user') {
             getCarInsurance()
         }
-    }, [selectedCar])
+    }, [selectedCar, getCarInsurance, role])
 
     useEffect(() => {
-        if (selectedCar.vehiclePaymentType !== undefined
-            && selectedCar.vehiclePaymentType !== 'Cash'
-            && user.role === 'user') {
+        if (vehiclePaymentType !== undefined
+            && vehiclePaymentType !== 'Cash'
+            && role === 'user') {
             getCarBankInfo()
         }
-    }, [selectedCar])
+    }, [selectedCar, role, getCarBankInfo, vehiclePaymentType])
 
     return (
-        <Grid container className={classes.mainContainer} direction="column">
-            {/* {selectedCar.thumbnail && (
+        !loading ?
+            <Grid container className={classes.mainContainer} direction="column">
+                {/* {selectedCar.thumbnail && (
                 <Box className={classes.imageBox}>
                     <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
             )} */}
-            <UserInfoBlock />
-            <VehicleDetailsGrid />
-            <InsuranceHouseGrid />
-            <BankGrid />
-            {carImages.length > 0 && <GalleryAlternative />}
-        </Grid>
+                <UserInfoBlock />
+                <VehicleDetailsGrid />
+                <InsuranceHouseGrid />
+                <BankGrid />
+                {carImages.length > 0 && <GalleryAlternative />}
+            </Grid> : <Loader />
     )
 }
 

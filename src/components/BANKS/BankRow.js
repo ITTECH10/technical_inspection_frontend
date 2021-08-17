@@ -3,7 +3,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 const BankRow = ({ bank }) => {
-    const {city, postNumber, streetAddress, phoneNumber, numberAddress} = bank
+    const { postNumber, streetAddress, numberAddress } = bank
     const formatedAddress = `${streetAddress} ${numberAddress}, ${postNumber}`
     return (
         <TableRow key={bank._id}>

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography, Box, TextField } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import BankDialog from './BankDialog'
 import { makeStyles } from '@material-ui/core/styles'
 import Alerts from '../UI/Alerts'
-// import { objectIsEmpty } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const BankGrid = () => {
-    const { banks, selectedCarBank, user, selectedCar, setSelectedCarBank } = useData()
+    const { banks, selectedCarBank, user, selectedCar } = useData()
     const selectedBank = banks.find(el => el._id === selectedCar.vehiclePaymentType)
     const classes = useStyles()
     const [alertOpen, setAlertOpen] = useState(false)

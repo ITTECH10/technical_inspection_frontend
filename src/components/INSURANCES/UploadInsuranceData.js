@@ -9,7 +9,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import { useData } from './../../contexts/DataContext'
-import { useHistory } from 'react-router-dom';
 import FloatingButton from './../UI/FloatingButton';
 import AddIcon from '@material-ui/icons/Add';
 import Alerts from './../UI/Alerts'

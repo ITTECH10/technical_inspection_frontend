@@ -22,7 +22,7 @@ import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 function App() {
-  const { authenticated, appLoading, setAuthenticated, setSelectedCar, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
+  const { authenticated, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
 
@@ -38,7 +38,7 @@ function App() {
     if (storageSelectedUser) {
       setSelectedUser(JSON.parse(storageSelectedUser))
     }
-  }, [])
+  }, [setUser, setSelectedUser, storageSelectedUser, storageUser])
 
   useEffect(() => {
     if (token) {

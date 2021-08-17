@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import FloatingButton from '../UI/FloatingButton'
 import AddIcon from '@material-ui/icons/Add';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, CircularProgress } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Alerts from './../UI/Alerts'
 import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom'
 
 const UploadCarImages = () => {
-    const [open, setOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
-    const [btnLoading, setBtnLoading] = useState(false)
-    const { myVehicles, setMyVehicles, carImages, setCarImages } = useData()
+    const { carImages, setCarImages, setLoading } = useData()
     const history = useHistory()
 
     const carId = history.location.pathname.split('/')[2]
@@ -26,7 +24,7 @@ const UploadCarImages = () => {
         if (submitBtn && fields.photo !== '') {
             submitBtn.click()
         }
-    }, [fields])
+    }, [fields, submitBtn])
 
     const formData = new FormData()
     formData.append('photo', fields.photo)
@@ -34,9 +32,7 @@ const UploadCarImages = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(fields).every(val => val === '')) return
-
-        console.log('submiting...')
-        setBtnLoading(true)
+        setLoading(true)
 
         axios({
             method: "post",
@@ -56,8 +52,7 @@ const UploadCarImages = () => {
                     // setMyVehicles(updatedVehicles)
                     setCarImages(updatedImages)
                     setAlertOpen(true)
-                    setBtnLoading(false)
-                    setOpen(false)
+                    setLoading(false)
                 }, 2000)
             }
         })

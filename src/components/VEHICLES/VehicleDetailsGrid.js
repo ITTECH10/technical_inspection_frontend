@@ -20,7 +20,7 @@ const VehicleDetailsGrid = () => {
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, insuranceHouse, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, vehiclePaymentType, yearlyTax, lastTechnicalInspection } = selectedCar
+    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toDateString()
     const formatedAu = new Date(AU).toDateString()
@@ -84,6 +84,10 @@ const VehicleDetailsGrid = () => {
                 <Box>
                     <Typography className={classes.inputTitle}>Monthly insurance payment</Typography>
                     <TextField className={classes.input} label={monthlyInsurancePayment} disabled />
+                </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>Yearly Tax</Typography>
+                    <TextField className={classes.input} label={yearlyTax} disabled />
                 </Box>
             </Box>
         </Grid>

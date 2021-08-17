@@ -10,7 +10,7 @@ export const useData = () => {
 const DataContextProvider = ({ children }) => {
     // GENERAL
     const [authenticated, setAuthenticated] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [appLoading, setAppLoading] = useState(false)
 
     // USERS

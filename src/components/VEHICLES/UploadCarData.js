@@ -6,7 +6,6 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, Dialo
 import Alerts from './../UI/Alerts'
 import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
-import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -24,8 +23,7 @@ const UploadCarData = () => {
     const [open, setOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { selectedUser, myVehicles, setMyVehicles, user } = useData()
-    const history = useHistory()
+    const { selectedUser, myVehicles, setMyVehicles } = useData()
     const classes = useStyles()
 
     const [fields, setFields] = useState({
@@ -71,8 +69,6 @@ const UploadCarData = () => {
         if (Object.values(fields).every(val => val === '')) return
 
         setBtnLoading(true)
-
-        const data = { ...fields }
 
         axios({
             method: "post",

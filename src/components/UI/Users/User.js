@@ -13,7 +13,7 @@ import { useData } from '../../../contexts/DataContext';
 const User = ({ userInfo }) => {
     const { getSelectedUser } = useData()
     const history = useHistory()
-    const { _id, email, firstName, lastName } = userInfo
+    const { _id, firstName, lastName } = userInfo
 
     const onSelectUser = () => {
         getSelectedUser(_id)

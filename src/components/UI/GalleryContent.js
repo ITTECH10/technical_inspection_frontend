@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Dialog, Box } from '@material-ui/core';
+import DeleteVehicleFiles from './../VEHICLES/DeleteVehicleFiles'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -38,9 +39,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const GalleryContent = ({ image }) => {
+const GalleryContent = ({ image, onHandleFileDeleteAlert }) => {
     const classes = useStyles()
-    const [open, setOpen] = React.useState()
+    const [open, setOpen] = React.useState(false)
 
     const formatedTitle = `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
 
@@ -72,9 +73,7 @@ const GalleryContent = ({ image }) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" variant="contained" color="primary">
-                        Delete
-                    </Button>
+                    <DeleteVehicleFiles onHandleFileDeleteAlert={onHandleFileDeleteAlert} fileId={image._id} />
                 </CardActions>
             </Card>
 
