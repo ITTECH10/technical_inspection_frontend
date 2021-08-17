@@ -16,7 +16,7 @@ export default function FormDialog({ onDisableLoginForm }) {
     const [buttonLoading, setButtonLoading] = React.useState()
     const [alertOpen, setAlertOpen] = React.useState(false)
     const [fields, setFields] = React.useState({
-        email: ''
+        emailForgot: ''
     })
 
     const handleClickOpen = () => {
@@ -42,7 +42,7 @@ export default function FormDialog({ onDisableLoginForm }) {
 
         setButtonLoading(true)
 
-        const data = { ...fields }
+        const data = { email: fields.email }
         axios.post('/users/forgotPassword', data).then(res => {
             if (res.data.message === 'success') {
                 setTimeout(() => {
@@ -74,9 +74,9 @@ export default function FormDialog({ onDisableLoginForm }) {
                     <form onSubmit={handleSubmit}>
                         <TextField
                             autoFocus
-                            name="email"
+                            name="emailForgot"
                             margin="dense"
-                            id="email"
+                            id="emailForgot"
                             label="E-mail"
                             type="email"
                             onChange={handleChange}
