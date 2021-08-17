@@ -85,7 +85,7 @@ const UploadCarImages = () => {
             <FloatingButton onHandleClick={handleImageClick}>
                 <AddIcon />
             </FloatingButton>
-            <Alerts message="Photo added successfuly!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message="Added successfuly!" open={alertOpen} handleOpening={setAlertOpen} />
             <form encType="multipart/form-data" onSubmit={handleSubmit}>
                 <input onChange={handleImageChange} name="photo" id="photo" type="file" hidden />
                 <Button id="imgSubmitBtn" style={{ position: 'absolute', visibility: 'hidden' }} type="submit" color="primary" variant="contained">

@@ -8,29 +8,45 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
-import { setAuthorizationHeader } from './../../utils/setAuthorizationHeader'
+// import { setAuthorizationHeader } from './../../utils/setAuthorizationHeader'
 import { useData } from './../../contexts/DataContext'
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import FloatingButton from './FloatingButton';
+import { makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+
+const useStyles = makeStyles(theme => ({
+  textField: {
+    marginTop: theme.spacing(1),
+    // marginBottom: theme.spacing(1),
+    width: '100%'
+  },
+}))
 
 export default function Signup({ handleAlertOpening }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
-  const history = useHistory()
+  // const history = useHistory()
+  const classes = useStyles()
 
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    password: '',
-    confirmPassword: ''
+    phoneNumber: '',
+    address: '',
+    birthDate: '',
+    password: '123456',
+    confirmPassword: '123456'
   })
 
   const errObj = {
     firstName: '',
     lastName: '',
     email: '',
+    phoneNumber: '',
+    address: '',
+    birthDate: '',
     password: '',
     confirmPassword: ''
   }
@@ -121,6 +137,19 @@ export default function Signup({ handleAlertOpening }) {
               fullWidth
             />
             <TextField
+              name="birthDate"
+              error={errors.birthDate && errors.birthDate.message}
+              helperText={errors.birthDate && errors.birthDate.message}
+              id="birthDate"
+              label="Birth Date"
+              onChange={handleChange}
+              type="date"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
               name="email"
               error={errors.email && errors.email.message}
               helperText={errors.email && errors.email.message}
@@ -132,6 +161,28 @@ export default function Signup({ handleAlertOpening }) {
               fullWidth
             />
             <TextField
+              name="phoneNumber"
+              error={errors.phoneNumber && errors.phoneNumber.message}
+              helperText={errors.phoneNumber && errors.phoneNumber.message}
+              margin="dense"
+              id="phoneNumber"
+              label="Phone number"
+              onChange={handleChange}
+              type="text"
+              fullWidth
+            />
+            <TextField
+              name="address"
+              error={errors.address && errors.address.message}
+              helperText={errors.address && errors.address.message}
+              margin="dense"
+              id="address"
+              label="Address"
+              onChange={handleChange}
+              type="text"
+              fullWidth
+            />
+            {/* <TextField
               name="password"
               error={errors.password && errors.password.message}
               helperText={errors.password && errors.password.message}
@@ -152,7 +203,7 @@ export default function Signup({ handleAlertOpening }) {
               type="password"
               onChange={handleChange}
               fullWidth
-            />
+            /> */}
             <DialogActions>
               <Button onClick={handleClose} color="secondary" variant="contained">
                 Cancel

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Typography } from '@material-ui/core'
+import { Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../../contexts/DataContext'
 
 const useStyles = makeStyles(theme => ({
@@ -19,12 +19,35 @@ const UserInfoBlock = () => {
     return (
         selectedUser &&
         <Box className={classes.root}>
-            <Typography variant="h4">Customer</Typography>
+            <Typography variant="h4">{`${selectedUser.firstName} ${selectedUser.lastName}`}</Typography>
             <Box className={classes.userRow}>
-                Name: {`${selectedUser.firstName} ${selectedUser.lastName}`}
+                {/* <Typography>Name: {selectedUser.firstName}</Typography> */}
+                <TextField
+                    value={`Name: ${selectedUser.firstName}`}
+                    disabled
+                    fullWidth
+                />
             </Box>
             <Box className={classes.userRow}>
-                E-mail: {selectedUser.email}
+                <TextField
+                    value={`Surname: ${selectedUser.lastName}`}
+                    disabled
+                    fullWidth
+                />
+            </Box>
+            <Box className={classes.userRow}>
+                <TextField
+                    value={`Phone: ${selectedUser.phoneNumber}`}
+                    disabled
+                    fullWidth
+                />
+            </Box>
+            <Box className={classes.userRow}>
+                <TextField
+                    value={`Address: ${selectedUser.address}`}
+                    disabled
+                    fullWidth
+                />
             </Box>
         </Box>
     )

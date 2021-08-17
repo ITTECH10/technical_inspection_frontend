@@ -7,8 +7,9 @@ import axios from 'axios'
 import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
 import BankGrid from '../BANKS/BankGrid'
-import Gallery from './../UI/Gallery'
+// import Gallery from './../UI/Gallery'
 import GalleryAlternative from './../UI/GalleryAlternative'
+import UserInfoBlock from '../UI/Users/UserInfoBlock'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -70,8 +71,6 @@ const CarDetails = () => {
         }
     }, [selectedCar])
 
-
-
     return (
         <Grid container className={classes.mainContainer} direction="column">
             {/* {selectedCar.thumbnail && (
@@ -79,6 +78,7 @@ const CarDetails = () => {
                     <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
             )} */}
+            <UserInfoBlock />
             <VehicleDetailsGrid />
             <InsuranceHouseGrid />
             <BankGrid />
