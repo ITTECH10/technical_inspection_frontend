@@ -49,6 +49,7 @@ export default function FormDialog({ onDisableLoginForm }) {
                     setOpen(false)
                     setAlertOpen(true)
                     setButtonLoading(false)
+                    onDisableLoginForm(false)
                 }, 2000)
             }
         })
