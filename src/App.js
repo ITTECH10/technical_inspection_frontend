@@ -21,11 +21,14 @@ import BankScreen from './screens/BankScreen';
 import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
+import MenuMiniVariant from './components/UI/MenuMiniVariant'
 
 function App() {
   const { authenticated, getAllVehicles, acceptPrivacyPolicy, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
+  const [open, setOpen] = React.useState(false);
+
 
   let token = localStorage.token
   let storageUser = localStorage.user
@@ -115,12 +118,12 @@ function App() {
     position: 'relative',
     top: '64px',
     height: 'calc(100vh - 64px)',
-    marginLeft: matches && 240,
+    marginLeft: open ? 250 : 80
   }
 
   const app = !appLoading ? (
     <div style={authenticated && history.location.pathname !== '/privacyPolicy' ? navbarFix : null} className="App">
-      {authenticated && history.location.pathname !== '/privacyPolicy' && < Navbar />}
+      {authenticated && history.location.pathname !== '/privacyPolicy' && <MenuMiniVariant open={open} setOpen={setOpen} />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />

@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom';
 import Menu from './Menu'
+import MenuMiniVariant from './MenuMiniVariant'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useMediaQuery } from '@material-ui/core';
 
@@ -35,7 +36,8 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar position="fixed" style={{ width: matches && 'calc(100% - 240px)' }}>
         <Toolbar>
-          <Menu />
+          {/* <Menu /> */}
+          <MenuMiniVariant />
           <Typography onClick={() => history.push('/')} variant="h6" className={classes.title}>
             Home
           </Typography>
