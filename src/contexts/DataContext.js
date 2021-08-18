@@ -23,6 +23,7 @@ const DataContextProvider = ({ children }) => {
     const [myVehicles, setMyVehicles] = useState([])
     const [selectedCar, setSelectedCar] = useState([])
     const [carImages, setCarImages] = useState([])
+    const [vehiclesPage, setVehiclesPage] = useState('allVehicles')
 
     // INSURANCES
     const [insurances, setInsurances] = useState([])
@@ -207,7 +208,9 @@ const DataContextProvider = ({ children }) => {
         getAllVehicles,
         vehicles,
         setVehicles,
-        acceptPrivacyPolicy
+        acceptPrivacyPolicy,
+        vehiclesPage,
+        setVehiclesPage
     }
 
     return (

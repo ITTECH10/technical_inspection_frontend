@@ -37,7 +37,7 @@ export default function TemporaryDrawer() {
     const [swipeableOpen, setSwipeableOpen] = useState(false)
     const history = useHistory()
     const classes = useStyles()
-    const { user } = useData()
+    const { user, setVehiclesPage } = useData()
 
     useEffect(() => {
         if (!matches) {
@@ -59,8 +59,11 @@ export default function TemporaryDrawer() {
         setSwipeableOpen(false)
     }
 
-    const onHandleNavigation = (route, vehiclesToRender) => {
-        history.push(route, vehiclesToRender)
+    const onHandleNavigation = (route) => {
+        if (route === '/cars') {
+            setVehiclesPage('allVehicles')
+        }
+        history.push(route)
         setSwipeableOpen(false)
         if (!matches) {
             setOpen(false)
@@ -83,7 +86,7 @@ export default function TemporaryDrawer() {
                                     <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
                                     <ListItemText primary="Customers" />
                                 </ListItem>
-                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars', "allVehicles")}>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
                                     <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
                                     <ListItemText primary="Fahrzeuge" />
                                 </ListItem>

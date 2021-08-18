@@ -11,11 +11,12 @@ import { useHistory } from 'react-router-dom';
 import { useData } from '../../../contexts/DataContext';
 
 const User = ({ userInfo }) => {
-    const { getSelectedUser } = useData()
+    const { getSelectedUser, setVehiclesPage } = useData()
     const history = useHistory()
     const { _id, firstName, lastName } = userInfo
 
     const onSelectUser = () => {
+        setVehiclesPage('customersVehicles')
         getSelectedUser(_id)
         history.push(`/cars`)
     }
