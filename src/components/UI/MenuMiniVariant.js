@@ -20,10 +20,12 @@ import Logo from './../../assets/images/logo.svg'
 import { useData } from '../../contexts/DataContext';
 import GroupIcon from '@material-ui/icons/Group';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+// import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import { useHistory } from 'react-router-dom';
+import { Button, useMediaQuery } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const drawerWidth = 240;
 
@@ -90,14 +92,35 @@ const useStyles = makeStyles((theme) => ({
     listItemRoot: {
         cursor: 'pointer'
     },
+    logoBox: {
+        height: 'auto',
+        width: '28%',
+        [theme.breakpoints.up('sm')]: {
+            width: '15%'
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '8%'
+        },
+    },
+    logo: {
+        height: '100%',
+        width: '100%',
+        filter: 'brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)'
+    }
 }));
 
 
 export default function MiniDrawer({ open, setOpen }) {
     const classes = useStyles();
     const theme = useTheme();
-    const { user, setVehiclesPage } = useData()
+    const { user, setVehiclesPage, logout } = useData()
     const history = useHistory()
+    const [url, setUrl] = React.useState('/')
+    const matches = useMediaQuery('(max-width: 600px)')
+
+    history.listen((location, action) => {
+        setUrl(location.pathname)
+    })
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -136,9 +159,12 @@ export default function MiniDrawer({ open, setOpen }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Box style={{ height: 'auto', width: '8%' }}>
-                        <img src={Logo} style={{ height: '100%', width: '100%', filter: 'brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)' }} />
+                    <Box className={classes.logoBox}>
+                        <img src={Logo} className={classes.logo} />
                     </Box>
+
+                    <Button style={{ position: 'absolute', right: 15 }} onClick={() => logout(history)} color="inherit">Logout</Button>
+                    {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton style={{ position: 'absolute', right: 75 }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
                 </Toolbar>
             </AppBar>
             <Drawer

@@ -36,10 +36,10 @@ export default function UsersList() {
 
     return (
         <div className={classes.root}>
-            <SearchCustomers fields={fields} setFields={setFields} />
-            <Typography variant="h4" style={{ padding: '0 5px' }}>
+            <Typography variant="h4" style={{ padding: 10 }}>
                 Alle Kunden
             </Typography>
+            <SearchCustomers fields={fields} setFields={setFields} />
             <List>
                 {query !== '' ? filteredContent : content}
             </List>

@@ -117,7 +117,8 @@ function App() {
     position: 'relative',
     top: '64px',
     height: 'calc(100vh - 64px)',
-    marginLeft: open ? 250 : 80
+    marginLeft: open && matches ? 250 : 75,
+    paddingRight: 20
   }
 
   const app = !appLoading ? (

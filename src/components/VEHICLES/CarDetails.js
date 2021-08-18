@@ -14,7 +14,7 @@ import Loader from './../../utils/Loader'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
-        padding: '15px'
+        // padding: '15px'
     },
     imageBox: {
         height: 220,

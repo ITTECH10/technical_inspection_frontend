@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paper, Box, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     boxRoot: {
@@ -20,14 +20,14 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     textRoot: {
-        marginTop: 10
+        margin: 15
     },
     btn: {}
 }))
 
 const PoliciesFooter = () => {
     const classes = useStyles()
-    const history = useHistory()
+    // const history = useHistory()
     const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
 
     let bannerTimeout
@@ -48,11 +48,11 @@ const PoliciesFooter = () => {
         showPrivacyBanner &&
         <Box className={classes.boxRoot}>
             <Paper elevation={2} className={classes.paperRoot}>
-                <Typography variant="h6" className={classes.textRoot}>
+                <Typography variant="body2" className={classes.textRoot}>
                     Important! You must first confirm that you agree
                     to our privacy policy to be able to use the app.
                 </Typography>
-                <Button onClick={() => setShowPrivacyBanner(false)} color="primary" variant="contained" className={classes.btn}>I understand</Button>
+                <Button size="small" onClick={() => setShowPrivacyBanner(false)} color="primary" variant="contained" className={classes.btn}>I understand</Button>
             </Paper>
         </Box>
     )

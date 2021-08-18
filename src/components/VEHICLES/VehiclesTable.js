@@ -40,11 +40,11 @@ export default function CarTable() {
 
   return (
     <>
+      <Typography variant="h4" style={{ padding: 10 }}>
+        {user.role === 'admin' ? 'Alle Fahrzeuge' : 'Meine Fahrzeuge'}
+      </Typography>
       <SearchVehicles fields={fields} setFields={setFields} />
       <TableContainer component={Paper}>
-        <Typography variant="h4" style={{ padding: '0 5px' }}>
-          {user.role === 'admin' ? 'Alle Fahrzeuge' : 'Mein Fahrzeuge'}
-        </Typography>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>

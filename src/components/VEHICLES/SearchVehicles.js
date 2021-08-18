@@ -9,7 +9,12 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         margin: '5px 0'
     },
-    inputRoot: { width: '50%' }
+    inputRoot: {
+        width: 'auto',
+        [theme.breakpoints.up('sm')]: {
+            width: '50%'
+        }
+    }
 }))
 
 const SearchVehicles = ({ fields, setFields }) => {
