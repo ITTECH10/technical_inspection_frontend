@@ -5,17 +5,23 @@ import { useData } from '../contexts/DataContext'
 import { Typography } from '@material-ui/core'
 import Loader from '../utils/Loader'
 import UserInfoBlock from '../components/UI/Users/UserInfoBlock'
+import VehiclesTable from './../components/VEHICLES/VehiclesTable'
 
 const CarScreen = () => {
     const { user, selectedUser, loading } = useData()
 
     return (
-        !loading ?
-            <React.Fragment>
-                <UserInfoBlock />
-                {selectedUser._id && user.role === 'admin' ? <CarTable /> : user.role === 'user' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
-                {user.role === 'admin' && selectedUser._id && <UploadCarData />}
-            </React.Fragment> : <Loader />
+        // !loading ?
+        //     <React.Fragment>
+        //         <UserInfoBlock />
+        //         {selectedUser._id && user.role === 'admin' ? <CarTable /> : user.role === 'user' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
+        // {user.role === 'admin' && selectedUser._id && <UploadCarData />}
+        //     </React.Fragment> : <Loader />
+        <>
+            <VehiclesTable />
+            {user.role === 'admin' && selectedUser._id && <UploadCarData />}
+        </>
+
     )
 }
 

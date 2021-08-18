@@ -23,7 +23,7 @@ const UploadCarData = () => {
     const [open, setOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { selectedUser, myVehicles, setMyVehicles } = useData()
+    const { selectedUser, myVehicles, setMyVehicles, setVehicles, vehicles } = useData()
     const classes = useStyles()
 
     const [fields, setFields] = useState({
@@ -36,6 +36,7 @@ const UploadCarData = () => {
         firstVehicleRegistrationOnOwner: '',
         kilometersDriven: '',
         lastTechnicalInspection: '',
+        registrationNumber: '',
         nextTechnicalInspection: '',
         TUV: '',
         AU: '',
@@ -56,6 +57,7 @@ const UploadCarData = () => {
     formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
     formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
     formData.append('kilometersDriven', fields.kilometersDriven)
+    formData.append('registrationNumber', fields.registrationNumber)
     formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
     formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
     formData.append('AU', fields.AU)
@@ -80,10 +82,10 @@ const UploadCarData = () => {
             console.log(res.data)
             if (res.status === 201) {
                 // DO LATER
-                const updatedVehicles = [...myVehicles, { ...res.data.newVehicle }]
+                const updatedVehicles = [...vehicles, { ...res.data.newVehicle }]
 
                 setTimeout(() => {
-                    setMyVehicles(updatedVehicles)
+                    setVehicles(updatedVehicles)
                     setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)
@@ -168,6 +170,14 @@ const UploadCarData = () => {
                             margin="dense"
                             id="TSN"
                             label="TSN"
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="registrationNumber"
+                            margin="dense"
+                            id="registrationNumber"
+                            label="Registration number"
                             onChange={handleChange}
                             fullWidth
                         />

@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         margin: '5px 0'
     },
-    inputRoot: { width: '35%' }
+    inputRoot: { width: '50%' }
 }))
 
 const SearchCustomers = () => {
@@ -27,23 +27,25 @@ const SearchCustomers = () => {
 
     return (
         <Box className={classes.boxRoot}>
-            <TextField
-                className={classes.inputRoot}
-                autoFocus
-                name="query"
-                margin="dense"
-                id="query"
-                label="Search for customers..."
-                onChange={handleChange}
-                type="text"
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon />
-                        </InputAdornment>
-                    ),
-                }}
-            />
+            <Box>
+                <TextField
+                    className={classes.inputRoot}
+                    autoFocus
+                    name="query"
+                    margin="dense"
+                    id="query"
+                    label="Search for customers..."
+                    onChange={handleChange}
+                    type="text"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+            </Box>
         </Box>
     )
 }
