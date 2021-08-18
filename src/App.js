@@ -29,7 +29,6 @@ function App() {
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = React.useState(false);
 
-
   let token = localStorage.token
   let storageUser = localStorage.user
   let storageSelectedUser = localStorage.selectedUser

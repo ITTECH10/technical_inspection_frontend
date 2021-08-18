@@ -4,6 +4,7 @@ import { Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../../contexts/DataContext'
 import EditUserDetails from './EditUserDetails'
 import DeleteUser from './DeleteUser'
+import ExportUserData from './ExportUserData'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -60,6 +61,7 @@ const UserInfoBlock = () => {
             </Box>
             <EditUserDetails userId={selectedUser._id} />
             <DeleteUser userId={selectedUser._id} />
+            <ExportUserData />
         </Box>
     )
 }
