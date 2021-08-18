@@ -32,12 +32,11 @@ const CarScreen = () => {
     return (
         // !loading ?
         //     <React.Fragment>
-        //         <UserInfoBlock />
         //         {selectedUser._id && user.role === 'admin' ? <CarTable /> : user.role === 'user' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
         // {user.role === 'admin' && selectedUser._id && <UploadCarData />}
         //     </React.Fragment> : <Loader />
         <>
-            {vehiclesPage !== 'allVehicles' ? <CarTable /> : <VehiclesTable />}
+            {vehiclesPage !== 'allVehicles' ? (<><UserInfoBlock /> <CarTable /> </>) : <VehiclesTable />}
             {user.role === 'admin' && selectedUser._id && <UploadCarData />}
         </>
 

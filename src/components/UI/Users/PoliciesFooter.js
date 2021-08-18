@@ -50,7 +50,7 @@ const PoliciesFooter = () => {
             <Paper elevation={2} className={classes.paperRoot}>
                 <Typography variant="h6" className={classes.textRoot}>
                     Important! You must first confirm that you agree
-                    to our privacy policy to be able to log in.
+                    to our privacy policy to be able to use the app.
                 </Typography>
                 <Button onClick={() => setShowPrivacyBanner(false)} color="primary" variant="contained" className={classes.btn}>I understand</Button>
             </Paper>

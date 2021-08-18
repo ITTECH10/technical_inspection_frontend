@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../../contexts/DataContext'
+import EditUserDetails from './EditUserDetails'
+import DeleteUser from './DeleteUser'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,6 +58,8 @@ const UserInfoBlock = () => {
                     fullWidth
                 />
             </Box>
+            <EditUserDetails userId={selectedUser._id} />
+            <DeleteUser userId={selectedUser._id} />
         </Box>
     )
 }

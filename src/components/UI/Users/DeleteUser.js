@@ -62,7 +62,7 @@ export default function DeleteUser({ userId }) {
   return (
     <div>
       <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
-        Delete
+        Delete Customer
         <DeleteIcon style={{ height: '.8em' }} />
       </Button>
       <Alerts message="Successfully deleted!" open={alertOpen} handleOpening={setAlertOpen} severity="error" />

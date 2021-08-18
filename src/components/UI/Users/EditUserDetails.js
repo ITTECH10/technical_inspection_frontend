@@ -11,22 +11,34 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import { useData } from './../../../contexts/DataContext'
 import Alerts from '../Alerts';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    textField: {
+        marginTop: theme.spacing(1),
+        // marginBottom: theme.spacing(1),
+        width: '100%'
+    },
+}))
 
 export default function EditUserDetails({ userId }) {
     const [open, setOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const { setSelectedUser, users, setUsers, setUser, user } = useData()
+    const classes = useStyles()
 
     if (user.role === 'user') {
         userId = user._id
     }
 
     const [fields, setFields] = useState({
+        firstName: '',
+        lastName: '',
         email: '',
-        vehicleModel: '',
-        password: '',
-        confirmPassword: ''
+        phoneNumber: '',
+        address: '',
+        birthDate: ''
     })
 
     const handleChange = (e) => {
@@ -47,17 +59,17 @@ export default function EditUserDetails({ userId }) {
         axios.patch(`/users/${userId}`, data).then(res => {
             // console.log(res.data)
             if (res.status === 202) {
-                if(user.role === 'admin') {
+                if (user.role === 'admin') {
                     setSelectedUser(res.data.user)
                     const copyUsers = [...users]
                     const foundUserIndex = copyUsers.findIndex(u => u._id === userId)
                     const foundUser = copyUsers[foundUserIndex]
                     foundUser.email = res.data.user.email
-    
+
                     setUsers(copyUsers)
                 }
 
-                if(user.role === 'user') {
+                if (user.role === 'user') {
                     setUser(res.data.user)
                 }
 
@@ -83,9 +95,9 @@ export default function EditUserDetails({ userId }) {
     };
 
     return (
-        <div>
+        <div style={{ margin: '8px 0' }}>
             <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
-                Edit
+                Edit Customer
                 <EditIcon style={{ height: '.8em' }} />
             </Button>
             <Alerts message="Successfully updated!" open={alertOpen} handleOpening={setAlertOpen} />
@@ -97,41 +109,61 @@ export default function EditUserDetails({ userId }) {
                     </DialogContentText>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            name="email"
+                            name="firstName"
                             autoFocus
                             margin="dense"
-                            id="mail"
-                            label="Email Address"
+                            id="first-name"
+                            label="First name"
                             onChange={handleChange}
-                            type="email"
+                            type="text"
                             fullWidth
                         />
                         <TextField
-                            name="vehicleModel"
+                            name="lastName"
                             margin="dense"
-                            id="vehicle-model"
-                            label="Vehicle Model"
+                            id="last-name"
+                            label="Last name"
                             type="text"
                             onChange={handleChange}
                             fullWidth
                         />
                         <TextField
-                            name="password"
+                            name="email"
                             margin="dense"
-                            id="pwd"
-                            label="Password"
-                            type="password"
+                            id="mail"
+                            label="E-mail"
+                            type="email"
                             onChange={handleChange}
                             fullWidth
                         />
                         <TextField
-                            name="confirmPassword"
+                            name="phoneNumber"
                             margin="dense"
-                            id="confirm-pwd"
-                            label="Confirm Password"
-                            type="password"
+                            id="phone-number"
+                            label="Phone number"
+                            type="text"
                             onChange={handleChange}
                             fullWidth
+                        />
+                        <TextField
+                            name="address"
+                            margin="dense"
+                            id="address-edit"
+                            label="Address"
+                            type="text"
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="birthDate"
+                            id="birthDate-edit"
+                            label="Birth Date"
+                            onChange={handleChange}
+                            type="date"
+                            className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <DialogActions>
                             <Button onClick={handleClose} color="secondary" variant="contained">

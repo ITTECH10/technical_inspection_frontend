@@ -78,10 +78,6 @@ export default function TemporaryDrawer() {
                     <Drawer style={{ zIndex: 0, width: 240 }} elevation={1} PaperProps={{ className: classes.root, style: { paddingTop: !matches && 56 } }} BackdropProps={{ invisible: true, open: matches ? false : true, className: classes.backdropRoot }} anchor="left" open={open} onClose={handleClosing}>
                         {user.role === 'admin' ?
                             <List>
-                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation(`/profile`)}>
-                                    <ListItemIcon><AccountCircleIcon color="primary" /></ListItemIcon>
-                                    <ListItemText primary="User" />
-                                </ListItem>
                                 <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
                                     <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
                                     <ListItemText primary="Customers" />
