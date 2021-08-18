@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import VehicleItemRow from './VehicleItemRow';
+import SearchVehicles from './SearchVehicles';
 
 const useStyles = makeStyles({
   table: {
@@ -21,27 +22,42 @@ export default function CarTable() {
   const classes = useStyles();
   const { vehicles, setSelectedCarBank, user } = useData()
 
+  // FILTERING
+  const [fields, setFields] = React.useState({
+    query: ''
+  })
+
+  const { query } = fields
+
+  const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase())).map(v => (
+    <VehicleItemRow key={v._id} car={v} />
+  ))
+
   const allCars = vehicles.map(v => (
     <VehicleItemRow key={v._id} car={v} />
   ))
 
+
   return (
-    <TableContainer component={Paper}>
-      <Typography variant="h4" style={{ padding: '0 5px' }}>
-        {user.role === 'admin' ? 'All Vehicles' : 'My Vehicles'}
-      </Typography>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Mark</TableCell>
-            <TableCell>Model</TableCell>
-            <TableCell>Registration number</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {allCars}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <SearchVehicles fields={fields} setFields={setFields} />
+      <TableContainer component={Paper}>
+        <Typography variant="h4" style={{ padding: '0 5px' }}>
+          {user.role === 'admin' ? 'Alle Fahrzeuge' : 'Mein Fahrzeuge'}
+        </Typography>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Mark</TableCell>
+              <TableCell>Model</TableCell>
+              <TableCell>Registration number</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {query !== '' ? filteredContent : allCars}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

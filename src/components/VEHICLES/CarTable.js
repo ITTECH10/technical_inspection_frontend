@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 export default function CarTable() {
   const classes = useStyles();
-  const { myVehicles, setSelectedCarBank } = useData()
+  const { myVehicles, setSelectedCarBank, user } = useData()
 
   const cars = myVehicles.map(mv => (
     <CarRow key={mv._id} car={mv} />
@@ -31,7 +31,7 @@ export default function CarTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Typography variant="h4" style={{ padding: '0 5px' }}>Customer Vehicles</Typography>
+      <Typography variant="h4" style={{ padding: '0 5px' }}>{user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}</Typography>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>

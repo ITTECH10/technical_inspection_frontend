@@ -6,9 +6,17 @@ import { Typography } from '@material-ui/core'
 import Loader from '../utils/Loader'
 import UserInfoBlock from '../components/UI/Users/UserInfoBlock'
 import VehiclesTable from './../components/VEHICLES/VehiclesTable'
+import { useHistory } from 'react-router-dom'
 
 const CarScreen = () => {
     const { user, selectedUser, loading } = useData()
+    const history = useHistory()
+
+    let renderVehiclesState
+
+    if (history.location.state) {
+        renderVehiclesState = history.location.state
+    }
 
     return (
         // !loading ?
@@ -18,7 +26,7 @@ const CarScreen = () => {
         // {user.role === 'admin' && selectedUser._id && <UploadCarData />}
         //     </React.Fragment> : <Loader />
         <>
-            <VehiclesTable />
+            {renderVehiclesState !== 'allVehicles' ? <CarTable /> : <VehiclesTable />}
             {user.role === 'admin' && selectedUser._id && <UploadCarData />}
         </>
 

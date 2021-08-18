@@ -8,7 +8,7 @@ const CustomersScreen = () => {
     const [open, setOpen] = useState(false)
     return (
         <>
-            <SearchCustomers />
+            {/* <SearchCustomers /> */}
             <UsersList />
             <NewUserCreation handleAlertOpening={setOpen} />
             <Alerts open={open} handleOpening={setOpen} message="User successfuly created!" />

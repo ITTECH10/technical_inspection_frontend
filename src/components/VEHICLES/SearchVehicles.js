@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     inputRoot: { width: '50%' }
 }))
 
-const SearchCustomers = ({ fields, setFields }) => {
+const SearchVehicles = ({ fields, setFields }) => {
     const classes = useStyles()
 
     const handleChange = (e) => {
@@ -30,8 +30,8 @@ const SearchCustomers = ({ fields, setFields }) => {
                     autoFocus
                     name="query"
                     margin="dense"
-                    id="query"
-                    label="Search for customers..."
+                    id="query-vehicles"
+                    label="Search for vehicles..."
                     onChange={handleChange}
                     type="text"
                     InputProps={{
@@ -47,4 +47,4 @@ const SearchCustomers = ({ fields, setFields }) => {
     )
 }
 
-export default SearchCustomers
+export default SearchVehicles

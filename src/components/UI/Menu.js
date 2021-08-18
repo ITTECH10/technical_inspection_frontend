@@ -59,8 +59,8 @@ export default function TemporaryDrawer() {
         setSwipeableOpen(false)
     }
 
-    const onHandleNavigation = (route) => {
-        history.push(route)
+    const onHandleNavigation = (route, vehiclesToRender) => {
+        history.push(route, vehiclesToRender)
         setSwipeableOpen(false)
         if (!matches) {
             setOpen(false)
@@ -83,7 +83,7 @@ export default function TemporaryDrawer() {
                                     <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
                                     <ListItemText primary="Customers" />
                                 </ListItem>
-                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
+                                <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars', "allVehicles")}>
                                     <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
                                     <ListItemText primary="Fahrzeuge" />
                                 </ListItem>
