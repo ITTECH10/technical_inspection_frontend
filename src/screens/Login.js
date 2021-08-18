@@ -68,22 +68,7 @@ const Login = (props) => {
     const [errors, setErrors] = useState({})
     const { setAuthenticated, setLoading } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
-    const privacyAcceptedStorage = localStorage.privacyAccepted
-    const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
 
-    let bannerTimeout
-
-    React.useEffect(() => {
-        bannerTimeout = setTimeout(() => {
-            setShowPrivacyBanner(false)
-        }, 5000)
-    }, [])
-
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(bannerTimeout)
-        }
-    }, [])
 
     const handleChange = (e) => {
         setFields({
@@ -94,8 +79,6 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        if ((!privacyAcceptedStorage) || (privacyAcceptedStorage && !JSON.parse(privacyAcceptedStorage))) return
 
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
@@ -146,7 +129,7 @@ const Login = (props) => {
 
                 <Grid item xs={false} sm={3} className={classes.gridChildThree} />
             </Grid>
-            {showPrivacyBanner && <PoliciesFooter />}
+            <PoliciesFooter />
         </>
     )
 }

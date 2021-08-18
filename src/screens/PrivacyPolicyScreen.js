@@ -3,14 +3,18 @@ import { Grid, Typography, Paper, Button, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Alerts from '../components/UI/Alerts'
 import { useHistory } from 'react-router'
+import { useData } from '../contexts/DataContext'
+import axios from 'axios'
 
 const useStyles = makeStyles(theme => ({
-    mainContainer: {},
+    mainContainer: {
+    },
     privacyTitle: {
         marginBottom: 30
     },
     visibleItem: {
-        // padding: 10
+        // position: 'relative',
+        // top: 64
     },
     paperRoot: {
         padding: 20
@@ -34,6 +38,7 @@ const PrivacyPolicyScreen = () => {
     const [alertOpen, setAlertOpen] = React.useState(false)
     const [alertMsg, setAlertMsg] = React.useState('')
     const history = useHistory()
+    const { logout, acceptPrivacyPolicy, user } = useData()
 
     let navigateTimeout
 
@@ -43,25 +48,23 @@ const PrivacyPolicyScreen = () => {
         }
     }, [navigateTimeout])
 
-    React.useEffect(() => {
-        localStorage.setItem('privacyAccepted', privacyAccepted)
-    }, [privacyAccepted])
+    // React.useEffect(() => {
+    //     localStorage.setItem('privacyAccepted', privacyAccepted)
+    // }, [privacyAccepted])
 
     const handlePrivacyAcception = () => {
-        setPrivacyAccepted(true)
-        localStorage.setItem('privacyAccepted', privacyAccepted)
+        acceptPrivacyPolicy(user._id)
         setAlertOpen(true)
         setAlertMsg("Thank you for reading and accepting our privacy policy!")
 
         navigateTimeout = setTimeout(() => {
             history.push('/')
+            history.go(0)
         }, 3000)
     }
 
     const handlePrivacyDissagrement = () => {
-        setPrivacyAccepted(false)
-        setAlertOpen(true)
-        setAlertMsg("Note! You won't be able to LOG IN if you don't accept our privacy policy.")
+        logout(history)
     }
 
     return (

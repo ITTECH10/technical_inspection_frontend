@@ -36,11 +36,7 @@ const DataContextProvider = ({ children }) => {
     const acceptPrivacyPolicy = useCallback((id) => {
         axios(`/users/me/privacyPolicy/${id}`)
             .then(res => {
-                if (res.status === 200) {
-                    setTimeout(() => {
-                        localStorage.removeItem('privacyAccepted')
-                    }, 3000)
-                }
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err.response)
@@ -70,9 +66,7 @@ const DataContextProvider = ({ children }) => {
 
     const logout = useCallback((history) => {
         setAppLoading(true)
-        localStorage.removeItem('user')
-        localStorage.removeItem('selectedUser')
-        localStorage.removeItem('token')
+        localStorage.clear()
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
         setTimeout(() => {

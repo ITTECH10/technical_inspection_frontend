@@ -28,15 +28,31 @@ const useStyles = makeStyles(theme => ({
 const PoliciesFooter = () => {
     const classes = useStyles()
     const history = useHistory()
+    const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
+
+    let bannerTimeout
+
+    React.useEffect(() => {
+        bannerTimeout = setTimeout(() => {
+            setShowPrivacyBanner(false)
+        }, 5000)
+    }, [])
+
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(bannerTimeout)
+        }
+    }, [])
 
     return (
+        showPrivacyBanner &&
         <Box className={classes.boxRoot}>
             <Paper elevation={2} className={classes.paperRoot}>
                 <Typography variant="h6" className={classes.textRoot}>
                     Important! You must first confirm that you agree
                     to our privacy policy to be able to log in.
                 </Typography>
-                <Button onClick={() => history.push('/privacyPolicy')} color="primary" variant="contained" className={classes.btn}>I understand</Button>
+                <Button onClick={() => setShowPrivacyBanner(false)} color="primary" variant="contained" className={classes.btn}>I understand</Button>
             </Paper>
         </Box>
     )

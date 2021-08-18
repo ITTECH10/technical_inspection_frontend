@@ -6,9 +6,28 @@ import { Typography } from '@material-ui/core'
 import Loader from '../utils/Loader'
 import UserInfoBlock from '../components/UI/Users/UserInfoBlock'
 import VehiclesTable from './../components/VEHICLES/VehiclesTable'
+import { useHistory } from 'react-router-dom'
 
 const CarScreen = () => {
     const { user, selectedUser, loading, vehiclesPage } = useData()
+    const history = useHistory()
+    let privacyPageTimeout
+
+    React.useEffect(() => {
+        if (user && !user.policiesAccepted) {
+            privacyPageTimeout = setTimeout(() => {
+                history.push('/privacyPolicy')
+                history.go(0)
+            }, 2000)
+        }
+    }, [])
+
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(privacyPageTimeout)
+        }
+    }, [])
+
 
     return (
         // !loading ?

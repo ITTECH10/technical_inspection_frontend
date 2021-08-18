@@ -30,7 +30,6 @@ function App() {
   let token = localStorage.token
   let storageUser = localStorage.user
   let storageSelectedUser = localStorage.selectedUser
-  let privacyPolicyStorage = localStorage.privacyAccepted
 
   useEffect(() => {
     if (storageUser) {
@@ -79,11 +78,11 @@ function App() {
     }
   }, [getSelectedUser, getUserVehicles, userId])
 
-  useEffect(() => {
-    if ((storageUser && JSON.parse(storageUser).role === 'user' && !JSON.parse(storageUser).policiesAccepted) && (privacyPolicyStorage && JSON.parse(privacyPolicyStorage))) {
-      acceptPrivacyPolicy(JSON.parse(storageUser)._id)
-    }
-  }, [acceptPrivacyPolicy])
+  // useEffect(() => {
+  //   if ((storageUser && JSON.parse(storageUser).role === 'user' && !JSON.parse(storageUser).policiesAccepted) && (privacyPolicyStorage && JSON.parse(privacyPolicyStorage))) {
+  //     acceptPrivacyPolicy(JSON.parse(storageUser)._id)
+  //   }
+  // }, [acceptPrivacyPolicy])
 
   const authRoutes = (
     user.role === 'admin' ?
@@ -101,6 +100,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={CarScreen} />
         <Route exact path="/cars/:id" component={CarDetailsScreen} />
+        <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
       </Switch>
   )
 
@@ -108,7 +108,6 @@ function App() {
     <Switch>
       <Route exact path="/" component={Login} />
       <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
-      <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
     </Switch>
   )
 
@@ -120,8 +119,8 @@ function App() {
   }
 
   const app = !appLoading ? (
-    <div style={authenticated ? navbarFix : null} className="App">
-      {authenticated && <Navbar />}
+    <div style={authenticated && history.location.pathname !== '/privacyPolicy' ? navbarFix : null} className="App">
+      {authenticated && history.location.pathname !== '/privacyPolicy' && < Navbar />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />
