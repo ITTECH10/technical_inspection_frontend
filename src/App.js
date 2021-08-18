@@ -20,15 +20,17 @@ import InsuranceScreen from './screens/InsuranceScreen';
 import BankScreen from './screens/BankScreen';
 import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
 
 function App() {
-  const { authenticated, getAllVehicles, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
+  const { authenticated, getAllVehicles, acceptPrivacyPolicy, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
 
   let token = localStorage.token
   let storageUser = localStorage.user
   let storageSelectedUser = localStorage.selectedUser
+  let privacyPolicyStorage = localStorage.privacyAccepted
 
   useEffect(() => {
     if (storageUser) {
@@ -77,6 +79,12 @@ function App() {
     }
   }, [getSelectedUser, getUserVehicles, userId])
 
+  useEffect(() => {
+    if ((storageUser && JSON.parse(storageUser).role === 'user' && !JSON.parse(storageUser).policiesAccepted) && (privacyPolicyStorage && JSON.parse(privacyPolicyStorage))) {
+      acceptPrivacyPolicy(JSON.parse(storageUser)._id)
+    }
+  }, [acceptPrivacyPolicy])
+
   const authRoutes = (
     user.role === 'admin' ?
       <Switch>
@@ -100,6 +108,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={Login} />
       <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
+      <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
     </Switch>
   )
 

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { useData } from '../contexts/DataContext'
 import ForgotPasswordForm from './../components/UI/Users/ForgotPasswordForm'
+import PoliciesFooter from '../components/UI/Users/PoliciesFooter'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -67,6 +68,22 @@ const Login = (props) => {
     const [errors, setErrors] = useState({})
     const { setAuthenticated, setLoading } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
+    const privacyAcceptedStorage = localStorage.privacyAccepted
+    const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
+
+    let bannerTimeout
+
+    React.useEffect(() => {
+        bannerTimeout = setTimeout(() => {
+            setShowPrivacyBanner(false)
+        }, 5000)
+    }, [])
+
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(bannerTimeout)
+        }
+    }, [])
 
     const handleChange = (e) => {
         setFields({
@@ -78,8 +95,11 @@ const Login = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        if ((!privacyAcceptedStorage) || (privacyAcceptedStorage && !JSON.parse(privacyAcceptedStorage))) return
+
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
+            console.log(res.data)
             setLoading(true)
             if (res.status === 201) {
                 setAuthorizationHeader(res.data.token)
@@ -100,31 +120,34 @@ const Login = (props) => {
     const classes = useStyles()
 
     return (
-        <Grid container className={classes.mainContainer}>
-            <Grid item xs={false} sm={3} className={classes.gridChildOne} />
+        <>
+            <Grid container className={classes.mainContainer}>
+                <Grid item xs={false} sm={3} className={classes.gridChildOne} />
 
-            <Grid item xs={12} sm={6} className={classes.gridChildTwo}>
-                <Paper elevation={2} className={classes.mainPaper}>
-                    <Box className={classes.mainBox}>
-                        <Box className={classes.logoBox}>
-                            <img src={AppLogo} alt="Logo" className={classes.logo} />
-                        </Box>
-                        {/* <Typography style={{ fontWeight: '500' }} variant="h4" align="center">Login</Typography> */}
-                        <Box className={classes.inputContainer}>
-                            <form className={classes.inputForm} onSubmit={handleSubmit} id="form__login">
-                                <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
-                                <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
+                <Grid item xs={12} sm={6} className={classes.gridChildTwo}>
+                    <Paper elevation={2} className={classes.mainPaper}>
+                        <Box className={classes.mainBox}>
+                            <Box className={classes.logoBox}>
+                                <img src={AppLogo} alt="Logo" className={classes.logo} />
+                            </Box>
+                            {/* <Typography style={{ fontWeight: '500' }} variant="h4" align="center">Login</Typography> */}
+                            <Box className={classes.inputContainer}>
+                                <form className={classes.inputForm} onSubmit={handleSubmit} id="form__login">
+                                    <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
+                                    <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
 
-                                <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
-                            </form>
-                            <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
+                                    <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
+                                </form>
+                                <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
+                            </Box>
                         </Box>
-                    </Box>
-                </Paper>
+                    </Paper>
+                </Grid>
+
+                <Grid item xs={false} sm={3} className={classes.gridChildThree} />
             </Grid>
-
-            <Grid item xs={false} sm={3} className={classes.gridChildThree} />
-        </Grid>
+            {showPrivacyBanner && <PoliciesFooter />}
+        </>
     )
 }
 

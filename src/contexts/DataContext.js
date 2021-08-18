@@ -32,6 +32,20 @@ const DataContextProvider = ({ children }) => {
     const [banks, setBanks] = useState([])
     const [selectedCarBank, setSelectedCarBank] = useState({})
 
+    const acceptPrivacyPolicy = useCallback((id) => {
+        axios(`/users/me/privacyPolicy/${id}`)
+            .then(res => {
+                if (res.status === 200) {
+                    setTimeout(() => {
+                        localStorage.removeItem('privacyAccepted')
+                    }, 3000)
+                }
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    })
+
     const getAllVehicles = useCallback(() => {
         axios.get('/cars')
             .then(res => {
@@ -55,7 +69,9 @@ const DataContextProvider = ({ children }) => {
 
     const logout = useCallback((history) => {
         setAppLoading(true)
-        localStorage.clear()
+        localStorage.removeItem('user')
+        localStorage.removeItem('selectedUser')
+        localStorage.removeItem('token')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
         setTimeout(() => {
@@ -190,7 +206,8 @@ const DataContextProvider = ({ children }) => {
         setCarImages,
         getAllVehicles,
         vehicles,
-        setVehicles
+        setVehicles,
+        acceptPrivacyPolicy
     }
 
     return (
