@@ -94,7 +94,11 @@ export default function EditUserDetails({ userId }) {
         setOpen(false);
     };
 
-    const formatedBirthDate = new Date(fields.birthDate).toISOString().split('T')[0]
+    let formatedBirthDate
+
+    if (selectedUser._id) {
+        formatedBirthDate = new Date(fields.birthDate).toISOString().split('T')[0]
+    }
 
     return (
         <div style={{ marginRight: 10 }}>
