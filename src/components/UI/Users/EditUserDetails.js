@@ -25,7 +25,7 @@ export default function EditUserDetails({ userId }) {
     const [open, setOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { setSelectedUser, users, setUsers, setUser, user } = useData()
+    const { setSelectedUser, users, setUsers, setUser, user, selectedUser } = useData()
     const classes = useStyles()
 
     if (user.role === 'user') {
@@ -33,12 +33,12 @@ export default function EditUserDetails({ userId }) {
     }
 
     const [fields, setFields] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-        address: '',
-        birthDate: ''
+        firstName: selectedUser.firstName,
+        lastName: selectedUser.lastName,
+        email: selectedUser.email,
+        phoneNumber: selectedUser.phoneNumber,
+        address: selectedUser.address,
+        birthDate: selectedUser.birthDate
     })
 
     const handleChange = (e) => {
@@ -94,8 +94,10 @@ export default function EditUserDetails({ userId }) {
         setOpen(false);
     };
 
+    const formatedBirthDate = new Date(fields.birthDate).toISOString().split('T')[0]
+
     return (
-        <div style={{ margin: '8px 0' }}>
+        <div style={{ marginRight: 10 }}>
             <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
                 Edit Customer
                 <EditIcon style={{ height: '.8em' }} />
@@ -112,6 +114,7 @@ export default function EditUserDetails({ userId }) {
                             name="firstName"
                             autoFocus
                             margin="dense"
+                            value={fields.firstName}
                             id="first-name"
                             label="First name"
                             onChange={handleChange}
@@ -121,6 +124,7 @@ export default function EditUserDetails({ userId }) {
                         <TextField
                             name="lastName"
                             margin="dense"
+                            value={fields.lastName}
                             id="last-name"
                             label="Last name"
                             type="text"
@@ -130,6 +134,7 @@ export default function EditUserDetails({ userId }) {
                         <TextField
                             name="email"
                             margin="dense"
+                            value={fields.email}
                             id="mail"
                             label="E-mail"
                             type="email"
@@ -139,6 +144,7 @@ export default function EditUserDetails({ userId }) {
                         <TextField
                             name="phoneNumber"
                             margin="dense"
+                            value={fields.phoneNumber}
                             id="phone-number"
                             label="Phone number"
                             type="text"
@@ -148,6 +154,7 @@ export default function EditUserDetails({ userId }) {
                         <TextField
                             name="address"
                             margin="dense"
+                            value={fields.address}
                             id="address-edit"
                             label="Address"
                             type="text"
@@ -158,6 +165,7 @@ export default function EditUserDetails({ userId }) {
                             name="birthDate"
                             id="birthDate-edit"
                             label="Birth Date"
+                            value={formatedBirthDate}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}

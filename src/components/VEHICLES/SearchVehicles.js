@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     inputRoot: {
         width: 'auto',
         [theme.breakpoints.up('sm')]: {
-            width: '50%'
+            width: '98%'
         }
     }
 }))
@@ -36,7 +36,7 @@ const SearchVehicles = ({ fields, setFields }) => {
                     name="query"
                     margin="dense"
                     id="query-vehicles"
-                    label="Search for vehicles..."
+                    label="Filter..."
                     onChange={handleChange}
                     type="text"
                     InputProps={{

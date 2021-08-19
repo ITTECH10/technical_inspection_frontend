@@ -83,9 +83,11 @@ const UploadCarData = () => {
             if (res.status === 201) {
                 // DO LATER
                 const updatedVehicles = [...vehicles, { ...res.data.newVehicle }]
+                const updatedCustomerVehicles = [...myVehicles, { ...res.data.newVehicle }]
 
                 setTimeout(() => {
                     setVehicles(updatedVehicles)
+                    setMyVehicles(updatedCustomerVehicles)
                     setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = () => {
-    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, loading } = useData()
+    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, loading, vehiclesPage } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehiclePaymentType } = selectedCar
@@ -82,7 +82,7 @@ const CarDetails = () => {
                     <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
             )} */}
-                <UserInfoBlock />
+                {vehiclesPage !== 'allVehicles' && <UserInfoBlock />}
                 <VehicleDetailsGrid />
                 <InsuranceHouseGrid />
                 <BankGrid />

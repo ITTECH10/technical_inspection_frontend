@@ -26,12 +26,16 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import { useHistory } from 'react-router-dom';
 import { Button, useMediaQuery } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ExportUserData from './Users/ExportUserData';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+    },
+    rootPaper: {
+        width: 57
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -74,7 +78,8 @@ const useStyles = makeStyles((theme) => ({
         overflowX: 'hidden',
         width: theme.spacing(7) + 1,
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing(9) + 1,
+            // width: theme.spacing(9) + 1,
+            width: 57,
         },
     },
     toolbar: {
@@ -168,6 +173,7 @@ export default function MiniDrawer({ open, setOpen }) {
                 </Toolbar>
             </AppBar>
             <Drawer
+                PaperProps={{ className: { root: classes.rootPaper } }}
                 variant="permanent"
                 className={clsx(classes.drawer, {
                     [classes.drawerOpen]: open,
@@ -204,6 +210,7 @@ export default function MiniDrawer({ open, setOpen }) {
                             <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
                             <ListItemText primary="Banks" />
                         </ListItem>
+                        <ExportUserData />
                     </List>
                     :
                     <List>

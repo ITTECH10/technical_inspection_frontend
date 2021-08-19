@@ -13,6 +13,15 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 10,
         borderBottom: '1px solid #eee'
     },
+    actionsFlexContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginTop: 10
+    },
+    actionBtnsBoxFlex: {
+        display: 'flex',
+        alignItems: 'center',
+    }
 }))
 
 const UserInfoBlock = () => {
@@ -22,7 +31,13 @@ const UserInfoBlock = () => {
     return (
         selectedUser &&
         <Box className={classes.root}>
-            <Typography variant="h4">{`${selectedUser.firstName} ${selectedUser.lastName}`}</Typography>
+            <Box className={classes.actionsFlexContainer}>
+                <Typography variant="h4">{`${selectedUser.firstName} ${selectedUser.lastName}`}</Typography>
+                <Box className={classes.actionBtnsBoxFlex}>
+                    <EditUserDetails userId={selectedUser._id} />
+                    <DeleteUser userId={selectedUser._id} />
+                </Box>
+            </Box>
             <Box className={classes.userRow}>
                 {/* <Typography>Name: {selectedUser.firstName}</Typography> */}
                 <TextField
@@ -59,9 +74,6 @@ const UserInfoBlock = () => {
                     fullWidth
                 />
             </Box>
-            <EditUserDetails userId={selectedUser._id} />
-            <DeleteUser userId={selectedUser._id} />
-            <ExportUserData />
         </Box>
     )
 }

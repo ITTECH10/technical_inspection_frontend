@@ -29,14 +29,16 @@ const CarScreen = () => {
     }, [])
 
 
-    return (
-        // !loading ?
-        //     <React.Fragment>
-        //         {selectedUser._id && user.role === 'admin' ? <CarTable /> : user.role === 'user' ? <CarTable /> : <Typography variant="h4">No customer selected.</Typography>}
-        // {user.role === 'admin' && selectedUser._id && <UploadCarData />}
-        //     </React.Fragment> : <Loader />
+    const renderVehicles = vehiclesPage !== 'allVehicles' ? (
         <>
-            {vehiclesPage !== 'allVehicles' ? (<><UserInfoBlock /> <CarTable /> </>) : <VehiclesTable />}
+            <UserInfoBlock />
+            <CarTable />
+        </>
+    ) : <VehiclesTable />
+
+    return (
+        <>
+            {renderVehicles}
             {user.role === 'admin' && selectedUser._id && <UploadCarData />}
         </>
 
