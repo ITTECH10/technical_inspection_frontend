@@ -44,13 +44,16 @@ const DataContextProvider = ({ children }) => {
     })
 
     const getAllVehicles = useCallback(() => {
+        // setAppLoading(true)
         axios.get('/cars')
             .then(res => {
                 if (res.status === 200) {
                     setVehicles(res.data.vehicles)
+                    // setAppLoading(false)
                 }
             })
             .catch(err => {
+                // setAppLoading(false)
                 console.log(err.response)
             })
     }, [])
@@ -77,41 +80,44 @@ const DataContextProvider = ({ children }) => {
     }, [])
 
     const getAllUsers = useCallback(() => {
+        setAppLoading(true)
         axios('/users').then(res => {
+            setAppLoading(false)
             setUsers(res.data.users)
         })
             .catch(err => {
+                setAppLoading(false)
                 console.log(err.response)
             })
     }, [])
 
     const getUserData = useCallback(() => {
-        setAppLoading(true)
+        // setAppLoading(true)
         axios('/users/me').then(res => {
             if (res.status === 200) {
                 setUser(res.data.user)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
-                setAppLoading(false)
+                // setAppLoading(false)
             }
         })
             .catch(err => {
-                setAppLoading(false)
+                // setAppLoading(false)
                 console.log(err.response)
             })
     }, [])
 
     const getSelectedUser = useCallback((id) => {
-        setLoading(true)
+        // setLoading(true)
 
         axios(`/users/${id}`).then(res => {
             if (res.status === 200) {
-                setLoading(false)
+                // setLoading(false)
                 setSelectedUser(res.data.user)
                 localStorage.setItem('selectedUser', JSON.stringify(res.data.user))
             }
         })
             .catch(err => {
-                setLoading(false)
+                // setLoading(false)
                 console.log(err.response)
             })
     }, [])
@@ -129,15 +135,16 @@ const DataContextProvider = ({ children }) => {
     }, [])
 
     const getUserVehicles = useCallback((id) => {
-        // setLoading(true)
+        // setAppLoading(true)
 
         axios(`/cars/${id}`).then(res => {
             if (res.status === 200) {
                 setMyVehicles(res.data.userVehicles)
+                // setAppLoading(false)
             }
         })
             .catch(err => {
-                // setLoading(false)
+                // setAppLoading(false)
                 console.log(err.response)
             })
     }, [])
@@ -169,6 +176,7 @@ const DataContextProvider = ({ children }) => {
         setAuthenticated,
         loading,
         setLoading,
+        setAppLoading,
         logout,
         getUserData,
         user,

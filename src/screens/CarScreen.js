@@ -9,7 +9,7 @@ import VehiclesTable from './../components/VEHICLES/VehiclesTable'
 import { useHistory } from 'react-router-dom'
 
 const CarScreen = () => {
-    const { user, selectedUser, loading, vehiclesPage } = useData()
+    const { user, selectedUser, appLoading, vehiclesPage, vehicles } = useData()
     const history = useHistory()
     let privacyPageTimeout
 
@@ -37,11 +37,11 @@ const CarScreen = () => {
     ) : <VehiclesTable />
 
     return (
-        <>
-            {renderVehicles}
-            {user.role === 'admin' && selectedUser._id && <UploadCarData />}
-        </>
-
+        !appLoading && vehicles.length > 0 ?
+            <>
+                {renderVehicles}
+                {user.role === 'admin' && selectedUser._id && <UploadCarData />}
+            </> : <Loader />
     )
 }
 

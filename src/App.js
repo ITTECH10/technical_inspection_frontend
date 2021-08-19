@@ -24,7 +24,7 @@ import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
 import MenuMiniVariant from './components/UI/MenuMiniVariant'
 
 function App() {
-  const { authenticated, getAllVehicles, acceptPrivacyPolicy, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
+  const { authenticated, getAllVehicles, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = React.useState(false);
@@ -79,12 +79,6 @@ function App() {
       getUserVehicles(userId)
     }
   }, [getSelectedUser, getUserVehicles, userId])
-
-  // useEffect(() => {
-  //   if ((storageUser && JSON.parse(storageUser).role === 'user' && !JSON.parse(storageUser).policiesAccepted) && (privacyPolicyStorage && JSON.parse(privacyPolicyStorage))) {
-  //     acceptPrivacyPolicy(JSON.parse(storageUser)._id)
-  //   }
-  // }, [acceptPrivacyPolicy])
 
   const authRoutes = (
     user.role === 'admin' ?
