@@ -41,23 +41,24 @@ export default function CarTable() {
   return (
     <>
       <Typography variant="h4" style={{ padding: 10 }}>
-        {user.role === 'admin' ? 'Alle Fahrzeuge' : 'Meine Fahrzeuge'}
+        {user.role === 'admin' && vehicles.length > 0 ? 'Alle Fahrzeuge' : vehicles.length === 0 ? 'Noch keine fahrzeuge' : 'Meine Fahrzeuge'}
       </Typography>
-      <SearchVehicles fields={fields} setFields={setFields} />
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Mark</TableCell>
-              <TableCell>Model</TableCell>
-              <TableCell>Registration number</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {query !== '' ? filteredContent : allCars}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />
+      {vehicles.length > 0 &&
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Mark</TableCell>
+                <TableCell>Model</TableCell>
+                <TableCell>Registration number</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {query !== '' ? filteredContent : allCars}
+            </TableBody>
+          </Table>
+        </TableContainer>}
     </>
   );
 }

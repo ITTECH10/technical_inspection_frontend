@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const SearchVehicles = ({ fields, setFields }) => {
+const SearchVehicles = ({ fields, setFields, noVehicles }) => {
     const classes = useStyles()
 
     const handleChange = (e) => {
@@ -39,6 +39,7 @@ const SearchVehicles = ({ fields, setFields }) => {
                     label="Filter..."
                     onChange={handleChange}
                     type="text"
+                    disabled={noVehicles}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">

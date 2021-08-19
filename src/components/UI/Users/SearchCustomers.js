@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const SearchCustomers = ({ fields, setFields }) => {
+const SearchCustomers = ({ fields, setFields, noCustomers }) => {
     const classes = useStyles()
 
     const handleChange = (e) => {
@@ -35,6 +35,7 @@ const SearchCustomers = ({ fields, setFields }) => {
                     autoFocus
                     name="query"
                     margin="dense"
+                    disabled={noCustomers}
                     id="query"
                     label="Filter..."
                     onChange={handleChange}

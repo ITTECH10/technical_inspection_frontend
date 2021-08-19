@@ -37,9 +37,9 @@ export default function UsersList() {
     return (
         <div className={classes.root}>
             <Typography variant="h4" style={{ padding: 10 }}>
-                Alle Kunden
+                {users.length > 1 ? "Alle Kunden" : "Noch keine kunden"}
             </Typography>
-            <SearchCustomers fields={fields} setFields={setFields} />
+            <SearchCustomers fields={fields} setFields={setFields} noCustomers={users.length === 1} />
             <List>
                 {query !== '' ? filteredContent : content}
             </List>
