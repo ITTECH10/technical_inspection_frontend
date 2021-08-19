@@ -11,6 +11,7 @@ import { Typography } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import VehicleItemRow from './VehicleItemRow';
 import SearchVehicles from './SearchVehicles';
+import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles({
   table: {
@@ -27,6 +28,8 @@ export default function CarTable() {
     query: ''
   })
 
+  const matches = useMediaQuery('(max-width: 600px)')
+
   const { query } = fields
 
   const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase())).map(v => (
@@ -40,7 +43,7 @@ export default function CarTable() {
 
   return (
     <>
-      <Typography variant="h4" style={{ padding: 10 }}>
+      <Typography variant="h4" style={{ padding: !matches ? 10 : 0 }}>
         {user.role === 'admin' && vehicles.length > 0 ? 'Alle Fahrzeuge' : vehicles.length === 0 ? 'Noch keine fahrzeuge' : 'Meine Fahrzeuge'}
       </Typography>
       <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />

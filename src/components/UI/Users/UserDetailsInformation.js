@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -81,11 +81,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function UserDetailsInformation({location}) {
+export default function UserDetailsInformation({ location }) {
     const classes = useStyles();
-    const { loading, getSelectedUser, user, getUserVehicles, selectedCar, selectedUser } = useData()
+    const { appLoading, getSelectedUser, user, getUserVehicles, selectedCar, selectedUser } = useData()
     const history = useHistory()
-    
+
     const [value, setValue] = React.useState(1);
 
     const handleChange = (event, newValue) => {
@@ -103,7 +103,7 @@ export default function UserDetailsInformation({location}) {
     // }, [getSelectedUser, getUserVehicles, userId])
 
     return (
-        !loading ?
+        !appLoading ?
             <div className={classes.root}>
                 <Tabs
                     orientation="vertical"
@@ -119,7 +119,7 @@ export default function UserDetailsInformation({location}) {
                     <Tab label="Fahrzeuge" {...a11yProps(2)} />
                     <Tab label="Insurances" {...a11yProps(3)} />
                     <Tab label="Banks" {...a11yProps(4)} />
-                   {value === 5 && <Tab label="Selected Car" {...a11yProps(5)} />}
+                    {value === 5 && <Tab label="Selected Car" {...a11yProps(5)} />}
                 </Tabs>
                 <TabPanel className={classes.tabPanel} value={value} index={0}>
                     <UsersProfile />
@@ -137,9 +137,9 @@ export default function UserDetailsInformation({location}) {
                     <BanksTab />
                 </TabPanel>
                 {value === 5 &&
-                <TabPanel className={classes.tabPanel} value={value} index={5}>
-                    <CarDetails />
-                </TabPanel>}
+                    <TabPanel className={classes.tabPanel} value={value} index={5}>
+                        <CarDetails />
+                    </TabPanel>}
             </div> : <Loader />
     );
 }

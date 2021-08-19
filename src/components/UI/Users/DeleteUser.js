@@ -10,12 +10,23 @@ import { useData } from './../../../contexts/DataContext'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import Alerts from '../Alerts';
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles(theme => ({
+  btnRoot: {
+    fontSize: 9,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '0.8125rem',
+    }
+  }
+}))
 
 export default function DeleteUser({ userId }) {
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false)
   const { user, logout, users, setUsers } = useData()
   const history = useHistory()
+  const classes = useStyles()
 
   if (user.role === 'user') {
     userId = user._id
@@ -61,7 +72,7 @@ export default function DeleteUser({ userId }) {
 
   return (
     <div>
-      <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
+      <Button className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
         Delete Customer
         <DeleteIcon style={{ height: '.8em' }} />
       </Button>

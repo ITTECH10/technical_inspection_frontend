@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
         margin: '5px 0'
     },
     inputRoot: {
-        width: 'auto',
+        width: '100%',
         [theme.breakpoints.up('sm')]: {
             width: '98%'
         }

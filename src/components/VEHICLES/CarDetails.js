@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = () => {
-    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, loading, vehiclesPage } = useData()
+    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, appLoading, vehiclesPage } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehiclePaymentType } = selectedCar
@@ -75,7 +75,7 @@ const CarDetails = () => {
     }, [selectedCar, role, getCarBankInfo, vehiclePaymentType])
 
     return (
-        !loading ?
+        !appLoading ?
             <Grid container className={classes.mainContainer} direction="column">
                 {/* {selectedCar.thumbnail && (
                 <Box className={classes.imageBox}>

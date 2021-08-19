@@ -19,6 +19,12 @@ const useStyles = makeStyles(theme => ({
         // marginBottom: theme.spacing(1),
         width: '100%'
     },
+    btnRoot: {
+        fontSize: 9,
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '0.8125rem',
+        }
+    }
 }))
 
 export default function EditUserDetails({ userId }) {
@@ -107,7 +113,7 @@ export default function EditUserDetails({ userId }) {
 
     return (
         <div style={{ marginRight: 10 }}>
-            <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
+            <Button className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
                 Edit Customer
                 <EditIcon style={{ height: '.8em' }} />
             </Button>

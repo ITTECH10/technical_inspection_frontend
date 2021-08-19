@@ -66,16 +66,15 @@ const Login = (props) => {
         password: ''
     })
     const [errors, setErrors] = useState({})
-    const { setAuthenticated, setAppLoading } = useData()
+    const { setAuthenticated, setAppLoading, appLoading } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
+    let loginTimeout
 
-    // let loginTimeout
-
-    // React.useEffect(() => {
-    //     return () => {
-    //         clearTimeout(loginTimeout)
-    //     }
-    // }, [])
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(loginTimeout)
+        }
+    }, [])
 
     const handleChange = (e) => {
         setFields({
@@ -90,23 +89,21 @@ const Login = (props) => {
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
             // console.log(res.data)
-            // setAppLoading(true)
+            setAppLoading(true)
             if (res.status === 201) {
-                setAuthenticated(true)
                 setAuthorizationHeader(res.data.token)
-                props.history.push('/')
+                setAuthenticated(true)
 
-                // loginTimeout = setTimeout(() => {
-                //     // setAppLoading(false)
-                //     props.history.push('/')
-                // }, 2000)
+                if (!appLoading) {
+                    props.history.push('/')
+                }
             }
         })
             .catch(err => {
                 setErrors({
                     message: err.response.data.message
                 })
-                // setAppLoading(false)
+                setAppLoading(false)
                 console.log(err.response)
             })
     }

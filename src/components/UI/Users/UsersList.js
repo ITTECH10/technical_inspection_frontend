@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { useData } from '../../../contexts/DataContext';
 import User from './User'
 import SearchCustomers from './SearchCustomers';
+import { useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +25,8 @@ export default function UsersList() {
         query: ''
     })
 
+    const matches = useMediaQuery('(max-width: 600px)')
+
     const { query } = fields
 
     const filteredContent = users && [...users].reverse().filter(el => el._id !== user._id).filter(x => x.firstName.toLowerCase().includes(query.toLowerCase()) || x.lastName.toLowerCase().includes(query.toLowerCase())).map(u => {
@@ -36,7 +39,7 @@ export default function UsersList() {
 
     return (
         <div className={classes.root}>
-            <Typography variant="h4" style={{ padding: 10 }}>
+            <Typography variant="h4" style={{ padding: !matches ? 10 : 0 }}>
                 {users.length > 1 ? "Alle Kunden" : "Noch keine kunden"}
             </Typography>
             <SearchCustomers fields={fields} setFields={setFields} noCustomers={users.length === 1} />

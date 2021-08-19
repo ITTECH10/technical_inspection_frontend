@@ -10,7 +10,7 @@ export const useData = () => {
 const DataContextProvider = ({ children }) => {
     // GENERAL
     const [authenticated, setAuthenticated] = useState(false)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [appLoading, setAppLoading] = useState(false)
 
     // USERS
@@ -80,7 +80,7 @@ const DataContextProvider = ({ children }) => {
     }, [])
 
     const getAllUsers = useCallback(() => {
-        setAppLoading(true)
+        // setAppLoading(true)
         axios('/users').then(res => {
             setAppLoading(false)
             setUsers(res.data.users)
@@ -97,11 +97,11 @@ const DataContextProvider = ({ children }) => {
             if (res.status === 200) {
                 setUser(res.data.user)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
-                // setAppLoading(false)
+                setAppLoading(false)
             }
         })
             .catch(err => {
-                // setAppLoading(false)
+                setAppLoading(false)
                 console.log(err.response)
             })
     }, [])

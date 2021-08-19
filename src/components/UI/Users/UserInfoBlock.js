@@ -4,7 +4,6 @@ import { Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../../contexts/DataContext'
 import EditUserDetails from './EditUserDetails'
 import DeleteUser from './DeleteUser'
-import ExportUserData from './ExportUserData'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -15,8 +14,12 @@ const useStyles = makeStyles(theme => ({
     },
     actionsFlexContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
-        marginTop: 10
+        flexDirection: 'column',
+        [theme.breakpoints.up('sm')]: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 10,
+        }
     },
     actionBtnsBoxFlex: {
         display: 'flex',
