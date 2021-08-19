@@ -169,7 +169,7 @@ export default function EditUserDetails({ userId }) {
                             name="birthDate"
                             id="birthDate-edit"
                             label="Birth Date"
-                            value={formatedBirthDate}
+                            value={selectedUser._id && formatedBirthDate}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
