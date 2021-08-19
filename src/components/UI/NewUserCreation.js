@@ -37,7 +37,7 @@ export default function Signup({ handleAlertOpening }) {
     phoneNumber: '',
     address: '',
     birthDate: '',
-    password: '123456',
+    password: generateId(),
     confirmPassword: ''
   })
 
