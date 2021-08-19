@@ -38,7 +38,7 @@ export default function EditUserDetails({ userId }) {
         email: selectedUser.email,
         phoneNumber: selectedUser.phoneNumber,
         address: selectedUser.address,
-        birthDate: selectedUser.birthDate
+        birthDate: selectedUser._id ? selectedUser.birthDate : '31-12-1970'
     })
 
     const handleChange = (e) => {
@@ -94,11 +94,11 @@ export default function EditUserDetails({ userId }) {
         setOpen(false);
     };
 
-    let formatedBirthDate
+    // let formatedBirthDate
 
-    if (selectedUser._id) {
-        formatedBirthDate = new Date(fields.birthDate).toISOString().split('T')[0]
-    }
+    // if (selectedUser._id) {
+    //     formatedBirthDate = new Date(fields.birthDate).toISOString().split('T')[0]
+    // }
 
     return (
         <div style={{ marginRight: 10 }}>
@@ -169,7 +169,7 @@ export default function EditUserDetails({ userId }) {
                             name="birthDate"
                             id="birthDate-edit"
                             label="Birth Date"
-                            value={selectedUser._id && formatedBirthDate}
+                            value={fields.birthDate && new Date(fields.birthDate).toISOString().split('T')[0]}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
