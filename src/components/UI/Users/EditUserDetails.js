@@ -38,8 +38,19 @@ export default function EditUserDetails({ userId }) {
         email: selectedUser.email,
         phoneNumber: selectedUser.phoneNumber,
         address: selectedUser.address,
-        birthDate: selectedUser._id ? selectedUser.birthDate : '31-12-1970'
+        birthDate: selectedUser.birthDate
     })
+
+    React.useEffect(() => {
+        setFields({
+            firstName: selectedUser.firstName,
+            lastName: selectedUser.lastName,
+            email: selectedUser.email,
+            phoneNumber: selectedUser.phoneNumber,
+            address: selectedUser.address,
+            birthDate: selectedUser.birthDate
+        })
+    }, [selectedUser])
 
     const handleChange = (e) => {
         setFields({
@@ -93,12 +104,6 @@ export default function EditUserDetails({ userId }) {
     const handleClose = () => {
         setOpen(false);
     };
-
-    // let formatedBirthDate
-
-    // if (selectedUser._id) {
-    //     formatedBirthDate = new Date(fields.birthDate).toISOString().split('T')[0]
-    // }
 
     return (
         <div style={{ marginRight: 10 }}>
@@ -169,7 +174,7 @@ export default function EditUserDetails({ userId }) {
                             name="birthDate"
                             id="birthDate-edit"
                             label="Birth Date"
-                            value={fields.birthDate && new Date(fields.birthDate).toISOString().split('T')[0]}
+                            value={fields.birthDate ? new Date(fields.birthDate).toISOString().split('T')[0] : '1970/12/31'}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
