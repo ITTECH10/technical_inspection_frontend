@@ -8,8 +8,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios'
 import { useData } from './../../contexts/DataContext'
+import { withNamespaces } from 'react-i18next';
 
-export default function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert }) {
+function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert, t }) {
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = React.useState(false)
     const { carImages, setCarImages } = useData()
@@ -55,7 +56,7 @@ export default function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert }) 
     return (
         <div>
             <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>
-                Delete
+                {t('DeleteButton')}
             </Button>
             <Dialog
                 open={open}
@@ -85,3 +86,5 @@ export default function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert }) 
         </div>
     );
 }
+
+export default withNamespaces()(DeleteVehicleFiles)

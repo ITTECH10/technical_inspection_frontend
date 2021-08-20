@@ -71,5 +71,12 @@
     "AUInputLabel": "AU",
     "MonthlyInsurancePaymentInputLabel": "Monthly insurance payment",
     "AllowedYearlyKilometersInputLabel": "Allowed yearly kilometers",
-    "YearlyTaxInputLabel": "Yearly tax"
+    "YearlyTaxInputLabel": "Yearly tax",
+    "AlertGeneralSuccessful": "Added successfuly!",
+    "AlertGeneralDeleted": "Deleted successfuly!",
+    "AlertGeneralUpdated": "Updated Successfuly!",
+    "AlertGeneralError": "Something went wrong!",
+    "AlertSuccessfulConnection": "Connected successfuly!",
+    "AlertCheckEmail": "Please check your email!",
+    "AlertPrivacyPolicyAccepted": "Thank you for reading and accepting our privacy policy!"
 }

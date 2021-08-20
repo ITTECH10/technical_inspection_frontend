@@ -22,3 +22,7 @@ code {
 .MuiDialog-root {
   z-index: 1501 !important;
 }
+
+.MuiFormLabel-root {
+  white-space: nowrap !important;
+}

@@ -74,7 +74,7 @@ function UploadBankData({ t }) {
       <FloatingButton onHandleClick={handleClickOpen}>
         <AddIcon />
       </FloatingButton>
-      <Alerts message="New bank added!" open={alertOpen} handleOpening={setAlertOpen} />
+      <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">{t('NewBankFormTitle')}</DialogTitle>
         <DialogContent>

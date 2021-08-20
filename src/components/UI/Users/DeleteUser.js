@@ -77,7 +77,7 @@ function DeleteUser({ userId, t }) {
         {t('DeleteCustomerButton')}
         <DeleteIcon style={{ height: '.8em' }} />
       </Button>
-      <Alerts message="Successfully deleted!" open={alertOpen} handleOpening={setAlertOpen} severity="error" />
+      <Alerts message={t('AlertGeneralDeleted')} open={alertOpen} handleOpening={setAlertOpen} severity="error" />
       <Dialog
         open={open}
         onClose={handleClose}

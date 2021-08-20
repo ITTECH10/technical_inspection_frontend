@@ -29,7 +29,7 @@ const BankGrid = ({ t }) => {
 
     return (
         <>
-            <Alerts message="Bank connected!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertSuccessfulConnection')} open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
                 <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('BankDetailsTitle')}</Typography>
                 {selectedBank && user.role === 'admin' ?

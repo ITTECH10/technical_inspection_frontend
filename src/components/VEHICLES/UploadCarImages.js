@@ -6,8 +6,9 @@ import Alerts from './../UI/Alerts'
 import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom'
+import { withNamespaces } from 'react-i18next';
 
-const UploadCarImages = () => {
+const UploadCarImages = ({ t }) => {
     const [alertOpen, setAlertOpen] = useState(false)
     const { carImages, setCarImages, setLoading } = useData()
     const history = useHistory()
@@ -80,7 +81,7 @@ const UploadCarImages = () => {
             <FloatingButton onHandleClick={handleImageClick}>
                 <AddIcon />
             </FloatingButton>
-            <Alerts message="Added successfuly!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
             <form encType="multipart/form-data" onSubmit={handleSubmit}>
                 <input onChange={handleImageChange} name="photo" id="photo" type="file" hidden />
                 <Button id="imgSubmitBtn" style={{ position: 'absolute', visibility: 'hidden' }} type="submit" color="primary" variant="contained">
@@ -91,4 +92,4 @@ const UploadCarImages = () => {
     )
 }
 
-export default UploadCarImages
+export default withNamespaces()(UploadCarImages)

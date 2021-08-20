@@ -7,7 +7,7 @@
     "CustomersTitle": "Alle Kunde",
     "VehiclesTitle": "Alle Fahrzeuge",
     "VehicleDetailsTitle": "Fahrzeugdaten",
-    "VehicleDocumentsTitle": "Fahrzeugpapiere",
+    "VehicleDocumentsTitle": "Fahrzeugdokumente",
     "InsuranceDetailsTitle": "Versicherungsdetails",
     "NoInsuranceConnectedYetTitle": "Noch keine Versicherungverbindung",
     "NoBankConnectedYetTitle": "Noch keine Bankverbindung",
@@ -30,7 +30,7 @@
     "ConnectBankButton": "Bank verbinden",
     "ConnectBankToVehicleTitle": "Fahrzeug mit Bank verbinden",
     "UserPayedWithCashTitle": "Wenn der Kunde bereits mit BAR bezahlt hat, drücken Sie die Taste unten.",
-    "DeleteButton": "Delete",
+    "DeleteButton": "löschen",
     "EditCustomersButton": "Kunde bearbeiten",
     "DeleteCustomerButton": "Kunde löschen",
     "NewCustomerFormTitle": "Neu Kunde",
@@ -71,5 +71,12 @@
     "AUInputLabel": "AU",
     "MonthlyInsurancePaymentInputLabel": "Monatliche Versicherungsleistung",
     "AllowedYearlyKilometersInputLabel": "Zulässige Jahreskilometer",
-    "YearlyTaxInputLabel": "Jährliche Steuer"
+    "YearlyTaxInputLabel": "Jährliche Steuer",
+    "AlertGeneralSuccessful": "Erfolgreich hinzugefügt!",
+    "AlertGeneralDeleted": "Erfolgreich gelöscht!",
+    "AlertGeneralUpdated": "Erfolgreich aktualisiert!",
+    "AlertGeneralError": "Etwas ist schief gelaufen!",
+    "AlertSuccessfulConnection": "Erfolgreich verbunden!",
+    "AlertCheckEmail": "Bitte überprüfen Sie Ihre E-Mail!",
+    "AlertPrivacyPolicyAccepted": "Vielen Dank, dass Sie unsere Datenschutzerklärung gelesen und akzeptiert haben!"
 }

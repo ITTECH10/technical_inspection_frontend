@@ -5,6 +5,7 @@ import Alerts from '../components/UI/Alerts'
 import { useHistory } from 'react-router'
 import { useData } from '../contexts/DataContext'
 import axios from 'axios'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const PrivacyPolicyScreen = () => {
+const PrivacyPolicyScreen = ({ t }) => {
     const classes = useStyles()
     const [privacyAccepted, setPrivacyAccepted] = React.useState(false)
     const [alertOpen, setAlertOpen] = React.useState(false)
@@ -69,7 +70,7 @@ const PrivacyPolicyScreen = () => {
 
     return (
         <>
-            <Alerts message={alertMsg} open={alertOpen} handleOpening={setAlertOpen} severity={alertMsg.startsWith('Thank you') ? 'success' : 'error'} />
+            <Alerts message={t('AlertPrivacyPolicyAccepted')} open={alertOpen} handleOpening={setAlertOpen} severity={alertMsg.startsWith('Thank you') ? 'success' : 'error'} />
             <Grid container className={classes.mainContainer}>
                 <Grid sm={3} item />
                 <Grid sm={6} item className={classes.visibleItem}>
@@ -111,4 +112,4 @@ const PrivacyPolicyScreen = () => {
     )
 }
 
-export default PrivacyPolicyScreen
+export default withNamespaces()(PrivacyPolicyScreen)

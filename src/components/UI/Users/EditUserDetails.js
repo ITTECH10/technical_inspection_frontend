@@ -118,7 +118,7 @@ function EditUserDetails({ userId, t }) {
                 {t('EditCustomersButton')}
                 <EditIcon style={{ height: '.8em' }} />
             </Button>
-            <Alerts message="Successfully updated!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertGeneralUpdated')} open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{t('EditCustomerFormTitle')}</DialogTitle>
                 <DialogContent>

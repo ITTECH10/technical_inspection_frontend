@@ -6,6 +6,7 @@ import { useData } from '../contexts/DataContext'
 import { useHistory } from 'react-router-dom'
 import Alerts from './../components/UI/Alerts'
 import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const ResetPasswordScreen = () => {
+const ResetPasswordScreen = ({ t }) => {
     const { setAuthenticated } = useData()
     const [fields, setFields] = React.useState({
         password: '',
@@ -100,7 +101,7 @@ const ResetPasswordScreen = () => {
 
     return (
         <>
-            <Alerts message="Password reseting successful!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
             <Alerts severity="error" message={errorMessage} open={errorAlertOpen} handleOpening={setErrorAlertOpen} />
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={3} className={classes.gridChildOne} />
@@ -130,4 +131,4 @@ const ResetPasswordScreen = () => {
     )
 }
 
-export default ResetPasswordScreen
+export default withNamespaces()(ResetPasswordScreen)

@@ -8,12 +8,13 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Dialog, Box } from '@material-ui/core';
 import DeleteVehicleFiles from './../VEHICLES/DeleteVehicleFiles'
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: 345,
-        // marginBottom: 10
-        marginRight: 10
+        marginBottom: 10,
+        marginRight: 10,
     },
     media: {
         height: 150,
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const GalleryContent = ({ image, onHandleFileDeleteAlert }) => {
+const GalleryContent = ({ image, onHandleFileDeleteAlert, t }) => {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false)
 
@@ -90,4 +91,4 @@ const GalleryContent = ({ image, onHandleFileDeleteAlert }) => {
     )
 }
 
-export default GalleryContent
+export default withNamespaces()(GalleryContent)

@@ -4,6 +4,7 @@ import { Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GalleryContent from './GalleryContent'
 import Alerts from './Alerts'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     boxFlex: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const GalleryAlternativeReal = () => {
+const GalleryAlternativeReal = ({ t }) => {
     const { carImages } = useData()
     const classes = useStyles()
     const [fileDeleteOpen, setFileDeleteOpen] = React.useState(false)
@@ -26,9 +27,9 @@ const GalleryAlternativeReal = () => {
 
     return (
         <>
-            <Alerts severity="error" message="Document deleted successfuly!" open={fileDeleteOpen} handleOpening={setFileDeleteOpen} />
+            <Alerts severity="error" message={t('AlertGeneralDeleted')} open={fileDeleteOpen} handleOpening={setFileDeleteOpen} />
             <Typography variant="h5" align="center">
-                Vehicle Documents
+                {t('VehicleDocumentsTitle')}
             </Typography>
 
             <Box className={classes.boxFlex}>
@@ -38,4 +39,4 @@ const GalleryAlternativeReal = () => {
     )
 }
 
-export default GalleryAlternativeReal
+export default withNamespaces()(GalleryAlternativeReal)

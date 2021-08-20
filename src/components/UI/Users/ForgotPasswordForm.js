@@ -64,7 +64,7 @@ function FormDialog({ onDisableLoginForm, t }) {
             <Link onClick={handleClickOpen} style={{ textAlign: 'center', width: '100%', display: 'inline-block', marginTop: 5, cursor: 'pointer' }}>
                 {t('LoginScreenForgotPassword')}
             </Link>
-            <Alerts message="Please check your email!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertCheckEmail')} open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{t('LoginScreenForgotPassword')}</DialogTitle>
                 <DialogContent>

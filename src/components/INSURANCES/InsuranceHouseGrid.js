@@ -28,7 +28,7 @@ const InsuranceHouseGrid = ({ t }) => {
 
     return (
         <>
-            <Alerts message="Insurance connected!" open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertSuccessfulConnection')} open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
                 <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('InsuranceDetailsTitle')}</Typography>
                 {selectedInsurance && user.role === 'admin' ?

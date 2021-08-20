@@ -3,17 +3,18 @@ import UsersList from '../components/UI/Users/UsersList'
 import NewUserCreation from '../components/UI/NewUserCreation'
 import Alerts from '../components/UI/Alerts'
 import SearchCustomers from '../components/UI/Users/SearchCustomers'
+import { withNamespaces } from 'react-i18next'
 
-const CustomersScreen = () => {
+const CustomersScreen = ({ t }) => {
     const [open, setOpen] = useState(false)
     return (
         <>
             {/* <SearchCustomers /> */}
             <UsersList />
             <NewUserCreation handleAlertOpening={setOpen} />
-            <Alerts open={open} handleOpening={setOpen} message="User successfuly created!" />
+            <Alerts open={open} handleOpening={setOpen} message={t('AlertGeneralSuccessful')} />
         </>
     )
 }
 
-export default CustomersScreen
+export default withNamespaces()(CustomersScreen)

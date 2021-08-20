@@ -74,7 +74,7 @@ function UploadInsuranceData({ t }) {
       <FloatingButton onHandleClick={handleClickOpen}>
         <AddIcon />
       </FloatingButton>
-      <Alerts message="New insurance house added!" open={alertOpen} handleOpening={setAlertOpen} />
+      <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">{t('NewInsuranceFormTitle')}</DialogTitle>
         <DialogContent>
