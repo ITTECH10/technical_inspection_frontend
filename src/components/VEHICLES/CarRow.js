@@ -20,8 +20,7 @@ const CarRow = ({ car }) => {
                 {car.mark}
             </TableCell>
             <TableCell>{car.model}</TableCell>
-            <TableCell>{new Date(car.lastTechnicalInspection).toLocaleDateString()}</TableCell>
-            <TableCell>{new Date(car.lastTechnicalInspection).toLocaleDateString()}</TableCell>
+            <TableCell>{car.registrationNumber}</TableCell>
         </TableRow>
     )
 }

@@ -4,6 +4,7 @@ import { useData } from '../../contexts/DataContext'
 import BankDialog from './BankDialog'
 import { makeStyles } from '@material-ui/core/styles'
 import Alerts from '../UI/Alerts'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const BankGrid = () => {
+const BankGrid = ({ t }) => {
     const { banks, selectedCarBank, user, selectedCar } = useData()
     const selectedBank = banks.find(el => el._id === selectedCar.vehiclePaymentType)
     const classes = useStyles()
@@ -30,7 +31,7 @@ const BankGrid = () => {
         <>
             <Alerts message="Bank connected!" open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
-                <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>Bank Details</Typography>
+                <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('BankDetailsTitle')}</Typography>
                 {selectedBank && user.role === 'admin' ?
                     <Box>
                         <Box>
@@ -61,7 +62,7 @@ const BankGrid = () => {
                             </Box>
                         </Box> : selectedCar.vehiclePaymentType && selectedCar.vehiclePaymentType.toLowerCase() === 'cash' ? <Typography variant="h4">
                             Customer payed with cash.
-                        </Typography> : <Typography variant="h4">No bank details yet.</Typography>}
+                        </Typography> : <Typography variant="h4">{t('NoBankConnectedYetTitle')}</Typography>}
                 {user.role === 'admin' &&
                     <Box style={{ margin: '10px 0' }}>
                         <BankDialog handleAlertOpening={setAlertOpen} />
@@ -71,4 +72,4 @@ const BankGrid = () => {
     )
 }
 
-export default BankGrid
+export default withNamespaces()(BankGrid)

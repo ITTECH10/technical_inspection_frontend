@@ -66,11 +66,10 @@ function FormDialog({ onDisableLoginForm, t }) {
             </Link>
             <Alerts message="Please check your email!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Forgot your password?</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('LoginScreenForgotPassword')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To proceed reseting your password,
-                        please enter the email associated with your account.
+                        {t('LoginScreenForgotPasswordTextHint')}
                     </DialogContentText>
                     <form onSubmit={handleSubmit}>
                         <TextField
@@ -86,10 +85,10 @@ function FormDialog({ onDisableLoginForm, t }) {
 
                         <DialogActions>
                             <Button onClick={handleClose} color="primary" variant="contained">
-                                Cancel
+                                {t('CancelButton')}
                             </Button>
                             <Button type="submit" color="primary" variant="contained">
-                                {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Continue'}
+                                {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>
                     </form>

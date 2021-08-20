@@ -15,6 +15,7 @@ import FloatingButton from './FloatingButton';
 import { makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { generateId } from './../../utils/helpers'
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Signup({ handleAlertOpening }) {
+function NewCustomer({ handleAlertOpening, t }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
   // const history = useHistory()
@@ -107,10 +108,10 @@ export default function Signup({ handleAlertOpening }) {
         <AddIcon />
       </FloatingButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
+        <DialogTitle id="form-dialog-title">{t('NewCustomerFormTitle')}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To create a new customer, simply fill the fields below.
+            {t('NewCustomerFormHint')}
           </DialogContentText>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -120,7 +121,7 @@ export default function Signup({ handleAlertOpening }) {
               helperText={errors.firstName && errors.firstName.message}
               margin="dense"
               id="firstName"
-              label="First name"
+              label={t('FirstNameInputLabel')}
               onChange={handleChange}
               type="text"
               fullWidth
@@ -131,7 +132,7 @@ export default function Signup({ handleAlertOpening }) {
               helperText={errors.lastName && errors.lastName.message}
               margin="dense"
               id="lastName"
-              label="Last name"
+              label={t('LastNameInputLabel')}
               onChange={handleChange}
               type="text"
               fullWidth
@@ -141,7 +142,7 @@ export default function Signup({ handleAlertOpening }) {
               error={errors.birthDate && errors.birthDate.message}
               helperText={errors.birthDate && errors.birthDate.message}
               id="birthDate"
-              label="Birth Date"
+              label={t('BirthDateInputLabel')}
               onChange={handleChange}
               type="date"
               className={classes.textField}
@@ -155,7 +156,7 @@ export default function Signup({ handleAlertOpening }) {
               helperText={errors.email && errors.email.message}
               margin="dense"
               id="mail"
-              label="Email Address"
+              label={t('EmailInputLabel')}
               onChange={handleChange}
               type="email"
               fullWidth
@@ -166,7 +167,7 @@ export default function Signup({ handleAlertOpening }) {
               helperText={errors.phoneNumber && errors.phoneNumber.message}
               margin="dense"
               id="phoneNumber"
-              label="Phone number"
+              label={t('PhoneNumberInputLabel')}
               onChange={handleChange}
               type="text"
               fullWidth
@@ -177,7 +178,7 @@ export default function Signup({ handleAlertOpening }) {
               helperText={errors.address && errors.address.message}
               margin="dense"
               id="address"
-              label="Address"
+              label={t('AdressInputLabel')}
               onChange={handleChange}
               type="text"
               fullWidth
@@ -206,10 +207,10 @@ export default function Signup({ handleAlertOpening }) {
             /> */}
             <DialogActions>
               <Button onClick={handleClose} color="secondary" variant="contained">
-                Cancel
+                {t('CancelButton')}
               </Button>
               <Button type="submit" color="primary" variant="contained">
-                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
               </Button>
             </DialogActions>
           </form>
@@ -218,3 +219,5 @@ export default function Signup({ handleAlertOpening }) {
     </div>
   );
 }
+
+export default withNamespaces()(NewCustomer)

@@ -6,6 +6,7 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, Dialo
 import Alerts from './../UI/Alerts'
 import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UploadCarData = () => {
+const UploadCarData = ({ t }) => {
     const [open, setOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
@@ -134,20 +135,20 @@ const UploadCarData = () => {
             </FloatingButton>
             <Alerts message="New vehicle added!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Add user vehicles</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('NewVehicleFormTitle')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To add user vehicles, simply fill the fields bellow.
+                        {t('NewVehicleFormHint')}
                     </DialogContentText>
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Add Photo</Button>
+                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
                         <TextField
                             name="mark"
                             autoFocus
                             margin="dense"
                             id="mark"
-                            label="Mark"
+                            label={t('MarkInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -155,7 +156,7 @@ const UploadCarData = () => {
                             name="model"
                             margin="dense"
                             id="model"
-                            label="Model"
+                            label={t('ModelInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -163,7 +164,7 @@ const UploadCarData = () => {
                             name="HSN"
                             margin="dense"
                             id="HSN"
-                            label="HSN"
+                            label={t('HSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -171,7 +172,7 @@ const UploadCarData = () => {
                             name="TSN"
                             margin="dense"
                             id="TSN"
-                            label="TSN"
+                            label={t('TSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -179,7 +180,7 @@ const UploadCarData = () => {
                             name="registrationNumber"
                             margin="dense"
                             id="registrationNumber"
-                            label="Registration number"
+                            label={t('RegistrationNumberInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -187,14 +188,14 @@ const UploadCarData = () => {
                             name="kilometersDriven"
                             margin="dense"
                             id="kilometersDriven"
-                            label="Kilometers driven"
+                            label={t('KilometersDrivenInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
                         <TextField
                             name="firstVehicleRegistration"
                             id="firstVehicleRegistration"
-                            label="First vehicle registration"
+                            label={t('FVRInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -205,7 +206,7 @@ const UploadCarData = () => {
                         <TextField
                             name="firstVehicleRegistrationOnOwner"
                             id="firstVehicleRegistrationOnOwner"
-                            label="First vehicle registration on owner"
+                            label={t('FVROOInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -216,7 +217,7 @@ const UploadCarData = () => {
                         <TextField
                             name="lastTechnicalInspection"
                             id="lastTechnicalInspection"
-                            label="Last technical inspection"
+                            label={t('LTIInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -227,7 +228,7 @@ const UploadCarData = () => {
                         <TextField
                             name="nextTechnicalInspection"
                             id="nextTechnicalInspection"
-                            label="Next technical inspection"
+                            label={t('NTIInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -238,7 +239,7 @@ const UploadCarData = () => {
                         <TextField
                             name="TUV"
                             id="TUV"
-                            label="TUV"
+                            label={t('TUVInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -249,7 +250,7 @@ const UploadCarData = () => {
                         <TextField
                             name="AU"
                             id="AU"
-                            label="AU"
+                            label={t('AUInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -261,7 +262,7 @@ const UploadCarData = () => {
                             name="monthlyInsurancePayment"
                             margin="dense"
                             id="monthlyInsurancePayment"
-                            label="Monthly insurance payment"
+                            label={t('MonthlyInsurancePaymentInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -269,7 +270,7 @@ const UploadCarData = () => {
                             name="allowedYearlyKilometers"
                             margin="dense"
                             id="allowedYearlyKilometers"
-                            label="Allowed yearly kilometers"
+                            label={t('AllowedYearlyKilometersInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -277,16 +278,16 @@ const UploadCarData = () => {
                             name="yearlyTax"
                             margin="dense"
                             id="yearlyTax"
-                            label="Yearly tax"
+                            label={t('YearlyTaxInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
                         <DialogActions>
                             <Button onClick={handleClose} color="secondary" variant="contained">
-                                Cancel
+                                {t('CancelButton')}
                             </Button>
                             <Button type="submit" color="primary" variant="contained">
-                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
+                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>
                     </form>
@@ -296,4 +297,4 @@ const UploadCarData = () => {
     )
 }
 
-export default UploadCarData
+export default withNamespaces()(UploadCarData)

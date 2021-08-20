@@ -5,8 +5,9 @@ import Dialog from '@material-ui/core/Dialog';
 
 import { useData } from '../../contexts/DataContext';
 import InsuranceList from './InsuranceList';
+import { withNamespaces } from 'react-i18next';
 
-function InsuranceDialog({ handleAlertOpening }) {
+function InsuranceDialog({ handleAlertOpening, t }) {
     const { insurances } = useData()
     const [open, setOpen] = React.useState(false);
 
@@ -25,14 +26,14 @@ function InsuranceDialog({ handleAlertOpening }) {
     return (
         <div>
             <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>
-                Connect Insurance
+                {t('ConnectInsuranceButton')}
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-                <DialogTitle>Connect vehicle to insurance</DialogTitle>
+                <DialogTitle>{t('ConnectInsuranceToVehicleTitle')}</DialogTitle>
                 {content}
             </Dialog>
         </div>
     );
 }
 
-export default InsuranceDialog
+export default withNamespaces()(InsuranceDialog)

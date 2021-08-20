@@ -30,7 +30,7 @@ import ExportUserData from './Users/ExportUserData';
 import LanguageMenu from './LanguageMenu'
 import { withNamespaces } from 'react-i18next';
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,12 +47,25 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: 210,
+        width: `calc(100% - ${210}px)`,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: 240,
+            width: `calc(100% - ${240}px)`,
+        }
+    },
+    actionBtnsMenuBox: {
+        // width: 145,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        right: 25,
+        padding: '0 10px'
     },
     menuButton: {
         marginRight: 10,
@@ -61,16 +74,22 @@ const useStyles = makeStyles((theme) => ({
         display: 'none',
     },
     drawer: {
-        width: drawerWidth,
+        width: 210,
         flexShrink: 0,
         whiteSpace: 'nowrap',
+        [theme.breakpoints.up('sm')]: {
+            width: 240,
+        }
     },
     drawerOpen: {
-        width: drawerWidth,
+        width: 210,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
+        [theme.breakpoints.up('sm')]: {
+            width: 240,
+        }
     },
     drawerClose: {
         transition: theme.transitions.create('width', {
@@ -166,12 +185,16 @@ function MiniDrawer({ open, setOpen, t }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Box className={classes.logoBox}>
+                    {!open ? <Box className={classes.logoBox}>
                         <img src={Logo} className={classes.logo} />
+                    </Box> : !matches ? <Box className={classes.logoBox}>
+                        <img src={Logo} className={classes.logo} />
+                    </Box> : null}
+                    <Box className={classes.actionBtnsMenuBox}>
+                        {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
+                        <Button onClick={() => logout(history)} color="inherit">{t('LogoutButton')}</Button>
                     </Box>
-                    <Button style={{ position: 'absolute', right: 35 }} onClick={() => logout(history)} color="inherit">{t('LogoutButton')}</Button>
                     <LanguageMenu />
-                    {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton style={{ position: 'absolute', right: 95 }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
                 </Toolbar>
             </AppBar>
             <Drawer

@@ -8,8 +8,9 @@ import Button from '@material-ui/core/Button';
 import { CircularProgress } from '@material-ui/core';
 import { useData } from './../../contexts/DataContext'
 import axios from 'axios'
+import { withNamespaces } from 'react-i18next';
 
-const BankList = ({ bank, handleAlertOpening, handleDialogClosing }) => {
+const BankList = ({ bank, t, handleAlertOpening, handleDialogClosing }) => {
     const { selectedCar, setSelectedCar } = useData()
     const [buttonLoading, setButtonLoading] = useState(false)
     const { name, _id } = bank
@@ -48,11 +49,11 @@ const BankList = ({ bank, handleAlertOpening, handleDialogClosing }) => {
             </AccordionSummary>
             <AccordionDetails>
                 <Button onClick={() => handleBankSelection()} color="primary" variant="contained">
-                    {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Select'}
+                    {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                 </Button>
             </AccordionDetails>
         </Accordion>
     )
 }
 
-export default BankList
+export default withNamespaces()(BankList)

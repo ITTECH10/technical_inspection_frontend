@@ -4,6 +4,7 @@ import { Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../../contexts/DataContext'
 import EditUserDetails from './EditUserDetails'
 import DeleteUser from './DeleteUser'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const UserInfoBlock = () => {
+const UserInfoBlock = ({ t }) => {
     const { selectedUser } = useData()
     const classes = useStyles()
 
@@ -44,14 +45,14 @@ const UserInfoBlock = () => {
             <Box className={classes.userRow}>
                 {/* <Typography>Name: {selectedUser.firstName}</Typography> */}
                 <TextField
-                    value={`Name: ${selectedUser.firstName}`}
+                    value={`${t('FirstNameInputLabel')}: ${selectedUser.firstName}`}
                     disabled
                     fullWidth
                 />
             </Box>
             <Box className={classes.userRow}>
                 <TextField
-                    value={`Surname: ${selectedUser.lastName}`}
+                    value={`${t('LastNameInputLabel')}: ${selectedUser.lastName}`}
                     disabled
                     fullWidth
                 />
@@ -65,14 +66,14 @@ const UserInfoBlock = () => {
             </Box>
             <Box className={classes.userRow}>
                 <TextField
-                    value={`Phone: ${selectedUser.phoneNumber}`}
+                    value={`${t('PhoneNumberInputLabel')}: ${selectedUser.phoneNumber}`}
                     disabled
                     fullWidth
                 />
             </Box>
             <Box className={classes.userRow}>
                 <TextField
-                    value={`Address: ${selectedUser.address}`}
+                    value={`${t('AdressInputLabel')}: ${selectedUser.address}`}
                     disabled
                     fullWidth
                 />
@@ -81,4 +82,4 @@ const UserInfoBlock = () => {
     )
 }
 
-export default UserInfoBlock
+export default withNamespaces()(UserInfoBlock)

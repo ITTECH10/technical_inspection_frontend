@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-function CarTable({ t }) {
+function VehiclesTable({ t }) {
   const classes = useStyles();
   const { vehicles, setSelectedCarBank, user } = useData()
 
@@ -53,9 +53,9 @@ function CarTable({ t }) {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Mark</TableCell>
-                <TableCell>Model</TableCell>
-                <TableCell>Registration number</TableCell>
+                <TableCell>{t('MarkInputLabel')}</TableCell>
+                <TableCell>{t('ModelInputLabel')}</TableCell>
+                <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -67,4 +67,4 @@ function CarTable({ t }) {
   );
 }
 
-export default withNamespaces()(CarTable)
+export default withNamespaces()(VehiclesTable)

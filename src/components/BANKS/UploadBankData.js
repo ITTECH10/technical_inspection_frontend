@@ -12,8 +12,9 @@ import { useData } from './../../contexts/DataContext'
 import FloatingButton from './../UI/FloatingButton';
 import AddIcon from '@material-ui/icons/Add';
 import Alerts from './../UI/Alerts'
+import { withNamespaces } from 'react-i18next';
 
-export default function UploadInsuranceData() {
+function UploadBankData({ t }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
   const [alertOpen, setAlertOpen] = useState(false)
@@ -75,10 +76,10 @@ export default function UploadInsuranceData() {
       </FloatingButton>
       <Alerts message="New bank added!" open={alertOpen} handleOpening={setAlertOpen} />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">New Bank</DialogTitle>
+        <DialogTitle id="form-dialog-title">{t('NewBankFormTitle')}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To create a new bank, simply fill the fields below.
+            {t('NewBankFormHint')}
           </DialogContentText>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -86,7 +87,7 @@ export default function UploadInsuranceData() {
               autoFocus
               margin="dense"
               id="nameId"
-              label="Bank name"
+              label={t('BankNameInputLabel')}
               onChange={handleChange}
               type="text"
               fullWidth
@@ -95,7 +96,7 @@ export default function UploadInsuranceData() {
               name="street"
               margin="dense"
               id="streetId"
-              label="Street"
+              label={t('StreetInputLabel')}
               type="text"
               onChange={handleChange}
               fullWidth
@@ -104,7 +105,7 @@ export default function UploadInsuranceData() {
               name="number"
               margin="dense"
               id="numberAdressId"
-              label="Address number"
+              label={t('AddressNumberInputLabel')}
               type="text"
               onChange={handleChange}
               fullWidth
@@ -113,7 +114,7 @@ export default function UploadInsuranceData() {
               name="postNumber"
               margin="dense"
               id="postNumber"
-              label="Post number"
+              label={t('PostNumberInputLabel')}
               type="text"
               onChange={handleChange}
               fullWidth
@@ -122,7 +123,7 @@ export default function UploadInsuranceData() {
               name="city"
               margin="dense"
               id="city"
-              label="City"
+              label={t('CityInputLabel')}
               type="text"
               onChange={handleChange}
               fullWidth
@@ -131,17 +132,17 @@ export default function UploadInsuranceData() {
               name="phoneNumber"
               margin="dense"
               id="phoneNumber"
-              label="Phone number"
+              label={t('PhoneNumberInputLabel')}
               type="text"
               onChange={handleChange}
               fullWidth
             />
             <DialogActions>
               <Button onClick={handleClose} color="secondary" variant="contained">
-                Cancel
+                {t('CancelButton')}
               </Button>
               <Button type="submit" color="primary" variant="contained">
-                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
               </Button>
             </DialogActions>
           </form>
@@ -150,3 +151,5 @@ export default function UploadInsuranceData() {
     </div>
   );
 }
+
+export default withNamespaces()(UploadBankData)

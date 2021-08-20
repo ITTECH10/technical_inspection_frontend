@@ -22,6 +22,7 @@ import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
 import MenuMiniVariant from './components/UI/MenuMiniVariant'
+import i18n from './i18n'
 
 function App() {
   const { authenticated, getAllVehicles, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
@@ -32,6 +33,7 @@ function App() {
   let token = localStorage.token
   let storageUser = localStorage.user
   let storageSelectedUser = localStorage.selectedUser
+  let storageLanguage = localStorage.language
 
   useEffect(() => {
     if (storageUser) {
@@ -40,6 +42,10 @@ function App() {
 
     if (storageSelectedUser) {
       setSelectedUser(JSON.parse(storageSelectedUser))
+    }
+
+    if (storageLanguage) {
+      i18n.changeLanguage(storageLanguage)
     }
   }, [setUser, setSelectedUser, storageSelectedUser, storageUser])
 

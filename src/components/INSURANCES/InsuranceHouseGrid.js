@@ -4,6 +4,7 @@ import { Grid, Typography, Box, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import InsuranceDialog from './InsuranceDialog'
 import Alerts from '../UI/Alerts'
+import { withNamespaces } from 'react-i18next'
 // import { objectIsEmpty } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const InsuranceHouseGrid = () => {
+const InsuranceHouseGrid = ({ t }) => {
     const classes = useStyles()
     const { insurances, user, selectedCar, selectedCarInsurance } = useData()
     const selectedInsurance = insurances.find(el => el._id === selectedCar.insuranceHouse)
@@ -29,7 +30,7 @@ const InsuranceHouseGrid = () => {
         <>
             <Alerts message="Insurance connected!" open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
-                <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>Insurance Details</Typography>
+                <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('InsuranceDetailsTitle')}</Typography>
                 {selectedInsurance && user.role === 'admin' ?
                     <Box>
                         <Box>
@@ -58,7 +59,7 @@ const InsuranceHouseGrid = () => {
                                 <Typography className={classes.inputTitle}>Phone</Typography>
                                 <TextField className={classes.input} label={selectedCarInsurance && selectedCarInsurance.phoneNumber} disabled />
                             </Box>
-                        </Box> : <Typography variant="h4" style={{ marginBottom: user.role === 'user' && 10 }} >No insurance yet.</Typography>}
+                        </Box> : <Typography variant="h4" style={{ marginBottom: user.role === 'user' && 10 }} >{t('NoInsuranceConnectedYetTitle')}</Typography>}
                 {user.role === 'admin' &&
                     <Box style={{ margin: '10px 0' }}>
                         <InsuranceDialog handleAlertOpening={setAlertOpen} />
@@ -68,4 +69,4 @@ const InsuranceHouseGrid = () => {
     )
 }
 
-export default InsuranceHouseGrid
+export default withNamespaces()(InsuranceHouseGrid)

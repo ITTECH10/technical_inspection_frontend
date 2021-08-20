@@ -12,6 +12,7 @@ import axios from 'axios'
 import { useData } from './../../../contexts/DataContext'
 import Alerts from '../Alerts';
 import { makeStyles } from '@material-ui/core/styles';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function EditUserDetails({ userId }) {
+function EditUserDetails({ userId, t }) {
     const [open, setOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
@@ -114,15 +115,15 @@ export default function EditUserDetails({ userId }) {
     return (
         <div style={{ marginRight: 10 }}>
             <Button className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
-                Edit Customer
+                {t('EditCustomersButton')}
                 <EditIcon style={{ height: '.8em' }} />
             </Button>
             <Alerts message="Successfully updated!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Edit User Information</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('EditCustomerFormTitle')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To edit user information, simply fill the fields you want to change.
+                        {t('EditCustomerFormHint')}
                     </DialogContentText>
                     <form onSubmit={handleSubmit}>
                         <TextField
@@ -131,7 +132,7 @@ export default function EditUserDetails({ userId }) {
                             margin="dense"
                             value={fields.firstName}
                             id="first-name"
-                            label="First name"
+                            label={t('FirstNameInputLabel')}
                             onChange={handleChange}
                             type="text"
                             fullWidth
@@ -141,8 +142,7 @@ export default function EditUserDetails({ userId }) {
                             margin="dense"
                             value={fields.lastName}
                             id="last-name"
-                            label="Last name"
-                            type="text"
+                            label={t('LastNameInputLabel')}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -151,7 +151,7 @@ export default function EditUserDetails({ userId }) {
                             margin="dense"
                             value={fields.email}
                             id="mail"
-                            label="E-mail"
+                            label={t('EmailInputLabel')}
                             type="email"
                             onChange={handleChange}
                             fullWidth
@@ -161,7 +161,7 @@ export default function EditUserDetails({ userId }) {
                             margin="dense"
                             value={fields.phoneNumber}
                             id="phone-number"
-                            label="Phone number"
+                            label={t('PhoneNumberInputLabel')}
                             type="text"
                             onChange={handleChange}
                             fullWidth
@@ -171,7 +171,7 @@ export default function EditUserDetails({ userId }) {
                             margin="dense"
                             value={fields.address}
                             id="address-edit"
-                            label="Address"
+                            label={t('AdressInputLabel')}
                             type="text"
                             onChange={handleChange}
                             fullWidth
@@ -179,7 +179,7 @@ export default function EditUserDetails({ userId }) {
                         <TextField
                             name="birthDate"
                             id="birthDate-edit"
-                            label="Birth Date"
+                            label={t('BirthDateInputLabel')}
                             value={fields.birthDate ? new Date(fields.birthDate).toISOString().split('T')[0] : '1970/12/31'}
                             onChange={handleChange}
                             type="date"
@@ -190,10 +190,10 @@ export default function EditUserDetails({ userId }) {
                         />
                         <DialogActions>
                             <Button onClick={handleClose} color="secondary" variant="contained">
-                                Cancel
+                                {t('CancelButton')}
                             </Button>
                             <Button type="submit" color="primary" variant="contained">
-                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
+                                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>
                     </form>
@@ -202,3 +202,5 @@ export default function EditUserDetails({ userId }) {
         </div>
     );
 }
+
+export default withNamespaces()(EditUserDetails)

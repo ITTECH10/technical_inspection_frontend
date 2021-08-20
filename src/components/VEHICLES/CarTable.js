@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import CarRow from './CarRow';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles({
   table: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CarTable() {
+function CarTable({ t }) {
   const classes = useStyles();
   const { myVehicles, setSelectedCarBank, user } = useData()
 
@@ -35,10 +36,9 @@ export default function CarTable() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Mark</TableCell>
-            <TableCell>Model</TableCell>
-            <TableCell>Last Service</TableCell>
-            <TableCell>Next Service</TableCell>
+            <TableCell>{t('MarkInputLabel')}</TableCell>
+            <TableCell>{t('ModelInputLabel')}</TableCell>
+            <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,3 +48,5 @@ export default function CarTable() {
     </TableContainer>
   );
 }
+
+export default withNamespaces()(CarTable)

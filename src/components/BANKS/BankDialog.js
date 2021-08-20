@@ -7,8 +7,9 @@ import { Typography, CircularProgress } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import BankList from './BankList';
 import axios from 'axios'
+import { withNamespaces } from 'react-i18next';
 
-function BankDialog({ handleAlertOpening }) {
+function BankDialog({ handleAlertOpening, t }) {
     const { banks, selectedCar, setSelectedCar } = useData()
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = useState(false)
@@ -51,20 +52,20 @@ function BankDialog({ handleAlertOpening }) {
     return (
         <div>
             <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>
-                Connect Bank
+                {t('ConnectBankButton')}
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-                <DialogTitle>Connect vehicle to bank</DialogTitle>
+                <DialogTitle>{t('ConnectBankToVehicleTitle')}</DialogTitle>
                 {content}
                 <Typography align="center" variant="h6" style={{ margin: '5px', fontWeight: 600 }}>
-                    If customer already payed with CASH press the button bellow.
+                    {t('UserPayedWithCashTitle')}
                 </Typography>
                 <Button onClick={() => handleCashPayment()} style={{ margin: '0 auto 5px auto', width: '20%' }} variant="contained" color="primary">
-                    {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'cash!'}
+                    {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'BAR!'}
                 </Button>
             </Dialog>
         </div>
     );
 }
 
-export default BankDialog
+export default withNamespaces()(BankDialog)

@@ -2,6 +2,7 @@ import React from 'react'
 import { useData } from '../../contexts/DataContext'
 import { Grid, Typography, Box, TextField, } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const VehicleDetailsGrid = () => {
+const VehicleDetailsGrid = ({ t }) => {
     const classes = useStyles()
     const { selectedCar } = useData()
 
@@ -31,62 +32,62 @@ const VehicleDetailsGrid = () => {
 
     return (
         <Grid item xs={12}>
-            <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>Vehicle Details</Typography>
+            <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('VehicleDetailsTitle')}</Typography>
             <Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Mark</Typography>
+                    <Typography className={classes.inputTitle}>{t('MarkInputLabel')}</Typography>
                     <TextField className={classes.input} label={mark} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Model</Typography>
+                    <Typography className={classes.inputTitle}>{t('ModelInputLabel')}</Typography>
                     <TextField className={classes.input} label={model} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Last technical inspection</Typography>
+                    <Typography className={classes.inputTitle}>{t('LTIInputLabel')}</Typography>
                     <TextField className={classes.input} label={formatedLastTechnicalInspection} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Next technical inspection</Typography>
+                    <Typography className={classes.inputTitle}>{t('NTIInputLabel')}</Typography>
                     <TextField className={classes.input} label={formatedNextTehInsp} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>AU</Typography>
+                    <Typography className={classes.inputTitle}>{t('AUInputLabel')}</Typography>
                     <TextField className={classes.input} label={formatedAu} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>TUV</Typography>
+                    <Typography className={classes.inputTitle}>{t('TUVInputLabel')}</Typography>
                     <TextField className={classes.input} label={formatedTuv} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>First vehicle registration</Typography>
+                    <Typography className={classes.inputTitle}>{t('FVRInputLabel')}</Typography>
                     <TextField className={classes.input} label={formatedFirstVehicleReg} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>First vehicle registration on owner</Typography>
+                    <Typography className={classes.inputTitle}>{t('FVROOInputLabel')}</Typography>
                     <TextField className={classes.input} label={formatedFirstVehOnOwner} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>HSN</Typography>
+                    <Typography className={classes.inputTitle}>{t('HSNInputLabel')}</Typography>
                     <TextField className={classes.input} label={HSN} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>TSN</Typography>
+                    <Typography className={classes.inputTitle}>{t('TSNInputLabel')}</Typography>
                     <TextField className={classes.input} label={TSN} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Allowed yearly kilometers</Typography>
+                    <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel')}</Typography>
                     <TextField className={classes.input} label={allowedYearlyKilometers} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Kilometers driven</Typography>
+                    <Typography className={classes.inputTitle}>{t('KilometersDrivenInputLabel')}</Typography>
                     <TextField className={classes.input} label={kilometersDriven} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Monthly insurance payment</Typography>
+                    <Typography className={classes.inputTitle}>{t('MonthlyInsurancePaymentInputLabel')}</Typography>
                     <TextField className={classes.input} label={monthlyInsurancePayment} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>Yearly Tax</Typography>
+                    <Typography className={classes.inputTitle}>{t('YearlyTaxInputLabel')}</Typography>
                     <TextField className={classes.input} label={yearlyTax} disabled />
                 </Box>
             </Box>
@@ -94,4 +95,4 @@ const VehicleDetailsGrid = () => {
     )
 }
 
-export default VehicleDetailsGrid
+export default withNamespaces()(VehicleDetailsGrid)
