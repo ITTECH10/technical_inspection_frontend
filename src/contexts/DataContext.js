@@ -69,7 +69,9 @@ const DataContextProvider = ({ children }) => {
 
     const logout = useCallback((history) => {
         setAppLoading(true)
-        localStorage.clear()
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        localStorage.removeItem('selectedUser')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
         setTimeout(() => {
