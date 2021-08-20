@@ -6,6 +6,7 @@ import { useData } from '../../../contexts/DataContext';
 import User from './User'
 import SearchCustomers from './SearchCustomers';
 import { useMediaQuery } from '@material-ui/core';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,9 +18,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function UsersList() {
+function UsersList({ t }) {
     const classes = useStyles();
     const { users, user } = useData()
+
     // FILTERING
     const [fields, setFields] = React.useState({
         query: ''
@@ -40,7 +42,9 @@ export default function UsersList() {
     return (
         <div className={classes.root}>
             <Typography variant="h4" style={{ padding: !matches ? 10 : 0 }}>
-                {users.length > 1 ? "Alle Kunden" : "Noch keine kunden"}
+                {/* {users.length > 1 ? "Alle Kunden" : "Noch keine kunden"} */}
+                {/* FINISH LATER THIS BELLOW */}
+                {t('CustomersTitle')}
             </Typography>
             <SearchCustomers fields={fields} setFields={setFields} noCustomers={users.length === 1} />
             <List>
@@ -49,3 +53,5 @@ export default function UsersList() {
         </div>
     );
 }
+
+export default withNamespaces()(UsersList)

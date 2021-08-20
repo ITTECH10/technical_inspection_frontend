@@ -1,0 +1,18 @@
+{
+    "LoginScreenLoginButton": "Login",
+    "LoginScreenForgotPassword": "Forgot your password?",
+    "LoginScreenPrivacyPolicyWarning": "Important! You must first confirm that you agree to our privacy policy to be able to use the app.",
+    "LoginScreenPrivacyPolicyButtonConfirm": "I Understand",
+    "CustomersTitle": "All Customers",
+    "VehiclesTitle": "All Vehicles",
+    "NoVehiclesYet": "No vehicles yet",
+    "MyVehicles": "My Vehicles",
+    "InsurancesTitle": "Insurances",
+    "BanksTitle": "Banks",
+    "MenuCustomers": "Customers",
+    "MenuVehicles": "Vehicles",
+    "MenuInsurances": "Insurances",
+    "MenuBanks": "Banks",
+    "MenuExport": "Export Customers",
+    "LogoutButton": "Log out"
+}

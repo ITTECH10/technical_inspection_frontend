@@ -12,6 +12,7 @@ import { useData } from '../../contexts/DataContext';
 import VehicleItemRow from './VehicleItemRow';
 import SearchVehicles from './SearchVehicles';
 import { useMediaQuery } from '@material-ui/core';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles({
   table: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CarTable() {
+function CarTable({ t }) {
   const classes = useStyles();
   const { vehicles, setSelectedCarBank, user } = useData()
 
@@ -44,7 +45,7 @@ export default function CarTable() {
   return (
     <>
       <Typography variant="h4" style={{ padding: !matches ? 10 : 0 }}>
-        {user.role === 'admin' && vehicles.length > 0 ? 'Alle Fahrzeuge' : vehicles.length === 0 ? 'Noch keine fahrzeuge' : 'Meine Fahrzeuge'}
+        {user.role === 'admin' && vehicles.length > 0 ? t('VehiclesTitle') : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
       </Typography>
       <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />
       {vehicles.length > 0 &&
@@ -65,3 +66,5 @@ export default function CarTable() {
     </>
   );
 }
+
+export default withNamespaces()(CarTable)

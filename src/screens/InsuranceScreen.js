@@ -4,14 +4,15 @@ import UploadInsuranceData from './../components/INSURANCES/UploadInsuranceData'
 import { Typography } from '@material-ui/core'
 import { useData } from '../contexts/DataContext'
 import Loader from './../utils/Loader'
+import { withNamespaces } from 'react-i18next'
 
-const InsuranceScreen = () => {
+const InsuranceScreen = ({ t }) => {
     const { appLoading, insurances } = useData()
     return (
         !appLoading && insurances.length > 0 ?
             <React.Fragment>
                 <Typography variant="h4" style={{ padding: 10 }}>
-                    Insurances
+                    {t('InsurancesTitle')}
                 </Typography>
                 <InsuranceTable />
                 <UploadInsuranceData />
@@ -19,4 +20,4 @@ const InsuranceScreen = () => {
     )
 }
 
-export default InsuranceScreen
+export default withNamespaces()(InsuranceScreen)

@@ -7,6 +7,7 @@ import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { useData } from '../contexts/DataContext'
 import ForgotPasswordForm from './../components/UI/Users/ForgotPasswordForm'
 import PoliciesFooter from '../components/UI/Users/PoliciesFooter'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -55,12 +56,12 @@ const useStyles = makeStyles(theme => ({
     },
     btnSubmit: {
         marginTop: 10,
-        width: 80,
+        width: 'auto',
         margin: '0 auto'
     }
 }))
 
-const Login = (props) => {
+const Login = ({ history, t }) => {
     const [fields, setFields] = useState({
         email: '',
         password: ''
@@ -95,7 +96,7 @@ const Login = (props) => {
                 setAuthenticated(true)
 
                 if (!appLoading) {
-                    props.history.push('/')
+                    history.push('/')
                 }
             }
         })
@@ -127,7 +128,7 @@ const Login = (props) => {
                                     <TextField name="email" autoFocus className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
                                     <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
 
-                                    <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">Login</Button>
+                                    <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">{t('LoginScreenLoginButton')}</Button>
                                 </form>
                                 <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
                             </Box>
@@ -142,4 +143,4 @@ const Login = (props) => {
     )
 }
 
-export default Login
+export default withNamespaces()(Login)

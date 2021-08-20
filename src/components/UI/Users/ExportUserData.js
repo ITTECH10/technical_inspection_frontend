@@ -5,8 +5,9 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { withNamespaces } from 'react-i18next';
 
-const ExportUserData = () => {
+const ExportUserData = ({ t }) => {
     const { users } = useData()
 
     // const btnStyle = {
@@ -41,10 +42,10 @@ const ExportUserData = () => {
         <CsvDownload className="btn-export" data={[users]} style={listItemStyle}>
             <ListItem>
                 <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
-                <ListItemText primary="Export Kunden" />
+                <ListItemText primary={t('MenuExport')} />
             </ListItem>
         </CsvDownload>
     )
 }
 
-export default ExportUserData
+export default withNamespaces()(ExportUserData)

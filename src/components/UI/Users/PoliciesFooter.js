@@ -1,6 +1,7 @@
 import React from 'react'
 import { Paper, Box, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { withNamespaces } from 'react-i18next'
 // import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     btn: {}
 }))
 
-const PoliciesFooter = () => {
+const PoliciesFooter = ({ t }) => {
     const classes = useStyles()
     // const history = useHistory()
     const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
@@ -49,13 +50,12 @@ const PoliciesFooter = () => {
         <Box className={classes.boxRoot}>
             <Paper elevation={2} className={classes.paperRoot}>
                 <Typography variant="body2" className={classes.textRoot}>
-                    Important! You must first confirm that you agree
-                    to our privacy policy to be able to use the app.
+                    {t('LoginScreenPrivacyPolicyWarning')}
                 </Typography>
-                <Button size="small" onClick={() => setShowPrivacyBanner(false)} color="primary" variant="contained" className={classes.btn}>I understand</Button>
+                <Button size="small" onClick={() => setShowPrivacyBanner(false)} color="primary" variant="contained" className={classes.btn}>{t('LoginScreenPrivacyPolicyButtonConfirm')}</Button>
             </Paper>
         </Box>
     )
 }
 
-export default PoliciesFooter
+export default withNamespaces()(PoliciesFooter)

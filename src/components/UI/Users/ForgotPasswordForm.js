@@ -10,8 +10,9 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios'
 import Alerts from '../Alerts';
 import { CircularProgress } from '@material-ui/core';
+import { withNamespaces } from 'react-i18next';
 
-export default function FormDialog({ onDisableLoginForm }) {
+function FormDialog({ onDisableLoginForm, t }) {
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = React.useState()
     const [alertOpen, setAlertOpen] = React.useState(false)
@@ -61,7 +62,7 @@ export default function FormDialog({ onDisableLoginForm }) {
     return (
         <div>
             <Link onClick={handleClickOpen} style={{ textAlign: 'center', width: '100%', display: 'inline-block', marginTop: 5, cursor: 'pointer' }}>
-                Forgot your password?
+                {t('LoginScreenForgotPassword')}
             </Link>
             <Alerts message="Please check your email!" open={alertOpen} handleOpening={setAlertOpen} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -97,3 +98,5 @@ export default function FormDialog({ onDisableLoginForm }) {
         </div>
     );
 }
+
+export default withNamespaces()(FormDialog)

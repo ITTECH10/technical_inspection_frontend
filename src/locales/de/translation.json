@@ -1,0 +1,18 @@
+{
+    "LoginScreenLoginButton": "Einloggen",
+    "LoginScreenForgotPassword": "Passwort vergessen?",
+    "LoginScreenPrivacyPolicyWarning": "Wichtig! Um die App nutzen zu können, müssen Sie zunächst bestätigen, dass Sie unserer Datenschutzerklärung zustimmen.",
+    "LoginScreenPrivacyPolicyButtonConfirm": "Ich verstehe",
+    "CustomersTitle": "Alle Kunde",
+    "VehiclesTitle": "Alle Fahrzeuge",
+    "NoVehiclesYet": "Noch keine fahrzeuge",
+    "MyVehicles": "Meine Fahrzeuge",
+    "InsurancesTitle": "Versicherungen",
+    "BanksTitle": "Banken",
+    "MenuCustomers": "Kunde",
+    "MenuVehicles": "Fahrzeuge",
+    "MenuInsurances": "Versicherungen",
+    "MenuBanks": "Banken",
+    "MenuExport": "Kunden Exporten",
+    "LogoutButton": "Ausslogen"
+}

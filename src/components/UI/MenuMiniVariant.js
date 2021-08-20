@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -27,6 +27,8 @@ import { useHistory } from 'react-router-dom';
 import { Button, useMediaQuery } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ExportUserData from './Users/ExportUserData';
+import LanguageMenu from './LanguageMenu'
+import { withNamespaces } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -115,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function MiniDrawer({ open, setOpen }) {
+function MiniDrawer({ open, setOpen, t }) {
     const classes = useStyles();
     const theme = useTheme();
     const { user, setVehiclesPage, logout } = useData()
@@ -167,9 +169,9 @@ export default function MiniDrawer({ open, setOpen }) {
                     <Box className={classes.logoBox}>
                         <img src={Logo} className={classes.logo} />
                     </Box>
-
-                    <Button style={{ position: 'absolute', right: 15 }} onClick={() => logout(history)} color="inherit">Logout</Button>
-                    {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton style={{ position: 'absolute', right: 75 }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
+                    <Button style={{ position: 'absolute', right: 35 }} onClick={() => logout(history)} color="inherit">{t('LogoutButton')}</Button>
+                    <LanguageMenu />
+                    {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton style={{ position: 'absolute', right: 95 }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -196,19 +198,19 @@ export default function MiniDrawer({ open, setOpen }) {
                     <List>
                         <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
                             <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Customers" />
+                            <ListItemText primary={t('MenuCustomers')} />
                         </ListItem>
                         <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
                             <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Fahrzeuge" />
+                            <ListItemText primary={t('MenuVehicles')} />
                         </ListItem>
                         <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances')}>
                             <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Insurances" />
+                            <ListItemText primary={t('MenuInsurances')} />
                         </ListItem>
                         <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks')}>
                             <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Banks" />
+                            <ListItemText primary={t('MenuBanks')} />
                         </ListItem>
                         <ExportUserData />
                     </List>
@@ -216,10 +218,12 @@ export default function MiniDrawer({ open, setOpen }) {
                     <List>
                         <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
                             <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                            <ListItemText primary="Fahrzeuge" />
+                            <ListItemText primary={t('MenuVehicles')} />
                         </ListItem>
                     </List>}
             </Drawer>
         </div>
     );
 }
+
+export default withNamespaces()(MiniDrawer)
