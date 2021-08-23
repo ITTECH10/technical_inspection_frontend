@@ -9,10 +9,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Dialog, Box } from '@material-ui/core';
 import DeleteVehicleFiles from './../VEHICLES/DeleteVehicleFiles'
 import { withNamespaces } from 'react-i18next';
+import PdfIcon from './../../assets/images/pdf-icon.svg'
 
 const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: 345,
+        marginTop: 10,
         marginBottom: 10,
         marginRight: 10,
     },
@@ -37,6 +39,20 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('md')]: {
             maxWidth: 900
         }
+    },
+    fileNameBox: {
+        display: 'flex',
+        // justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    pdfIconBox: {
+        // height: 25,
+        width: 22,
+        marginRight: 5
+    },
+    pdfIcon: {
+        height: '100%',
+        width: '100%'
     }
 }));
 
@@ -74,11 +90,16 @@ const GalleryContent = ({ image, onHandleFileDeleteAlert, t }) => {
                             style={{ backgroundSize: 'cover' }}
                         /> : null}
                     <CardContent>
-                        <Typography>
-                            {image.format === 'jpg' || image.format === 'png' ? formatedTitle
-                                : `${image._id}.${image.format}`
-                            }
-                        </Typography>
+                        <Box className={classes.fileNameBox}>
+                            <Box className={classes.pdfIconBox}>
+                                <img alt="pdf" src={PdfIcon} className={classes.pdfIcon} />
+                            </Box>
+                            <Typography>
+                                {image.format === 'jpg' || image.format === 'png' ? formatedTitle
+                                    : `${image.name}`
+                                }
+                            </Typography>
+                        </Box>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>

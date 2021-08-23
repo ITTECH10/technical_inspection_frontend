@@ -142,8 +142,6 @@ function ClippedDrawer({ open, setOpen, t }) {
     const [url, setUrl] = React.useState('/')
     const matches = useMediaQuery('(max-width: 600px)')
 
-    console.log(open)
-
     history.listen((location, action) => {
         setUrl(location.pathname)
     })
@@ -185,7 +183,7 @@ function ClippedDrawer({ open, setOpen, t }) {
                         <img src={Logo} className={classes.logo} />
                     </Box>
                     <Box className={classes.actionBtnsMenuBox}>
-                        {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
+                        {url !== '/' && url !== '/banks' && url !== '/insurances' && <IconButton style={{ color: '#fff' }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
                         <Button onClick={() => logout(history)} color="inherit">{t('LogoutButton')}</Button>
                     </Box>
                     <LanguageMenu />

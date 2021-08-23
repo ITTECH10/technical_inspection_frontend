@@ -54,6 +54,7 @@ const UploadCarImages = ({ t }) => {
                     setCarImages(updatedImages)
                     setAlertOpen(true)
                     setLoading(false)
+                    setFields({ photo: '' })
                 }, 2000)
             }
         })
