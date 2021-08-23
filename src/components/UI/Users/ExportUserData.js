@@ -1,13 +1,16 @@
 import React from 'react'
-import CsvDownload from 'react-json-to-csv'
+// import CsvDownload from 'react-json-to-csv'
+import { json2csv } from 'json-2-csv'
 import { useData } from '../../../contexts/DataContext'
 import GetAppIcon from '@material-ui/icons/GetApp';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withNamespaces } from 'react-i18next';
+import { CSVLink, CSVDownload } from "react-csv";
 
 const ExportUserData = ({ t }) => {
+    const [data, setData] = React.useState()
     const { users } = useData()
 
     // const btnStyle = {
@@ -32,19 +35,32 @@ const ExportUserData = ({ t }) => {
     //     cursor: 'pointer'
     // }
 
+
+    json2csv([users[1]], (err, csv) => {
+        if (err) {
+            console.log(err)
+        }
+        if (csv) {
+            setData(csv)
+        }
+    })
+
     const listItemStyle = {
         border: 'none',
         backgroundColor: '#fff',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        textDecoration: 'none',
+        color: 'inherit'
     }
 
     return (
-        <CsvDownload className="btn-export" data={[users]} style={listItemStyle}>
-            <ListItem>
-                <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
-                <ListItemText primary={t('MenuExport')} />
-            </ListItem>
-        </CsvDownload>
+        users.length > 1 ?
+            <CSVLink filename={'users-data.csv'} className="btn-export" data={users.length > 1 ? data : []} style={listItemStyle}>
+                <ListItem>
+                    <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
+                    <ListItemText primary={t('MenuExport')} />
+                </ListItem>
+            </CSVLink> : null
     )
 }
 

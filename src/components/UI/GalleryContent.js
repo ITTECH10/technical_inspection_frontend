@@ -54,6 +54,14 @@ const GalleryContent = ({ image, onHandleFileDeleteAlert, t }) => {
         setOpen(false)
     }
 
+    const handlePdfDownload = () => {
+        var link = document.createElement('a')
+        link.href = image.url
+        link.target = '_blank'
+        link.download = 'file.pdf'
+        link.dispatchEvent(new MouseEvent('click'));
+    }
+
     return (
         <>
             <Card className={classes.root}>
@@ -84,7 +92,7 @@ const GalleryContent = ({ image, onHandleFileDeleteAlert, t }) => {
                     <Box className={classes.imgBox}>
                         <img alt="gallery-car" src={image.url} className={classes.img} />
                         <Typography style={{ position: 'absolute', bottom: 5, right: 10, fontSize: 12, color: '#fff' }}>{formatedTitle}</Typography>
-                    </Box> : <Button variant="contained" size="large" color="primary">Download pdf</Button>}
+                    </Box> : <Button variant="contained" size="large" color="primary" onClick={() => handlePdfDownload()}>Download pdf</Button>}
                 {/* </DialogContent> */}
             </Dialog>
         </>
