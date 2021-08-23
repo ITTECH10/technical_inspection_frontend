@@ -8,10 +8,10 @@ import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next';
 
-const UploadCarImages = ({ t }) => {
-    const [alertOpen, setAlertOpen] = useState(false)
+const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const { carImages, setCarImages, setLoading } = useData()
     const history = useHistory()
+    let fileUploadTimeout
 
     const carId = history.location.pathname.split('/')[2]
 
@@ -20,6 +20,12 @@ const UploadCarImages = ({ t }) => {
     })
 
     const submitBtn = document.getElementById('imgSubmitBtn')
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(fileUploadTimeout)
+        }
+    }, [])
 
     useEffect(() => {
         if (submitBtn && fields.photo !== '') {
@@ -49,12 +55,12 @@ const UploadCarImages = ({ t }) => {
                 // updatedVehicle.images = res.data.vehicle.images
                 const updatedImages = [...carImages, { ...res.data.newFile }]
 
-                setTimeout(() => {
+                fileUploadTimeout = setTimeout(() => {
                     // setMyVehicles(updatedVehicles)
-                    setCarImages(updatedImages)
-                    setAlertOpen(true)
                     setLoading(false)
                     setFields({ photo: '' })
+                    setCarImages(updatedImages)
+                    setOnHandleAddOpen(true)
                 }, 2000)
             }
         })
@@ -82,7 +88,7 @@ const UploadCarImages = ({ t }) => {
             <FloatingButton onHandleClick={handleImageClick}>
                 <AddIcon />
             </FloatingButton>
-            <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
+            <Alerts message={t('AlertGeneralSuccessful')} open={onHandleAddOpen} handleOpening={setOnHandleAddOpen} />
             <form encType="multipart/form-data" onSubmit={handleSubmit}>
                 <input onChange={handleImageChange} name="photo" id="photo" type="file" hidden />
                 <Button id="imgSubmitBtn" style={{ position: 'absolute', visibility: 'hidden' }} type="submit" color="primary" variant="contained">

@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const GalleryContent = ({ image, onHandleFileDeleteAlert, t }) => {
+const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false)
 
@@ -103,7 +103,7 @@ const GalleryContent = ({ image, onHandleFileDeleteAlert, t }) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <DeleteVehicleFiles onHandleFileDeleteAlert={onHandleFileDeleteAlert} fileId={image._id} />
+                    <DeleteVehicleFiles fileId={image._id} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
                 </CardActions>
             </Card>
 

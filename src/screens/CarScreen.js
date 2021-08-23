@@ -28,13 +28,17 @@ const CarScreen = () => {
         }
     }, [])
 
-
-    const renderVehicles = vehiclesPage !== 'allVehicles' ? (
+    const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
         <>
-            <UserInfoBlock />
+            {selectedUser._id && <UserInfoBlock />}
+            <VehiclesTable />
+        </>
+    ) : (
+        <>
+            {selectedUser._id && <UserInfoBlock />}
             <CarTable />
         </>
-    ) : <VehiclesTable />
+    )
 
     return (
         !appLoading && user.role === 'admin' ?
@@ -45,7 +49,7 @@ const CarScreen = () => {
             !appLoading && user.role === 'user' ?
                 <>
                     {renderVehicles}
-                    {selectedUser._id && <UploadCarData />}
+                    {/* {selectedUser._id && <UploadCarData />} */}
                 </> : <Loader />
     )
 }

@@ -72,6 +72,7 @@ function DeleteUser({ userId, t }) {
   }
 
   return (
+    user.role === 'admin' &&
     <div>
       <Button className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
         {t('DeleteCustomerButton')}

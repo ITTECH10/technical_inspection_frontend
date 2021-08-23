@@ -113,6 +113,7 @@ function EditUserDetails({ userId, t }) {
     };
 
     return (
+        user.role === 'admin' &&
         <div style={{ marginRight: 10 }}>
             <Button className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
                 {t('EditCustomersButton')}

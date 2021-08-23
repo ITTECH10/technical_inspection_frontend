@@ -26,7 +26,7 @@ import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 
 function App() {
-  const { authenticated, getAllVehicles, appLoading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
+  const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = React.useState(false);
@@ -116,16 +116,16 @@ function App() {
 
   const navbarFix = {
     position: 'relative',
-    top: '64px',
+    top: !loading && 64,
     height: 'calc(100vh - 64px)',
     // marginLeft: open && matches ? 250 : 75,
-    marginLeft: 75,
+    marginLeft: !loading && 75,
     paddingRight: 20
   }
 
   const app = !appLoading ? (
     <div style={authenticated && history.location.pathname !== '/privacyPolicy' ? navbarFix : null} className="App">
-      {authenticated && history.location.pathname !== '/privacyPolicy' && <MenuCliped open={open} setOpen={setOpen} />}
+      {authenticated && history.location.pathname !== '/privacyPolicy' && !loading && <MenuCliped open={open} setOpen={setOpen} />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />

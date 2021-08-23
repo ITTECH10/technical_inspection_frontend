@@ -16,18 +16,17 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const GalleryAlternativeReal = ({ t }) => {
+const GalleryAlternativeReal = ({ t, setOnHandleDeleteOpen }) => {
     const { carImages } = useData()
     const classes = useStyles()
-    const [fileDeleteOpen, setFileDeleteOpen] = React.useState(false)
+    const [fileDeleteOpen, setFileDeleteOpen] = React.useState()
 
     const content = carImages.map(x => {
-        return <GalleryContent key={x.url} image={x} onHandleFileDeleteAlert={setFileDeleteOpen} />
+        return <GalleryContent key={x.url} image={x} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
     })
 
     return (
         <>
-            <Alerts severity="error" message={t('AlertGeneralDeleted')} open={fileDeleteOpen} handleOpening={setFileDeleteOpen} />
             <Typography variant="h5" align="center">
                 {t('VehicleDocumentsTitle')}
             </Typography>

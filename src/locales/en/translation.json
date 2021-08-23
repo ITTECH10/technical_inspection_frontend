@@ -47,7 +47,7 @@
     "DeleteCustomerFormHint": "Beware, after deleting this profile there is no going back, before deleting copy the data somewhere safe.",
     "EmailInputLabel": "E-mail",
     "FirstNameInputLabel": "First name",
-    "LastNameInputLabel": "First name",
+    "LastNameInputLabel": "Last name",
     "BirthDateInputLabel": "Birth Date",
     "PhoneNumberInputLabel": "Phone Number",
     "AdressInputLabel": "Address",

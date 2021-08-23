@@ -11,6 +11,7 @@ import BankGrid from '../BANKS/BankGrid'
 import GalleryAlternative from './../UI/GalleryAlternative'
 import UserInfoBlock from '../UI/Users/UserInfoBlock'
 import Loader from './../../utils/Loader'
+import UploadCarImages from './UploadCarImages'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -27,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const CarDetails = () => {
-    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, appLoading, vehiclesPage } = useData()
+const CarDetails = ({ setOnHandleDeleteOpen }) => {
+    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, loading, vehiclesPage } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehiclePaymentType } = selectedCar
@@ -75,19 +76,25 @@ const CarDetails = () => {
     }, [selectedCar, role, getCarBankInfo, vehiclePaymentType])
 
     return (
-        !appLoading ?
-            <Grid container className={classes.mainContainer} direction="column">
-                {/* {selectedCar.thumbnail && (
+        <Grid container className={classes.mainContainer} direction="column">
+            {/* {selectedCar.thumbnail && (
                 <Box className={classes.imageBox}>
                     <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
             )} */}
-                {vehiclesPage !== 'allVehicles' && <UserInfoBlock />}
-                <VehicleDetailsGrid />
-                <InsuranceHouseGrid />
-                <BankGrid />
-                {carImages.length > 0 && <GalleryAlternative />}
-            </Grid> : <Loader />
+            {vehiclesPage !== 'allVehicles' && <UserInfoBlock />}
+            <VehicleDetailsGrid />
+            <InsuranceHouseGrid />
+            <BankGrid />
+            {/* <UploadCarImages
+                    onHandleAddOpen={onHandleAddOpen}
+                    setOnHandleAddOpen={setOnHandleAddOpen}
+                /> */}
+            {carImages.length > 0 &&
+                <GalleryAlternative
+                    setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+                />}
+        </Grid>
     )
 }
 

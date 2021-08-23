@@ -10,7 +10,7 @@ import axios from 'axios'
 import { useData } from './../../contexts/DataContext'
 import { withNamespaces } from 'react-i18next';
 
-function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert, t }) {
+function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = React.useState(false)
     const { carImages, setCarImages } = useData()
@@ -20,7 +20,7 @@ function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert, t }) {
         return () => {
             clearTimeout(deleteTimeout)
         }
-    }, [deleteTimeout])
+    }, [])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,7 +44,7 @@ function DeleteVehicleFiles({ fileId, onHandleFileDeleteAlert, t }) {
                         setCarImages(updatedImages)
                         setOpen(false)
                         setButtonLoading(false)
-                        onHandleFileDeleteAlert(true)
+                        setOnHandleDeleteOpen(true)
                     }, 2000)
                 }
             })

@@ -42,8 +42,6 @@ function UsersList({ t }) {
     return (
         <div className={classes.root}>
             <Typography variant="h4" style={{ padding: !matches ? 10 : 0 }}>
-                {/* {users.length > 1 ? "Alle Kunden" : "Noch keine kunden"} */}
-                {/* FINISH LATER THIS BELLOW */}
                 {t('CustomersTitle')}
             </Typography>
             <SearchCustomers fields={fields} setFields={setFields} noCustomers={users.length === 1} />

@@ -163,7 +163,7 @@ function ClippedDrawer({ open, setOpen, t }) {
             setVehiclesPage('allVehicles')
         }
         history.push(route)
-        // setOpen(false)
+        setOpen(false)
     }
 
     return (
