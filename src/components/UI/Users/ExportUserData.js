@@ -36,7 +36,7 @@ const ExportUserData = ({ t }) => {
     // }
 
 
-    json2csv([users[1]], (err, csv) => {
+    json2csv(users, (err, csv) => {
         if (err) {
             console.log(err)
         }
