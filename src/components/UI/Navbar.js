@@ -12,6 +12,7 @@ import Menu from './Menu'
 import MenuMiniVariant from './MenuMiniVariant'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useMediaQuery } from '@material-ui/core';
+import MenuCliped from './MenuCliped'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +38,8 @@ export default function Navbar() {
       <AppBar position="fixed" style={{ width: matches && 'calc(100% - 240px)' }}>
         <Toolbar>
           {/* <Menu /> */}
-          <MenuMiniVariant />
+          {/* <MenuMiniVariant /> */}
+          {/* <MenuCliped /> */}
           <Typography onClick={() => history.push('/')} variant="h6" className={classes.title}>
             Home
           </Typography>

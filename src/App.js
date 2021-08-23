@@ -5,7 +5,7 @@ import Loader from './utils/Loader'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
 
-import Navbar from './components/UI/Navbar';
+// import Navbar from './components/UI/Navbar';
 import Login from './screens/Login'
 import CarDetailsScreen from './screens/CarDetailsScreen'
 import CustomersScreen from './screens/CustomersScreen';
@@ -22,6 +22,7 @@ import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
 import MenuMiniVariant from './components/UI/MenuMiniVariant'
+import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 
 function App() {
@@ -117,13 +118,14 @@ function App() {
     position: 'relative',
     top: '64px',
     height: 'calc(100vh - 64px)',
-    marginLeft: open && matches ? 250 : 75,
+    // marginLeft: open && matches ? 250 : 75,
+    marginLeft: 75,
     paddingRight: 20
   }
 
   const app = !appLoading ? (
     <div style={authenticated && history.location.pathname !== '/privacyPolicy' ? navbarFix : null} className="App">
-      {authenticated && history.location.pathname !== '/privacyPolicy' && <MenuMiniVariant open={open} setOpen={setOpen} />}
+      {authenticated && history.location.pathname !== '/privacyPolicy' && <MenuCliped open={open} setOpen={setOpen} />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />
