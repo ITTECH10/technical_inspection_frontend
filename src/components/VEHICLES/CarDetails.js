@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = ({ setOnHandleDeleteOpen }) => {
-    const { selectedCar, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setSelectedCarBank, carImages, vehiclesPage } = useData()
+    const { selectedCar, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setSelectedCarBank, carImages } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehiclePaymentType, vehicleOwner } = selectedCar
@@ -83,7 +83,7 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
                 </Box>
             )} */}
             {/* {vehiclesPage !== 'allVehicles' && <UserInfoBlock />} */}
-            <UserInfoBlock />
+            {user.role === 'admin' && <UserInfoBlock />}
             <VehicleDetailsGrid />
             <InsuranceHouseGrid />
             <BankGrid />
