@@ -32,7 +32,6 @@ const SearchCustomers = ({ fields, setFields, noCustomers }) => {
             <Box>
                 <TextField
                     className={classes.inputRoot}
-                    autoFocus
                     name="query"
                     margin="dense"
                     disabled={noCustomers}

@@ -32,7 +32,6 @@ const SearchVehicles = ({ fields, setFields, noVehicles }) => {
             <Box>
                 <TextField
                     className={classes.inputRoot}
-                    autoFocus
                     name="query"
                     margin="dense"
                     id="query-vehicles"

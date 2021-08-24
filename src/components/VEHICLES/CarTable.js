@@ -35,11 +35,11 @@ function CarTable({ t }) {
 
   return (
     <>
+      {selectedUser._id && <UserInfoBlock />}
       <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
         {user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}
       </Typography>
       <TableContainer component={Paper}>
-        {selectedUser._id && <UserInfoBlock />}
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
