@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 
 export default function BanksTable() {
   const classes = useStyles();
-  const {banks} = useData()
+  const { banks } = useData()
 
   const banksContent = banks.map(bank => (
     <BankRow key={bank._id} bank={bank} />

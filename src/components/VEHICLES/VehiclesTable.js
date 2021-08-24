@@ -44,7 +44,7 @@ function VehiclesTable({ t }) {
 
   return (
     <>
-      <Typography variant="h4" style={{ padding: !matches ? 10 : 0 }}>
+      <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
         {user.role === 'admin' && vehicles.length > 0 ? t('VehiclesTitle') : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
       </Typography>
       <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />

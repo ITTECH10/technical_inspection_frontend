@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Box, TextField } from '@material-ui/core'
+import { Grid, Typography, Box, TextField, Paper } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import BankDialog from './BankDialog'
 import { makeStyles } from '@material-ui/core/styles'
@@ -31,9 +31,9 @@ const BankGrid = ({ t }) => {
         <>
             <Alerts message={t('AlertSuccessfulConnection')} open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
-                <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('BankDetailsTitle')}</Typography>
+                <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('BankDetailsTitle')}</Typography>
                 {selectedBank && user.role === 'admin' ?
-                    <Box>
+                    <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                         <Box>
                             <Typography className={classes.inputTitle}>Name</Typography>
                             <TextField className={classes.input} label={selectedBank && selectedBank.name} disabled />
@@ -46,7 +46,7 @@ const BankGrid = ({ t }) => {
                             <Typography className={classes.inputTitle}>Phone</Typography>
                             <TextField className={classes.input} label={selectedBank && selectedBank.phoneNumber} disabled />
                         </Box>
-                    </Box> : selectedCarBank._id && user.role === 'user' ?
+                    </Paper> : selectedCarBank._id && user.role === 'user' ?
                         <Box>
                             <Box>
                                 <Typography className={classes.inputTitle}>Name</Typography>

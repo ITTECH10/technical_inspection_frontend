@@ -33,12 +33,7 @@ const CarScreen = () => {
             {selectedUser._id && <UserInfoBlock />}
             <VehiclesTable />
         </>
-    ) : (
-        <>
-            {selectedUser._id && <UserInfoBlock />}
-            <CarTable />
-        </>
-    )
+    ) : <CarTable />
 
     return (
         !appLoading && user.role === 'admin' ?

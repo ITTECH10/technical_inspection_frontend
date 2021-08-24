@@ -55,7 +55,7 @@ const ExportUserData = ({ t }) => {
 
     return (
         users.length > 1 ?
-            <CSVLink filename={'users-data.csv'} className="btn-export" data={''} style={listItemStyle}>
+            <CSVLink filename={'users-data.csv'} className="btn-export" data={data ? data.replaceAll(undefined, ',') : ''} style={listItemStyle}>
                 <ListItem>
                     <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
                     <ListItemText primary={t('MenuExport')} />

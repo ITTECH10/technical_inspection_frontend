@@ -11,7 +11,7 @@ const InsuranceScreen = ({ t }) => {
     return (
         !appLoading && insurances.length > 0 ?
             <React.Fragment>
-                <Typography variant="h4" style={{ padding: 10 }}>
+                <Typography variant="h4" style={{ padding: '10px 0' }}>
                     {t('InsurancesTitle')}
                 </Typography>
                 <InsuranceTable />

@@ -15,7 +15,7 @@ const CarRow = ({ car }) => {
     }
 
     return (
-        <TableRow onClick={() => onHandleCarRender()}>
+        <TableRow className='table__row--root' onClick={() => onHandleCarRender()}>
             <TableCell component="th" scope="row">
                 {car.mark}
             </TableCell>

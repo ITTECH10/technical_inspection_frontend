@@ -6,7 +6,7 @@ const InsuranceRow = ({ insurance }) => {
     const { postNumber, streetAddress, numberAddress } = insurance
     const formatedAddress = `${streetAddress} ${numberAddress}, ${postNumber}`
     return (
-        <TableRow key={insurance._id}>
+        <TableRow className='table__row--root' key={insurance._id}>
             <TableCell component="th" scope="row">
                 {insurance.name}
             </TableCell>

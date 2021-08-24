@@ -1,6 +1,6 @@
 import React from 'react'
 import { useData } from '../../contexts/DataContext'
-import { Grid, Typography, Box, TextField, } from '@material-ui/core'
+import { Grid, Typography, Box, TextField, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
 
@@ -32,8 +32,8 @@ const VehicleDetailsGrid = ({ t }) => {
 
     return (
         <Grid item xs={12}>
-            <Typography variant="h5" align="center" style={{ marginBottom: 15 }}>{t('VehicleDetailsTitle')}</Typography>
-            <Box>
+            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('VehicleDetailsTitle')}</Typography>
+            <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('MarkInputLabel')}</Typography>
                     <TextField className={classes.input} label={mark} disabled />
@@ -90,7 +90,7 @@ const VehicleDetailsGrid = ({ t }) => {
                     <Typography className={classes.inputTitle}>{t('YearlyTaxInputLabel')}</Typography>
                     <TextField className={classes.input} label={yearlyTax} disabled />
                 </Box>
-            </Box>
+            </Paper>
         </Grid>
     )
 }

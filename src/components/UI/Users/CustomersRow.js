@@ -16,7 +16,7 @@ const CustomersRow = ({ customer }) => {
     }
 
     return (
-        <TableRow onClick={() => onSelectUser()}>
+        <TableRow className='table__row--root' onClick={() => onSelectUser()}>
             <TableCell component="th" scope="row">
                 {customer.firstName && customer.firstName}
             </TableCell>

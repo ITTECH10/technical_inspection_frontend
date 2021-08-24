@@ -26,3 +26,9 @@ code {
 .MuiFormLabel-root {
   white-space: nowrap !important;
 }
+
+.table__row--root:hover {
+  background-color: #eee;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+}

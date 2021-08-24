@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -141,6 +141,7 @@ function ClippedDrawer({ open, setOpen, t }) {
     const history = useHistory()
     const [url, setUrl] = React.useState('/')
     const matches = useMediaQuery('(max-width: 600px)')
+    const [selectedIndex, setSelectedIndex] = useState(0)
 
     history.listen((location, action) => {
         setUrl(location.pathname)
@@ -158,11 +159,12 @@ function ClippedDrawer({ open, setOpen, t }) {
         setOpen(prevState => !prevState)
     }
 
-    const onHandleNavigation = (route) => {
+    const onHandleNavigation = (route, index) => {
         if (route === '/cars') {
             setVehiclesPage('allVehicles')
         }
         history.push(route)
+        setSelectedIndex(index)
         setOpen(false)
     }
 
@@ -212,27 +214,27 @@ function ClippedDrawer({ open, setOpen, t }) {
                 <div className={classes.drawerContainer}>
                     {user.role === 'admin' ?
                         <List>
-                            <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
+                            <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/', 0)}>
                                 <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
-                                <ListItemText primary={t('MenuCustomers')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : '#000' }} primary={t('MenuCustomers')} />
                             </ListItem>
-                            <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars')}>
+                            <ListItem selected={selectedIndex === 1} className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars', 1)}>
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                                <ListItemText primary={t('MenuVehicles')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 1 ? 'primary' : '#000' }} primary={t('MenuVehicles')} />
                             </ListItem>
-                            <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances')}>
+                            <ListItem selected={selectedIndex === 2} className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances', 2)}>
                                 <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
-                                <ListItemText primary={t('MenuInsurances')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 2 ? 'primary' : '#000' }} primary={t('MenuInsurances')} />
                             </ListItem>
-                            <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks')}>
+                            <ListItem selected={selectedIndex === 3} className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks', 3)}>
                                 <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
-                                <ListItemText primary={t('MenuBanks')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 3 ? 'primary' : '#000' }} primary={t('MenuBanks')} />
                             </ListItem>
                             <ExportUserData />
                         </List>
                         :
                         <List>
-                            <ListItem className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
+                            <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
                                 <ListItemText primary={t('MenuVehicles')} />
                             </ListItem>

@@ -11,7 +11,7 @@ const BankScreen = ({ t }) => {
     return (
         !appLoading && banks.length > 0 ?
             <React.Fragment>
-                <Typography variant="h4" style={{ padding: 10 }}>
+                <Typography variant="h4" style={{ padding: '10px 0' }}>
                     {t('BanksTitle')}
                 </Typography>
                 <BanksTable />

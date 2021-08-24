@@ -7,10 +7,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Typography } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import CarRow from './CarRow';
 import { withNamespaces } from 'react-i18next';
+import UserInfoBlock from '../UI/Users/UserInfoBlock';
 
 const useStyles = makeStyles({
   table: {
@@ -20,7 +22,8 @@ const useStyles = makeStyles({
 
 function CarTable({ t }) {
   const classes = useStyles();
-  const { myVehicles, setSelectedCarBank, user } = useData()
+  const { myVehicles, setSelectedCarBank, user, selectedUser } = useData()
+  const matches = useMediaQuery('(max-width: 600px)')
 
   const cars = myVehicles.map(mv => (
     <CarRow key={mv._id} car={mv} />
@@ -31,21 +34,26 @@ function CarTable({ t }) {
   }, [setSelectedCarBank])
 
   return (
-    <TableContainer component={Paper}>
-      <Typography variant="h4" style={{ padding: '0 5px' }}>{user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}</Typography>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>{t('MarkInputLabel')}</TableCell>
-            <TableCell>{t('ModelInputLabel')}</TableCell>
-            <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {cars}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
+        {user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}
+      </Typography>
+      <TableContainer component={Paper}>
+        {selectedUser._id && <UserInfoBlock />}
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>{t('MarkInputLabel')}</TableCell>
+              <TableCell>{t('ModelInputLabel')}</TableCell>
+              <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {cars}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
 
