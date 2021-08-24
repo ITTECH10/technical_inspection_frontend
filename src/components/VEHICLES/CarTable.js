@@ -46,7 +46,7 @@ function CarTable({ t }) {
 
   return (
     <>
-      {selectedUser._id && <UserInfoBlock />}
+      {selectedUser && <UserInfoBlock />}
       <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
         {user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}
       </Typography>

@@ -36,8 +36,6 @@ const UserInfoBlock = ({ t }) => {
     const { selectedUser } = useData()
     const classes = useStyles()
 
-    console.log(selectedUser)
-
     return (
         selectedUser &&
         <>

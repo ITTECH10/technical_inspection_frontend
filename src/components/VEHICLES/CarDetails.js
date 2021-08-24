@@ -58,7 +58,9 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
     let carId = history.location.pathname.split('/')[2]
     useEffect(() => {
         getSelectedCar(carId)
-        setSelectedUser(syncedUserCar)
+        if (user.role === 'admin') {
+            setSelectedUser(syncedUserCar)
+        }
     }, [carId, getSelectedCar, vehicleOwner])
 
     useEffect(() => {
@@ -83,7 +85,7 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
                 </Box>
             )} */}
             {/* {vehiclesPage !== 'allVehicles' && <UserInfoBlock />} */}
-            {user.role === 'admin' && <UserInfoBlock />}
+            <UserInfoBlock />
             <VehicleDetailsGrid />
             <InsuranceHouseGrid />
             <BankGrid />

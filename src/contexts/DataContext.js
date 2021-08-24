@@ -98,9 +98,9 @@ const DataContextProvider = ({ children }) => {
         axios('/users/me').then(res => {
             if (res.status === 200) {
                 setUser(res.data.user)
-                if (res.data.user.role !== 'admin') {
-                    setSelectedUser(res.data.user)
-                }
+                // if (res.data.user.role !== 'admin') {
+                //     setSelectedUser(res.data.user)
+                // }
                 localStorage.setItem('user', JSON.stringify(res.data.user))
                 setAppLoading(false)
             }
