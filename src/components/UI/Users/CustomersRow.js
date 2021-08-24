@@ -6,12 +6,13 @@ import { useHistory } from 'react-router-dom';
 // import { useData } from '../../contexts/DataContext';
 
 const CustomersRow = ({ customer }) => {
-    const { setVehiclesPage, getSelectedUser } = useData()
+    const { setVehiclesPage, setSelectedUser, users } = useData()
     const history = useHistory()
 
     const onSelectUser = () => {
+        const corelatedUser = users.find(u => u._id === customer._id)
+        setSelectedUser(corelatedUser)
         setVehiclesPage('customersVehicles')
-        getSelectedUser(customer._id)
         history.push(`/cars`)
     }
 

@@ -186,9 +186,9 @@ function MiniDrawer({ open, setOpen, t }) {
                         <MenuIcon />
                     </IconButton>
                     {!open ? <Box className={classes.logoBox}>
-                        <img src={Logo} className={classes.logo} />
+                        <img src={Logo} className={classes.logo} alt="Company Logo" />
                     </Box> : !matches ? <Box className={classes.logoBox}>
-                        <img src={Logo} className={classes.logo} />
+                        <img src={Logo} className={classes.logo} alt="Company Logo" />
                     </Box> : null}
                     <Box className={classes.actionBtnsMenuBox}>
                         {url !== '/' && url !== '/banks' && url !== '/insurances' && !open && <IconButton onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}

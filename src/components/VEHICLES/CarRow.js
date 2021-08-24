@@ -6,10 +6,17 @@ import { useData } from '../../contexts/DataContext';
 
 const CarRow = ({ car }) => {
     const history = useHistory()
-    const { myVehicles, setSelectedCar } = useData()
+    const { vehicles, setSelectedCar, myVehicles, user } = useData()
+    let selectedCar
+
+    if (user.role === 'admin') {
+        selectedCar = vehicles.find(v => v._id === car._id)
+    }
+    if (user.role === 'user') {
+        selectedCar = myVehicles.find(v => v._id === car._id)
+    }
 
     const onHandleCarRender = () => {
-        const selectedCar = myVehicles.find(v => v._id === car._id)
         setSelectedCar(selectedCar)
         history.push(`/cars/${selectedCar._id}`)
     }

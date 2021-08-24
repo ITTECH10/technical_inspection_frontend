@@ -2,7 +2,6 @@ import React from 'react'
 import { Paper, Box, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
-// import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     boxRoot: {
@@ -28,22 +27,18 @@ const useStyles = makeStyles(theme => ({
 
 const PoliciesFooter = ({ t }) => {
     const classes = useStyles()
-    // const history = useHistory()
     const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
-
     let bannerTimeout
 
     React.useEffect(() => {
         bannerTimeout = setTimeout(() => {
             setShowPrivacyBanner(false)
         }, 5000)
-    }, [])
 
-    React.useEffect(() => {
         return () => {
             clearTimeout(bannerTimeout)
         }
-    }, [])
+    }, [bannerTimeout])
 
     return (
         showPrivacyBanner &&

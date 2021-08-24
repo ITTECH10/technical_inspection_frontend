@@ -117,8 +117,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             <TextField
               autoFocus
               name="firstName"
-              error={errors.firstName && errors.firstName.message}
-              helperText={errors.firstName && errors.firstName.message}
+              // error={errors.firstName && errors.firstName.message}
+              // helperText={errors.firstName && errors.firstName.message}
               margin="dense"
               id="firstName"
               label={t('FirstNameInputLabel')}
@@ -128,8 +128,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="lastName"
-              error={errors.lastName && errors.lastName.message}
-              helperText={errors.lastName && errors.lastName.message}
+              // error={errors.lastName && errors.lastName.message}
+              // helperText={errors.lastName && errors.lastName.message}
               margin="dense"
               id="lastName"
               label={t('LastNameInputLabel')}
@@ -139,8 +139,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="birthDate"
-              error={errors.birthDate && errors.birthDate.message}
-              helperText={errors.birthDate && errors.birthDate.message}
+              // error={errors.birthDate && errors.birthDate.message}
+              // helperText={errors.birthDate && errors.birthDate.message}
               id="birthDate"
               label={t('BirthDateInputLabel')}
               onChange={handleChange}
@@ -152,8 +152,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="email"
-              error={errors.email && errors.email.message}
-              helperText={errors.email && errors.email.message}
+              // error={errors.email && errors.email.message}
+              // helperText={errors.email && errors.email.message}
               margin="dense"
               id="mail"
               label={t('EmailInputLabel')}
@@ -163,8 +163,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="phoneNumber"
-              error={errors.phoneNumber && errors.phoneNumber.message}
-              helperText={errors.phoneNumber && errors.phoneNumber.message}
+              // error={errors.phoneNumber && errors.phoneNumber.message}
+              // helperText={errors.phoneNumber && errors.phoneNumber.message}
               margin="dense"
               id="phoneNumber"
               label={t('PhoneNumberInputLabel')}
@@ -174,7 +174,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="address"
-              error={errors.address && errors.address.message}
+              // error={errors.address && errors.address.message}
               helperText={errors.address && errors.address.message}
               margin="dense"
               id="address"

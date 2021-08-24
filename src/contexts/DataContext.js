@@ -41,7 +41,7 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 console.log(err.response)
             })
-    })
+    }, [])
 
     const getAllVehicles = useCallback(() => {
         // setAppLoading(true)
@@ -84,20 +84,23 @@ const DataContextProvider = ({ children }) => {
     const getAllUsers = useCallback(() => {
         // setAppLoading(true)
         axios('/users').then(res => {
-            setAppLoading(false)
+            // setAppLoading(false)
             setUsers(res.data.users)
         })
             .catch(err => {
-                setAppLoading(false)
+                // setAppLoading(false)
                 console.log(err.response)
             })
     }, [])
 
     const getUserData = useCallback(() => {
-        // setAppLoading(true)
+        setAppLoading(true)
         axios('/users/me').then(res => {
             if (res.status === 200) {
                 setUser(res.data.user)
+                if (res.data.user.role !== 'admin') {
+                    setSelectedUser(res.data.user)
+                }
                 localStorage.setItem('user', JSON.stringify(res.data.user))
                 setAppLoading(false)
             }

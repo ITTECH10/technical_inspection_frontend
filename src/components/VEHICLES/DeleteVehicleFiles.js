@@ -20,7 +20,7 @@ function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
         return () => {
             clearTimeout(deleteTimeout)
         }
-    }, [])
+    }, [deleteTimeout])
 
     const handleClickOpen = () => {
         setOpen(true);

@@ -23,9 +23,9 @@ code {
   z-index: 1501 !important;
 }
 
-.MuiFormLabel-root {
+/* .MuiFormLabel-root {
   white-space: nowrap !important;
-}
+} */
 
 .table__row--root:hover {
   background-color: #eee;

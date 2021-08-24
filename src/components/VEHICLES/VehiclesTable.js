@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 function VehiclesTable({ t }) {
   const classes = useStyles();
-  const { vehicles, setSelectedCarBank, user } = useData()
+  const { vehicles, user } = useData()
 
   // FILTERING
   const [fields, setFields] = React.useState({

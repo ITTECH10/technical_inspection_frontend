@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withNamespaces } from 'react-i18next';
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 const ExportUserData = ({ t }) => {
     const [data, setData] = React.useState()
@@ -35,6 +35,15 @@ const ExportUserData = ({ t }) => {
     //     cursor: 'pointer'
     // }
 
+    let isMounted
+    React.useEffect(() => {
+        isMounted = true
+
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
 
     json2csv(users, (err, csv) => {
         if (err) {
@@ -43,6 +52,9 @@ const ExportUserData = ({ t }) => {
         if (csv) {
             setData(csv)
         }
+    }, {
+        excludeKeys: ['password', '__v'],
+        useDateIso8601Format: true
     })
 
     const listItemStyle = {

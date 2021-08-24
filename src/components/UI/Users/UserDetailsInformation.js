@@ -92,16 +92,6 @@ export default function UserDetailsInformation({ location }) {
         setValue(newValue);
     };
 
-    // let userId = user._id
-    // if(user && user.role === 'admin' && selectedUser) {
-    //     userId = selectedUser._id
-    // }
-
-    // useEffect(() => {
-    //     getSelectedUser(userId)
-    //     getUserVehicles(userId)
-    // }, [getSelectedUser, getUserVehicles, userId])
-
     return (
         !appLoading ?
             <div className={classes.root}>

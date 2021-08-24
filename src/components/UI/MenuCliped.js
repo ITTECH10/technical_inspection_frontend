@@ -9,17 +9,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { withNamespaces } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
-import { Button, useMediaQuery, IconButton, Box } from '@material-ui/core';
+import { Button, IconButton, Box } from '@material-ui/core';
 import GroupIcon from '@material-ui/icons/Group';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
@@ -28,8 +24,7 @@ import ExportUserData from './Users/ExportUserData';
 import Logo from './../../assets/images/logo.svg'
 import LanguageMenu from './LanguageMenu'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
-const drawerWidth = 240;
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -140,16 +135,21 @@ function ClippedDrawer({ open, setOpen, t }) {
     const { user, setVehiclesPage, logout } = useData()
     const history = useHistory()
     const [url, setUrl] = React.useState('/')
-    const matches = useMediaQuery('(max-width: 600px)')
     const [selectedIndex, setSelectedIndex] = useState(0)
 
-    history.listen((location, action) => {
-        setUrl(location.pathname)
-    })
+    React.useEffect(() => {
+        let isMounted
 
-    // const handleDrawerOpen = () => {
-    //     setOpen(true);
-    // };
+        if (isMounted) {
+            history.listen((location, action) => {
+                setUrl(location.pathname)
+            })
+        }
+
+        return () => {
+            isMounted = false
+        }
+    })
 
     const handleDrawerClose = () => {
         setOpen(false);
@@ -173,16 +173,26 @@ function ClippedDrawer({ open, setOpen, t }) {
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerToggling}
-                        edge="start"
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    {!open ?
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerToggling}
+                            edge="start"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        :
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerToggling}
+                            edge="start"
+                        >
+                            <CloseIcon />
+                        </IconButton>}
                     <Box className={classes.logoBox}>
-                        <img src={Logo} className={classes.logo} />
+                        <img src={Logo} className={classes.logo} alt="Company Logo" />
                     </Box>
                     <Box className={classes.actionBtnsMenuBox}>
                         {url !== '/' && url !== '/banks' && url !== '/insurances' && <IconButton style={{ color: '#fff' }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
@@ -216,19 +226,19 @@ function ClippedDrawer({ open, setOpen, t }) {
                         <List>
                             <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/', 0)}>
                                 <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : '#000' }} primary={t('MenuCustomers')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : 'initial' }} primary={t('MenuCustomers')} />
                             </ListItem>
                             <ListItem selected={selectedIndex === 1} className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars', 1)}>
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 1 ? 'primary' : '#000' }} primary={t('MenuVehicles')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 1 ? 'primary' : 'initial' }} primary={t('MenuVehicles')} />
                             </ListItem>
                             <ListItem selected={selectedIndex === 2} className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances', 2)}>
                                 <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 2 ? 'primary' : '#000' }} primary={t('MenuInsurances')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 2 ? 'primary' : 'initial' }} primary={t('MenuInsurances')} />
                             </ListItem>
                             <ListItem selected={selectedIndex === 3} className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks', 3)}>
                                 <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 3 ? 'primary' : '#000' }} primary={t('MenuBanks')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 3 ? 'primary' : 'initial' }} primary={t('MenuBanks')} />
                             </ListItem>
                             <ExportUserData />
                         </List>
@@ -236,7 +246,7 @@ function ClippedDrawer({ open, setOpen, t }) {
                         <List>
                             <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/')}>
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                                <ListItemText primary={t('MenuVehicles')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : 'initial' }} primary={t('MenuVehicles')} />
                             </ListItem>
                         </List>}
                 </div>

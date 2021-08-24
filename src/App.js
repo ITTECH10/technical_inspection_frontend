@@ -13,7 +13,6 @@ import CustomersScreen from './screens/CustomersScreen';
 import { useData } from './contexts/DataContext';
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import SelectedUserDetailed from './components/UI/Users/SelectedUserDetailed';
 import CarScreen from './screens/CarScreen';
 import InsuranceScreen from './screens/InsuranceScreen';
@@ -21,19 +20,17 @@ import BankScreen from './screens/BankScreen';
 import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
-import MenuMiniVariant from './components/UI/MenuMiniVariant'
 import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 
 function App() {
   const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
-  const matches = useMediaQuery('(min-width:600px)');
   const [open, setOpen] = React.useState(false);
 
   let token = localStorage.token
   let storageUser = localStorage.user
-  let storageSelectedUser = localStorage.selectedUser
+  let storageSelectedUserRef = React.useRef(localStorage.selectedUser)
   let storageLanguage = localStorage.language
 
   useEffect(() => {
@@ -41,14 +38,14 @@ function App() {
       setUser(JSON.parse(storageUser))
     }
 
-    if (storageSelectedUser) {
-      setSelectedUser(JSON.parse(storageSelectedUser))
+    if (storageSelectedUserRef.current) {
+      setSelectedUser(JSON.parse(storageSelectedUserRef.current))
     }
 
     if (storageLanguage) {
       i18n.changeLanguage(storageLanguage)
     }
-  }, [setUser, setSelectedUser, storageSelectedUser, storageUser])
+  }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser])
 
   useEffect(() => {
     if (token) {
@@ -81,11 +78,11 @@ function App() {
   }
 
   useEffect(() => {
-    if (userId) {
-      getSelectedUser(userId)
+    if (userId && user.role === 'user') {
+      // getSelectedUser(userId)
       getUserVehicles(userId)
     }
-  }, [getSelectedUser, getUserVehicles, userId])
+  }, [getUserVehicles, userId])
 
   const authRoutes = (
     user.role === 'admin' ?

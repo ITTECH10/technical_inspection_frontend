@@ -25,7 +25,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
         return () => {
             clearTimeout(fileUploadTimeout)
         }
-    }, [])
+    }, [fileUploadTimeout])
 
     useEffect(() => {
         if (submitBtn && fields.photo !== '') {

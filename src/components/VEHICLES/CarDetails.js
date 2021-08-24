@@ -7,11 +7,8 @@ import axios from 'axios'
 import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
 import BankGrid from '../BANKS/BankGrid'
-// import Gallery from './../UI/Gallery'
 import GalleryAlternative from './../UI/GalleryAlternative'
 import UserInfoBlock from '../UI/Users/UserInfoBlock'
-import Loader from './../../utils/Loader'
-import UploadCarImages from './UploadCarImages'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -29,11 +26,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = ({ setOnHandleDeleteOpen }) => {
-    const { selectedCar, user, setSelectedCarInsurance, getSelectedCar, setSelectedCarBank, carImages, loading, vehiclesPage } = useData()
+    const { selectedCar, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setSelectedCarBank, carImages, vehiclesPage } = useData()
     const classes = useStyles()
     const history = useHistory()
-    const { insuranceHouse, vehiclePaymentType } = selectedCar
+    const { insuranceHouse, vehiclePaymentType, vehicleOwner } = selectedCar
     const { role } = user
+
+    const syncedUserCar = users.find(u => u._id === vehicleOwner)
 
     const getCarInsurance = React.useCallback(() => {
         axios.get(`/insuranceHouse/${insuranceHouse}`)
@@ -59,13 +58,14 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
     let carId = history.location.pathname.split('/')[2]
     useEffect(() => {
         getSelectedCar(carId)
-    }, [carId, getSelectedCar])
+        setSelectedUser(syncedUserCar)
+    }, [carId, getSelectedCar, vehicleOwner])
 
     useEffect(() => {
         if (selectedCar.insuranceHouse !== undefined && role === 'user') {
             getCarInsurance()
         }
-    }, [selectedCar, getCarInsurance, role])
+    }, [selectedCar, getCarInsurance, setSelectedUser, role])
 
     useEffect(() => {
         if (vehiclePaymentType !== undefined
@@ -82,7 +82,8 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
                     <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
                 </Box>
             )} */}
-            {vehiclesPage !== 'allVehicles' && <UserInfoBlock />}
+            {/* {vehiclesPage !== 'allVehicles' && <UserInfoBlock />} */}
+            <UserInfoBlock />
             <VehicleDetailsGrid />
             <InsuranceHouseGrid />
             <BankGrid />

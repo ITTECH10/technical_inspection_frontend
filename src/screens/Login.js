@@ -69,13 +69,6 @@ const Login = ({ history, t }) => {
     const [errors, setErrors] = useState({})
     const { setAuthenticated, setAppLoading, appLoading } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
-    let loginTimeout
-
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(loginTimeout)
-        }
-    }, [])
 
     const handleChange = (e) => {
         setFields({

@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Alerts from '../components/UI/Alerts'
 import { useHistory } from 'react-router'
 import { useData } from '../contexts/DataContext'
-import axios from 'axios'
 import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 
 const PrivacyPolicyScreen = ({ t }) => {
     const classes = useStyles()
-    const [privacyAccepted, setPrivacyAccepted] = React.useState(false)
     const [alertOpen, setAlertOpen] = React.useState(false)
     const [alertMsg, setAlertMsg] = React.useState('')
     const history = useHistory()

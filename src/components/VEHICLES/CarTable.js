@@ -22,12 +22,23 @@ const useStyles = makeStyles({
 
 function CarTable({ t }) {
   const classes = useStyles();
-  const { myVehicles, setSelectedCarBank, user, selectedUser } = useData()
+  const { myVehicles, setSelectedCarBank, user, selectedUser, vehicles } = useData()
   const matches = useMediaQuery('(max-width: 600px)')
+  let customersVehiclesFound, customersVehiclesRender, myVehiclesRender
 
-  const cars = myVehicles.map(mv => (
-    <CarRow key={mv._id} car={mv} />
-  ))
+  if (user.role === 'admin') {
+    customersVehiclesFound = vehicles.filter(v => v.vehicleOwner === selectedUser._id)
+
+    customersVehiclesRender = customersVehiclesFound.map(mv => (
+      <CarRow key={mv._id} car={mv} />
+    ))
+  }
+
+  if (user.role === 'user') {
+    myVehiclesRender = myVehicles.map(mv => (
+      <CarRow key={mv._id} car={mv} />
+    ))
+  }
 
   useEffect(() => {
     setSelectedCarBank({})
@@ -49,7 +60,7 @@ function CarTable({ t }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {cars}
+            {user.role === 'admin' ? customersVehiclesRender : myVehiclesRender}
           </TableBody>
         </Table>
       </TableContainer>
