@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 function DeleteCars({ t, setOnHandleDeleteOpen }) {
   const [open, setOpen] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
-  const { vehicles, setVehicles } = useData()
+  const { vehicles, setVehicles, user } = useData()
   const history = useHistory()
 
   const carId = history.location.pathname.split('/')[2]
@@ -58,6 +58,7 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
   }
 
   return (
+    user.role === 'admin' &&
     <div>
       <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
         {t('DeleteVehicleButton')}
