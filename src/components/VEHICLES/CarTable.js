@@ -5,6 +5,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import Divider from '@material-ui/core/Divider';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -50,6 +51,8 @@ function CarTable({ t }) {
       <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
         {user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}
       </Typography>
+      <Divider style={{ marginBottom: 10 }} />
+
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>

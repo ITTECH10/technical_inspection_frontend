@@ -11,7 +11,7 @@ import { Typography } from '@material-ui/core';
 import { useData } from '../../contexts/DataContext';
 import VehicleItemRow from './VehicleItemRow';
 import SearchVehicles from './SearchVehicles';
-import { useMediaQuery } from '@material-ui/core';
+import { useMediaQuery, Divider } from '@material-ui/core';
 import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles({
@@ -47,6 +47,8 @@ function VehiclesTable({ t }) {
       <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
         {user.role === 'admin' && vehicles.length > 0 ? t('VehiclesTitle') : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
       </Typography>
+      <Divider style={{ marginBottom: 10 }} />
+
       <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />
       {vehicles.length > 0 &&
         <TableContainer component={Paper}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useData } from '../../contexts/DataContext'
-import { Grid, Typography, Box, TextField, Paper } from '@material-ui/core'
+import { Grid, Typography, Box, TextField, Paper, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import InsuranceDialog from './InsuranceDialog'
 import Alerts from '../UI/Alerts'
@@ -31,6 +31,8 @@ const InsuranceHouseGrid = ({ t }) => {
             <Alerts message={t('AlertSuccessfulConnection')} open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
                 <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('InsuranceDetailsTitle')}</Typography>
+                <Divider style={{ marginBottom: 10 }} />
+
                 {selectedInsurance && user.role === 'admin' ?
                     <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                         <Box>

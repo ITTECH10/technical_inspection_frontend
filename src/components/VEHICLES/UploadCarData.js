@@ -283,10 +283,10 @@ const UploadCarData = ({ t }) => {
                             fullWidth
                         />
                         <DialogActions>
-                            <Button onClick={handleClose} color="secondary" variant="contained">
+                            <Button onClick={handleClose} color="primary" variant="contained">
                                 {t('CancelButton')}
                             </Button>
-                            <Button type="submit" color="primary" variant="contained">
+                            <Button type="submit" color="secondary" variant="contained">
                                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>

@@ -11,7 +11,7 @@ import { useData } from '../../../contexts/DataContext';
 import CustomersRow from './CustomersRow';
 import { withNamespaces } from 'react-i18next';
 import SearchCustomers from './SearchCustomers';
-import { useMediaQuery, Typography } from '@material-ui/core';
+import { useMediaQuery, Typography, Divider } from '@material-ui/core';
 
 const useStyles = makeStyles({
     table: {
@@ -44,6 +44,7 @@ function CarTable({ t }) {
             <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
                 {t('CustomersTitle')}
             </Typography>
+            <Divider style={{ marginBottom: 10 }} />
             <SearchCustomers fields={fields} setFields={setFields} noCustomers={users.length === 1} />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

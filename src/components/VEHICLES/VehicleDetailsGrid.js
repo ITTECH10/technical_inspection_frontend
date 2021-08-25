@@ -1,6 +1,6 @@
 import React from 'react'
 import { useData } from '../../contexts/DataContext'
-import { Grid, Typography, Box, TextField, Paper } from '@material-ui/core'
+import { Grid, Typography, Box, TextField, Paper, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
 import DeleteCars from './DeleteCars'
@@ -43,6 +43,8 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen }) => {
                 <Typography variant="h5">{t('VehicleDetailsTitle')}</Typography>
                 <DeleteCars setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
             </Box>
+            <Divider style={{ marginBottom: 10 }} />
+
             <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('MarkInputLabel')}</Typography>

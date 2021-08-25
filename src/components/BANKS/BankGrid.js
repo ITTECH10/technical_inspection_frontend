@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Box, TextField, Paper } from '@material-ui/core'
+import { Grid, Typography, Box, TextField, Paper, Divider } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import BankDialog from './BankDialog'
 import { makeStyles } from '@material-ui/core/styles'
@@ -32,6 +32,8 @@ const BankGrid = ({ t }) => {
             <Alerts message={t('AlertSuccessfulConnection')} open={alertOpen} handleOpening={setAlertOpen} />
             <Grid item xs={12}>
                 <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('BankDetailsTitle')}</Typography>
+                <Divider style={{ marginBottom: 10 }} />
+
                 {selectedBank && user.role === 'admin' ?
                     <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                         <Box>

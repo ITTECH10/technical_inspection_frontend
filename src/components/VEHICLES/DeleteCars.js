@@ -60,7 +60,7 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
   return (
     user.role === 'admin' &&
     <div>
-      <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
+      <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>
         {t('DeleteVehicleButton')}
       </Button>
       <Dialog
@@ -76,10 +76,10 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
               {t('DeleteVehicleFormHint')}
             </DialogContentText>
             <DialogActions>
-              <Button variant="contained" onClick={handleClose} color="secondary">
+              <Button variant="contained" onClick={handleClose} color="primary">
                 {t('CancelButton')}
               </Button>
-              <Button type="submit" variant="contained" color="primary" autoFocus>
+              <Button type="submit" variant="contained" color="secondary" autoFocus>
                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('DeleteButton')}
               </Button>
             </DialogActions>

@@ -110,7 +110,14 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
     },
     listItemRoot: {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        transition: 'all .5s ease',
+        '&.Mui-selected': {
+            backgroundColor: 'rgba(75, 5, 5, .15)'
+        },
+        '&.Mui-selected:hover': {
+            backgroundColor: 'rgba(75, 5, 5, .10)'
+        }
     },
     logoBox: {
         height: 'auto',

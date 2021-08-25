@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -74,10 +76,11 @@ function DeleteUser({ userId, t }) {
   return (
     user.role === 'admin' &&
     <div>
-      <Button className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
-        {t('DeleteCustomerButton')}
-        <DeleteIcon style={{ height: '.8em' }} />
-      </Button>
+      <Tooltip title={t('DeleteCustomerButton')}>
+        <IconButton className={classes.btnRoot} size="small" variant="contained" color="primary" onClick={handleClickOpen}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
       <Alerts message={t('AlertGeneralDeleted')} open={alertOpen} handleOpening={setAlertOpen} severity="error" />
       <Dialog
         open={open}
@@ -92,10 +95,10 @@ function DeleteUser({ userId, t }) {
               {t('DeleteCustomerFormHint')}
             </DialogContentText>
             <DialogActions>
-              <Button variant="contained" onClick={handleClose} color="secondary">
+              <Button variant="contained" onClick={handleClose} color="primary">
                 {t('CancelButton')}
               </Button>
-              <Button type="submit" variant="contained" onClick={handleClose} color="primary" autoFocus>
+              <Button type="submit" variant="contained" onClick={handleClose} color="secondary" autoFocus>
                 {t('SubmitButton')}
               </Button>
             </DialogActions>

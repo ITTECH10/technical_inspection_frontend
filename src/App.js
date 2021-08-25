@@ -49,8 +49,13 @@ function App() {
     }
   }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser])
 
+
   useEffect(() => {
     if (token) {
+      if (!token.startsWith('Bearer')) {
+        logout(history)
+      }
+
       // 1) If there is a token, decode it
       const decodedToken = jwtDecode(token)
 
