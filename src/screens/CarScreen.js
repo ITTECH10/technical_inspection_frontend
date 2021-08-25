@@ -33,12 +33,12 @@ const CarScreen = () => {
     ) : <CarTable />
 
     return (
-        !appLoading && user.role === 'admin' ?
+        user.role === 'admin' ?
             <>
                 {renderVehicles}
                 {selectedUser._id && <UploadCarData />}
             </> :
-            !appLoading && user.role === 'user' ?
+            user.role === 'user' ?
                 <>
                     {renderVehicles}
                 </> : <Loader />

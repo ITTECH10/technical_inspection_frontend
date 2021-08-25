@@ -5,23 +5,25 @@ import Loader from './utils/Loader'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
 
-// import Navbar from './components/UI/Navbar';
 import Login from './screens/Login'
-import CarDetailsScreen from './screens/CarDetailsScreen'
-import CustomersScreen from './screens/CustomersScreen';
 
 import { useData } from './contexts/DataContext';
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
-import SelectedUserDetailed from './components/UI/Users/SelectedUserDetailed';
-import CarScreen from './screens/CarScreen';
-import InsuranceScreen from './screens/InsuranceScreen';
-import BankScreen from './screens/BankScreen';
-import Profile from './screens/Profile';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
-import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
 import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
+import ErrorBoundary from './utils/ErrorBoundary';
+
+// LAZY LOADING 
+const CustomersScreen = React.lazy(() => import('./screens/CustomersScreen'))
+const SelectedUserDetailed = React.lazy(() => import('./components/UI/Users/SelectedUserDetailed'))
+const CarScreen = React.lazy(() => import('./screens/CarScreen'))
+const CarDetailsScreen = React.lazy(() => import('./screens/CarDetailsScreen'))
+const InsuranceScreen = React.lazy(() => import('./screens/InsuranceScreen'))
+const BankScreen = React.lazy(() => import('./screens/BankScreen'))
+const Profile = React.lazy(() => import('./screens/Profile'))
+const PrivacyPolicyScreen = React.lazy(() => import('./screens/PrivacyPolicyScreen'))
 
 function App() {
   const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
@@ -85,23 +87,27 @@ function App() {
   }, [getUserVehicles, userId])
 
   const authRoutes = (
-    user.role === 'admin' ?
-      <Switch>
-        {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
-        {/* <Route exact path="/" component={HomeUser} /> */}
-        <Route exact path="/" component={CustomersScreen} />
-        <Route exact path="/user/:id" component={SelectedUserDetailed} />
-        <Route exact path="/cars" component={CarScreen} />
-        <Route exact path="/cars/:id" component={CarDetailsScreen} />
-        <Route exact path="/insurances" component={InsuranceScreen} />
-        <Route exact path="/banks" component={BankScreen} />
-        <Route exact path="/profile" component={Profile} />
-      </Switch> :
-      <Switch>
-        <Route exact path="/" component={CarScreen} />
-        <Route exact path="/cars/:id" component={CarDetailsScreen} />
-        <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
-      </Switch>
+    <ErrorBoundary>
+      <React.Suspense fallback={<Loader />}>
+        {user.role === 'admin' ?
+          <Switch>
+            {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
+            {/* <Route exact path="/" component={HomeUser} /> */}
+            <Route exact path="/" component={CustomersScreen} />
+            <Route exact path="/user/:id" component={SelectedUserDetailed} />
+            <Route exact path="/cars" component={CarScreen} />
+            <Route exact path="/cars/:id" component={CarDetailsScreen} />
+            <Route exact path="/insurances" component={InsuranceScreen} />
+            <Route exact path="/banks" component={BankScreen} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch> :
+          <Switch>
+            <Route exact path="/" component={CarScreen} />
+            <Route exact path="/cars/:id" component={CarDetailsScreen} />
+            <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
+          </Switch>}
+      </React.Suspense>
+    </ErrorBoundary>
   )
 
   const routes = (
@@ -117,7 +123,7 @@ function App() {
     height: 'calc(100vh - 64px)',
     // marginLeft: open && matches ? 250 : 75,
     marginLeft: !loading && 75,
-    paddingRight: 20
+    // paddingRight: 17
   }
 
   const app = !appLoading ? (

@@ -26,13 +26,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = ({ setOnHandleDeleteOpen }) => {
-    const { selectedCar, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setSelectedCarBank, carImages } = useData()
+    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setSelectedCarBank, carImages } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehiclePaymentType, vehicleOwner } = selectedCar
     const { role } = user
-
-    const syncedUserCar = users.find(u => u._id === vehicleOwner)
+    const corelatedCar = users.find(u => u._id === vehicleOwner)
 
     const getCarInsurance = React.useCallback(() => {
         axios.get(`/insuranceHouse/${insuranceHouse}`)
@@ -59,7 +58,7 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
     useEffect(() => {
         getSelectedCar(carId)
         if (user.role === 'admin') {
-            setSelectedUser(syncedUserCar)
+            setSelectedUser(corelatedCar)
         }
     }, [carId, getSelectedCar, vehicleOwner])
 
@@ -85,8 +84,8 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
                 </Box>
             )} */}
             {/* {vehiclesPage !== 'allVehicles' && <UserInfoBlock />} */}
-            <UserInfoBlock />
-            <VehicleDetailsGrid />
+            {selectedUser && <UserInfoBlock />}
+            <VehicleDetailsGrid setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
             <InsuranceHouseGrid />
             <BankGrid />
             {/* <UploadCarImages

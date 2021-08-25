@@ -91,9 +91,10 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                         /> : null}
                     <CardContent>
                         <Box className={classes.fileNameBox}>
-                            <Box className={classes.pdfIconBox}>
-                                <img alt="pdf" src={PdfIcon} className={classes.pdfIcon} />
-                            </Box>
+                            {image.format === 'pdf' &&
+                                <Box className={classes.pdfIconBox}>
+                                    <img alt="pdf" src={PdfIcon} className={classes.pdfIcon} />
+                                </Box>}
                             <Typography>
                                 {image.format === 'jpg' || image.format === 'png' ? formatedTitle
                                     : `${image.name}`
@@ -113,7 +114,7 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                     <Box className={classes.imgBox}>
                         <img alt="gallery-car" src={image.url} className={classes.img} />
                         <Typography style={{ position: 'absolute', bottom: 5, right: 10, fontSize: 12, color: '#fff' }}>{formatedTitle}</Typography>
-                    </Box> : <Button variant="contained" size="large" color="primary" onClick={() => handlePdfDownload()}>Download pdf</Button>}
+                    </Box> : <Button variant="contained" size="large" color="primary" onClick={() => handlePdfDownload()}>{t('DownloadPdfButton')}</Button>}
                 {/* </DialogContent> */}
             </Dialog>
         </>

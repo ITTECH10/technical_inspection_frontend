@@ -3,6 +3,7 @@ import { useData } from '../../contexts/DataContext'
 import { Grid, Typography, Box, TextField, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
+import DeleteCars from './DeleteCars'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -15,9 +16,15 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 10,
         width: '100%'
     },
+    vehicleTitleDeleteBox: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10
+    }
 }))
 
-const VehicleDetailsGrid = ({ t }) => {
+const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen }) => {
     const classes = useStyles()
     const { selectedCar } = useData()
 
@@ -32,7 +39,10 @@ const VehicleDetailsGrid = ({ t }) => {
 
     return (
         <Grid item xs={12}>
-            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('VehicleDetailsTitle')}</Typography>
+            <Box className={classes.vehicleTitleDeleteBox}>
+                <Typography variant="h5">{t('VehicleDetailsTitle')}</Typography>
+                <DeleteCars setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+            </Box>
             <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('MarkInputLabel')}</Typography>

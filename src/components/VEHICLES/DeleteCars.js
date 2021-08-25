@@ -9,12 +9,23 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { useData } from './../../contexts/DataContext'
 import axios from 'axios'
 import Alerts from './../UI/Alerts'
+import { withNamespaces } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 
-export default function DeleteUser({ carId, handleAlertOpening }) {
+function DeleteCars({ t, setOnHandleDeleteOpen }) {
   const [open, setOpen] = useState(false);
-  const [alertOpen, setAlertOpen] = useState(false)
   const [btnLoading, setBtnLoading] = useState(false)
-  const { myVehicles, setMyVehicles } = useData()
+  const { vehicles, setVehicles } = useData()
+  const history = useHistory()
+
+  const carId = history.location.pathname.split('/')[2]
+  let deleteCarTimeout
+
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(deleteCarTimeout)
+    }
+  }, [])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,13 +41,14 @@ export default function DeleteUser({ carId, handleAlertOpening }) {
 
     axios.delete(`/cars/${carId}`).then(res => {
       if (res.status === 204) {
-        const updatedVehicles = [...myVehicles].filter(v => v._id !== carId)
+        const updatedVehicles = [...vehicles].filter(v => v._id !== carId)
+        setOpen(false)
+        setVehicles(updatedVehicles)
+        setOnHandleDeleteOpen(true)
+        setBtnLoading(false)
 
-        setTimeout(() => {
-          setMyVehicles(updatedVehicles)
-          handleAlertOpening(true)
-          setBtnLoading(false)
-          setOpen(false)
+        deleteCarTimeout = setTimeout(() => {
+          history.push('/cars')
         }, 2000)
       }
     })
@@ -48,27 +60,26 @@ export default function DeleteUser({ carId, handleAlertOpening }) {
   return (
     <div>
       <Button size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
-        Delete
+        {t('DeleteVehicleButton')}
       </Button>
-      {/* <Alerts message="Successfully deleted!" open={alertOpen} handleOpening={setAlertOpen} severity="error" /> */}
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete Car?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('DeleteVehicleFormTitle')}</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <DialogContentText id="alert-dialog-description">
-              Are you sure you want to delete this car?
+              {t('DeleteVehicleFormHint')}
             </DialogContentText>
             <DialogActions>
               <Button variant="contained" onClick={handleClose} color="secondary">
-                Cancel
+                {t('CancelButton')}
               </Button>
               <Button type="submit" variant="contained" color="primary" autoFocus>
-                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Submit'}
+                {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('DeleteButton')}
               </Button>
             </DialogActions>
           </form>
@@ -77,3 +88,5 @@ export default function DeleteUser({ carId, handleAlertOpening }) {
     </div>
   );
 }
+
+export default withNamespaces()(DeleteCars)

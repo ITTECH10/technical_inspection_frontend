@@ -64,19 +64,19 @@ function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Delete Document?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{t('DeleteDocumentFormTitle')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are you sure you want to delete this document?
+                        {t('DeleteDocumentFormHint')}
                     </DialogContentText>
 
                     <form onSubmit={handleSubmit}>
                         <DialogActions>
                             <Button onClick={handleClose} variant="contained" color="primary">
-                                Cancel
+                                {t('CancelButton')}
                             </Button>
                             <Button type="submit" variant="contained" color="primary" autoFocus>
-                                {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Delete'}
+                                {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('DeleteButton')}
                             </Button>
                         </DialogActions>
                     </form>
