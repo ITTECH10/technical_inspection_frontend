@@ -5,7 +5,7 @@ import Loader from './utils/Loader'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
 
-import Login from './screens/Login'
+// import Login from './screens/Login'
 
 import { useData } from './contexts/DataContext';
 import jwtDecode from 'jwt-decode'
@@ -25,6 +25,7 @@ const InsuranceScreen = React.lazy(() => import('./screens/InsuranceScreen'))
 const BankScreen = React.lazy(() => import('./screens/BankScreen'))
 const Profile = React.lazy(() => import('./screens/Profile'))
 const PrivacyPolicyScreen = React.lazy(() => import('./screens/PrivacyPolicyScreen'))
+const Login = React.lazy(() => import('./screens/Login'))
 
 function App() {
   const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
@@ -117,10 +118,12 @@ function App() {
   )
 
   const routes = (
-    <Switch>
-      <GuardedRoute exact path="/" component={Login} auth={authenticated} />
-      <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
-    </Switch>
+    <React.Suspense fallback={<Loader />}>
+      <Switch>
+        <Route exact path="/" component={Login} auth={!authenticated} />
+        <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
+      </Switch>
+    </React.Suspense>
   )
 
   const navbarFix = {
