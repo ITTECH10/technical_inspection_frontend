@@ -33,6 +33,15 @@ const DataContextProvider = ({ children }) => {
     const [banks, setBanks] = useState([])
     const [selectedCarBank, setSelectedCarBank] = useState({})
 
+    // PAGINATION 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const getPaginatedData = (data, dataLimit) => {
+        const startIndex = currentPage * dataLimit - dataLimit;
+        const endIndex = startIndex + dataLimit;
+        return data.slice(startIndex, endIndex);
+    };
+
     const acceptPrivacyPolicy = useCallback((id) => {
         axios(`/users/me/privacyPolicy/${id}`)
             .then(res => {
@@ -217,7 +226,10 @@ const DataContextProvider = ({ children }) => {
         setVehicles,
         acceptPrivacyPolicy,
         vehiclesPage,
-        setVehiclesPage
+        setVehiclesPage,
+        getPaginatedData,
+        currentPage,
+        setCurrentPage
     }
 
     return (

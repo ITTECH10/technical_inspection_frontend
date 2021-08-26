@@ -14,6 +14,7 @@ import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 import ErrorBoundary from './utils/ErrorBoundary';
+import GuardedRoute from './utils/GuardedRoute';
 
 // LAZY LOADING 
 const CustomersScreen = React.lazy(() => import('./screens/CustomersScreen'))
@@ -117,7 +118,7 @@ function App() {
 
   const routes = (
     <Switch>
-      <Route exact path="/" component={Login} />
+      <GuardedRoute exact path="/" component={Login} auth={authenticated} />
       <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
     </Switch>
   )

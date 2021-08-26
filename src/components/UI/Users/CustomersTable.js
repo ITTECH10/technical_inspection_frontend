@@ -12,6 +12,8 @@ import CustomersRow from './CustomersRow';
 import { withNamespaces } from 'react-i18next';
 import SearchCustomers from './SearchCustomers';
 import { useMediaQuery, Typography, Divider } from '@material-ui/core';
+import Pagination from '../../../utils/Pagination';
+import RenderPaginatedContent from '../../../utils/RenderPaginatedContent';
 
 const useStyles = makeStyles({
     table: {
@@ -31,13 +33,8 @@ function CarTable({ t }) {
 
     const { query } = fields
 
-    const filteredContent = users && [...users].reverse().filter(el => el._id !== user._id).filter(x => x.firstName.toLowerCase().includes(query.toLowerCase()) || x.lastName.toLowerCase().includes(query.toLowerCase())).map(c => {
-        return <CustomersRow key={c._id} customer={c} />
-    })
-
-    const content = users && [...users].reverse().filter(el => el._id !== user._id).map(c => {
-        return <CustomersRow key={c._id} customer={c} />
-    })
+    const filteredContent = users && [...users].reverse().filter(el => el._id !== user._id).filter(x => x.firstName.toLowerCase().includes(query.toLowerCase()) || x.lastName.toLowerCase().includes(query.toLowerCase()))
+    const content = users && [...users].reverse().filter(el => el._id !== user._id)
 
     return (
         <>
@@ -56,10 +53,18 @@ function CarTable({ t }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {query !== '' ? filteredContent : content}
+                        {/* {query !== '' ? filteredContent : content} */}
+                        <RenderPaginatedContent
+                            data={query !== '' ? filteredContent : content}
+                            RenderComponent={CustomersRow}
+                            dataLimit={10}
+                        />
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Pagination
+                pageLimit={matches ? 1 : 3}
+            />
         </>
     );
 }

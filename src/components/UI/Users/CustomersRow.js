@@ -5,12 +5,12 @@ import { useData } from '../../../contexts/DataContext';
 import { useHistory } from 'react-router-dom';
 // import { useData } from '../../contexts/DataContext';
 
-const CustomersRow = ({ customer }) => {
+const CustomersRow = ({ data }) => {
     const { setVehiclesPage, setSelectedUser, users } = useData()
     const history = useHistory()
 
     const onSelectUser = () => {
-        const corelatedUser = users.find(u => u._id === customer._id)
+        const corelatedUser = users.find(u => u._id === data._id)
         setSelectedUser(corelatedUser)
         setVehiclesPage('customersVehicles')
         history.push(`/cars`)
@@ -19,10 +19,10 @@ const CustomersRow = ({ customer }) => {
     return (
         <TableRow className='table__row--root' onClick={() => onSelectUser()}>
             <TableCell component="th" scope="row">
-                {customer.firstName && customer.firstName}
+                {data.firstName && data.firstName}
             </TableCell>
-            <TableCell>{customer.lastName}</TableCell>
-            <TableCell>{customer.email}</TableCell>
+            <TableCell>{data.lastName}</TableCell>
+            <TableCell>{data.email}</TableCell>
         </TableRow>
     )
 }
