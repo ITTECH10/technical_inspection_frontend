@@ -22,7 +22,7 @@ function Pagination({ pageLimit, data, dataLimit }) {
     }
 
     const mobileStyle = {
-        textAlign: 'center',
+        textAlign: 'left',
         padding: '10px 0'
     }
 
