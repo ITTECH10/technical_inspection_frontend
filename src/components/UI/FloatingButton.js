@@ -2,22 +2,22 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      position: 'fixed',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
-      zIndex: 1500
+export default function FloatingButton({ onHandleClick, children, color = "primary", bottom = 80, right }) {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        position: 'fixed',
+        bottom: bottom || theme.spacing(2),
+        right: right || theme.spacing(2),
+        zIndex: 1500
+      },
     },
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-  fab: {}
-}));
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+    fab: {}
+  }));
 
-export default function FloatingButton({onHandleClick, children, color="primary"}) {
   const classes = useStyles();
 
   return (

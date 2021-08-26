@@ -13,11 +13,13 @@ import VehicleItemRow from './VehicleItemRow';
 import SearchVehicles from './SearchVehicles';
 import { useMediaQuery, Divider } from '@material-ui/core';
 import { withNamespaces } from 'react-i18next';
+import Pagination from '../../utils/Pagination';
+import RenderPaginatedContent from '../../utils/RenderPaginatedContent';
 
 const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-  },
+  // table: {
+  //   marginBottom: 20
+  // },
 });
 
 function VehiclesTable({ t }) {
@@ -33,14 +35,7 @@ function VehiclesTable({ t }) {
 
   const { query } = fields
 
-  const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase())).map(v => (
-    <VehicleItemRow key={v._id} car={v} />
-  ))
-
-  const allCars = vehicles.map(v => (
-    <VehicleItemRow key={v._id} car={v} />
-  ))
-
+  const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <>
@@ -48,8 +43,12 @@ function VehiclesTable({ t }) {
         {user.role === 'admin' && vehicles.length > 0 ? t('VehiclesTitle') : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
       </Typography>
       <Divider style={{ marginBottom: 10 }} />
-
       <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />
+      {!matches && <Pagination
+        pageLimit={matches ? 1 : 3}
+        data={query !== '' ? filteredContent : vehicles}
+        dataLimit={10}
+      />}
       {vehicles.length > 0 &&
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -61,10 +60,21 @@ function VehiclesTable({ t }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {query !== '' ? filteredContent : allCars}
+              {/* {query !== '' ? filteredContent : allCars} */}
+              <RenderPaginatedContent
+                data={query !== '' ? filteredContent : vehicles}
+                RenderComponent={VehicleItemRow}
+                dataLimit={10}
+              />
             </TableBody>
           </Table>
         </TableContainer>}
+      {matches && <Pagination
+        pageLimit={matches ? 1 : 3}
+        data={query !== '' ? filteredContent : vehicles}
+        dataLimit={10}
+        style={{ padding: '10px 0' }}
+      />}
     </>
   );
 }

@@ -1,26 +1,30 @@
 import React from 'react';
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, useMediaQuery } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useData } from '../contexts/DataContext';
 
 const useStyles = makeStyles(theme => ({
-    btnContainer: {
-        width: '100%',
-        textAlign: 'center',
-        // position: 'fixed',
-        padding: '10px 0',
-        bottom: 25,
-        // left: '50%',
-        // transform: 'translate(-50%, 0)'
-    },
     groupBtn: {
         margin: '0 5px'
     }
 }))
 
-function Pagination({ pageLimit }) {
+function Pagination({ pageLimit, data, dataLimit }) {
+    const [pages] = React.useState(Math.ceil(data.length / dataLimit));
     const { currentPage, setCurrentPage } = useData()
     const classes = useStyles()
+    const matches = useMediaQuery('(max-width: 600px)')
+
+    const desktopStyle = {
+        width: '100%',
+        textAlign: 'right',
+        paddingBottom: 10,
+    }
+
+    const mobileStyle = {
+        textAlign: 'center',
+        padding: '10px 0'
+    }
 
     function goToNextPage() {
         setCurrentPage(page => page + 1);
@@ -41,24 +45,25 @@ function Pagination({ pageLimit }) {
     };
 
     const PaginationButtons = () => (
-        <Box className={classes.btnContainer}>
+        <Box style={!matches ? desktopStyle : mobileStyle}>
             <Button
                 onClick={goToPreviousPage}
                 // className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
                 disabled={currentPage === 1}
                 variant="contained"
                 color="primary"
+                size="small"
             >
                 prev
             </Button>
 
             {getPaginationGroup().map((item, index) => {
-                console.log(item)
                 return <Button
                     key={index}
                     onClick={changePage}
                     className={classes.groupBtn}
-                    style={{ backgroundColor: item === currentPage ? '#ccc' : 'inherit' }}
+                    style={{ backgroundColor: item === currentPage ? '#eee' : 'inherit' }}
+                    size="small"
                 >
                     <span>{item}</span>
                 </Button>
@@ -67,9 +72,10 @@ function Pagination({ pageLimit }) {
             <Button
                 onClick={goToNextPage}
                 // className={`next ${currentPage === pages ? 'disabled' : ''}`}
-                // disabled={`next ${currentPage === pages ? 'disabled' : ''}`}
+                disabled={currentPage >= pages}
                 variant="contained"
                 color="primary"
+                size="small"
             >
                 next
             </Button>
@@ -83,4 +89,4 @@ function Pagination({ pageLimit }) {
     );
 }
 
-export default Pagination;
+export default Pagination

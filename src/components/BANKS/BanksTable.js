@@ -11,9 +11,9 @@ import { useData } from '../../contexts/DataContext';
 import BankRow from './BankRow';
 
 const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-  },
+  // table: {
+  //   marginBottom: 20
+  // },
 });
 
 export default function BanksTable() {

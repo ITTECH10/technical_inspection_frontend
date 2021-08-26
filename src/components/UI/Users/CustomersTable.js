@@ -16,9 +16,9 @@ import Pagination from '../../../utils/Pagination';
 import RenderPaginatedContent from '../../../utils/RenderPaginatedContent';
 
 const useStyles = makeStyles({
-    table: {
-        // minWidth: 650,
-    },
+    // table: {
+    //     minWidth: 650,
+    // },
 });
 
 function CarTable({ t }) {
@@ -43,6 +43,11 @@ function CarTable({ t }) {
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
             <SearchCustomers fields={fields} setFields={setFields} noCustomers={users.length === 1} />
+            {!matches && <Pagination
+                pageLimit={matches ? 1 : 3}
+                data={query !== '' ? filteredContent : content}
+                dataLimit={10}
+            />}
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
@@ -62,9 +67,11 @@ function CarTable({ t }) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Pagination
+            {matches && <Pagination
                 pageLimit={matches ? 1 : 3}
-            />
+                data={query !== '' ? filteredContent : content}
+                dataLimit={10}
+            />}
         </>
     );
 }

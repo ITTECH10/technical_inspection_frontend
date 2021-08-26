@@ -16,9 +16,9 @@ import { withNamespaces } from 'react-i18next';
 import UserInfoBlock from '../UI/Users/UserInfoBlock';
 
 const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-  },
+  // table: {
+  //   marginBottom: 20
+  // },
 });
 
 function CarTable({ t }) {

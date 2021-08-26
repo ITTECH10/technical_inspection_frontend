@@ -19,7 +19,7 @@ const CustomersRow = ({ data }) => {
     return (
         <TableRow className='table__row--root' onClick={() => onSelectUser()}>
             <TableCell component="th" scope="row">
-                {data.firstName && data.firstName}
+                {data.firstName}
             </TableCell>
             <TableCell>{data.lastName}</TableCell>
             <TableCell>{data.email}</TableCell>

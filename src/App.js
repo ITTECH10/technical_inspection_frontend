@@ -14,7 +14,8 @@ import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 import ErrorBoundary from './utils/ErrorBoundary';
-import GuardedRoute from './utils/GuardedRoute';
+// import GuardedRoute from './utils/GuardedRoute';
+import ScrollToTopButton from './components/UI/ScrollToTopButton';
 
 // LAZY LOADING 
 const CustomersScreen = React.lazy(() => import('./screens/CustomersScreen'))
@@ -138,6 +139,7 @@ function App() {
   const app = !appLoading ? (
     <div style={authenticated && history.location.pathname !== '/privacyPolicy' ? navbarFix : null} className="App">
       {authenticated && history.location.pathname !== '/privacyPolicy' && !loading && <MenuCliped open={open} setOpen={setOpen} />}
+      {authenticated && history.location.pathname !== '/privacyPolicy' && !loading && <ScrollToTopButton />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />

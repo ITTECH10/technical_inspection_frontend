@@ -11,14 +11,14 @@ import { useData } from '../../contexts/DataContext';
 import InsuranceRow from './InsuranceRow';
 
 const useStyles = makeStyles({
-  table: {
-    // minWidth: 650,
-  },
+  // table: {
+  //   marginBottom: 20
+  // },
 });
 
 export default function InsuranceTable() {
   const classes = useStyles();
-  const {insurances} = useData()
+  const { insurances } = useData()
 
   const insurancesContent = insurances.map(insurance => (
     <InsuranceRow key={insurance._id} insurance={insurance} />
