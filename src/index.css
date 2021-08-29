@@ -12,7 +12,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: visible !important;
-  padding-right: 17px !important;
 }
 
 code {
@@ -32,4 +31,10 @@ code {
   background-color: #eee;
   cursor: pointer;
   transition: all .5s ease-in-out;
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    padding-right: 17px !important;
+  }
 }
