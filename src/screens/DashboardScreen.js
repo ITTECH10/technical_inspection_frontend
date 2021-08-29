@@ -13,9 +13,20 @@ const useStyles = makeStyles(theme => ({
     title: {},
     divider: {},
     dashboardBoxOne: {
-        width: 300,
-        // height: 180,
-        position: 'relative'
+        position: 'relative',
+        marginBottom: 10,
+        [theme.breakpoints.up('md')]: {
+            width: 300,
+            marginBottom: 0
+        }
+    },
+    dashboardBoxThree: {
+        marginBottom: 10,
+        // flexGrow: 1,
+        [theme.breakpoints.up('md')]: {
+            width: 400,
+            marginBottom: 0
+        }
     },
     dashboardBoxBlueBox: {
         position: 'absolute',
@@ -58,7 +69,11 @@ const useStyles = makeStyles(theme => ({
     },
     boxFlexContainer: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+        [theme.breakpoints.up('md')]: {
+            flexDirection: 'row'
+        }
     },
     mainBoxTitle: {
         fontSize: 15,
@@ -102,7 +117,7 @@ const DashboardScreen = () => {
     const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date() && new Date(v.TUV) < oneMonthAhead)
 
     const fourteenDaysAhead = new Date(new Date().setDate(new Date().getDate() + 14))
-    const TUVExpiresInFourteenDays = vehicles.filter(v => new Date(v.TUV) < fourteenDaysAhead)
+    const TUVExpiresInFourteenDays = vehicles.filter(v => new Date(v.TUV) < fourteenDaysAhead && new Date(v.TUV) > new Date())
 
     const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
 
