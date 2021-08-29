@@ -20,6 +20,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExportUserData from './Users/ExportUserData';
 import Logo from './../../assets/images/logo.svg'
 import LanguageMenu from './LanguageMenu'
@@ -113,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'pointer',
         transition: 'all .5s ease',
         '&.Mui-selected': {
-            backgroundColor: 'rgba(75, 5, 5, .15)'
+            backgroundColor: 'rgba(75, 5, 5, .07)'
         },
         '&.Mui-selected:hover': {
             backgroundColor: 'rgba(75, 5, 5, .10)'
@@ -232,20 +233,24 @@ function ClippedDrawer({ open, setOpen, t }) {
                     {user.role === 'admin' ?
                         <List>
                             <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/', 0)}>
-                                <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
+                                <ListItemIcon><DashboardIcon color="primary" /></ListItemIcon>
                                 <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : 'initial' }} primary={t('MenuCustomers')} />
                             </ListItem>
-                            <ListItem selected={selectedIndex === 1} className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars', 1)}>
+                            <ListItem selected={selectedIndex === 1} className={classes.listItemRoot} onClick={() => onHandleNavigation('/customers', 1)}>
+                                <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 1 ? 'primary' : 'initial' }} primary={t('MenuCustomers')} />
+                            </ListItem>
+                            <ListItem selected={selectedIndex === 2} className={classes.listItemRoot} onClick={() => onHandleNavigation('/cars', 2)}>
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 1 ? 'primary' : 'initial' }} primary={t('MenuVehicles')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 2 ? 'primary' : 'initial' }} primary={t('MenuVehicles')} />
                             </ListItem>
-                            <ListItem selected={selectedIndex === 2} className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances', 2)}>
+                            <ListItem selected={selectedIndex === 3} className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances', 3)}>
                                 <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 2 ? 'primary' : 'initial' }} primary={t('MenuInsurances')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 3 ? 'primary' : 'initial' }} primary={t('MenuInsurances')} />
                             </ListItem>
-                            <ListItem selected={selectedIndex === 3} className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks', 3)}>
+                            <ListItem selected={selectedIndex === 4} className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks', 4)}>
                                 <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 3 ? 'primary' : 'initial' }} primary={t('MenuBanks')} />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 4 ? 'primary' : 'initial' }} primary={t('MenuBanks')} />
                             </ListItem>
                             <ExportUserData />
                         </List>

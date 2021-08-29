@@ -67,7 +67,7 @@ const Login = ({ history, t }) => {
         password: ''
     })
     const [errors, setErrors] = useState({})
-    const { setAuthenticated, setAppLoading, appLoading } = useData()
+    const { setAuthenticated, setAppLoading, appLoading, authenticated } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
 
     const handleChange = (e) => {
@@ -83,7 +83,7 @@ const Login = ({ history, t }) => {
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
             // console.log(res.data)
-            setAppLoading(true)
+            // setAppLoading(true)
             if (res.status === 201) {
                 setAuthorizationHeader(res.data.token)
                 setAuthenticated(true)
@@ -94,9 +94,9 @@ const Login = ({ history, t }) => {
             }
         })
             .catch(err => {
-                setErrors({
-                    message: err.response.data.message
-                })
+                // setErrors({
+                //     message: err.response.data.message ? err.response.data.message : {}
+                // })
                 setAppLoading(false)
                 console.log(err.response)
             })

@@ -5,19 +5,15 @@ import Loader from './utils/Loader'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
 
-// import Login from './screens/Login'
-
 import { useData } from './contexts/DataContext';
-import jwtDecode from 'jwt-decode'
-import axios from 'axios'
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 import ErrorBoundary from './utils/ErrorBoundary';
-// import GuardedRoute from './utils/GuardedRoute';
 import ScrollToTopButton from './components/UI/ScrollToTopButton';
 
 // LAZY LOADING 
+const DashboardScreen = React.lazy(() => import('./screens/DashboardScreen'))
 const CustomersScreen = React.lazy(() => import('./screens/CustomersScreen'))
 const SelectedUserDetailed = React.lazy(() => import('./components/UI/Users/SelectedUserDetailed'))
 const CarScreen = React.lazy(() => import('./screens/CarScreen'))
@@ -33,10 +29,29 @@ function App() {
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
-  let token = localStorage.token
+  // console.log(`authenticated: ${authenticated}`)
+
+  // let token = localStorage.token
+  let storageAuthenticated = localStorage.authenticated
   let storageUser = localStorage.user
   let storageSelectedUserRef = React.useRef(localStorage.selectedUser)
   let storageLanguage = localStorage.language
+
+  // OLD LOGIC
+  // if (!token.startsWith('Bearer')) {
+  //   logout(history)
+  // }
+
+  // // 1) If there is a token, decode it
+  // const decodedToken = jwtDecode(token)
+
+  // // 2) Check if the token is expired
+  // if (new Date(decodedToken.exp * 1000) < new Date()) {
+  //   logout(history)
+  // }
+
+  // setAuthenticated(true)
+  // axios.defaults.headers.common['Authorization'] = token
 
   useEffect(() => {
     if (storageUser) {
@@ -52,35 +67,21 @@ function App() {
     }
   }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser])
 
-
   useEffect(() => {
-    if (token) {
-      if (!token.startsWith('Bearer')) {
-        logout(history)
-      }
-
-      // 1) If there is a token, decode it
-      const decodedToken = jwtDecode(token)
-
-      // 2) Check if the token is expired
-      if (new Date(decodedToken.exp * 1000) < new Date()) {
-        logout(history)
-      }
-
-      setAuthenticated(true)
-      axios.defaults.headers.common['Authorization'] = token
+    if (authenticated) {
       getUserData()
     }
-  }, [token, logout, setAuthenticated, getUserData, history])
+  }, [getUserData, authenticated])
 
   useEffect(() => {
-    if (user && user.role === 'admin') {
+    if (storageUser && user && user.role === 'admin') {
+      setAuthenticated(true)
       getAllUsers()
       getAllVehicles()
       getInsurances()
       getBanks()
     }
-  }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles])
+  }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles, storageUser])
 
   let userId = user._id
   if (user && user.role === 'admin' && selectedUser) {
@@ -101,7 +102,8 @@ function App() {
           <Switch>
             {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
             {/* <Route exact path="/" component={HomeUser} /> */}
-            <Route exact path="/" component={CustomersScreen} />
+            <Route exact path="/" component={DashboardScreen} />
+            <Route exact path="/customers" component={CustomersScreen} />
             <Route exact path="/user/:id" component={SelectedUserDetailed} />
             <Route exact path="/cars" component={CarScreen} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
@@ -121,7 +123,7 @@ function App() {
   const routes = (
     <React.Suspense fallback={<Loader />}>
       <Switch>
-        <Route exact path="/" component={Login} auth={!authenticated} />
+        <Route exact path="/" component={Login} />
         <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
       </Switch>
     </React.Suspense>

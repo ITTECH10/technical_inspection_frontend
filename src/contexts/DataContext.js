@@ -78,7 +78,7 @@ const DataContextProvider = ({ children }) => {
 
     const logout = useCallback((history) => {
         setAppLoading(true)
-        localStorage.removeItem('token')
+        localStorage.removeItem('authenticated')
         localStorage.removeItem('user')
         localStorage.removeItem('selectedUser')
         setAuthenticated(false)

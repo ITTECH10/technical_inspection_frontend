@@ -1,7 +1,7 @@
 import React from 'react'
 import FloatingButton from './FloatingButton'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import { Box, Tooltip } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 const ScrollToTopButton = () => {
     // INITIAL FUNCTION
@@ -33,12 +33,9 @@ const ScrollToTopButton = () => {
     return (
         <>
             <Box ref={scrollElRef} style={{ position: 'absolute', top: -57, height: 0, width: 0 }}></Box>
-
-            <Tooltip title="Scroll to top">
-                <FloatingButton bottom={0} onHandleClick={() => SmoothVerticalScrolling(scrollElRef.current, 275, 'top')}>
-                    <ArrowDropUpIcon />
-                </FloatingButton>
-            </Tooltip>
+            <FloatingButton bottom={0} onHandleClick={() => SmoothVerticalScrolling(scrollElRef.current, 275, 'top')}>
+                <ArrowDropUpIcon />
+            </FloatingButton>
         </>
     )
 }
