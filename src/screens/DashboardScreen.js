@@ -108,10 +108,11 @@ const DashboardScreen = () => {
         getAllVehicles()
     }, [])
 
-    const cashVehicles = vehicles.filter(v => v.vehiclePaymentType === 'cash')
-    const leasingVehicles = vehicles.filter(v => v.vehiclePaymentType !== 'cash')
-
     const twoMonthsAhead = new Date(new Date().setMonth(new Date().getMonth() + 2))
+
+    const cashVehicles = vehicles.filter(v => v.vehiclePaymentType === 'cash' && (new Date(v.paymentContractExpires) > new Date && new Date(v.paymentContractExpires) < twoMonthsAhead))
+    const leasingVehicles = vehicles.filter(v => v.vehiclePaymentType !== 'cash' && (new Date(v.paymentContractExpires) > new Date && new Date(v.paymentContractExpires) < twoMonthsAhead))
+
 
     const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
     const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date() && new Date(v.TUV) < oneMonthAhead)
@@ -120,6 +121,8 @@ const DashboardScreen = () => {
     const TUVExpiresInFourteenDays = vehicles.filter(v => new Date(v.TUV) < fourteenDaysAhead && new Date(v.TUV) > new Date())
 
     const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
+
+    // const twoMonthsAheadVehicles = vehicles.filter(v => new Date(v.paymentContractExpires) > new Date && new Date(v.paymentContractExpires) < twoMonthsAhead)
 
     const handleNavigateFinansesVehicles = () => {
         setVehicles(cashVehicles)
@@ -228,7 +231,7 @@ const DashboardScreen = () => {
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
                         <Typography className={classes.mainBoxTitle} variant="h5" component="h2">
-                            Finanzenstatus (Ablauf in 2 Monanten)
+                            Finanzenstatus (Ablauf in 2 Monaten)
                         </Typography>
                         <Divider className={classes.mainBoxDivider} />
 

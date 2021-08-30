@@ -140,24 +140,16 @@ const useStyles = makeStyles((theme) => ({
 function ClippedDrawer({ open, setOpen, t }) {
     const classes = useStyles();
     const theme = useTheme();
-    const { user, setVehiclesPage, logout } = useData()
+    const { user, setVehiclesPage, logout, getAllVehicles } = useData()
     const history = useHistory()
-    const [url, setUrl] = React.useState('/')
     const [selectedIndex, setSelectedIndex] = useState(0)
+    let storageSelectedIndex = localStorage.menuSelectedIndex
 
     React.useEffect(() => {
-        let isMounted
-
-        if (isMounted) {
-            history.listen((location, action) => {
-                setUrl(location.pathname)
-            })
+        if (storageSelectedIndex) {
+            setSelectedIndex(JSON.parse(storageSelectedIndex))
         }
-
-        return () => {
-            isMounted = false
-        }
-    })
+    }, [storageSelectedIndex])
 
     const handleDrawerClose = () => {
         setOpen(false);
@@ -170,9 +162,11 @@ function ClippedDrawer({ open, setOpen, t }) {
     const onHandleNavigation = (route, index) => {
         if (route === '/cars') {
             setVehiclesPage('allVehicles')
+            getAllVehicles()
         }
         history.push(route)
         setSelectedIndex(index)
+        localStorage.setItem('menuSelectedIndex', index)
         setOpen(false)
     }
 
@@ -203,7 +197,7 @@ function ClippedDrawer({ open, setOpen, t }) {
                         <img src={Logo} className={classes.logo} alt="Company Logo" />
                     </Box>
                     <Box className={classes.actionBtnsMenuBox}>
-                        {url !== '/' && url !== '/banks' && url !== '/insurances' && <IconButton style={{ color: '#fff' }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
+                        {history.location.pathname !== '/' && history.location.pathname !== '/banks' && history.location.pathname !== '/insurances' && <IconButton style={{ color: '#fff' }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
                         <Button onClick={() => logout(history)} color="inherit">{t('LogoutButton')}</Button>
                     </Box>
                     <LanguageMenu />
