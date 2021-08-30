@@ -19,11 +19,15 @@ function Pagination({ pageLimit, data, dataLimit }) {
         width: '100%',
         textAlign: 'right',
         paddingBottom: 10,
+        position: 'relative',
+        zIndex: 100000
     }
 
     const mobileStyle = {
         textAlign: 'left',
-        padding: '10px 0'
+        padding: '10px 0',
+        position: 'relative',
+        zIndex: 100000
     }
 
     function goToNextPage() {
@@ -44,20 +48,20 @@ function Pagination({ pageLimit, data, dataLimit }) {
         return new Array(pages).fill().map((_, idx) => start + idx + 1);
     };
 
-    const PaginationButtons = () => (
-        <Box style={!matches ? desktopStyle : mobileStyle}>
-            <Button
-                onClick={goToPreviousPage}
-                // className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
-                disabled={currentPage === 1}
-                variant="contained"
-                color="primary"
-                size="small"
-            >
-                prev
-            </Button>
+    const PaginationButtons = () => {
+        <Button
+            onClick={goToPreviousPage}
+            // className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
+            disabled={currentPage === 1}
+            variant="contained"
+            color="primary"
+            size="small"
+        >
+            prev
+        </Button>
 
-            {getPaginationGroup().map((item, index) => {
+        {
+            getPaginationGroup().map((item, index) => {
                 return <Button
                     key={index}
                     onClick={changePage}
@@ -67,25 +71,25 @@ function Pagination({ pageLimit, data, dataLimit }) {
                 >
                     <span>{item}</span>
                 </Button>
-            })}
+            })
+        }
 
-            <Button
-                onClick={goToNextPage}
-                // className={`next ${currentPage === pages ? 'disabled' : ''}`}
-                disabled={currentPage >= pages}
-                variant="contained"
-                color="primary"
-                size="small"
-            >
-                next
-            </Button>
-        </Box>
-    )
+        <Button
+            onClick={goToNextPage}
+            // className={`next ${currentPage === pages ? 'disabled' : ''}`}
+            disabled={currentPage >= pages}
+            variant="contained"
+            color="primary"
+            size="small"
+        >
+            next
+        </Button>
+    }
 
     return (
-        <>
+        <Box style={!matches ? desktopStyle : mobileStyle}>
             <PaginationButtons />
-        </>
+        </Box>
     );
 }
 
