@@ -162,7 +162,9 @@ function ClippedDrawer({ open, setOpen, t }) {
     const onHandleNavigation = (route, index) => {
         if (route === '/cars') {
             setVehiclesPage('allVehicles')
-            getAllVehicles()
+            if (user.role === 'admin') {
+                getAllVehicles()
+            }
         }
         history.push(route)
         setSelectedIndex(index)
