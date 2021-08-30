@@ -48,20 +48,20 @@ function Pagination({ pageLimit, data, dataLimit }) {
         return new Array(pages).fill().map((_, idx) => start + idx + 1);
     };
 
-    const PaginationButtons = () => {
-        <Button
-            onClick={goToPreviousPage}
-            // className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
-            disabled={currentPage === 1}
-            variant="contained"
-            color="primary"
-            size="small"
-        >
-            prev
-        </Button>
+    const PaginationButtons = () => (
+        <Box style={!matches ? desktopStyle : mobileStyle}>
+            <Button
+                onClick={goToPreviousPage}
+                // className={`prev ${currentPage === 1 ? 'disabled' : ''}`}
+                disabled={currentPage === 1}
+                variant="contained"
+                color="primary"
+                size="small"
+            >
+                prev
+            </Button>
 
-        {
-            getPaginationGroup().map((item, index) => {
+            {getPaginationGroup().map((item, index) => {
                 return <Button
                     key={index}
                     onClick={changePage}
@@ -71,25 +71,25 @@ function Pagination({ pageLimit, data, dataLimit }) {
                 >
                     <span>{item}</span>
                 </Button>
-            })
-        }
+            })}
 
-        <Button
-            onClick={goToNextPage}
-            // className={`next ${currentPage === pages ? 'disabled' : ''}`}
-            disabled={currentPage >= pages}
-            variant="contained"
-            color="primary"
-            size="small"
-        >
-            next
-        </Button>
-    }
+            <Button
+                onClick={goToNextPage}
+                // className={`next ${currentPage === pages ? 'disabled' : ''}`}
+                disabled={currentPage >= pages}
+                variant="contained"
+                color="primary"
+                size="small"
+            >
+                next
+            </Button>
+        </Box>
+    )
 
     return (
-        <Box style={!matches ? desktopStyle : mobileStyle}>
+        <>
             <PaginationButtons />
-        </Box>
+        </>
     );
 }
 
