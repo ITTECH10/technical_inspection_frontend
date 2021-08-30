@@ -25,33 +25,13 @@ const PrivacyPolicyScreen = React.lazy(() => import('./screens/PrivacyPolicyScre
 const Login = React.lazy(() => import('./screens/Login'))
 
 function App() {
-  const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getSelectedUser, getUserVehicles, logout, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
+  const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getUserVehicles, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
-  // console.log(`authenticated: ${authenticated}`)
-
-  // let token = localStorage.token
-  let storageAuthenticated = localStorage.authenticated
   let storageUser = localStorage.user
   let storageSelectedUserRef = React.useRef(localStorage.selectedUser)
   let storageLanguage = localStorage.language
-
-  // OLD LOGIC
-  // if (!token.startsWith('Bearer')) {
-  //   logout(history)
-  // }
-
-  // // 1) If there is a token, decode it
-  // const decodedToken = jwtDecode(token)
-
-  // // 2) Check if the token is expired
-  // if (new Date(decodedToken.exp * 1000) < new Date()) {
-  //   logout(history)
-  // }
-
-  // setAuthenticated(true)
-  // axios.defaults.headers.common['Authorization'] = token
 
   useEffect(() => {
     if (storageUser) {
@@ -79,8 +59,6 @@ function App() {
     }
   }, [user, storageUser])
 
-  console.log(authenticated)
-
   useEffect(() => {
     if (storageUser && user && user.role === 'admin') {
       setAuthenticated(true)
@@ -98,7 +76,6 @@ function App() {
 
   useEffect(() => {
     if (userId && user.role === 'user') {
-      // getSelectedUser(userId)
       getUserVehicles(userId)
     }
   }, [getUserVehicles, userId])
@@ -108,8 +85,6 @@ function App() {
       <React.Suspense fallback={<Loader />}>
         {user.role === 'admin' ?
           <Switch>
-            {/* {user.role === 'admin' ? <Route exact path="/" component={Home} /> : <Route exact path="/" component={HomeUser} />} */}
-            {/* <Route exact path="/" component={HomeUser} /> */}
             <Route exact path="/" component={DashboardScreen} />
             <Route exact path="/customers" component={CustomersScreen} />
             <Route exact path="/user/:id" component={SelectedUserDetailed} />
