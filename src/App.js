@@ -74,6 +74,14 @@ function App() {
   }, [getUserData, authenticated])
 
   useEffect(() => {
+    if (storageUser && user && user.role === 'user') {
+      setAuthenticated(true)
+    }
+  }, [user, storageUser])
+
+  console.log(authenticated)
+
+  useEffect(() => {
     if (storageUser && user && user.role === 'admin') {
       setAuthenticated(true)
       getAllUsers()

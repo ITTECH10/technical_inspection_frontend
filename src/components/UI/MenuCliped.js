@@ -224,7 +224,6 @@ function ClippedDrawer({ open, setOpen, t }) {
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </div>
-                {/* <Toolbar /> */}
                 <div className={classes.drawerContainer}>
                     {user.role === 'admin' ?
                         <List>
