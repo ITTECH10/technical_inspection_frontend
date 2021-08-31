@@ -18,15 +18,19 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('md')]: {
             width: 300,
             marginBottom: 0
-        }
+        },
+        boxShadow: '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)',
+        marginRight: 20,
     },
     dashboardBoxThree: {
         marginBottom: 10,
         // flexGrow: 1,
         [theme.breakpoints.up('md')]: {
-            width: 400,
+            width: 415,
             marginBottom: 0
-        }
+        },
+        boxShadow: '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)',
+        marginRight: 20,
     },
     dashboardBoxBlueBox: {
         position: 'absolute',
@@ -69,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     },
     boxFlexContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         flexDirection: 'column',
         [theme.breakpoints.up('md')]: {
             flexDirection: 'row'
@@ -84,18 +88,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#1976d2'
     },
     btnWarning: {
-        color: '#fff',
-        backgroundColor: yellow[700],
-        "&:hover": {
-            backgroundColor: yellow[800]
-        }
+        color: yellow[700]
     },
     btnDanger: {
-        color: '#fff',
-        backgroundColor: red[700],
-        "&:hover": {
-            backgroundColor: red[800]
-        }
+        color: red[700]
     }
 }))
 
@@ -106,8 +102,8 @@ const DashboardScreen = () => {
     const twoMonthsAhead = new Date(new Date().setMonth(new Date().getMonth() + 2))
 
     const vehiclesWithAddedContract = vehicles.filter(v => v.contractExpiresOn)
-    const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) > new Date() && new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) < twoMonthsAhead && v.vehiclePaymentTypeVariant === 'credit')
-    const vehiclesWithLeasingsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) > new Date() && new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) < twoMonthsAhead && v.vehiclePaymentTypeVariant === 'leasing')
+    const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
+    const vehiclesWithLeasingsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
 
     React.useEffect(() => {
         getAllVehicles()
@@ -161,18 +157,17 @@ const DashboardScreen = () => {
             </Box>
 
             <Box className={classes.boxFlexContainer}>
-                <Card className={classes.dashboardBoxOne} variant="outlined">
+                <Card className={classes.dashboardBoxOne} variant="outlined" elevation={3}>
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h2">
+                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                             Kunden
                         </Typography>
-                        <Divider className={classes.mainBoxDivider} />
 
                         <Box className={classes.dashboardContentFlex}>
-                            <Typography className={classes.countTitle} variant="h4" component="h2">
+                            <Typography className={classes.countTitle} variant="h4" component="h4">
                                 {users.length}
                             </Typography>
-                            <Button size="small" variant="contained" color="secondary" onClick={() => history.push('/customers')}>
+                            <Button size="small" variant="basic" style={{ marginTop: 20 }} color="secondary" onClick={() => history.push('/customers')}>
                                 Alle Kunden
                             </Button>
                         </Box>
@@ -180,16 +175,15 @@ const DashboardScreen = () => {
                 </Card>
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h2">
+                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                             Vervaltete Fahrzeuge
                         </Typography>
-                        <Divider className={classes.mainBoxDivider} />
 
                         <Box className={classes.dashboardContentFlex}>
-                            <Typography className={classes.countTitle} variant="h4" component="h2">
+                            <Typography className={classes.countTitle} variant="h4" component="h4">
                                 {vehicles.length}
                             </Typography>
-                            <Button size="small" variant="contained" color="secondary" onClick={() => history.push('/cars')}>
+                            <Button size="small" variant="basic" style={{ marginTop: 20 }} color="secondary" onClick={() => history.push('/cars')}>
                                 Alle Fahrzeuge
                             </Button>
                         </Box>
@@ -197,33 +191,32 @@ const DashboardScreen = () => {
                 </Card>
                 <Card className={classes.dashboardBoxThree} variant="outlined">
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h2">
+                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                             TUV/AU Status (fallig)
                         </Typography>
-                        <Divider className={classes.mainBoxDivider} />
 
                         <Box className={classes.tuvBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h2">
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {TUVExpiresInThirtyDays.length}
                                 </Typography>
-                                <Button size="small" variant="contained" color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
+                                <Button size="small" variant="basic" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
                                     In 30 tagen
                                 </Button>
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h2">
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {TUVExpiresInFourteenDays.length}
                                 </Typography>
-                                <Button size="small" variant="contained" className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
+                                <Button size="small" variant="basic" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
                                     In 14 Tagen
                                 </Button>
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h2">
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {TUVExpired.length}
                                 </Typography>
-                                <Button size="small" variant="contained" className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
+                                <Button size="small" variant="basic" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
                                     Uberfallig
                                 </Button>
                             </Box>
@@ -232,25 +225,24 @@ const DashboardScreen = () => {
                 </Card>
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h2">
+                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                             Finanzenstatus (Ablauf in 2 Monaten)
                         </Typography>
-                        <Divider className={classes.mainBoxDivider} />
 
                         <Box className={classes.finansesBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h2">
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {vehiclesWithCreditsContractExpiringInTwoMonths.length}
                                 </Typography>
-                                <Button size="small" variant="contained" color="secondary" onClick={handleNavigateFinansesVehicles}>
+                                <Button size="small" variant="basic" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
                                     Finanzierung
                                 </Button>
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h2">
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {vehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                 </Typography>
-                                <Button size="small" variant="contained" color="secondary" onClick={handleNavigateCreditVehicles}>
+                                <Button size="small" variant="basic" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
                                     Leasing
                                 </Button>
                             </Box>

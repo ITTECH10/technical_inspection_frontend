@@ -1,11 +1,12 @@
 import React from 'react'
 import UploadCarData from '../components/VEHICLES/UploadCarData'
-import CarTable from '../components/VEHICLES/CarTable'
+import CarTableAdvanced from '../components/VEHICLES/CarTableAdvanced'
 import { useData } from '../contexts/DataContext'
 import Loader from '../utils/Loader'
 // import UserInfoBlock from '../components/UI/Users/UserInfoBlock'
-import VehiclesTable from './../components/VEHICLES/VehiclesTable'
+import VehiclesTableAdvanced from './../components/VEHICLES/VehiclesTableAdvanced'
 import { useHistory } from 'react-router-dom'
+import Box from '@material-ui/core/Box'
 
 const CarScreen = () => {
     const { user, selectedUser, appLoading, vehiclesPage } = useData()
@@ -27,10 +28,14 @@ const CarScreen = () => {
     }, [])
 
     const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
-        <>
-            <VehiclesTable />
-        </>
-    ) : <CarTable />
+        <Box style={{ position: 'relative', margin: '10px 0', marginRight: 60 }}>
+            <VehiclesTableAdvanced />
+        </Box>
+    ) : (
+        <Box style={{ position: 'relative', margin: '10px 0', marginRight: 60 }}>
+            <CarTableAdvanced />
+        </Box>
+    )
 
     return (
         user.role === 'admin' ?

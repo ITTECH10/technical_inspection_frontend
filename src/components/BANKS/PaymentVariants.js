@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: 25
     },
     flexContent: {
-        width: 310,
+        width: 320,
         display: 'flex',
         justifyContent: 'space-between'
     }
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 const PaymentVariants = () => {
     const classes = useStyles()
-    const { selectedCar, getCorespondingPayment } = useData()
+    const { selectedCar, getCorespondingPayment, selectedPayment } = useData()
     const { vehiclePaymentType } = selectedCar
 
     React.useEffect(() => {

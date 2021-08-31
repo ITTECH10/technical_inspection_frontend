@@ -4,12 +4,12 @@ import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 
-const CarRow = ({ data }) => {
+const CarRow = ({ vehicle }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar } = useData()
 
     const onHandleCarRender = () => {
-        const selectedCar = vehicles.find(v => v._id === data._id)
+        const selectedCar = vehicles.find(v => v._id === vehicle._id)
         setSelectedCar(selectedCar)
         history.push(`/cars/${selectedCar._id}`)
     }
@@ -17,10 +17,10 @@ const CarRow = ({ data }) => {
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()}>
             <TableCell component="th" scope="row">
-                {data.mark}
+                {vehicle.mark}
             </TableCell>
-            <TableCell>{data.model}</TableCell>
-            <TableCell>{data.registrationNumber}</TableCell>
+            <TableCell>{vehicle.model}</TableCell>
+            <TableCell>{vehicle.registrationNumber}</TableCell>
         </TableRow>
     )
 }

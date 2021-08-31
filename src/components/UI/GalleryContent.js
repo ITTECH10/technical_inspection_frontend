@@ -22,15 +22,7 @@ const useStyles = makeStyles(theme => ({
         height: 150,
         // width: 160
     },
-    imgBox: {
-        borderRadius: 3,
-        overflow: 'hidden',
-        height: 250,
-        // width: 500,
-        [theme.breakpoints.up('md')]: {
-            height: 600
-        }
-    },
+    imgBox: {},
     img: {
         height: '100%',
         width: '100%'
@@ -61,6 +53,17 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
     const [open, setOpen] = React.useState(false)
 
     const formatedTitle = `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
+
+    const imgBox = {
+        borderRadius: 3,
+        overflow: 'hidden',
+        height: '100vh',
+        width: '80vw',
+        background: `url(${`${image.url}`})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'contain'
+    }
 
     const handleOpen = () => {
         setOpen(true)
@@ -111,8 +114,8 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
             <Dialog PaperProps={{ className: { root: classes.rootPaper } }} open={open} onClose={handleClose}>
                 {/* <DialogContent> */}
                 {image.format === 'jpg' || image.format === 'png' ?
-                    <Box className={classes.imgBox}>
-                        <img alt="gallery-car" src={image.url} className={classes.img} />
+                    <Box style={imgBox}>
+                        {/* <img alt="gallery-car" src={image.url} className={classes.img} /> */}
                         <Typography style={{ position: 'absolute', bottom: 5, right: 10, fontSize: 12, color: '#fff' }}>{formatedTitle}</Typography>
                     </Box> : <Button variant="contained" size="large" color="primary" onClick={() => handlePdfDownload()}>{t('DownloadPdfButton')}</Button>}
                 {/* </DialogContent> */}

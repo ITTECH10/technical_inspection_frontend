@@ -4,24 +4,31 @@ import { useData } from '../../contexts/DataContext'
 
 const PaymentDetailsForm = () => {
     const { selectedPayment } = useData()
+    let formatedCashPayedAt, formatedFinansesCreditStartDate, formatedLeasingStartDate
+
+    if (selectedPayment.cashPayment) {
+        formatedCashPayedAt = new Date(selectedPayment.cashPayment.payedAt).toLocaleString()
+    }
+
+    if (selectedPayment.creditPayment) {
+        formatedFinansesCreditStartDate = new Date(selectedPayment.creditPayment.creditStartDate).toLocaleString()
+    }
+
+    if (selectedPayment.leasingPayment) {
+        formatedLeasingStartDate = new Date(selectedPayment.leasingPayment.leasingStartDate).toLocaleString()
+    }
 
     const CashPaymentForm = () => (
         <Paper style={{ padding: 10, marginBottom: 20 }}>
             {selectedPayment.cashPayment && (
                 <>
                     <Typography variant="h5" style={{ marginBottom: 10 }}>Bezahlt mit cash</Typography>
-                    <TextField
-                        value={`Payed at: ${selectedPayment.cashPayment.payedAt}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Summe: ${selectedPayment.cashPayment.cashSum}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Payed at: ${formatedCashPayedAt}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Summe: ${selectedPayment.cashPayment.cashSum}`}</Typography>
+                    </Box>
                 </>
             )}
         </Paper>
@@ -32,43 +39,26 @@ const PaymentDetailsForm = () => {
             {selectedPayment.creditPayment && (
                 <>
                     <Typography variant="h5" style={{ marginBottom: 10 }}>Bezahlt mit finanzierung</Typography>
-                    <TextField
-                        value={`Contract number: ${selectedPayment.creditPayment.contractNumber}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Credit start date: ${selectedPayment.creditPayment.creditStartDate}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Monthly credit payment: ${selectedPayment.creditPayment.monthlyCreditPayment}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Interest Rate: ${selectedPayment.creditPayment.interestRate}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Credit lasts for: ${selectedPayment.creditPayment.creditLastsFor} months`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Contract number: ${selectedPayment.creditPayment.contractNumber}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Credit start date: ${formatedFinansesCreditStartDate}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Monthly credit payment: ${selectedPayment.creditPayment.monthlyCreditPayment}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Interest Rate: ${selectedPayment.creditPayment.interestRate}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Credit lasts for: ${selectedPayment.creditPayment.creditLastsFor} months`}</Typography>
+                    </Box>
+
                     {selectedPayment.creditPayment.closingRate &&
-                        <TextField
-                            value={`Closing rate: ${selectedPayment.creditPayment.closingRate}`}
-                            fullWidth
-                            disabled
-                            style={{ marginBottom: 10 }}
-                        />}
+                        <Box style={{ marginBottom: 10 }}>
+                            <Typography>{`Closing rate: ${selectedPayment.creditPayment.closingRate}`}</Typography>
+                        </Box>}
                 </>
             )}
         </Paper>
@@ -79,58 +69,39 @@ const PaymentDetailsForm = () => {
             {selectedPayment.leasingPayment && (
                 <>
                     <Typography variant="h5" style={{ marginBottom: 10 }}>Bezahlt mit leasing</Typography>
-                    <TextField
-                        value={`Contract number: ${selectedPayment.leasingPayment.contractNumber}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Leasing start date: ${selectedPayment.leasingPayment.leasingStartDate}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Monthly leasing payment: ${selectedPayment.leasingPayment.monthlyLeasingPayment}`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
-                    <TextField
-                        value={`Leasing lasts for: ${selectedPayment.leasingPayment.leasingLastsFor} months`}
-                        fullWidth
-                        disabled
-                        style={{ marginBottom: 10 }}
-                    />
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Contract number: ${selectedPayment.leasingPayment.contractNumber}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Leasing start date: ${formatedLeasingStartDate}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Monthly leasing payment: ${selectedPayment.leasingPayment.monthlyLeasingPayment}`}</Typography>
+                    </Box>
+                    <Box style={{ marginBottom: 10 }}>
+                        <Typography>{`Leasing lasts for: ${selectedPayment.leasingPayment.leasingLastsFor} months`}</Typography>
+                    </Box>
+
                     {selectedPayment.leasingPayment.remainingPayment &&
-                        <TextField
-                            value={`Restvert: ${selectedPayment.leasingPayment.remainingPayment}`}
-                            fullWidth
-                            disabled
-                            style={{ marginBottom: 10 }}
-                        />}
+                        <Box style={{ marginBottom: 10 }}>
+                            <Typography>{`Restvert: ${selectedPayment.leasingPayment.remainingPayment}`}</Typography>
+                        </Box>
+                    }
                     {selectedPayment.leasingPayment.allowedYearlyKilometers &&
-                        <TextField
-                            value={`Allowed yearly kilometers: ${selectedPayment.leasingPayment.allowedYearlyKilometers}`}
-                            fullWidth
-                            disabled
-                            style={{ marginBottom: 10 }}
-                        />}
+                        <Box style={{ marginBottom: 10 }}>
+                            <Typography>{`Allowed yearly kilometers: ${selectedPayment.leasingPayment.allowedYearlyKilometers}`}</Typography>
+                        </Box>
+                    }
                     {selectedPayment.leasingPayment.costsForMoreKilometers &&
-                        <TextField
-                            value={`Costs for more kilometers: ${selectedPayment.leasingPayment.costsForMoreKilometers}`}
-                            fullWidth
-                            disabled
-                            style={{ marginBottom: 10 }}
-                        />}
+                        <Box style={{ marginBottom: 10 }}>
+                            <Typography>{`Costs for more kilometers: ${selectedPayment.leasingPayment.costsForMoreKilometers}`}</Typography>
+                        </Box>
+                    }
                     {selectedPayment.leasingPayment.costsForLessKilometers &&
-                        <TextField
-                            value={`Costs for less kilometers: ${selectedPayment.leasingPayment.costsForLessKilometers}`}
-                            fullWidth
-                            disabled
-                            style={{ marginBottom: 10 }}
-                        />}
+                        <Box style={{ marginBottom: 10 }}>
+                            <Typography>{`Costs for less kilometers: ${selectedPayment.leasingPayment.costsForLessKilometers}`}</Typography>
+                        </Box>
+                    }
                 </>
             )}
         </Paper>

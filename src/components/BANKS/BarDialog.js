@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { useData } from './../../contexts/DataContext'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
     const history = useHistory()
-    const { setSelectedCar } = useData()
+    const { setSelectedCar, selectedPayment } = useData()
 
     const fieldsInit = {
         payedAt: '',
@@ -65,8 +66,9 @@ export default function FormDialog() {
 
     return (
         <div>
-            <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+            <Button variant="text" color="secondary" onClick={handleClickOpen}>
                 Bar
+                {selectedPayment.cashPayment && <CheckCircleIcon />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Barbezahlung</DialogTitle>

@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
-    const { banks, setSelectedCar } = useData()
+    const { banks, setSelectedCar, selectedPayment } = useData()
     const history = useHistory()
 
     const fieldsInit = {
@@ -75,8 +76,9 @@ export default function FormDialog() {
 
     return (
         <div>
-            <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+            <Button variant="text" color="secondary" onClick={handleClickOpen}>
                 Leasing
+                {selectedPayment.leasingPayment && <CheckCircleIcon />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Leasing</DialogTitle>
