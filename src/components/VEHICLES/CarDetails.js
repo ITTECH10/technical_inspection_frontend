@@ -6,9 +6,11 @@ import { Grid } from '@material-ui/core'
 import axios from 'axios'
 import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
-import BankGrid from '../BANKS/BankGrid'
+// import BankGrid from '../BANKS/BankGrid'
+import PaymentVariants from '../BANKS/PaymentVariants'
 import GalleryAlternative from './../UI/GalleryAlternative'
 import UserInfoBlock from '../UI/Users/UserInfoBlock'
+import PaymentDetailsForm from '../BANKS/PaymentDetailsForm'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -87,7 +89,9 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
             {selectedUser && <UserInfoBlock />}
             <VehicleDetailsGrid setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
             <InsuranceHouseGrid />
-            <BankGrid />
+            <PaymentVariants />
+            <PaymentDetailsForm />
+            {/* <BankGrid /> */}
             {/* <UploadCarImages
                     onHandleAddOpen={onHandleAddOpen}
                     setOnHandleAddOpen={setOnHandleAddOpen}

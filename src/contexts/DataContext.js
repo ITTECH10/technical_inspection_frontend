@@ -33,6 +33,9 @@ const DataContextProvider = ({ children }) => {
     const [banks, setBanks] = useState([])
     const [selectedCarBank, setSelectedCarBank] = useState({})
 
+    // CONTRACTS
+    const [selectedPayment, setSelectedPayment] = useState({})
+
     // PAGINATION 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -41,6 +44,16 @@ const DataContextProvider = ({ children }) => {
         const endIndex = startIndex + dataLimit;
         return data.slice(startIndex, endIndex);
     };
+
+    const getCorespondingPayment = useCallback((paymentId) => {
+        axios.get(`/cars/payments/${paymentId}`).then(res => {
+            if (res.status === 200) {
+                setSelectedPayment(res.data.payments)
+            }
+        }).catch(err => {
+            console.log(err.response)
+        })
+    }, [])
 
     const acceptPrivacyPolicy = useCallback((id) => {
         axios(`/users/me/privacyPolicy/${id}`)
@@ -229,7 +242,9 @@ const DataContextProvider = ({ children }) => {
         setVehiclesPage,
         getPaginatedData,
         currentPage,
-        setCurrentPage
+        setCurrentPage,
+        getCorespondingPayment,
+        selectedPayment
     }
 
     return (

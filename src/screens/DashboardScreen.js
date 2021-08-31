@@ -102,17 +102,19 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, selectedCar } = useData()
+    const twoMonthsAhead = new Date(new Date().setMonth(new Date().getMonth() + 2))
+
+    const vehiclesWithAddedContract = vehicles.filter(v => v.contractExpiresOn)
+    const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) > new Date() && new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) < twoMonthsAhead && v.vehiclePaymentTypeVariant === 'credit')
+    const vehiclesWithLeasingsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) > new Date() && new Date(new Date().setMonth(new Date().getMonth() + v.contractExpiresOn)) < twoMonthsAhead && v.vehiclePaymentTypeVariant === 'leasing')
 
     React.useEffect(() => {
         getAllVehicles()
     }, [])
 
-    const twoMonthsAhead = new Date(new Date().setMonth(new Date().getMonth() + 2))
-
     const cashVehicles = vehicles.filter(v => v.vehiclePaymentType === 'cash' && (new Date(v.paymentContractExpires) > new Date && new Date(v.paymentContractExpires) < twoMonthsAhead))
     const leasingVehicles = vehicles.filter(v => v.vehiclePaymentType !== 'cash' && (new Date(v.paymentContractExpires) > new Date && new Date(v.paymentContractExpires) < twoMonthsAhead))
-
 
     const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
     const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date() && new Date(v.TUV) < oneMonthAhead)
@@ -125,12 +127,12 @@ const DashboardScreen = () => {
     // const twoMonthsAheadVehicles = vehicles.filter(v => new Date(v.paymentContractExpires) > new Date && new Date(v.paymentContractExpires) < twoMonthsAhead)
 
     const handleNavigateFinansesVehicles = () => {
-        setVehicles(cashVehicles)
+        setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
         history.push('/cars')
     }
 
     const handleNavigateCreditVehicles = () => {
-        setVehicles(leasingVehicles)
+        setVehicles(vehiclesWithLeasingsContractExpiringInTwoMonths)
         history.push('/cars')
     }
 
@@ -238,7 +240,7 @@ const DashboardScreen = () => {
                         <Box className={classes.finansesBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h2">
-                                    {cashVehicles.length}
+                                    {vehiclesWithCreditsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="contained" color="secondary" onClick={handleNavigateFinansesVehicles}>
                                     Finanzierung
@@ -246,7 +248,7 @@ const DashboardScreen = () => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h2">
-                                    {leasingVehicles.length}
+                                    {vehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="contained" color="secondary" onClick={handleNavigateCreditVehicles}>
                                     Leasing
