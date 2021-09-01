@@ -22,7 +22,13 @@ const useStyles = makeStyles(theme => ({
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
     const history = useHistory()
-    const { setSelectedCar, selectedPayment } = useData()
+    const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
+    let cashPaymentId
+    const carId = history.location.pathname.split('/')[2]
+
+    if (selectedPayment.cashPayment) {
+        cashPaymentId = selectedPayment.cashPayment._id
+    }
 
     const fieldsInit = {
         payedAt: '',
@@ -30,9 +36,7 @@ export default function FormDialog() {
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
-
     const classes = useStyles()
-    const carId = history.location.pathname.split('/')[2]
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -50,7 +54,7 @@ export default function FormDialog() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handlePostSubmit = (e) => {
         e.preventDefault()
 
         const data = { ...fields }
@@ -59,6 +63,22 @@ export default function FormDialog() {
                 if (res.status === 201) {
                     handleClose()
                     setSelectedCar(res.data.vehicle)
+                }
+            })
+            .catch(err => console.log(err.response))
+    }
+
+    const handlePutSubmit = (e) => {
+        e.preventDefault()
+
+        const data = { ...fields, vehiclePayedFor: carId }
+        axios.put(`/contracts/cash/${cashPaymentId}`, data)
+            .then(res => {
+                if (res.status === 202) {
+                    const updatedPayments = { ...selectedPayment }
+                    updatedPayments.cashPayment = res.data.cashPayment
+                    setSelectedPayment(updatedPayments)
+                    handleClose()
                 }
             })
             .catch(err => console.log(err.response))
@@ -76,7 +96,7 @@ export default function FormDialog() {
                     <DialogContentText>
                         Wann wurde das Auto abbgezahlt / gekauft?
                     </DialogContentText>
-                    <form onSubmit={handleSubmit} style={{ marginBottom: 10 }}>
+                    <form onSubmit={!selectedPayment.cashPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="payedAt"
                             id="payedAt-bar"

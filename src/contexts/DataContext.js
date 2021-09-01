@@ -1,5 +1,6 @@
 import React, { useContext, useState, useCallback } from 'react'
 import axios from 'axios'
+import { objectIsEmpty } from './../utils/helpers'
 
 const DataContext = React.createContext()
 
@@ -244,7 +245,8 @@ const DataContextProvider = ({ children }) => {
         currentPage,
         setCurrentPage,
         getCorespondingPayment,
-        selectedPayment
+        selectedPayment,
+        setSelectedPayment
     }
 
     return (

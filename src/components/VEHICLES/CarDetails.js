@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = ({ setOnHandleDeleteOpen }) => {
-    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setSelectedCarBank, carImages } = useData()
+    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, carImages } = useData()
     const classes = useStyles()
     const history = useHistory()
-    const { insuranceHouse, vehiclePaymentType, vehicleOwner } = selectedCar
+    const { insuranceHouse, vehicleOwner } = selectedCar
     const { role } = user
     const corelatedCar = users.find(u => u._id === vehicleOwner)
 
@@ -45,15 +45,15 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
             .catch(err => console.log(err.response))
     }, [insuranceHouse, setSelectedCarInsurance])
 
-    const getCarBankInfo = React.useCallback(() => {
-        axios.get(`/payment/${vehiclePaymentType}`)
-            .then(res => {
-                if (res.status === 200) {
-                    setSelectedCarBank(res.data.bank)
-                }
-            })
-            .catch(err => console.log(err.response))
-    }, [setSelectedCarBank, vehiclePaymentType])
+    // const getCarBankInfo = React.useCallback(() => {
+    //     axios.get(`/payment/${vehiclePaymentType}`)
+    //         .then(res => {
+    //             if (res.status === 200) {
+    //                 setSelectedCarBank(res.data.bank)
+    //             }
+    //         })
+    //         .catch(err => console.log(err.response))
+    // }, [setSelectedCarBank, vehiclePaymentType])
 
     // OPTIONAL
     let carId = history.location.pathname.split('/')[2]
@@ -70,13 +70,13 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
         }
     }, [selectedCar, getCarInsurance, setSelectedUser, role])
 
-    useEffect(() => {
-        if (vehiclePaymentType !== undefined
-            && vehiclePaymentType !== 'Cash'
-            && role === 'user') {
-            getCarBankInfo()
-        }
-    }, [selectedCar, role, getCarBankInfo, vehiclePaymentType])
+    // useEffect(() => {
+    //     if (vehiclePaymentType !== undefined
+    //         && vehiclePaymentType !== 'Cash'
+    //         && role === 'user') {
+    //         getCarBankInfo()
+    //     }
+    // }, [selectedCar, role, getCarBankInfo, vehiclePaymentType])
 
     return (
         <Grid container className={classes.mainContainer} direction="column">

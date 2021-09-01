@@ -19,16 +19,19 @@ const useStyles = makeStyles(theme => ({
 
 const PaymentVariants = () => {
     const classes = useStyles()
-    const { selectedCar, getCorespondingPayment, selectedPayment } = useData()
+    const { selectedCar, getCorespondingPayment, setSelectedPayment, user } = useData()
     const { vehiclePaymentType } = selectedCar
 
     React.useEffect(() => {
-        if (selectedCar._id) {
+        if (selectedCar._id && vehiclePaymentType) {
             getCorespondingPayment(vehiclePaymentType)
+        } else {
+            setSelectedPayment({})
         }
     }, [getCorespondingPayment, selectedCar])
 
     return (
+        user.role === 'admin' &&
         <Box className={classes.container}>
             <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>Bezahlung</Typography>
             <Divider style={{ marginBottom: 10 }} />

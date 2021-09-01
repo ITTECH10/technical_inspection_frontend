@@ -23,11 +23,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
-    const { banks, setSelectedCar, selectedPayment } = useData()
+    const { banks, setSelectedCar, selectedPayment, setSelectedPayment } = useData()
     const history = useHistory()
 
+    let leasingPaymentId
+    const carId = history.location.pathname.split('/')[2]
+
+    if (selectedPayment.leasingPayment) {
+        leasingPaymentId = selectedPayment.leasingPayment._id
+    }
+
     const fieldsInit = {
-        leasingGiver: banks[0]._id,
+        leasingGiver: banks ? banks[0]._id : '',
         contractNumber: '',
         leasingStartDate: '',
         monthlyLeasingPayment: '',
@@ -39,8 +46,6 @@ export default function FormDialog() {
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
-
-    const carId = history.location.pathname.split('/')[2]
 
     const handleChange = (e) => {
         setFields({
@@ -60,7 +65,7 @@ export default function FormDialog() {
         setFields(fieldsInit)
     };
 
-    const handleSubmit = (e) => {
+    const handlePostSubmit = (e) => {
         e.preventDefault()
 
         const data = { ...fields }
@@ -69,6 +74,22 @@ export default function FormDialog() {
                 if (res.status === 201) {
                     handleClose()
                     setSelectedCar(res.data.vehicle)
+                }
+            })
+            .catch(err => console.log(err.response))
+    }
+
+    const handlePutSubmit = (e) => {
+        e.preventDefault()
+
+        const data = { ...fields, vehiclePayedFor: carId }
+        axios.put(`/contracts/leasing/${leasingPaymentId}`, data)
+            .then(res => {
+                if (res.status === 202) {
+                    const updatedPayments = { ...selectedPayment }
+                    updatedPayments.leasingPayment = res.data.leasingPayment
+                    setSelectedPayment(updatedPayments)
+                    handleClose()
                 }
             })
             .catch(err => console.log(err.response))
@@ -86,7 +107,7 @@ export default function FormDialog() {
                     <DialogContentText>
                         Sie mussen die Felder mit mark '*' fullen.
                     </DialogContentText>
-                    <form onSubmit={handleSubmit} style={{ marginBottom: 10 }}>
+                    <form onSubmit={!selectedPayment.leasingPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="leasingGiver"
                             id="standard-select-currency-native"
