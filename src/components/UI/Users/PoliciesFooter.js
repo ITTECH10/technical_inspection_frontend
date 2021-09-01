@@ -28,15 +28,15 @@ const useStyles = makeStyles(theme => ({
 const PoliciesFooter = ({ t }) => {
     const classes = useStyles()
     const [showPrivacyBanner, setShowPrivacyBanner] = React.useState(true)
-    let bannerTimeout
+    const bannerTimeout = React.useRef()
 
     React.useEffect(() => {
-        bannerTimeout = setTimeout(() => {
+        bannerTimeout.current = setTimeout(() => {
             setShowPrivacyBanner(false)
         }, 5000)
 
         return () => {
-            clearTimeout(bannerTimeout)
+            clearTimeout(bannerTimeout.current)
         }
     }, [bannerTimeout])
 

@@ -76,7 +76,7 @@ const UploadCarData = ({ t }) => {
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         }).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             if (res.status === 201) {
                 // DO LATER
                 const updatedVehicles = [...vehicles, { ...res.data.newVehicle }]
@@ -92,7 +92,7 @@ const UploadCarData = ({ t }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 

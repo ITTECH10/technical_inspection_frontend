@@ -102,7 +102,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 

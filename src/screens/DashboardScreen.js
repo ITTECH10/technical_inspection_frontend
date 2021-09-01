@@ -4,13 +4,23 @@ import { makeStyles } from '@material-ui/core/styles'
 import { yellow, red } from '@material-ui/core/colors'
 import { useHistory } from 'react-router-dom'
 import { useData } from '../contexts/DataContext'
+import GroupIcon from '@material-ui/icons/Group';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
+import WarningIcon from '@material-ui/icons/Warning';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 
 const useStyles = makeStyles(theme => ({
     dashboardContainer: {},
     titleDividerBox: {
-        margin: '10px 0'
+        margin: '10px 0',
+        marginBottom: 15
     },
     title: {},
+    boxTitleFlex: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     divider: {},
     dashboardBoxOne: {
         position: 'relative',
@@ -80,7 +90,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     mainBoxTitle: {
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: 600
     },
     mainBoxDivider: {
@@ -98,7 +108,7 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, selectedCar } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles } = useData()
 
     const vehiclesWithAddedContract = vehicles.filter(v => v.contractExpiresOn)
     const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
@@ -106,7 +116,7 @@ const DashboardScreen = () => {
 
     React.useEffect(() => {
         getAllVehicles()
-    }, [])
+    }, [getAllVehicles])
 
     // const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
     const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
@@ -150,9 +160,12 @@ const DashboardScreen = () => {
             <Box className={classes.boxFlexContainer}>
                 <Card className={classes.dashboardBoxOne} variant="outlined" elevation={3}>
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                            Kunden
-                        </Typography>
+                        <Box className={classes.boxTitleFlex}>
+                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                Kunden
+                            </Typography>
+                            <GroupIcon color="secondary" />
+                        </Box>
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
@@ -166,9 +179,12 @@ const DashboardScreen = () => {
                 </Card>
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                            Vervaltete Fahrzeuge
-                        </Typography>
+                        <Box className={classes.boxTitleFlex}>
+                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                Vervaltete Fahrzeuge
+                            </Typography>
+                            <DriveEtaIcon color="secondary" />
+                        </Box>
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
@@ -182,9 +198,12 @@ const DashboardScreen = () => {
                 </Card>
                 <Card className={classes.dashboardBoxThree} variant="outlined">
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                            TUV/AU Status (fallig)
-                        </Typography>
+                        <Box className={classes.boxTitleFlex}>
+                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                TUV/AU Status (fallig)
+                            </Typography>
+                            <WarningIcon color="primary" />
+                        </Box>
 
                         <Box className={classes.tuvBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
@@ -216,9 +235,12 @@ const DashboardScreen = () => {
                 </Card>
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
-                        <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                            Finanzenstatus (Ablauf in 2 Monaten)
-                        </Typography>
+                        <Box className={classes.boxTitleFlex}>
+                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                Finanzenstatus (Ablauf in 2 Monaten)
+                            </Typography>
+                            <LocalAtmIcon color="secondary" />
+                        </Box>
 
                         <Box className={classes.finansesBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>

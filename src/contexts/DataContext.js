@@ -1,6 +1,5 @@
 import React, { useContext, useState, useCallback } from 'react'
 import axios from 'axios'
-import { objectIsEmpty } from './../utils/helpers'
 
 const DataContext = React.createContext()
 
@@ -52,17 +51,17 @@ const DataContextProvider = ({ children }) => {
                 setSelectedPayment(res.data.payments)
             }
         }).catch(err => {
-            console.log(err.response)
+            // console.log(err.response)
         })
     }, [])
 
     const acceptPrivacyPolicy = useCallback((id) => {
         axios(`/users/me/privacyPolicy/${id}`)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -77,7 +76,7 @@ const DataContextProvider = ({ children }) => {
             })
             .catch(err => {
                 // setAppLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -86,7 +85,7 @@ const DataContextProvider = ({ children }) => {
             setCarImages(res.data.images)
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 
@@ -112,7 +111,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // setAppLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -130,7 +129,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 setAppLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -146,7 +145,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // setLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -158,7 +157,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -173,7 +172,7 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // setAppLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -184,7 +183,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 
@@ -195,7 +194,7 @@ const DataContextProvider = ({ children }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }, [])
 

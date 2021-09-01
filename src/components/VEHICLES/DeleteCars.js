@@ -31,13 +31,13 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
   const history = useHistory()
 
   const carId = history.location.pathname.split('/')[2]
-  let deleteCarTimeout
+  const deleteCarTimeout = React.useRef()
 
   React.useEffect(() => {
     return () => {
-      clearTimeout(deleteCarTimeout)
+      clearTimeout(deleteCarTimeout.current)
     }
-  }, [])
+  }, [deleteCarTimeout])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,13 +59,13 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
         setOnHandleDeleteOpen(true)
         setBtnLoading(false)
 
-        deleteCarTimeout = setTimeout(() => {
+        deleteCarTimeout.current = setTimeout(() => {
           history.push('/cars')
         }, 2000)
       }
     })
       .catch(err => {
-        console.log(err.response)
+        // console.log(err.response)
       })
   }
 

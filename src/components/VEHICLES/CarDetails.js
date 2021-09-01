@@ -42,7 +42,9 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
                     setSelectedCarInsurance(res.data.insurance)
                 }
             })
-            .catch(err => console.log(err.response))
+            .catch(err => {
+                // console.log(err.response)
+            })
     }, [insuranceHouse, setSelectedCarInsurance])
 
     // OPTIONAL
@@ -52,7 +54,7 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
         if (user.role === 'admin') {
             setSelectedUser(corelatedCar)
         }
-    }, [carId, getSelectedCar, vehicleOwner])
+    }, [carId, getSelectedCar, vehicleOwner, setSelectedUser, user.role, corelatedCar])
 
     useEffect(() => {
         if (selectedCar.insuranceHouse !== undefined && role === 'user') {

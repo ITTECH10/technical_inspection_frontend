@@ -67,10 +67,8 @@ const Login = ({ history, t }) => {
         password: ''
     })
     const [errors, setErrors] = useState({})
-    const { setAuthenticated, setAppLoading, appLoading, authenticated } = useData()
+    const { setAuthenticated, setAppLoading, appLoading } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
-
-    console.log(errors)
 
     const handleChange = (e) => {
         setFields({
@@ -103,7 +101,7 @@ const Login = ({ history, t }) => {
                 //     message: err.response.data.message ? err.response.data.message : {}
                 // })
                 setAppLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 

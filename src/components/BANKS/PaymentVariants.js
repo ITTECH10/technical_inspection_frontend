@@ -28,7 +28,7 @@ const PaymentVariants = () => {
         } else {
             setSelectedPayment({})
         }
-    }, [getCorespondingPayment, selectedCar])
+    }, [getCorespondingPayment, selectedCar, setSelectedPayment, vehiclePaymentType])
 
     return (
         user.role === 'admin' &&

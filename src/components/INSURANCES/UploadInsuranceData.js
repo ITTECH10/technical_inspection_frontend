@@ -57,7 +57,7 @@ function UploadInsuranceData({ t }) {
     })
       .catch(err => {
         setBtnLoading(false)
-        console.log(err.response)
+        // console.log(err.response)
       })
   }
 

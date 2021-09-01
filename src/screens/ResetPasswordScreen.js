@@ -91,7 +91,7 @@ const ResetPasswordScreen = ({ t }) => {
             }
         })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
                 setErrorMessage('Something went wrong!')
                 setErrorAlertOpen(true)
             })

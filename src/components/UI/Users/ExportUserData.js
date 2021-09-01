@@ -10,8 +10,9 @@ import { withNamespaces } from 'react-i18next';
 import { CSVLink } from "react-csv";
 
 const ExportUserData = ({ t }) => {
-    const [data, setData] = React.useState()
+    const [data, setData] = React.useState('')
     const { users } = useData()
+    const isMounted = React.useRef()
 
     // const btnStyle = {
     //     display: 'flex',
@@ -35,15 +36,13 @@ const ExportUserData = ({ t }) => {
     //     cursor: 'pointer'
     // }
 
-    let isMounted
     React.useEffect(() => {
-        isMounted = true
+        isMounted.current = true
 
         return () => {
-            isMounted = false
+            isMounted.current = false
         }
-    }, [])
-
+    }, [isMounted])
 
     json2csv(users, (err, csv) => {
         if (err) {
@@ -64,7 +63,7 @@ const ExportUserData = ({ t }) => {
 
     return (
         users.length > 1 ?
-            <CSVLink filename={'users-data.csv'} className="btn-export" data={''} style={listItemStyle}>
+            <CSVLink filename={'users-data.csv'} className="btn-export" data={data.replaceAll(undefined, ',').replaceAll('T00:00:00.000Z', ',')} style={listItemStyle}>
                 <ListItem>
                     <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
                     <ListItemText primary={t('MenuExport')} />

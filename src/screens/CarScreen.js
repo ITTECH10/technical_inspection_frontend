@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom'
 import Box from '@material-ui/core/Box'
 
 const CarScreen = () => {
-    const { user, selectedUser, appLoading, vehiclesPage } = useData()
+    const { user, selectedUser, vehiclesPage } = useData()
     const history = useHistory()
 
     React.useEffect(() => {
@@ -25,7 +25,7 @@ const CarScreen = () => {
         return () => {
             clearTimeout(privacyPageTimeout)
         }
-    }, [])
+    }, [history, user])
 
     const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
         <Box style={{ position: 'relative', margin: '10px 0', marginRight: 60 }}>

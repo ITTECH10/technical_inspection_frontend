@@ -73,7 +73,9 @@ export default function FormDialog() {
                     setSelectedCar(res.data.vehicle)
                 }
             })
-            .catch(err => console.log(err.response))
+            .catch(err => {
+                // console.log(err.response)
+            })
     }
 
     const handlePutSubmit = (e) => {
@@ -89,7 +91,9 @@ export default function FormDialog() {
                     handleClose()
                 }
             })
-            .catch(err => console.log(err.response))
+            .catch(err => {
+                // console.log(err.response)
+            })
     }
 
     return (

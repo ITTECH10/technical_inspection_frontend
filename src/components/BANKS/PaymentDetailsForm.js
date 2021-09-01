@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Box, TextField, Typography } from '@material-ui/core'
+import { Paper, Box, Typography } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 
 const PaymentDetailsForm = () => {

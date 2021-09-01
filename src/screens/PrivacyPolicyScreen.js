@@ -39,11 +39,11 @@ const PrivacyPolicyScreen = ({ t }) => {
     const history = useHistory()
     const { logout, acceptPrivacyPolicy, user } = useData()
 
-    let navigateTimeout
+    const navigateTimeout = React.useRef()
 
     React.useEffect(() => {
         return () => {
-            clearTimeout(navigateTimeout)
+            clearTimeout(navigateTimeout.current)
         }
     }, [navigateTimeout])
 
@@ -56,7 +56,7 @@ const PrivacyPolicyScreen = ({ t }) => {
         setAlertOpen(true)
         setAlertMsg("Thank you for reading and accepting our privacy policy!")
 
-        navigateTimeout = setTimeout(() => {
+        navigateTimeout.current = setTimeout(() => {
             history.push('/')
             history.go(0)
         }, 3000)

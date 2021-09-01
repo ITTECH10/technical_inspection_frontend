@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -14,7 +14,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { withNamespaces } from 'react-i18next';
 import { useData } from './../../contexts/DataContext';
 import VehicleItemRow from './VehicleItemRow';
-import UserInfoBlock from '../UI/Users/UserInfoBlock';
 import SearchVehicles from './SearchVehicles';
 
 const useStyles = makeStyles({

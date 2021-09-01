@@ -11,7 +11,7 @@ import { withNamespaces } from 'react-i18next';
 const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const { carImages, setCarImages, setLoading } = useData()
     const history = useHistory()
-    let fileUploadTimeout
+    const fileUploadTimeout = React.useRef()
 
     const carId = history.location.pathname.split('/')[2]
 
@@ -23,7 +23,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
 
     useEffect(() => {
         return () => {
-            clearTimeout(fileUploadTimeout)
+            clearTimeout(fileUploadTimeout.current)
         }
     }, [fileUploadTimeout])
 
@@ -47,7 +47,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         }).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             if (res.status === 201) {
                 // const updatedVehicles = [...myVehicles]
                 // const updatedVehicleIndex = updatedVehicles.findIndex(v => v._id === carId)
@@ -55,7 +55,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
                 // updatedVehicle.images = res.data.vehicle.images
                 const updatedImages = [...carImages, { ...res.data.newFile }]
 
-                fileUploadTimeout = setTimeout(() => {
+                fileUploadTimeout.current = setTimeout(() => {
                     // setMyVehicles(updatedVehicles)
                     setLoading(false)
                     setFields({ photo: '' })

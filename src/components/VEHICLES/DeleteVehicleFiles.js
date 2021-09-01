@@ -49,7 +49,7 @@ function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
                 }
             })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 

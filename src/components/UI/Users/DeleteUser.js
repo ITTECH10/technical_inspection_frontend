@@ -69,7 +69,7 @@ function DeleteUser({ userId, t }) {
       }
     })
       .catch(err => {
-        console.log(err.response)
+        // console.log(err.response)
       })
   }
 

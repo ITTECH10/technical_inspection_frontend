@@ -45,7 +45,7 @@ function App() {
     if (storageLanguage) {
       i18n.changeLanguage(storageLanguage)
     }
-  }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser])
+  }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser, storageLanguage])
 
   useEffect(() => {
     if (authenticated) {
@@ -57,7 +57,7 @@ function App() {
     if (storageUser && user && user.role === 'user') {
       setAuthenticated(true)
     }
-  }, [user, storageUser])
+  }, [user, storageUser, setAuthenticated])
 
   useEffect(() => {
     if (storageUser && user && user.role === 'admin') {
@@ -67,7 +67,7 @@ function App() {
       getInsurances()
       getBanks()
     }
-  }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles, storageUser])
+  }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles, storageUser, setAuthenticated])
 
   let userId = user._id
   if (user && user.role === 'admin' && selectedUser) {
@@ -78,7 +78,7 @@ function App() {
     if (userId && user.role === 'user') {
       getUserVehicles(userId)
     }
-  }, [getUserVehicles, userId])
+  }, [getUserVehicles, userId, user.role])
 
   const authRoutes = (
     <ErrorBoundary>

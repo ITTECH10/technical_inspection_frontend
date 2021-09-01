@@ -13,7 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import { useData } from './../../../contexts/DataContext'
 import Alerts from '../Alerts';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +36,6 @@ function EditUserDetails({ userId, t }) {
     const [btnLoading, setBtnLoading] = useState(false)
     const { setSelectedUser, users, setUsers, setUser, user, selectedUser } = useData()
     const classes = useStyles()
-    const theme = useTheme()
 
     if (user.role === 'user') {
         userId = user._id
@@ -103,7 +102,7 @@ function EditUserDetails({ userId, t }) {
         })
             .catch(err => {
                 setBtnLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 

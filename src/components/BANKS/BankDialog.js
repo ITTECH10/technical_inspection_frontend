@@ -41,7 +41,7 @@ function BankDialog({ handleAlertOpening, t }) {
                 }
             })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
             })
     }
 
