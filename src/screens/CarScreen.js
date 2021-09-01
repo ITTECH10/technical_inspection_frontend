@@ -41,7 +41,7 @@ const CarScreen = () => {
         user.role === 'admin' ?
             <>
                 {renderVehicles}
-                {selectedUser._id && <UploadCarData />}
+                {selectedUser && <UploadCarData />}
             </> :
             user.role === 'user' ?
                 <>

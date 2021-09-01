@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
-import FloatingButton from '../UI/FloatingButton'
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import { makeStyles } from '@material-ui/core/styles'
-import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, CircularProgress } from '@material-ui/core';
-import Alerts from './../UI/Alerts'
-import axios from 'axios'
-import { useData } from '../../contexts/DataContext';
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
+import { makeStyles } from '@material-ui/core/styles'
+import EditIcon from '@material-ui/icons/Edit';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useData } from '../../contexts/DataContext';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -16,98 +24,50 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UploadCarData = ({ t }) => {
-    const [open, setOpen] = useState(false)
-    const [alertOpen, setAlertOpen] = useState(false)
-    const [btnLoading, setBtnLoading] = useState(false)
-    const { selectedUser, myVehicles, setMyVehicles, setVehicles, vehicles } = useData()
+function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     const classes = useStyles()
-
-    const [fields, setFields] = useState({
-        photo: '',
+    const [open, setOpen] = React.useState(false);
+    const [btnLoading, setBtnLoading] = React.useState(false)
+    const { setSelectedCar, selectedCar } = useData()
+    const [fields, setFields] = React.useState({
         mark: '',
         model: '',
+        registrationNumber: '',
         HSN: '',
         TSN: '',
         firstVehicleRegistration: '',
         firstVehicleRegistrationOnOwner: '',
         kilometersDriven: '',
         lastTechnicalInspection: '',
-        registrationNumber: '',
         nextTechnicalInspection: '',
         TUV: '',
         AU: '',
-        // insuranceHouse: '',
         monthlyInsurancePayment: '',
         allowedYearlyKilometers: '',
-        // vehiclePaymentType: '',
-        yearlyTax: ''
+        yearlyTax: '',
     })
+    const history = useHistory()
+    const carId = history.location.pathname.split('/')[2]
 
-    const formData = new FormData()
-
-    formData.append('photo', fields.photo)
-    formData.append('mark', fields.mark)
-    formData.append('model', fields.model)
-    formData.append('HSN', fields.HSN)
-    formData.append('TSN', fields.TSN)
-    formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
-    formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
-    formData.append('kilometersDriven', fields.kilometersDriven)
-    formData.append('registrationNumber', fields.registrationNumber)
-    formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
-    formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
-    formData.append('AU', fields.AU)
-    formData.append('TUV', fields.TUV)
-    formData.append('monthlyInsurancePayment', fields.monthlyInsurancePayment)
-    formData.append('allowedYearlyKilometers', fields.allowedYearlyKilometers)
-    formData.append('yearlyTax', fields.yearlyTax)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if (Object.values(fields).every(val => val === '')) return
-
-        setBtnLoading(true)
-
-        axios({
-            method: "post",
-            url: `/cars/${selectedUser._id}`,
-            // url: `/cars/610a98be4c36692a9890751d`,
-            data: formData,
-            headers: { "Content-Type": "multipart/form-data" },
-        }).then(res => {
-            console.log(res.data)
-            if (res.status === 201) {
-                // DO LATER
-                const updatedVehicles = [...vehicles, { ...res.data.newVehicle }]
-                const updatedCustomerVehicles = [...myVehicles, { ...res.data.newVehicle }]
-
-                setTimeout(() => {
-                    setVehicles(updatedVehicles)
-                    setMyVehicles(updatedCustomerVehicles)
-                    setAlertOpen(true)
-                    setBtnLoading(false)
-                    setOpen(false)
-                }, 2000)
-            }
-        })
-            .catch(err => {
-                console.log(err.response)
-            })
-    }
-
-    const handleImageClick = () => {
-        const file = document.getElementById('photo')
-        file.click()
-    }
-
-    const handleImageChange = (e) => {
-        const photo = e.target.files[0]
+    React.useEffect(() => {
         setFields({
-            ...fields,
-            photo
+            mark: selectedCar.mark,
+            model: selectedCar.model,
+            registrationNumber: selectedCar.registrationNumber,
+            HSN: selectedCar.HSN,
+            TSN: selectedCar.TSN,
+            firstVehicleRegistration: selectedCar.firstVehicleRegistration,
+            firstVehicleRegistrationOnOwner: selectedCar.firstVehicleRegistrationOnOwner,
+            kilometersDriven: selectedCar.kilometersDriven,
+            lastTechnicalInspection: selectedCar.lastTechnicalInspection,
+            nextTechnicalInspection: selectedCar.nextTechnicalInspection,
+            TUV: selectedCar.TUV,
+            AU: selectedCar.AU,
+            monthlyInsurancePayment: selectedCar.monthlyInsurancePayment,
+            allowedYearlyKilometers: selectedCar.allowedYearlyKilometers,
+            yearlyTax: selectedCar.yearlyTax,
         })
-    }
+    }, [selectedCar, open])
 
     const handleChange = (e) => {
         setFields({
@@ -124,132 +84,177 @@ const UploadCarData = ({ t }) => {
         setOpen(false);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (Object.values(fields).every(val => val === '')) return
+
+        setBtnLoading(true)
+
+        const data = { ...fields }
+        axios.put(`/cars/${carId}`, data).then(res => {
+            if (res.status === 200) {
+                setTimeout(() => {
+                    setSelectedCar(res.data.updatedVehicle)
+                    setBtnLoading(false)
+                    handleClose()
+                    setOnHandleUpdateOpen(true)
+                }, 2000)
+            }
+        })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
     return (
-        <div>
-            <FloatingButton onHandleClick={handleClickOpen}>
-                <DriveEtaIcon />
-            </FloatingButton>
-            <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
+        <div style={{ marginRight: 10 }}>
+            <Tooltip title="Update Vehicle?">
+                <IconButton className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
+                    <EditIcon />
+                </IconButton>
+            </Tooltip>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{t('NewVehicleFormTitle')}</DialogTitle>
+                <DialogTitle id="form-dialog-title">Edit vehicle information</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        {t('NewVehicleFormHint')}
+                        To edit vehicle information, fill all the fields with '*' mark.
                     </DialogContentText>
-                    <form onSubmit={handleSubmit} encType="multipart/form-data">
-                        <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                        <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
+                    <form onSubmit={handleSubmit}>
                         <TextField
                             name="mark"
                             autoFocus
                             margin="dense"
-                            id="mark"
+                            id="update-vehicle-mark"
                             label={t('MarkInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
+                            value={fields.mark}
                         />
                         <TextField
                             name="model"
                             margin="dense"
-                            id="model"
+                            id="update-vehicle-model"
                             label={t('ModelInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
+                            value={fields.model}
                         />
                         <TextField
                             name="HSN"
                             margin="dense"
-                            id="HSN"
+                            id="update-vehicle-HSN"
                             label={t('HSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
+                            value={fields.HSN}
                         />
                         <TextField
                             name="TSN"
                             margin="dense"
-                            id="TSN"
+                            id="update-vehicle-TSN"
                             label={t('TSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
+                            value={fields.TSN}
                         />
                         <TextField
                             name="registrationNumber"
                             margin="dense"
-                            id="registrationNumber"
+                            id="update-vehicle-registrationNumber"
                             label={t('RegistrationNumberInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
+                            value={fields.registrationNumber}
                         />
                         <TextField
                             name="kilometersDriven"
                             margin="dense"
-                            id="kilometersDriven"
+                            id="update-vehicle-kilometersDriven"
                             label={t('KilometersDrivenInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
+                            value={fields.kilometersDriven}
                         />
                         <TextField
                             name="firstVehicleRegistration"
-                            id="firstVehicleRegistration"
+                            id="update-vehicle-firstVehicleRegistration"
                             label={t('FVRInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
+                            required
+                            value={fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             name="firstVehicleRegistrationOnOwner"
-                            id="firstVehicleRegistrationOnOwner"
+                            id="update-vehicle-firstVehicleRegistrationOnOwner"
                             label={t('FVROOInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
+                            required
+                            value={fields.firstVehicleRegistrationOnOwner ? new Date(fields.firstVehicleRegistrationOnOwner).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             name="lastTechnicalInspection"
-                            id="lastTechnicalInspection"
+                            id="update-vehicle-lastTechnicalInspection"
                             label={t('LTIInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
+                            required
+                            value={fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             name="nextTechnicalInspection"
-                            id="nextTechnicalInspection"
+                            id="update-vehicle-nextTechnicalInspection"
                             label={t('NTIInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
+                            required
+                            value={fields.nextTechnicalInspection ? new Date(fields.nextTechnicalInspection).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             name="TUV"
-                            id="TUV"
+                            id="update-vehicle-TUV"
                             label={t('TUVInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
+                            value={fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : '1970/12/31'}
+                            required
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
                         <TextField
                             name="AU"
-                            id="AU"
+                            id="update-vehicle-AU"
                             label={t('AUInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
+                            required
+                            value={fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -257,40 +262,46 @@ const UploadCarData = ({ t }) => {
                         <TextField
                             name="monthlyInsurancePayment"
                             margin="dense"
-                            id="monthlyInsurancePayment"
+                            id="update-vehicle-monthlyInsurancePayment"
                             label={t('MonthlyInsurancePaymentInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            value={fields.monthlyInsurancePayment}
+                            required
                         />
                         <TextField
                             name="allowedYearlyKilometers"
                             margin="dense"
-                            id="allowedYearlyKilometers"
+                            id="update-vehicle-allowedYearlyKilometers"
                             label={t('AllowedYearlyKilometersInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            value={fields.allowedYearlyKilometers}
+                            required
                         />
                         <TextField
                             name="yearlyTax"
                             margin="dense"
-                            id="yearlyTax"
+                            id="update-vehicle-yearlyTax"
                             label={t('YearlyTaxInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            value={fields.yearlyTax}
+                            required
                         />
                         <DialogActions>
-                            <Button onClick={handleClose} color="primary" variant="contained">
+                            <Button variant="contained" onClick={handleClose} color="primary">
                                 {t('CancelButton')}
                             </Button>
-                            <Button type="submit" color="secondary" variant="contained">
+                            <Button variant="contained" type="submit" color="secondary">
                                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>
                     </form>
                 </DialogContent>
             </Dialog>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default withNamespaces()(UploadCarData)
+export default withNamespaces()(UpdateVehicleInformation)

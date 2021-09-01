@@ -8,12 +8,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useData } from './../../contexts/DataContext'
 import axios from 'axios'
-import Alerts from './../UI/Alerts'
 import { withNamespaces } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { Tooltip, IconButton } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  btnRoot: {
+    fontSize: 9,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '0.8125rem',
+    }
+  }
+}))
 
 function DeleteCars({ t, setOnHandleDeleteOpen }) {
   const [open, setOpen] = useState(false);
+  const classes = useStyles()
   const [btnLoading, setBtnLoading] = useState(false)
   const { vehicles, setVehicles, user } = useData()
   const history = useHistory()
@@ -60,9 +72,11 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
   return (
     user.role === 'admin' &&
     <div>
-      <Button size="small" variant="contained" color="primary" onClick={handleClickOpen}>
-        {t('DeleteVehicleButton')}
-      </Button>
+      <Tooltip title={t('DeleteVehicleFormTitle')}>
+        <IconButton className={classes.btnRoot} size="small" variant="contained" color="primary" onClick={handleClickOpen}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={handleClose}

@@ -4,6 +4,7 @@ import { Grid, Typography, Box, TextField, Paper, Divider } from '@material-ui/c
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
 import DeleteCars from './DeleteCars'
+import UpdateVehicleInformation from './UpdateVehicleInformation'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -16,15 +17,23 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 10,
         width: '100%'
     },
-    vehicleTitleDeleteBox: {
+    actionsFlexContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        marginBottom: 5,
+        [theme.breakpoints.up('sm')]: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 10,
+        }
+    },
+    actionBtnsBoxFlex: {
+        display: 'flex',
         alignItems: 'center',
-        marginBottom: 10
-    }
+    },
 }))
 
-const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen }) => {
+const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
     const classes = useStyles()
     const { selectedCar } = useData()
 
@@ -39,9 +48,12 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen }) => {
 
     return (
         <Grid item xs={12}>
-            <Box className={classes.vehicleTitleDeleteBox}>
+            <Box className={classes.actionsFlexContainer}>
                 <Typography variant="h5">{t('VehicleDetailsTitle')}</Typography>
-                <DeleteCars setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+                <Box className={classes.actionBtnsBoxFlex}>
+                    <UpdateVehicleInformation setOnHandleUpdateOpen={setOnHandleUpdateOpen} />
+                    <DeleteCars setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+                </Box>
             </Box>
             <Divider style={{ marginBottom: 10 }} />
 

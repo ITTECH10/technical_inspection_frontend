@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const CarDetails = ({ setOnHandleDeleteOpen }) => {
+const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
     const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, carImages } = useData()
     const classes = useStyles()
     const history = useHistory()
@@ -45,16 +45,6 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
             .catch(err => console.log(err.response))
     }, [insuranceHouse, setSelectedCarInsurance])
 
-    // const getCarBankInfo = React.useCallback(() => {
-    //     axios.get(`/payment/${vehiclePaymentType}`)
-    //         .then(res => {
-    //             if (res.status === 200) {
-    //                 setSelectedCarBank(res.data.bank)
-    //             }
-    //         })
-    //         .catch(err => console.log(err.response))
-    // }, [setSelectedCarBank, vehiclePaymentType])
-
     // OPTIONAL
     let carId = history.location.pathname.split('/')[2]
     useEffect(() => {
@@ -70,32 +60,16 @@ const CarDetails = ({ setOnHandleDeleteOpen }) => {
         }
     }, [selectedCar, getCarInsurance, setSelectedUser, role])
 
-    // useEffect(() => {
-    //     if (vehiclePaymentType !== undefined
-    //         && vehiclePaymentType !== 'Cash'
-    //         && role === 'user') {
-    //         getCarBankInfo()
-    //     }
-    // }, [selectedCar, role, getCarBankInfo, vehiclePaymentType])
-
     return (
         <Grid container className={classes.mainContainer} direction="column">
-            {/* {selectedCar.thumbnail && (
-                <Box className={classes.imageBox}>
-                    <img src={selectedCar.thumbnail} style={{ height: '100%', width: '100%' }} alt="car" />
-                </Box>
-            )} */}
-            {/* {vehiclesPage !== 'allVehicles' && <UserInfoBlock />} */}
             {selectedUser && <UserInfoBlock />}
-            <VehicleDetailsGrid setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+            <VehicleDetailsGrid
+                setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+                setOnHandleUpdateOpen={setOnHandleUpdateOpen}
+            />
             <InsuranceHouseGrid />
             <PaymentVariants />
             <PaymentDetailsForm />
-            {/* <BankGrid /> */}
-            {/* <UploadCarImages
-                    onHandleAddOpen={onHandleAddOpen}
-                    setOnHandleAddOpen={setOnHandleAddOpen}
-                /> */}
             {carImages.length > 0 &&
                 <GalleryAlternative
                     setOnHandleDeleteOpen={setOnHandleDeleteOpen}

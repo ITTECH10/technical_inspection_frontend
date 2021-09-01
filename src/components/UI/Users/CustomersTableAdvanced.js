@@ -129,7 +129,7 @@ function CustomersTableAdvanced({ t }) {
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={users.length}
+                    count={users.length - 1}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
