@@ -27,11 +27,6 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         width: '100%'
     },
-    rootPaper: {
-        [theme.breakpoints.up('md')]: {
-            // maxWidth: 900
-        }
-    },
     fileNameBox: {
         display: 'flex',
         // justifyContent: 'space-between',
@@ -111,7 +106,7 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                 </CardActions>
             </Card>
 
-            <Dialog PaperProps={{ className: { root: classes.rootPaper } }} open={open} onClose={handleClose}>
+            <Dialog PaperProps={{ style: { maxWidth: '100%' } }} open={open} onClose={handleClose}>
                 {/* <DialogContent> */}
                 {image.format === 'jpg' || image.format === 'png' ?
                     <Box style={imgBox}>
