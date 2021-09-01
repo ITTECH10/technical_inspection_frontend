@@ -104,12 +104,14 @@ function App() {
   )
 
   const routes = (
-    <React.Suspense fallback={<Loader />}>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
-      </Switch>
-    </React.Suspense>
+    <ErrorBoundary>
+      <React.Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
+        </Switch>
+      </React.Suspense>
+    </ErrorBoundary>
   )
 
   const navbarFix = {

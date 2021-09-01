@@ -70,6 +70,8 @@ const Login = ({ history, t }) => {
     const { setAuthenticated, setAppLoading, appLoading, authenticated } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
 
+    console.log(errors)
+
     const handleChange = (e) => {
         setFields({
             ...fields,
@@ -94,6 +96,9 @@ const Login = ({ history, t }) => {
             }
         })
             .catch(err => {
+                setErrors({
+                    message: 'Something Went wrong!'
+                })
                 // setErrors({
                 //     message: err.response.data.message ? err.response.data.message : {}
                 // })
