@@ -34,7 +34,7 @@ export default function FormDialog() {
     }
 
     const fieldsInit = {
-        leasingGiver: banks ? banks[0]._id : '',
+        leasingGiver: banks.length > 0 ? banks[0]._id : '',
         contractNumber: '',
         leasingStartDate: '',
         monthlyLeasingPayment: '',

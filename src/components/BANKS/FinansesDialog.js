@@ -32,7 +32,7 @@ export default function FormDialog() {
     }
 
     const fieldsInit = {
-        creditInstitute: banks ? banks[0]._id : '',
+        creditInstitute: banks.length > 0 ? banks[0]._id : '',
         contractNumber: '',
         creditStartDate: '',
         monthlyCreditPayment: '',
