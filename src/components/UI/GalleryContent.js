@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
     rootPaper: {
         [theme.breakpoints.up('md')]: {
-            maxWidth: 900
+            // maxWidth: 900
         }
     },
     fileNameBox: {
