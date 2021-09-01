@@ -28,7 +28,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
-    const { setSelectedCar, selectedCar } = useData()
+    const { setSelectedCar, selectedCar, user } = useData()
     const [fields, setFields] = React.useState({
         mark: '',
         model: '',
@@ -107,6 +107,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     }
 
     return (
+        user.role === 'admin' &&
         <div style={{ marginRight: 10 }}>
             <Tooltip title="Update Vehicle?">
                 <IconButton className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
