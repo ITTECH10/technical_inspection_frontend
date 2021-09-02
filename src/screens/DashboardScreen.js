@@ -12,8 +12,7 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 const useStyles = makeStyles(theme => ({
     dashboardContainer: {},
     titleDividerBox: {
-        margin: '10px 0',
-        marginBottom: 15
+        padding: '10px 0'
     },
     title: {},
     boxTitleFlex: {
@@ -21,7 +20,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    divider: {},
+    divider: {
+        marginTop: 10
+    },
     dashboardBoxOne: {
         position: 'relative',
         marginBottom: 10,
@@ -86,7 +87,8 @@ const useStyles = makeStyles(theme => ({
         // justifyContent: 'space-between',
         flexDirection: 'column',
         [theme.breakpoints.up('md')]: {
-            flexDirection: 'row'
+            flexDirection: 'row',
+            marginTop: 5
         }
     },
     mainBoxTitle: {

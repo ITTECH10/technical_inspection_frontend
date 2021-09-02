@@ -1,4 +1,5 @@
 import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import { deDE } from '@material-ui/core/locale';
 
 let theme = createTheme({
     palette: {
@@ -12,7 +13,14 @@ let theme = createTheme({
             main: '#ff9800'
         }
     },
-});
+    overrides: {
+        MuiTablePagination: {
+            spacer: {
+                flex: 'none'
+            }
+        }
+    }
+}, deDE);
 
 theme = responsiveFontSizes(theme)
 

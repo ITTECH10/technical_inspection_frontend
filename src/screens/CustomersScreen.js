@@ -9,7 +9,7 @@ const CustomersScreen = ({ t }) => {
     const [open, setOpen] = useState(false)
 
     return (
-        <Box style={{ position: 'relative', margin: '10px 0', marginRight: 60 }}>
+        <Box>
             <CustomersTableAdvanced />
             <NewUserCreation handleAlertOpening={setOpen} />
             <Alerts open={open} handleOpening={setOpen} message={t('AlertGeneralSuccessful')} />

@@ -53,7 +53,7 @@ function CustomersTableAdvanced({ t }) {
 
     return (
         <>
-            <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
+            <Typography variant="h4" style={{ padding: !matches && '10px 0' }}>
                 {t('CustomersTitle')}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />

@@ -28,11 +28,11 @@ const CarScreen = () => {
     }, [history, user])
 
     const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
-        <Box style={{ position: 'relative', margin: '10px 0', marginRight: 60 }}>
+        <Box>
             <VehiclesTableAdvanced />
         </Box>
     ) : (
-        <Box style={{ position: 'relative', margin: '10px 0', marginRight: 60 }}>
+        <Box>
             <CarTableAdvanced />
         </Box>
     )
