@@ -46,7 +46,9 @@ function EditUserDetails({ userId, t }) {
         lastName: selectedUser.lastName,
         email: selectedUser.email,
         phoneNumber: selectedUser.phoneNumber,
-        address: selectedUser.address,
+        street: selectedUser.street,
+        postCode: selectedUser.postCode,
+        city: selectedUser.city,
         birthDate: selectedUser.birthDate
     })
 
@@ -56,7 +58,11 @@ function EditUserDetails({ userId, t }) {
             lastName: selectedUser.lastName,
             email: selectedUser.email,
             phoneNumber: selectedUser.phoneNumber,
-            address: selectedUser.address,
+            street: selectedUser.street,
+            street: selectedUser.street,
+            street: selectedUser.street,
+            postCode: selectedUser.postCode,
+            city: selectedUser.city,
             birthDate: selectedUser.birthDate
         })
     }, [selectedUser])
@@ -171,11 +177,31 @@ function EditUserDetails({ userId, t }) {
                             fullWidth
                         />
                         <TextField
-                            name="address"
+                            name="street"
                             margin="dense"
-                            value={fields.address}
-                            id="address-edit"
-                            label={t('AdressInputLabel')}
+                            value={fields.street}
+                            id="street-edit"
+                            label={t('StreetInputLabel')}
+                            type="text"
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="postCode"
+                            margin="dense"
+                            value={fields.postCode}
+                            id="postCode-edit"
+                            label="Post code"
+                            type="text"
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="city"
+                            margin="dense"
+                            value={fields.city}
+                            id="city-edit"
+                            label={t('CityInputLabel')}
                             type="text"
                             onChange={handleChange}
                             fullWidth

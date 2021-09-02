@@ -72,7 +72,6 @@ const DataContextProvider = ({ children }) => {
             .then(res => {
                 if (res.status === 200) {
                     setVehicles(res.data.vehicles)
-                    // setAppLoading(false)
                 }
             })
             .catch(err => {
@@ -95,6 +94,7 @@ const DataContextProvider = ({ children }) => {
         localStorage.removeItem('authenticated')
         localStorage.removeItem('user')
         localStorage.removeItem('selectedUser')
+        localStorage.removeItem('menuSelectedIndex')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
         setTimeout(() => {

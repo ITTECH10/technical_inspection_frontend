@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useData } from '../../contexts/DataContext'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
+import { Grid, Paper, Divider, Typography } from '@material-ui/core'
 import axios from 'axios'
 import VehicleDetailsGrid from './VehicleDetailsGrid'
 import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
@@ -69,9 +69,13 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
                 setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                 setOnHandleUpdateOpen={setOnHandleUpdateOpen}
             />
-            <InsuranceHouseGrid />
-            <PaymentVariants />
-            <PaymentDetailsForm />
+            {/* <InsuranceHouseGrid /> */}
+            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>Bezahlung</Typography>
+            <Divider style={{ marginBottom: 10 }} />
+            <Paper>
+                <PaymentVariants />
+                <PaymentDetailsForm />
+            </Paper>
             {carImages.length > 0 &&
                 <GalleryAlternative
                     setOnHandleDeleteOpen={setOnHandleDeleteOpen}

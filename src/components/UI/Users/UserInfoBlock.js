@@ -5,6 +5,7 @@ import { useData } from '../../../contexts/DataContext'
 import EditUserDetails from './EditUserDetails'
 import DeleteUser from './DeleteUser'
 import { withNamespaces } from 'react-i18next'
+import MailOnClick from './MailOnClick'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -42,6 +43,7 @@ const UserInfoBlock = ({ t }) => {
             <Box className={classes.actionsFlexContainer}>
                 <Typography variant="h4">{`${selectedUser.firstName} ${selectedUser.lastName}`}</Typography>
                 <Box className={classes.actionBtnsBoxFlex}>
+                    <MailOnClick />
                     <EditUserDetails userId={selectedUser._id} />
                     <DeleteUser userId={selectedUser._id} />
                 </Box>
@@ -78,7 +80,21 @@ const UserInfoBlock = ({ t }) => {
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`${t('AdressInputLabel')}: ${selectedUser.address}`}
+                        value={`Strasse: ${selectedUser.street}`}
+                        disabled
+                        fullWidth
+                    />
+                </Box>
+                <Box className={classes.userRow}>
+                    <TextField
+                        value={`Post code: ${selectedUser.postCode}`}
+                        disabled
+                        fullWidth
+                    />
+                </Box>
+                <Box className={classes.userRow}>
+                    <TextField
+                        value={`City: ${selectedUser.city}`}
                         disabled
                         fullWidth
                     />

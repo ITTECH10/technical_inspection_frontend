@@ -66,7 +66,6 @@ function CustomersTableAdvanced({ t }) {
                                 <TableCell>{t('FirstNameInputLabel')}</TableCell>
                                 <TableCell>{t('LastNameInputLabel')}</TableCell>
                                 <TableCell>{t('EmailInputLabel')}</TableCell>
-                                <TableCell>Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

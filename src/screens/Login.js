@@ -11,13 +11,17 @@ import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
-        height: '100vh'
+        height: '100vh',
+        background: '#fafafa'
     },
     gridChildOne: {
         // backgroundColor: 'red'
     },
     gridChildTwo: {
         // backgroundColor: 'green'
+        height: '60%',
+        position: 'relative',
+        top: '20%'
     },
     gridChildThree: {
         // backgroundColor: 'blue'
@@ -29,7 +33,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center'
     },
     mainBox: {
-        height: '60%',
+        // height: '60%',
+        marginBottom: 20,
         width: '100%',
     },
     inputContainer: {
@@ -110,9 +115,9 @@ const Login = ({ history, t }) => {
     return (
         <>
             <Grid container className={classes.mainContainer}>
-                <Grid item xs={false} sm={3} className={classes.gridChildOne} />
+                <Grid item xs={false} sm={4} className={classes.gridChildOne} />
 
-                <Grid item xs={12} sm={6} className={classes.gridChildTwo}>
+                <Grid item xs={12} sm={4} className={classes.gridChildTwo}>
                     <Paper elevation={2} className={classes.mainPaper}>
                         <Box className={classes.mainBox}>
                             <Box className={classes.logoBox}>
@@ -132,7 +137,7 @@ const Login = ({ history, t }) => {
                     </Paper>
                 </Grid>
 
-                <Grid item xs={false} sm={3} className={classes.gridChildThree} />
+                <Grid item xs={false} sm={4} className={classes.gridChildThree} />
             </Grid>
             <PoliciesFooter />
         </>

@@ -3,12 +3,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import { useData } from '../../../contexts/DataContext';
 import { useHistory } from 'react-router-dom';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import { IconButton } from '@material-ui/core';
-// import { useData } from '../../contexts/DataContext';
 
 const CustomersRow = ({ customer }) => {
-    const { setVehiclesPage, setSelectedUser, users, user } = useData()
+    const { setVehiclesPage, setSelectedUser, users } = useData()
     const history = useHistory()
 
     const onSelectUser = () => {
@@ -19,17 +16,12 @@ const CustomersRow = ({ customer }) => {
     }
 
     return (
-        <TableRow className='table__row--root' onClick={() => onSelectUser()}>
+        <TableRow className='table__row--root' onClick={(e) => onSelectUser(e)}>
             <TableCell component="th" scope="row">
                 {customer.firstName}
             </TableCell>
             <TableCell>{customer.lastName}</TableCell>
             <TableCell>{customer.email}</TableCell>
-            <TableCell>
-                <IconButton href={`mailto:${customer.email}`}>
-                    <MailOutlineIcon />
-                </IconButton>
-            </TableCell>
         </TableRow>
     )
 }

@@ -8,7 +8,7 @@ import { useData } from '../../contexts/DataContext'
 
 const useStyles = makeStyles(theme => ({
     container: {
-        paddingBottom: 25
+        // paddingBottom: 25
     },
     flexContent: {
         width: 320,
@@ -33,9 +33,6 @@ const PaymentVariants = () => {
     return (
         user.role === 'admin' &&
         <Box className={classes.container}>
-            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>Bezahlung</Typography>
-            <Divider style={{ marginBottom: 10 }} />
-
             <Box className={classes.flexContent}>
                 <BarDialog />
                 <FinansesDialog />

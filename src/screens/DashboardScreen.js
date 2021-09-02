@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, selectedUser } = useData()
 
     const ordinaryIconSizePositioning = {
         position: 'absolute',
@@ -158,19 +158,19 @@ const DashboardScreen = () => {
 
     const handleNavigateTuvExpiredVehicles = () => {
         setVehicles(TUVExpired)
-        history.push('/cars')
+        history.push('/cars', { title: 'TÜV überfällig' })
         setSelectedIndex(2)
     }
 
     const handleNavigateTuvFourteenVehicles = () => {
         setVehicles(TUVExpiresInFourteenDays)
-        history.push('/cars')
+        history.push('/cars', { title: 'TÜV läuft in 14 Tagen ab' })
         setSelectedIndex(2)
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
         setVehicles(TUVExpiresInThirtyDays)
-        history.push('/cars')
+        history.push('/cars', { title: 'TÜV läuft in 30 Tagen ab' })
         setSelectedIndex(2)
     }
 
@@ -188,7 +188,7 @@ const DashboardScreen = () => {
         <Box className={classes.dashboardContainer}>
             <Box className={classes.titleDividerBox}>
                 <Typography className={classes.title} variant="h4">
-                    Dashboard
+                    {selectedUser.firstName ? `Hallo, ${selectedUser.firstName}` : `Hallo, Admin`}
                 </Typography>
                 <Divider className={classes.divider} />
             </Box>
@@ -205,7 +205,7 @@ const DashboardScreen = () => {
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
-                                {users.length}
+                                {users.length - 1}
                             </Typography>
                             <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
                                 Alle Kunden

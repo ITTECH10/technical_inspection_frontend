@@ -92,7 +92,7 @@ export default function FormDialog() {
         <div>
             <Button variant="text" color="secondary" onClick={handleClickOpen}>
                 Bar
-                {selectedPayment.cashPayment && <CheckCircleIcon />}
+                {selectedPayment.cashPayment && <CheckCircleIcon style={{ marginLeft: 10 }} />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Barbezahlung</DialogTitle>

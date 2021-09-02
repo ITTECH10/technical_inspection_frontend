@@ -36,7 +36,9 @@ function NewCustomer({ handleAlertOpening, t }) {
     lastName: '',
     email: '',
     phoneNumber: '',
-    address: '',
+    street: '',
+    postCode: '',
+    city: '',
     birthDate: '',
     password: generateId(),
     confirmPassword: ''
@@ -47,7 +49,9 @@ function NewCustomer({ handleAlertOpening, t }) {
     lastName: '',
     email: '',
     phoneNumber: '',
-    address: '',
+    street: '',
+    postCode: '',
+    city: '',
     birthDate: '',
     password: '',
     confirmPassword: ''
@@ -173,38 +177,38 @@ function NewCustomer({ handleAlertOpening, t }) {
               fullWidth
             />
             <TextField
-              name="address"
-              // error={errors.address && errors.address.message}
-              helperText={errors.address && errors.address.message}
+              name="street"
+              // error={errors.street && errors.street.message}
+              helperText={errors.street && errors.street.message}
               margin="dense"
-              id="address"
-              label={t('AdressInputLabel')}
+              id="street"
+              label={t('StreetInputLabel')}
               onChange={handleChange}
               type="text"
               fullWidth
             />
-            {/* <TextField
-              name="password"
-              error={errors.password && errors.password.message}
-              helperText={errors.password && errors.password.message}
+            <TextField
+              name="postCode"
+              error={errors.postCode && errors.postCode.message}
+              helperText={errors.postCode && errors.postCode.message}
               margin="dense"
               id="pwd"
-              label="Password"
-              type="password"
+              label="Post code"
+              type="text"
               onChange={handleChange}
               fullWidth
             />
             <TextField
-              name="confirmPassword"
-              error={errors.confirmPassword && errors.confirmPassword.message}
-              helperText={errors.confirmPassword && errors.confirmPassword.message}
+              name="city"
+              error={errors.city && errors.city.message}
+              helperText={errors.city && errors.city.message}
               margin="dense"
               id="confirm-pwd"
-              label="Confirm Password"
-              type="password"
+              label="City"
+              type="text"
               onChange={handleChange}
               fullWidth
-            /> */}
+            />
             <DialogActions>
               <Button onClick={handleClose} color="primary" variant="contained">
                 {t('CancelButton')}

@@ -62,7 +62,7 @@ const ExportUserData = ({ t }) => {
     }
 
     return (
-        users.length > 1 ?
+        users.length >= 2 ?
             <CSVLink filename={'users-data.csv'} className="btn-export" data={data.replaceAll(undefined, ',').replaceAll('T00:00:00.000Z', ',')} style={listItemStyle}>
                 <ListItem>
                     <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
