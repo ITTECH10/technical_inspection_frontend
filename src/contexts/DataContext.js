@@ -12,6 +12,7 @@ const DataContextProvider = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
     const [appLoading, setAppLoading] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(0)
 
     // USERS
     const [user, setUser] = useState({})
@@ -245,7 +246,9 @@ const DataContextProvider = ({ children }) => {
         setCurrentPage,
         getCorespondingPayment,
         selectedPayment,
-        setSelectedPayment
+        setSelectedPayment,
+        selectedIndex,
+        setSelectedIndex
     }
 
     return (

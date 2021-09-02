@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { useData } from '../contexts/DataContext'
 import GroupIcon from '@material-ui/icons/Group';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import WarningIcon from '@material-ui/icons/Warning';
+import BuildIcon from '@material-ui/icons/Build';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 
 const useStyles = makeStyles(theme => ({
@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: 20,
     },
     dashboardBoxThree: {
+        position: 'relative',
         marginBottom: 10,
         // flexGrow: 1,
         [theme.breakpoints.up('md')]: {
@@ -110,7 +111,25 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex } = useData()
+
+    const ordinaryIconSizePositioning = {
+        position: 'absolute',
+        right: '-35px',
+        bottom: '-45px',
+        height: '140px',
+        width: '140px',
+        fill: '#eee'
+    }
+
+    const distortedIconPositioning = {
+        position: 'absolute',
+        right: '-35px',
+        bottom: '-57px',
+        height: '140px',
+        width: '140px',
+        fill: '#eee'
+    }
 
     const vehiclesWithAddedContract = vehicles.filter(v => v.contractExpiresOn)
     const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
@@ -128,26 +147,41 @@ const DashboardScreen = () => {
     const handleNavigateFinansesVehicles = () => {
         setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
         history.push('/cars')
+        setSelectedIndex(2)
     }
 
     const handleNavigateCreditVehicles = () => {
         setVehicles(vehiclesWithLeasingsContractExpiringInTwoMonths)
         history.push('/cars')
+        setSelectedIndex(2)
     }
 
     const handleNavigateTuvExpiredVehicles = () => {
         setVehicles(TUVExpired)
         history.push('/cars')
+        setSelectedIndex(2)
     }
 
     const handleNavigateTuvFourteenVehicles = () => {
         setVehicles(TUVExpiresInFourteenDays)
         history.push('/cars')
+        setSelectedIndex(2)
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
         setVehicles(TUVExpiresInThirtyDays)
         history.push('/cars')
+        setSelectedIndex(2)
+    }
+
+    const handleCustomersNavigate = () => {
+        history.push('/customers')
+        setSelectedIndex(1)
+    }
+
+    const handleAllVehiclesNavigate = () => {
+        history.push('/cars')
+        setSelectedIndex(2)
     }
 
     return (
@@ -166,14 +200,14 @@ const DashboardScreen = () => {
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                                 Kunden
                             </Typography>
-                            <GroupIcon color="secondary" />
+                            <GroupIcon style={ordinaryIconSizePositioning} color="secondary" />
                         </Box>
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
                                 {users.length}
                             </Typography>
-                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={() => history.push('/customers')}>
+                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
                                 Alle Kunden
                             </Button>
                         </Box>
@@ -185,14 +219,14 @@ const DashboardScreen = () => {
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                                 Vervaltete Fahrzeuge
                             </Typography>
-                            <DriveEtaIcon color="secondary" />
+                            <DriveEtaIcon style={ordinaryIconSizePositioning} color="secondary" />
                         </Box>
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
                                 {vehicles.length}
                             </Typography>
-                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={() => history.push('/cars')}>
+                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
                                 Alle Fahrzeuge
                             </Button>
                         </Box>
@@ -204,7 +238,7 @@ const DashboardScreen = () => {
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                                 TUV/AU Status (fallig)
                             </Typography>
-                            <WarningIcon color="primary" />
+                            <BuildIcon style={distortedIconPositioning} color="secondary" />
                         </Box>
 
                         <Box className={classes.tuvBoxBtnsFlex}>
@@ -241,7 +275,7 @@ const DashboardScreen = () => {
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
                                 Finanzenstatus (Ablauf in 2 Monaten)
                             </Typography>
-                            <LocalAtmIcon color="secondary" />
+                            <LocalAtmIcon style={ordinaryIconSizePositioning} color="secondary" />
                         </Box>
 
                         <Box className={classes.finansesBoxBtnsFlex}>

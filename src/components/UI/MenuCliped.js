@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -30,6 +30,11 @@ import CloseIcon from '@material-ui/icons/Close';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+    },
+    toolbarRoot: {
+        '&.MuiToolbar-gutters': {
+            padding: '0 16px'
+        }
     },
     rootPaper: {
         width: 57
@@ -140,16 +145,15 @@ const useStyles = makeStyles((theme) => ({
 function ClippedDrawer({ open, setOpen, t }) {
     const classes = useStyles();
     const theme = useTheme();
-    const { user, setVehiclesPage, logout, getAllVehicles } = useData()
+    const { user, setVehiclesPage, logout, getAllVehicles, selectedIndex, setSelectedIndex } = useData()
     const history = useHistory()
-    const [selectedIndex, setSelectedIndex] = useState(0)
     let storageSelectedIndex = localStorage.menuSelectedIndex
 
     React.useEffect(() => {
         if (storageSelectedIndex) {
             setSelectedIndex(JSON.parse(storageSelectedIndex))
         }
-    }, [storageSelectedIndex])
+    }, [storageSelectedIndex, setSelectedIndex])
 
     const handleDrawerClose = () => {
         setOpen(false);
@@ -176,7 +180,7 @@ function ClippedDrawer({ open, setOpen, t }) {
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className={classes.toolbarRoot}>
                     {!open ?
                         <IconButton
                             color="inherit"
