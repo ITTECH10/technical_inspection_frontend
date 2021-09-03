@@ -23,6 +23,7 @@ const BankScreen = React.lazy(() => import('./screens/BankScreen'))
 const Profile = React.lazy(() => import('./screens/Profile'))
 const PrivacyPolicyScreen = React.lazy(() => import('./screens/PrivacyPolicyScreen'))
 const Login = React.lazy(() => import('./screens/Login'))
+const AccountScreen = React.lazy(() => import('./screens/AccountScreen'))
 
 function App() {
   const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getUserVehicles, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
@@ -96,6 +97,7 @@ function App() {
           </Switch> :
           <Switch>
             <Route exact path="/" component={CarScreen} />
+            <Route exact path="/account" component={AccountScreen} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
             <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
           </Switch>}
@@ -117,8 +119,9 @@ function App() {
     top: !loading && 64,
     height: 'calc(100vh - 64px)',
     // marginLeft: open && matches ? 250 : 75,
-    marginLeft: !loading && 75,
+    marginLeft: !loading && 57,
     // paddingRight: 17
+    overflow: history.location.pathname === '/account' ? 'hidden' : 'visible'
   }
 
   const app = !appLoading ? (

@@ -28,7 +28,6 @@ const useStyles = makeStyles(theme => ({
 function NewCustomer({ handleAlertOpening, t }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
-  // const history = useHistory()
   const classes = useStyles()
 
   const [fields, setFields] = useState({
@@ -44,19 +43,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     confirmPassword: ''
   })
 
-  const errObj = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    street: '',
-    postCode: '',
-    city: '',
-    birthDate: '',
-    password: '',
-    confirmPassword: ''
-  }
-  const [errors, setErrors] = useState(errObj)
+  const [errors, setErrors] = useState({})
 
   const { users, setUsers } = useData()
 
@@ -73,10 +60,7 @@ function NewCustomer({ handleAlertOpening, t }) {
 
     const data = { ...fields, confirmPassword: fields.password }
     axios.post('/users/signup', data).then(res => {
-      // console.log(res.data)
       if (res.status === 201) {
-        // setAuthorizationHeader(res.data.token)
-        // setAuthenticated(true)
         const updatedUsers = [...users, { ...res.data.newUser }]
 
         setTimeout(() => {
@@ -85,13 +69,11 @@ function NewCustomer({ handleAlertOpening, t }) {
           setOpen(false)
           handleAlertOpening(true)
         }, 2000)
-        //fix loader later
       }
     })
       .catch(err => {
         setBtnLoading(false)
-        setErrors(err.response.data.error.errors)
-        // console.log(err.response)
+        setErrors(JSON.parse(err.response.data.message))
       })
   }
 
@@ -101,9 +83,7 @@ function NewCustomer({ handleAlertOpening, t }) {
 
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => {
-      setErrors(errObj)
-    }, 200)
+    setErrors({})
   };
 
   return (
@@ -121,8 +101,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             <TextField
               autoFocus
               name="firstName"
-              // error={errors.firstName && errors.firstName.message}
-              // helperText={errors.firstName && errors.firstName.message}
+              error={errors.firstName && errors.firstName}
+              helperText={errors.firstName && errors.firstName}
               margin="dense"
               id="firstName"
               label={t('FirstNameInputLabel')}
@@ -132,8 +112,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="lastName"
-              // error={errors.lastName && errors.lastName.message}
-              // helperText={errors.lastName && errors.lastName.message}
+              error={errors.lastName && errors.lastName}
+              helperText={errors.lastName && errors.lastName}
               margin="dense"
               id="lastName"
               label={t('LastNameInputLabel')}
@@ -143,8 +123,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="birthDate"
-              // error={errors.birthDate && errors.birthDate.message}
-              // helperText={errors.birthDate && errors.birthDate.message}
+              error={errors.birthDate && errors.birthDate}
+              helperText={errors.birthDate && errors.birthDate}
               id="birthDate"
               label={t('BirthDateInputLabel')}
               onChange={handleChange}
@@ -156,8 +136,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="email"
-              // error={errors.email && errors.email.message}
-              // helperText={errors.email && errors.email.message}
+              error={errors.email && errors.email}
+              helperText={errors.email && errors.email}
               margin="dense"
               id="mail"
               label={t('EmailInputLabel')}
@@ -167,8 +147,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="phoneNumber"
-              // error={errors.phoneNumber && errors.phoneNumber.message}
-              // helperText={errors.phoneNumber && errors.phoneNumber.message}
+              error={errors.phoneNumber && errors.phoneNumber}
+              helperText={errors.phoneNumber && errors.phoneNumber}
               margin="dense"
               id="phoneNumber"
               label={t('PhoneNumberInputLabel')}
@@ -178,8 +158,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="street"
-              // error={errors.street && errors.street.message}
-              helperText={errors.street && errors.street.message}
+              error={errors.street && errors.street}
+              helperText={errors.street && errors.street}
               margin="dense"
               id="street"
               label={t('StreetInputLabel')}
@@ -189,8 +169,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="postCode"
-              error={errors.postCode && errors.postCode.message}
-              helperText={errors.postCode && errors.postCode.message}
+              error={errors.postCode && errors.postCode}
+              helperText={errors.postCode && errors.postCode}
               margin="dense"
               id="pwd"
               label="Post code"
@@ -200,8 +180,8 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="city"
-              error={errors.city && errors.city.message}
-              helperText={errors.city && errors.city.message}
+              error={errors.city && errors.city}
+              helperText={errors.city && errors.city}
               margin="dense"
               id="confirm-pwd"
               label="City"
@@ -213,7 +193,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               <Button onClick={handleClose} color="primary" variant="contained">
                 {t('CancelButton')}
               </Button>
-              <Button type="submit" color="secondary" variant="contained">
+              <Button disabled={Object.values(fields).filter((el, i) => i !== 8).every(el => el === '')} type="submit" color="secondary" variant="contained">
                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
               </Button>
             </DialogActions>

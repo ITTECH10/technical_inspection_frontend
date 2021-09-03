@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
+import { useHistory } from 'react-router-dom';
 
 export default function FloatingButton({ onHandleClick, children, color = "primary", bottom = 80, right }) {
   const useStyles = makeStyles((theme) => ({
@@ -19,8 +20,10 @@ export default function FloatingButton({ onHandleClick, children, color = "prima
   }));
 
   const classes = useStyles();
+  const history = useHistory()
 
   return (
+    history.location.pathname !== '/account' &&
     <div className={classes.root}>
       <Fab onClick={onHandleClick} color={color} aria-label="add" className={classes.fab}>
         {children}

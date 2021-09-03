@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = () => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, selectedUser } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user } = useData()
 
     const ordinaryIconSizePositioning = {
         position: 'absolute',
@@ -188,7 +188,7 @@ const DashboardScreen = () => {
         <Box className={classes.dashboardContainer}>
             <Box className={classes.titleDividerBox}>
                 <Typography className={classes.title} variant="h4">
-                    {selectedUser.firstName ? `Hallo, ${selectedUser.firstName}` : `Hallo, Admin`}
+                    {user.role === 'admin' ? 'Hallo, Admin' : `Hallo, ${user.firstName} ${user.lastName}`}
                 </Typography>
                 <Divider className={classes.divider} />
             </Box>

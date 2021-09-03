@@ -26,6 +26,7 @@ import Logo from './../../assets/images/logo.svg'
 import LanguageMenu from './LanguageMenu'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CloseIcon from '@material-ui/icons/Close';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -134,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: '8%'
         },
+        [theme.breakpoints.up('xl')]: {
+            width: '4%'
+        }
     },
     logo: {
         height: '100%',
@@ -258,6 +262,10 @@ function ClippedDrawer({ open, setOpen, t }) {
                             <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/', 0)}>
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
                                 <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : 'initial' }} primary={t('MenuVehicles')} />
+                            </ListItem>
+                            <ListItem selected={selectedIndex === 1} className={classes.listItemRoot} onClick={() => onHandleNavigation('/account', 1)}>
+                                <ListItemIcon><PersonIcon color="primary" /></ListItemIcon>
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 1 ? 'primary' : 'initial' }} primary="Konto" />
                             </ListItem>
                         </List>}
                 </div>

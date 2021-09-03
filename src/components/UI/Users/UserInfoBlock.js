@@ -34,11 +34,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const UserInfoBlock = ({ t }) => {
-    const { selectedUser } = useData()
+    const { selectedUser, user } = useData()
     const classes = useStyles()
 
     return (
-        selectedUser &&
+        selectedUser && user.role === 'admin' &&
         <>
             <Box className={classes.actionsFlexContainer}>
                 <Typography variant="h4">{`${selectedUser.firstName} ${selectedUser.lastName}`}</Typography>
