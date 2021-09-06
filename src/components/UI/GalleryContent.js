@@ -111,7 +111,7 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                 {image.format === 'jpg' || image.format === 'png' ?
                     <Box style={imgBox}>
                         {/* <img alt="gallery-car" src={image.url} className={classes.img} /> */}
-                        <Typography style={{ position: 'absolute', bottom: 5, right: 10, fontSize: 12, color: '#fff' }}>{formatedTitle}</Typography>
+                        <Typography style={{ position: 'absolute', bottom: 5, right: 10, fontSize: 20, fontWeight: 'bold' }}>{formatedTitle}</Typography>
                     </Box> : <Button variant="contained" size="large" color="primary" onClick={() => handlePdfDownload()}>{t('DownloadPdfButton')}</Button>}
                 {/* </DialogContent> */}
             </Dialog>

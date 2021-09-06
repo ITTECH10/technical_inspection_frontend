@@ -54,14 +54,11 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
                 // const updatedVehicle = updatedVehicles[updatedVehicleIndex]
                 // updatedVehicle.images = res.data.vehicle.images
                 const updatedImages = [...carImages, { ...res.data.newFile }]
-
-                fileUploadTimeout.current = setTimeout(() => {
-                    // setMyVehicles(updatedVehicles)
-                    setLoading(false)
-                    setFields({ photo: '' })
-                    setCarImages(updatedImages)
-                    setOnHandleAddOpen(true)
-                }, 2000)
+                // setMyVehicles(updatedVehicles)
+                setLoading(false)
+                setFields({ photo: '' })
+                setCarImages(updatedImages)
+                setOnHandleAddOpen(true)
             }
         })
             .catch(err => {

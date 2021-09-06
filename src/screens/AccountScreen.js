@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography, Button, Box, Paper, TextField } from '@material-ui/core'
+import { Grid, Typography, Button, Box, Paper, TextField, useMediaQuery, Divider } from '@material-ui/core'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles'
 import { useData } from '../contexts/DataContext';
@@ -109,10 +109,15 @@ const AccountScreen = () => {
     const { user } = useData()
 
     const formatedBirthDate = new Date(user.birthDate).toLocaleDateString()
+    const matches = useMediaQuery('(max-width: 600px)')
 
     return (
         <Grid container className={classes.gridContainer}>
             <Grid className={classes.gridChildTwo} xs={12} sm={12}>
+                <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
+                    Mein Profil
+                </Typography>
+                <Divider style={{ marginBottom: 10 }} />
                 <Paper elevation={2} className={classes.gridTwoContent}>
                     <Box className={classes.imageBtnsContent}>
                         <Box className={classes.circleContainer}>

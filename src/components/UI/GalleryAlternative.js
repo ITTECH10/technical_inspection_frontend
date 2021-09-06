@@ -25,7 +25,7 @@ const GalleryAlternativeReal = ({ t, setOnHandleDeleteOpen }) => {
 
     return (
         <>
-            <Typography variant="h5" align="left">
+            <Typography variant="h5" align="left" style={{ marginTop: 10 }}>
                 {t('VehicleDocumentsTitle')}
             </Typography>
 
