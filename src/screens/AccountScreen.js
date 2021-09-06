@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     gridTwoContent: {
         height: 600,
         width: '100%',
-        padding: 20,
+        // padding: 20,
         // overflowY: 'scroll',
         [theme.breakpoints.up('sm')]: {
             // height: 520
