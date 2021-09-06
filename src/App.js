@@ -121,10 +121,7 @@ function App() {
     position: 'relative',
     top: !loading && 64,
     height: 'calc(100vh - 64px)',
-    // marginLeft: open && matches ? 250 : 75,
-    marginLeft: !loading && 75,
-    // paddingRight: 17
-    overflow: history.location.pathname === '/account' ? 'hidden' : 'visible'
+    marginLeft: !loading && 75
   }
 
   const app = !appLoading ? (

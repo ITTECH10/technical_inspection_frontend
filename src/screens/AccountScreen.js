@@ -19,28 +19,35 @@ const useStyles = makeStyles(theme => ({
     gridChildTwo: {
         position: 'relative',
         marginTop: 0,
-        marginLeft: -9,
+        // marginLeft: -9,
+        marginRight: 18,
         [theme.breakpoints.up('sm')]: {
             // marginTop: 110,
-            marginLeft: 0
+            // marginLeft: 10
         }
     },
     gridTwoContent: {
-        height: 600,
+        // height: 600,
         width: '100%',
-        // padding: 20,
+        padding: '5px 9px',
+        // marginLeft: 20,
         // overflowY: 'scroll',
         [theme.breakpoints.up('sm')]: {
             // height: 520
+            width: '65%',
             height: '100%'
         },
         [theme.breakpoints.up('md')]: {
-            // width: '52%',
+            width: '50%'
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '35%',
+            height: '100%'
         },
         [theme.breakpoints.up('xl')]: {
-            width: '80%',
+            width: '35%',
             height: '100%',
-            margin: '0 auto'
+            // margin: '0 auto'
         }
     },
     settingsContent: {
@@ -105,36 +112,16 @@ const AccountScreen = () => {
 
     return (
         <Grid container className={classes.gridContainer}>
-            {/* <Grid className={classes.gridChildOne} sm={false}>
-                <Box className={classes.settingsContent}>
-                    <Typography align="center" variant="h4">
-                        Settings
-                    </Typography>
-                    <Box className={classes.listContentSettings}>
-                        <Typography variant="body2" className={classes.settingsListItem}>Public profile</Typography>
-                        <Typography variant="body2" className={classes.settingsListItem}>Account settings</Typography>
-                        <Typography variant="body2" className={classes.settingsListItem}>Notifications</Typography>
-                        <Typography variant="body2" className={classes.settingsListItem}>Pro account</Typography>
-                    </Box>
-                </Box>
-            </Grid> */}
             <Grid className={classes.gridChildTwo} xs={12} sm={12}>
-                <Paper elevation={1} className={classes.gridTwoContent}>
+                <Paper elevation={3} className={classes.gridTwoContent}>
                     <Box className={classes.imageBtnsContent}>
                         <Box className={classes.circleContainer}>
                             <AccountCircleIcon color="primary" className={classes.circleIcon} />
                         </Box>
-                        {/* 
-                        <Box className={classes.btnsProfileBox}>
-                            <Box className={classes.btnsProfileFlex}>
-                                <Button size="small" variant="contained" color="primary">Change picture</Button>
-                                <Button size="small" variant="contained" color="primary">Delete picture</Button>
-                            </Box>
-                        </Box> */}
                     </Box>
                     <Box className={classes.userContent}>
                         <Typography align="center" variant="h6" style={{ letterSpacing: '.05em' }}>
-                            {`Hallo, ${user.firstName}`}
+                            {`${user.firstName} ${user.lastName}`}
                         </Typography>
 
                         <Box className={classes.inputsContent}>
@@ -144,7 +131,7 @@ const AccountScreen = () => {
                                         Vorname
                                     </Typography>
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         value={user.firstName}
                                         style={{ width: '97%' }}
@@ -155,7 +142,7 @@ const AccountScreen = () => {
                                         Nachname
                                     </Typography>
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         value={user.lastName}
                                         fullWidth
@@ -166,24 +153,51 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Location
-                                    </Typography>
-                                    <TextField
-                                        variant="outlined"
-                                        disabled
-                                        value={`${user.city}, ${user.postCode} ${user.street}`}
-                                    />
-                                </Box>
-                            </Box>
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
                                         Geburtstag
                                     </Typography>
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         value={formatedBirthDate}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box className={classes.inputSingleBox}>
+                                <Box className={classes.inputContentVertical}>
+                                    <Typography style={{ fontWeight: '400' }}>
+                                        Stadt
+                                    </Typography>
+                                    <TextField
+                                        variant="standard"
+                                        disabled
+                                        value={user.city}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box className={classes.inputSingleBox}>
+                                <Box className={classes.inputContentVertical}>
+                                    <Typography style={{ fontWeight: '400' }}>
+                                        Strasse
+                                    </Typography>
+                                    <TextField
+                                        variant="standard"
+                                        disabled
+                                        value={user.street}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box className={classes.inputSingleBox}>
+                                <Box className={classes.inputContentVertical}>
+                                    <Typography style={{ fontWeight: '400' }}>
+                                        Postzahl
+                                    </Typography>
+                                    <TextField
+                                        variant="standard"
+                                        disabled
+                                        value={user.postCode}
                                     />
                                 </Box>
                             </Box>
@@ -193,7 +207,7 @@ const AccountScreen = () => {
                                         E-mail
                                     </Typography>
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         value={user.email}
                                     />
@@ -205,7 +219,7 @@ const AccountScreen = () => {
                                         Telephone
                                     </Typography>
                                     <TextField
-                                        variant="outlined"
+                                        variant="standard"
                                         disabled
                                         value={user.phoneNumber}
                                     />
