@@ -113,7 +113,7 @@ const AccountScreen = () => {
     return (
         <Grid container className={classes.gridContainer}>
             <Grid className={classes.gridChildTwo} xs={12} sm={12}>
-                <Paper elevation={3} className={classes.gridTwoContent}>
+                <Paper elevation={2} className={classes.gridTwoContent}>
                     <Box className={classes.imageBtnsContent}>
                         <Box className={classes.circleContainer}>
                             <AccountCircleIcon color="primary" className={classes.circleIcon} />
