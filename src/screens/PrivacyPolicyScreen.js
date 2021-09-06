@@ -57,7 +57,7 @@ const PrivacyPolicyScreen = ({ t }) => {
         setAlertMsg("Thank you for reading and accepting our privacy policy!")
 
         navigateTimeout.current = setTimeout(() => {
-            history.push('/')
+            history.push('/changePassword')
             history.go(0)
         }, 3000)
     }

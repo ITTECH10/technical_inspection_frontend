@@ -21,23 +21,26 @@ const useStyles = makeStyles(theme => ({
         marginTop: 0,
         marginLeft: -9,
         [theme.breakpoints.up('sm')]: {
-            marginTop: 110
+            // marginTop: 110,
+            marginLeft: 0
         }
     },
     gridTwoContent: {
         height: 600,
         width: '100%',
         padding: 20,
-        overflowY: 'scroll',
+        // overflowY: 'scroll',
         [theme.breakpoints.up('sm')]: {
-            height: 520
+            // height: 520
+            height: '100%'
         },
         [theme.breakpoints.up('md')]: {
-            width: '52%',
+            // width: '52%',
         },
         [theme.breakpoints.up('xl')]: {
-            width: '100%',
-            height: '100%'
+            width: '80%',
+            height: '100%',
+            margin: '0 auto'
         }
     },
     settingsContent: {
@@ -69,7 +72,8 @@ const useStyles = makeStyles(theme => ({
         width: 100,
         position: 'relative',
         border: '2px solid #eee',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        margin: '0 auto'
     },
     circleIcon: {
         height: '100%',
@@ -79,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     // USER CONTENT
     userContent: {},
     inputsContent: {
-        marginTop: 30
+        marginTop: 20
     },
     userNameBoxFlex: {
         display: 'flex',
@@ -88,7 +92,8 @@ const useStyles = makeStyles(theme => ({
     inputContentVertical: {
         display: 'flex',
         flexDirection: 'column',
-        marginBottom: 20
+        marginBottom: 20,
+        width: '100%'
     }
 }))
 
@@ -100,7 +105,7 @@ const AccountScreen = () => {
 
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid className={classes.gridChildOne} sm={4}>
+            {/* <Grid className={classes.gridChildOne} sm={false}>
                 <Box className={classes.settingsContent}>
                     <Typography align="center" variant="h4">
                         Settings
@@ -112,23 +117,23 @@ const AccountScreen = () => {
                         <Typography variant="body2" className={classes.settingsListItem}>Pro account</Typography>
                     </Box>
                 </Box>
-            </Grid>
-            <Grid className={classes.gridChildTwo} xs={12} sm={8}>
+            </Grid> */}
+            <Grid className={classes.gridChildTwo} xs={12} sm={12}>
                 <Paper elevation={1} className={classes.gridTwoContent}>
                     <Box className={classes.imageBtnsContent}>
                         <Box className={classes.circleContainer}>
                             <AccountCircleIcon color="primary" className={classes.circleIcon} />
                         </Box>
-
+                        {/* 
                         <Box className={classes.btnsProfileBox}>
                             <Box className={classes.btnsProfileFlex}>
                                 <Button size="small" variant="contained" color="primary">Change picture</Button>
                                 <Button size="small" variant="contained" color="primary">Delete picture</Button>
                             </Box>
-                        </Box>
+                        </Box> */}
                     </Box>
                     <Box className={classes.userContent}>
-                        <Typography variant="h6" style={{ letterSpacing: '.05em' }}>
+                        <Typography align="center" variant="h6" style={{ letterSpacing: '.05em' }}>
                             {`Hallo, ${user.firstName}`}
                         </Typography>
 
@@ -142,6 +147,7 @@ const AccountScreen = () => {
                                         variant="outlined"
                                         disabled
                                         value={user.firstName}
+                                        style={{ width: '97%' }}
                                     />
                                 </Box>
                                 <Box className={classes.inputContentVertical}>
@@ -152,6 +158,7 @@ const AccountScreen = () => {
                                         variant="outlined"
                                         disabled
                                         value={user.lastName}
+                                        fullWidth
                                     />
                                 </Box>
                             </Box>

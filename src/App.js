@@ -11,6 +11,8 @@ import MenuCliped from './components/UI/MenuCliped'
 import i18n from './i18n'
 import ErrorBoundary from './utils/ErrorBoundary';
 import ScrollToTopButton from './components/UI/ScrollToTopButton';
+import ChangeGeneratedPasswordScreen from './screens/ChangeGeneratedPasswordScreen';
+import GuardedRoute from './utils/GuardedRoute'
 
 // LAZY LOADING 
 const DashboardScreen = React.lazy(() => import('./screens/DashboardScreen'))
@@ -98,6 +100,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={CarScreen} />
             <Route exact path="/account" component={AccountScreen} />
+            <GuardedRoute exact path="/changePassword" component={ChangeGeneratedPasswordScreen} condition={user.firstLogIn} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
             <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
           </Switch>}
@@ -125,9 +128,9 @@ function App() {
   }
 
   const app = !appLoading ? (
-    <div style={authenticated && history.location.pathname !== '/privacyPolicy' ? navbarFix : null} className="App">
-      {authenticated && history.location.pathname !== '/privacyPolicy' && !loading && <MenuCliped open={open} setOpen={setOpen} />}
-      {authenticated && history.location.pathname !== '/privacyPolicy' && !loading && <ScrollToTopButton />}
+    <div style={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? navbarFix : null} className="App">
+      {authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' && !loading && <MenuCliped open={open} setOpen={setOpen} />}
+      {authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' && !loading && <ScrollToTopButton />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />
