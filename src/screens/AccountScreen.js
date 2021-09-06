@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     gridChildTwo: {
         position: 'relative',
         marginTop: 0,
+        marginLeft: -9,
         [theme.breakpoints.up('sm')]: {
             marginTop: 110
         }
