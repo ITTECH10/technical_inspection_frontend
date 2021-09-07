@@ -89,43 +89,43 @@ const PaymentDetailsForm = () => {
             {selectedPayment.leasingPayment && (
                 <>
                     <Box>
-                        <Typography className={classes.inputTitle}>Contract number </Typography>
+                        <Typography className={classes.inputTitle}>Vertragsnummer</Typography>
                         <TextField className={classes.input} label={selectedPayment.leasingPayment.contractNumber} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Leasing start date</Typography>
+                        <Typography className={classes.inputTitle}>Beginn</Typography>
                         <TextField className={classes.input} label={formatedLeasingStartDate} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Monthly leasing payment</Typography>
+                        <Typography className={classes.inputTitle}>Leasingrate</Typography>
                         <TextField className={classes.input} label={selectedPayment.leasingPayment.monthlyLeasingPayment} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Leasing lasts for</Typography>
+                        <Typography className={classes.inputTitle}>Leasingdauer</Typography>
                         <TextField className={classes.input} label={`Leasing lasts for: ${selectedPayment.leasingPayment.leasingLastsFor} months`} disabled fullWidth />
                     </Box>
 
                     {selectedPayment.leasingPayment.remainingPayment &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Restvert</Typography>
+                            <Typography className={classes.inputTitle}>Restwert</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.remainingPayment} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.allowedYearlyKilometers &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Allowed yearly kilometers</Typography>
+                            <Typography className={classes.inputTitle}>Fahrleistung</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.allowedYearlyKilometers} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForMoreKilometers &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Costs for more kilometers</Typography>
+                            <Typography className={classes.inputTitle}>Mehrkilometerkosten</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForMoreKilometers} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForLessKilometers &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Costs for less kilometers</Typography>
+                            <Typography className={classes.inputTitle}>Vergütung bei Minderkilometer</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForLessKilometers} disabled fullWidth />
                         </Box>
                     }
