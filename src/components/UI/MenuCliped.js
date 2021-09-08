@@ -237,7 +237,7 @@ function ClippedDrawer({ open, setOpen, t }) {
                         <List>
                             <ListItem selected={selectedIndex === 0} className={classes.listItemRoot} onClick={() => onHandleNavigation('/', 0)}>
                                 <ListItemIcon><DashboardIcon color="primary" /></ListItemIcon>
-                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : 'initial' }} primary="Dashboard" />
+                                <ListItemText primaryTypographyProps={{ color: selectedIndex === 0 ? 'primary' : 'initial' }} primary={t('Dashboard.title')} />
                             </ListItem>
                             <ListItem selected={selectedIndex === 1} className={classes.listItemRoot} onClick={() => onHandleNavigation('/customers', 1)}>
                                 <ListItemIcon><GroupIcon color="primary" /></ListItemIcon>

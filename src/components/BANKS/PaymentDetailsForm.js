@@ -2,6 +2,7 @@ import React from 'react'
 import { Paper, Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import { makeStyles } from '@material-ui/core/styles'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const PaymentDetailsForm = () => {
+const PaymentDetailsForm = ({ t }) => {
     const classes = useStyles()
 
     const { selectedPayment } = useData()
@@ -38,11 +39,11 @@ const PaymentDetailsForm = () => {
             {selectedPayment.cashPayment && (
                 <>
                     <Box>
-                        <Typography className={classes.inputTitle}>Bezahlt am</Typography>
+                        <Typography className={classes.inputTitle}>{t('Payment.cash.payedAt')}</Typography>
                         <TextField className={classes.input} label={formatedCashPayedAt} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Summe</Typography>
+                        <Typography className={classes.inputTitle}>{t('Payment.cash.sum')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.cashPayment.cashSum} disabled fullWidth />
                     </Box>
                 </>
@@ -55,28 +56,28 @@ const PaymentDetailsForm = () => {
             {selectedPayment.creditPayment && (
                 <>
                     <Box>
-                        <Typography className={classes.inputTitle}>Contract number</Typography>
+                        <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.creditPayment.contractNumber} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Credit start date</Typography>
+                        <Typography className={classes.inputTitle}>{t('CreditStartDateInputLabel')}</Typography>
                         <TextField className={classes.input} label={formatedFinansesCreditStartDate} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Monthly credit payment</Typography>
+                        <Typography className={classes.inputTitle}>{t('MonthlyCreditPaymentInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.creditPayment.monthlyCreditPayment} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Interest rate</Typography>
+                        <Typography className={classes.inputTitle}>{t('CreditPaymentInterestInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.creditPayment.interestRate} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Credit lasts for</Typography>
-                        <TextField className={classes.input} label={`${selectedPayment.creditPayment.creditLastsFor} months`} disabled fullWidth />
+                        <Typography className={classes.inputTitle}>{t('CreditLastsForInputLabel')}</Typography>
+                        <TextField className={classes.input} label={`${selectedPayment.creditPayment.creditLastsFor} ${selectedPayment.creditPayment.creditLastsFor === 1 ? t('monthSingular') : t('monthPlural')}`} disabled fullWidth />
                     </Box>
                     {selectedPayment.creditPayment.closingRate &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Closing rate</Typography>
+                            <Typography className={classes.inputTitle}>{t('CreditClosingRate')}</Typography>
                             <TextField className={classes.input} label={selectedPayment.creditPayment.closingRate} disabled fullWidth />
                         </Box>}
                 </>
@@ -89,43 +90,43 @@ const PaymentDetailsForm = () => {
             {selectedPayment.leasingPayment && (
                 <>
                     <Box>
-                        <Typography className={classes.inputTitle}>Vertragsnummer</Typography>
+                        <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.leasingPayment.contractNumber} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Beginn</Typography>
+                        <Typography className={classes.inputTitle}>{t('LeasingStartDateInputLabel')}</Typography>
                         <TextField className={classes.input} label={formatedLeasingStartDate} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Leasingrate</Typography>
+                        <Typography className={classes.inputTitle}>{t('MonthlyLeasingPaymentInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.leasingPayment.monthlyLeasingPayment} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Leasingdauer</Typography>
-                        <TextField className={classes.input} label={`Leasing lasts for: ${selectedPayment.leasingPayment.leasingLastsFor} months`} disabled fullWidth />
+                        <Typography className={classes.inputTitle}>{t('LeasingLastsForInputLabel')}</Typography>
+                        <TextField className={classes.input} label={`${t('LeasingLastsForInputLabel')}: ${selectedPayment.leasingPayment.leasingLastsFor} months`} disabled fullWidth />
                     </Box>
 
                     {selectedPayment.leasingPayment.remainingPayment &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Restwert</Typography>
+                            <Typography className={classes.inputTitle}>{t('RestvertInputLabel')}</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.remainingPayment} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.allowedYearlyKilometers &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Fahrleistung</Typography>
+                            <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel')}</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.allowedYearlyKilometers} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForMoreKilometers &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Mehrkilometerkosten</Typography>
+                            <Typography className={classes.inputTitle}>{t('CostsForMoreKilometersInputLabel')}</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForMoreKilometers} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForLessKilometers &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Vergütung bei Minderkilometer</Typography>
+                            <Typography className={classes.inputTitle}>{t('CostsForLessKilometers')}</Typography>
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForLessKilometers} disabled fullWidth />
                         </Box>
                     }
@@ -146,4 +147,4 @@ const PaymentDetailsForm = () => {
     )
 }
 
-export default PaymentDetailsForm
+export default withNamespaces()(PaymentDetailsForm)

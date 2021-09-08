@@ -8,6 +8,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import BuildIcon from '@material-ui/icons/Build';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles(theme => ({
     dashboardContainer: {},
@@ -108,7 +109,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const DashboardScreen = () => {
+const DashboardScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
     const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user } = useData()
@@ -188,7 +189,7 @@ const DashboardScreen = () => {
         <Box className={classes.dashboardContainer}>
             <Box className={classes.titleDividerBox}>
                 <Typography className={classes.title} variant="h4">
-                    {user.role === 'admin' ? 'Hallo, Admin' : `Hallo, ${user.firstName} ${user.lastName}`}
+                    {user.role === 'admin' ? `${t('Dashboard.admin.greeting')}, Admin` : `Hallo, ${user.firstName} ${user.lastName}`}
                 </Typography>
                 <Divider className={classes.divider} />
             </Box>
@@ -198,7 +199,7 @@ const DashboardScreen = () => {
                     <CardContent>
                         <Box className={classes.boxTitleFlex}>
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                Kunden
+                                {t('Dashboard.customersBox')}
                             </Typography>
                             <GroupIcon style={ordinaryIconSizePositioning} color="secondary" />
                         </Box>
@@ -208,7 +209,7 @@ const DashboardScreen = () => {
                                 {users.length - 1}
                             </Typography>
                             <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
-                                Alle Kunden
+                                {t('Dashboard.customersBtn')}
                             </Button>
                         </Box>
                     </CardContent>
@@ -217,7 +218,7 @@ const DashboardScreen = () => {
                     <CardContent>
                         <Box className={classes.boxTitleFlex}>
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                Vervaltete Fahrzeuge
+                                {t('Dashboard.vehicleBox')}
                             </Typography>
                             <DriveEtaIcon style={ordinaryIconSizePositioning} color="secondary" />
                         </Box>
@@ -227,7 +228,7 @@ const DashboardScreen = () => {
                                 {vehicles.length}
                             </Typography>
                             <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
-                                Alle Fahrzeuge
+                                {t('Dashboard.vehiclesBtn')}
                             </Button>
                         </Box>
                     </CardContent>
@@ -236,7 +237,7 @@ const DashboardScreen = () => {
                     <CardContent>
                         <Box className={classes.boxTitleFlex}>
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                TUV/AU Status (fallig)
+                                {t('Dashboard.tuvBox')}
                             </Typography>
                             <BuildIcon style={distortedIconPositioning} color="secondary" />
                         </Box>
@@ -247,7 +248,7 @@ const DashboardScreen = () => {
                                     {TUVExpiresInThirtyDays.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
-                                    In 30 tagen
+                                    {t('Dashboard.tuvBtn30')}
                                 </Button>
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
@@ -255,7 +256,7 @@ const DashboardScreen = () => {
                                     {TUVExpiresInFourteenDays.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
-                                    In 14 Tagen
+                                    {t('Dashboard.tuvBtn14')}
                                 </Button>
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
@@ -263,7 +264,7 @@ const DashboardScreen = () => {
                                     {TUVExpired.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
-                                    Uberfallig
+                                    {t('Dashboard.tuvBtnExpired')}
                                 </Button>
                             </Box>
                         </Box>
@@ -273,7 +274,7 @@ const DashboardScreen = () => {
                     <CardContent>
                         <Box className={classes.boxTitleFlex}>
                             <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                Finanzenstatus (Ablauf in 2 Monaten)
+                                {t('Dashboard.financingStatusBox')}
                             </Typography>
                             <LocalAtmIcon style={ordinaryIconSizePositioning} color="secondary" />
                         </Box>
@@ -284,7 +285,7 @@ const DashboardScreen = () => {
                                     {vehiclesWithCreditsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
-                                    Finanzierung
+                                    {t('Dashboard.financingStatusBtnFinancing')}
                                 </Button>
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
@@ -292,7 +293,7 @@ const DashboardScreen = () => {
                                     {vehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
-                                    Leasing
+                                    {t('Dashboard.financingStatusBtnLeasing')}
                                 </Button>
                             </Box>
                         </Box>
@@ -303,4 +304,4 @@ const DashboardScreen = () => {
     )
 }
 
-export default DashboardScreen
+export default withNamespaces()(DashboardScreen)

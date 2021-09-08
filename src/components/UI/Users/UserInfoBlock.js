@@ -80,21 +80,21 @@ const UserInfoBlock = ({ t }) => {
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`Strasse: ${selectedUser.street}`}
+                        value={`${t('StreetInputLabel')}: ${selectedUser.street}`}
                         disabled
                         fullWidth
                     />
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`Post code: ${selectedUser.postCode}`}
+                        value={`${t('PostNumberInputLabel')}: ${selectedUser.postCode}`}
                         disabled
                         fullWidth
                     />
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`City: ${selectedUser.city}`}
+                        value={`${t('CityInputLabel')}: ${selectedUser.city}`}
                         disabled
                         fullWidth
                     />

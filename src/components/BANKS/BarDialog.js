@@ -11,6 +11,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { useData } from './../../contexts/DataContext'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function FormDialog() {
+function BarDialog({ t }) {
     const [open, setOpen] = React.useState(false);
     const history = useHistory()
     const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
@@ -91,7 +92,7 @@ export default function FormDialog() {
     return (
         <div>
             <Button variant="text" color="secondary" onClick={handleClickOpen}>
-                Bar
+                {t('Payment.cash.btn')}
                 {selectedPayment.cashPayment && <CheckCircleIcon style={{ marginLeft: 10 }} />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -136,3 +137,5 @@ export default function FormDialog() {
         </div>
     );
 }
+
+export default withNamespaces()(BarDialog)

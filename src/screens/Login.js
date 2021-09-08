@@ -123,7 +123,6 @@ const Login = ({ history, t }) => {
                             <Box className={classes.logoBox}>
                                 <img src={AppLogo} alt="Logo" className={classes.logo} />
                             </Box>
-                            {/* <Typography style={{ fontWeight: '500' }} variant="h4" align="center">Login</Typography> */}
                             <Box className={classes.inputContainer}>
                                 <form className={classes.inputForm} onSubmit={handleSubmit} id="form__login">
                                     <TextField name="email" className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />

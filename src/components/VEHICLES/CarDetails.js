@@ -11,6 +11,7 @@ import PaymentVariants from '../BANKS/PaymentVariants'
 import GalleryAlternative from './../UI/GalleryAlternative'
 import UserInfoBlock from '../UI/Users/UserInfoBlock'
 import PaymentDetailsForm from '../BANKS/PaymentDetailsForm'
+import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
+const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
     const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, carImages } = useData()
     const classes = useStyles()
     const history = useHistory()
@@ -70,7 +71,7 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
                 setOnHandleUpdateOpen={setOnHandleUpdateOpen}
             />
             {/* <InsuranceHouseGrid /> */}
-            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>Bezahlung</Typography>
+            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('Payment.title')}</Typography>
             <Divider style={{ marginBottom: 10 }} />
             <Paper>
                 <PaymentVariants />
@@ -84,4 +85,4 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen }) => {
     )
 }
 
-export default CarDetails
+export default withNamespaces()(CarDetails)
