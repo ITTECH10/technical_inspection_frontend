@@ -67,8 +67,8 @@ function App() {
       setAuthenticated(true)
       getAllUsers()
       getAllVehicles()
-      getInsurances()
-      getBanks()
+      // getInsurances()
+      // getBanks()
     }
   }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles, storageUser, setAuthenticated])
 
@@ -93,8 +93,8 @@ function App() {
             <Route exact path="/user/:id" component={SelectedUserDetailed} />
             <Route exact path="/cars" component={CarScreen} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
-            <Route exact path="/insurances" component={InsuranceScreen} />
-            <Route exact path="/banks" component={BankScreen} />
+            {/* <Route exact path="/insurances" component={InsuranceScreen} /> */}
+            {/* <Route exact path="/banks" component={BankScreen} /> */}
             <Route exact path="/profile" component={Profile} />
           </Switch> :
           <Switch>

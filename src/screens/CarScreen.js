@@ -46,6 +46,7 @@ const CarScreen = () => {
             user.role === 'user' ?
                 <>
                     {renderVehicles}
+                    <UploadCarData />
                 </> : <Loader />
     )
 }

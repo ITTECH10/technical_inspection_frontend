@@ -21,6 +21,9 @@ const CarRow = ({ vehicle }) => {
             </TableCell>
             <TableCell>{vehicle.model}</TableCell>
             <TableCell>{vehicle.registrationNumber}</TableCell>
+            <TableCell>
+                {vehicle.formatedName}
+            </TableCell>
         </TableRow>
     )
 }

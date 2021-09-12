@@ -247,14 +247,14 @@ function ClippedDrawer({ open, setOpen, t }) {
                                 <ListItemIcon><DriveEtaIcon color="primary" /></ListItemIcon>
                                 <ListItemText primaryTypographyProps={{ color: selectedIndex === 2 ? 'primary' : 'initial' }} primary={t('MenuVehicles')} />
                             </ListItem>
-                            <ListItem selected={selectedIndex === 3} className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances', 3)}>
+                            {/* <ListItem selected={selectedIndex === 3} className={classes.listItemRoot} onClick={() => onHandleNavigation('/insurances', 3)}>
                                 <ListItemIcon><VerifiedUserIcon color="primary" /></ListItemIcon>
                                 <ListItemText primaryTypographyProps={{ color: selectedIndex === 3 ? 'primary' : 'initial' }} primary={t('MenuInsurances')} />
                             </ListItem>
                             <ListItem selected={selectedIndex === 4} className={classes.listItemRoot} onClick={() => onHandleNavigation('/banks', 4)}>
                                 <ListItemIcon><AccountBalanceIcon color="primary" /></ListItemIcon>
                                 <ListItemText primaryTypographyProps={{ color: selectedIndex === 4 ? 'primary' : 'initial' }} primary={t('MenuBanks')} />
-                            </ListItem>
+                            </ListItem> */}
                             <ExportUserData />
                         </List>
                         :

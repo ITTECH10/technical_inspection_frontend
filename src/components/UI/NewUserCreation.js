@@ -30,6 +30,14 @@ function NewCustomer({ handleAlertOpening, t }) {
   const [btnLoading, setBtnLoading] = useState(false)
   const classes = useStyles()
 
+  let userCreationTimeout = React.useRef()
+
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(userCreationTimeout.current)
+    }
+  }, [userCreationTimeout])
+
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -63,7 +71,7 @@ function NewCustomer({ handleAlertOpening, t }) {
       if (res.status === 201) {
         const updatedUsers = [...users, { ...res.data.newUser }]
 
-        setTimeout(() => {
+        userCreationTimeout.current = setTimeout(() => {
           setUsers(updatedUsers)
           setBtnLoading(false)
           setOpen(false)

@@ -13,7 +13,7 @@ class ErrorBoundary extends React.Component {
     }
 
     componentDidUpdate() {
-        this.autoReloadAfter()
+        // this.autoReloadAfter()
     }
 
     static getDerivedStateFromError(error) {

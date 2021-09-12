@@ -177,27 +177,27 @@ const DataContextProvider = ({ children }) => {
             })
     }, [])
 
-    const getInsurances = useCallback(() => {
-        axios.get('/insuranceHouse').then(res => {
-            if (res.status === 200) {
-                setInsurances(res.data.insurances)
-            }
-        })
-            .catch(err => {
-                // console.log(err.response)
-            })
-    }, [])
+    // const getInsurances = useCallback(() => {
+    //     axios.get('/insuranceHouse').then(res => {
+    //         if (res.status === 200) {
+    //             setInsurances(res.data.insurances)
+    //         }
+    //     })
+    //         .catch(err => {
+    //             // console.log(err.response)
+    //         })
+    // }, [])
 
-    const getBanks = useCallback(() => {
-        axios.get('/payment').then(res => {
-            if (res.status === 200) {
-                setBanks(res.data.banks)
-            }
-        })
-            .catch(err => {
-                // console.log(err.response)
-            })
-    }, [])
+    // const getBanks = useCallback(() => {
+    //     axios.get('/payment').then(res => {
+    //         if (res.status === 200) {
+    //             setBanks(res.data.banks)
+    //         }
+    //     })
+    //         .catch(err => {
+    //             // console.log(err.response)
+    //         })
+    // }, [])
 
     const value = {
         authenticated,
@@ -220,11 +220,11 @@ const DataContextProvider = ({ children }) => {
         appLoading,
         getUserVehicles,
         insurances,
-        getInsurances,
+        // getInsurances,
         setInsurances,
         banks,
         setBanks,
-        getBanks,
+        // getBanks,
         getSelectedCar,
         selectedCar,
         setSelectedCar,

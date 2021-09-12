@@ -76,6 +76,7 @@ function CarTableAdvanced({ t }) {
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
+                                {user.role === 'admin' && <TableCell>TUV/AU und NTI Status (ablauf in 2 monaten)</TableCell>}
                             </TableRow>
                         </TableHead>
                         <TableBody>
