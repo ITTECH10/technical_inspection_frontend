@@ -67,7 +67,6 @@ const DataContextProvider = ({ children }) => {
     }, [])
 
     const getAllVehicles = useCallback(() => {
-        // setAppLoading(true)
         axios.get('/cars')
             .then(res => {
                 if (res.status === 200) {
@@ -100,14 +99,12 @@ const DataContextProvider = ({ children }) => {
         setTimeout(() => {
             setAppLoading(false)
             history.push('/')
-            history.go(0) //non optional :/
+            // history.go(0) //non optional :/
         }, 2000)
     }, [])
 
     const getAllUsers = useCallback(() => {
-        // setAppLoading(true)
         axios('/users').then(res => {
-            // setAppLoading(false)
             setUsers(res.data.users)
         })
             .catch(err => {
@@ -135,11 +132,8 @@ const DataContextProvider = ({ children }) => {
     }, [])
 
     const getSelectedUser = useCallback((id) => {
-        // setLoading(true)
-
         axios(`/users/${id}`).then(res => {
             if (res.status === 200) {
-                // setLoading(false)
                 setSelectedUser(res.data.user)
                 localStorage.setItem('selectedUser', JSON.stringify(res.data.user))
             }

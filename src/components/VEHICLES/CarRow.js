@@ -23,6 +23,16 @@ const CarRow = ({ car }) => {
         history.push(`/cars/${selectedCar._id}`)
     }
 
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const curDate = new Date()
+    const NTIDate = new Date(car.nextTechnicalInspection)
+    const TUVDate = new Date(car.TUV)
+    const AUDate = new Date(car.AU)
+
+    const NTIDiff = Math.round(Math.abs((curDate - NTIDate) / oneDay)) + 1;
+    const TUVDiff = Math.round(Math.abs((curDate - TUVDate) / oneDay)) + 1;
+    const HUDiff = Math.round(Math.abs((curDate - AUDate) / oneDay)) + 1;
+
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()} key={car._id}>
             <TableCell component="th" scope="row">
@@ -32,41 +42,30 @@ const CarRow = ({ car }) => {
             <TableCell>{car.registrationNumber}</TableCell>
             {user.role === 'admin' &&
                 <TableCell>
-                    {car.TUVAUExpiresInTwoMonths ?
+                    {car.TUVExpiresInTwoMonths &&
                         <Chip
-                            icon={<BuildIcon />}
-                            label="TUV/AU"
+                            label={`TUV in ${TUVDiff} days`}
                             color="primary"
                             size="small"
-                            variant="outlined"
-                            style={{ cursor: 'pointer', marginRight: 5 }}
-                        />
-                        :
-                        <Chip
-                            icon={<BuildIcon />}
-                            label="Not available"
-                            color="secondary"
-                            size="small"
-                            variant="outlined"
+                            variant="default"
                             style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     }
-                    {car.nextTechnicalInspection ?
+                    {car.AUExpiresInTwoMonths &&
                         <Chip
-                            icon={<BuildIcon />}
-                            label={`NTI ${new Date(car.nextTechnicalInspection).toLocaleDateString()}`}
+                            label={`HU in ${HUDiff} days`}
                             color="primary"
                             size="small"
-                            variant="outlined"
-                            style={{ cursor: 'pointer' }}
+                            variant="default"
+                            style={{ cursor: 'pointer', marginRight: 5 }}
                         />
-                        :
+                    }
+                    {car.technicalInspectionInNextTwoMonths &&
                         <Chip
-                            icon={<BuildIcon />}
-                            label="Not available"
+                            label={`NTI in ${NTIDiff} days`}
                             color="primary"
                             size="small"
-                            variant="outlined"
+                            variant="default"
                             style={{ cursor: 'pointer' }}
                         />
                     }
