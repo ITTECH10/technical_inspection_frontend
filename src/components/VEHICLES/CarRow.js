@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 import Chip from '@material-ui/core/Chip';
-import BuildIcon from '@material-ui/icons/Build';
+// import BuildIcon from '@material-ui/icons/Build';
 
 const CarRow = ({ car }) => {
     const history = useHistory()

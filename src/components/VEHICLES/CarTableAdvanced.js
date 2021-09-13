@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 function CarTableAdvanced({ t }) {
     const classes = useStyles();
-    const { myVehicles, setSelectedCarBank, user, selectedUser, vehicles } = useData()
+    const { myVehicles, setSelectedCarBank, user, selectedUser, vehicles, setVehicles } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const matches = useMediaQuery('(max-width: 600px)')
@@ -72,7 +72,7 @@ function CarTableAdvanced({ t }) {
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                {user.role === 'admin' && <TableCell>TUV/AU und NTI Status (ablauf in 2 monaten)</TableCell>}
+                                {user.role === 'admin' && <TableCell>TUV AU und NTI Status (ablauf in 2 monaten)</TableCell>}
                             </TableRow>
                         </TableHead>
                         <TableBody>

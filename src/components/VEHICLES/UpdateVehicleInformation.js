@@ -28,7 +28,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
-    const { setSelectedCar, selectedCar, user } = useData()
+    const { vehicles, setVehicles, selectedCar, user, setSelectedCar } = useData()
     const [fields, setFields] = React.useState({
         mark: '',
         model: '',
@@ -93,7 +93,15 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         const data = { ...fields }
         axios.put(`/cars/${carId}`, data).then(res => {
             if (res.status === 200) {
+                const updatedVehicles = [...vehicles]
+                const selectedCarIndex = updatedVehicles.findIndex(el => el._id === carId)
+                const corespondingCar = updatedVehicles[selectedCarIndex]
+                corespondingCar.nextTechnicalInspection = res.data.updatedVehicle.nextTechnicalInspection
+                corespondingCar.TUV = res.data.updatedVehicle.TUV
+                corespondingCar.AU = res.data.updatedVehicle.AU
+
                 setTimeout(() => {
+                    setVehicles(updatedVehicles)
                     setSelectedCar(res.data.updatedVehicle)
                     setBtnLoading(false)
                     handleClose()
