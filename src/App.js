@@ -17,12 +17,10 @@ import GuardedRoute from './utils/GuardedRoute'
 // LAZY LOADING 
 const DashboardScreen = React.lazy(() => import('./screens/DashboardScreen'))
 const CustomersScreen = React.lazy(() => import('./screens/CustomersScreen'))
-const SelectedUserDetailed = React.lazy(() => import('./components/UI/Users/SelectedUserDetailed'))
 const CarScreen = React.lazy(() => import('./screens/CarScreen'))
 const CarDetailsScreen = React.lazy(() => import('./screens/CarDetailsScreen'))
-const InsuranceScreen = React.lazy(() => import('./screens/InsuranceScreen'))
-const BankScreen = React.lazy(() => import('./screens/BankScreen'))
-const Profile = React.lazy(() => import('./screens/Profile'))
+// const InsuranceScreen = React.lazy(() => import('./screens/InsuranceScreen'))
+// const BankScreen = React.lazy(() => import('./screens/BankScreen'))
 const PrivacyPolicyScreen = React.lazy(() => import('./screens/PrivacyPolicyScreen'))
 const Login = React.lazy(() => import('./screens/Login'))
 const AccountScreen = React.lazy(() => import('./screens/AccountScreen'))
@@ -90,12 +88,10 @@ function App() {
           <Switch>
             <Route exact path="/" component={DashboardScreen} />
             <Route exact path="/customers" component={CustomersScreen} />
-            <Route exact path="/user/:id" component={SelectedUserDetailed} />
             <Route exact path="/cars" component={CarScreen} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
             {/* <Route exact path="/insurances" component={InsuranceScreen} /> */}
             {/* <Route exact path="/banks" component={BankScreen} /> */}
-            <Route exact path="/profile" component={Profile} />
           </Switch> :
           <Switch>
             <Route exact path="/" component={CarScreen} />

@@ -59,8 +59,6 @@ function EditUserDetails({ userId, t }) {
             email: selectedUser.email,
             phoneNumber: selectedUser.phoneNumber,
             street: selectedUser.street,
-            street: selectedUser.street,
-            street: selectedUser.street,
             postCode: selectedUser.postCode,
             city: selectedUser.city,
             birthDate: selectedUser.birthDate

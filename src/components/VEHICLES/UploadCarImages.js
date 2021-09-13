@@ -22,8 +22,9 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const submitBtn = document.getElementById('imgSubmitBtn')
 
     useEffect(() => {
+        let caseTimeoutChanged = fileUploadTimeout.current
         return () => {
-            clearTimeout(fileUploadTimeout.current)
+            clearTimeout(caseTimeoutChanged)
         }
     }, [fileUploadTimeout])
 

@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import InsuranceDialog from './InsuranceDialog'
 import Alerts from '../UI/Alerts'
 import { withNamespaces } from 'react-i18next'
-// import { objectIsEmpty } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {

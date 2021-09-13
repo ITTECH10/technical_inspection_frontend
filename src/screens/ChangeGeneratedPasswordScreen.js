@@ -1,6 +1,6 @@
 import React from 'react'
 import { withNamespaces } from 'react-i18next'
-import { Box, Typography, TextField, Button, IconButton, Paper, Grid, CircularProgress } from '@material-ui/core'
+import { Box, Typography, TextField, Button, Paper, Grid, CircularProgress } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'

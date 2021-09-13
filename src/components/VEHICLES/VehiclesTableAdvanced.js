@@ -56,6 +56,7 @@ function VehiclesTableAdvanced({ t }) {
         return skipAdmin.find((u, idx) => u._id === el)
     }).map((el, i) => {
         vehicles[i].formatedName = `${el.firstName} ${el.lastName}`
+        return vehicles
     })
 
     const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase())).map(v => (
