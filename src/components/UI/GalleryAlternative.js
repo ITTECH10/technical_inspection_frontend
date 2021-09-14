@@ -4,6 +4,7 @@ import { Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import GalleryContent from './GalleryContent'
 import { withNamespaces } from 'react-i18next'
+import FileCategoryTabs from './../VEHICLES/FileCategoryTabs'
 
 const useStyles = makeStyles(theme => ({
     boxFlex: {
@@ -25,13 +26,15 @@ const GalleryAlternativeReal = ({ t, setOnHandleDeleteOpen }) => {
 
     return (
         <>
-            <Typography variant="h5" align="left" style={{ marginTop: 10 }}>
+            <Typography variant="h5" align="left" style={{ marginTop: 10, marginBottom: 10 }}>
                 {t('VehicleDocumentsTitle')}
             </Typography>
 
-            <Box className={classes.boxFlex}>
+            <FileCategoryTabs files={carImages} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+
+            {/* <Box className={classes.boxFlex}>
                 {content}
-            </Box>
+            </Box> */}
         </>
     )
 }

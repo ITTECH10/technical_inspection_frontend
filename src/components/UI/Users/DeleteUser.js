@@ -46,21 +46,14 @@ function DeleteUser({ userId, t }) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const copyUsers = [...users]
-
     axios.delete(`/users/${userId}`).then(res => {
       if (res.status === 204) {
+        res = undefined
+        const copyUsers = [...users]
         setAlertOpen(true)
 
-        if (user.role === 'user') {
-          setTimeout(() => {
-            setAlertOpen(false)
-            logout(history)
-          }, 3000)
-        }
-
-        const newUsers = copyUsers.filter(user => user._id !== userId)
-        setUsers(newUsers)
+        const updatedUsers = copyUsers.filter(user => user._id !== userId)
+        setUsers(updatedUsers)
 
         setTimeout(() => {
           setAlertOpen(false)

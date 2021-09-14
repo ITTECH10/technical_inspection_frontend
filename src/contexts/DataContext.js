@@ -37,15 +37,6 @@ const DataContextProvider = ({ children }) => {
     // CONTRACTS
     const [selectedPayment, setSelectedPayment] = useState({})
 
-    // PAGINATION 
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const getPaginatedData = (data, dataLimit) => {
-        const startIndex = currentPage * dataLimit - dataLimit;
-        const endIndex = startIndex + dataLimit;
-        return data.slice(startIndex, endIndex);
-    };
-
     const getCorespondingPayment = useCallback((paymentId) => {
         axios.get(`/cars/payments/${paymentId}`).then(res => {
             if (res.status === 200) {
@@ -235,9 +226,6 @@ const DataContextProvider = ({ children }) => {
         acceptPrivacyPolicy,
         vehiclesPage,
         setVehiclesPage,
-        getPaginatedData,
-        currentPage,
-        setCurrentPage,
         getCorespondingPayment,
         selectedPayment,
         setSelectedPayment,

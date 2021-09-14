@@ -7,8 +7,10 @@ import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next';
+import ImagePortal from './ImagePortal';
 
 const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
+    const [portalOpen, setPortalOpen] = useState(false)
     const { carImages, setCarImages, setLoading } = useData()
     const history = useHistory()
     const fileUploadTimeout = React.useRef()
@@ -17,6 +19,8 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
 
     const [fields, setFields] = useState({
         photo: '',
+        fileName: '',
+        fileCategory: 'X'
     })
 
     const submitBtn = document.getElementById('imgSubmitBtn')
@@ -30,12 +34,15 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
 
     useEffect(() => {
         if (submitBtn && fields.photo !== '') {
-            submitBtn.click()
+            // submitBtn.click()
+            setPortalOpen(true)
         }
     }, [fields, submitBtn])
 
     const formData = new FormData()
     formData.append('photo', fields.photo)
+    formData.append('photoName', fields.fileName)
+    formData.append('fileCategory', fields.fileCategory)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -48,14 +55,8 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         }).then(res => {
-            // console.log(res.data)
             if (res.status === 201) {
-                // const updatedVehicles = [...myVehicles]
-                // const updatedVehicleIndex = updatedVehicles.findIndex(v => v._id === carId)
-                // const updatedVehicle = updatedVehicles[updatedVehicleIndex]
-                // updatedVehicle.images = res.data.vehicle.images
                 const updatedImages = [...carImages, { ...res.data.newFile }]
-                // setMyVehicles(updatedVehicles)
                 setLoading(false)
                 setFields({ photo: '' })
                 setCarImages(updatedImages)
@@ -65,7 +66,6 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
             .catch(err => {
                 // console.log(err.response)
             })
-
     }
 
     const handleImageClick = () => {
@@ -81,8 +81,22 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
         })
     }
 
+    const handleChange = (e) => {
+        setFields({
+            ...fields,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <div>
+            <ImagePortal
+                open={portalOpen}
+                setOpen={setPortalOpen}
+                handleChange={handleChange}
+                onHandleSubmit={submitBtn}
+                fields={fields}
+            />
             <FloatingButton onHandleClick={handleImageClick}>
                 <AddIcon />
             </FloatingButton>

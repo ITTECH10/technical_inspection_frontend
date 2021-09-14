@@ -75,29 +75,13 @@ function EditUserDetails({ userId, t }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(fields).every(val => val === '')) return
-
         setBtnLoading(true)
 
         const data = { ...fields }
-
         axios.patch(`/users/${userId}`, data).then(res => {
-            // console.log(res.data)
             if (res.status === 202) {
-                if (user.role === 'admin') {
-                    setSelectedUser(res.data.user)
-                    const copyUsers = [...users]
-                    const foundUserIndex = copyUsers.findIndex(u => u._id === userId)
-                    const foundUser = copyUsers[foundUserIndex]
-                    foundUser.email = res.data.user.email
-
-                    setUsers(copyUsers)
-                }
-
-                if (user.role === 'user') {
-                    setUser(res.data.user)
-                }
-
                 setTimeout(() => {
+                    setSelectedUser(res.data.user)
                     setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)
