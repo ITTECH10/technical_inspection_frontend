@@ -65,7 +65,7 @@ function FinancingDialog({ t }) {
     const handlePostSubmit = (e) => {
         e.preventDefault()
 
-        const data = { ...fields, vehiclePayedFor: carId }
+        const data = { ...fields }
         axios.post(`/cars/${carId}/contracts/credit`, data)
             .then(res => {
                 console.log(res.data)

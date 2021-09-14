@@ -65,8 +65,8 @@ function App() {
       setAuthenticated(true)
       getAllUsers()
       getAllVehicles()
-      // getInsurances()
-      // getBanks()
+      getInsurances()
+      getBanks()
     }
   }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles, storageUser, setAuthenticated])
 
