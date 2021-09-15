@@ -113,23 +113,15 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                                     {formatedTitle}
                                 </Typography>}
                             {
-                                image.documentPublisher ?
-                                    <Typography>
-                                        <Chip
-                                            label={image.documentPublisher}
-                                            color="primary"
-                                            size="large"
-                                            variant="default"
-                                        />
-                                    </Typography> :
-                                    <Typography>
-                                        <Chip
-                                            label="Not available"
-                                            color="primary"
-                                            size="large"
-                                            variant="default"
-                                        />
-                                    </Typography>
+                                image.documentPublisher &&
+                                <Typography>
+                                    <Chip
+                                        label={image.documentPublisher}
+                                        color="primary"
+                                        size="large"
+                                        variant="default"
+                                    />
+                                </Typography>
                             }
                         </Box>
                     </CardContent>
