@@ -77,7 +77,7 @@ export default function ImagePortal({ open, handleChange, setOpen, onHandleSubmi
                     <Button variant="contained" onClick={handleClose} color="primary">
                         Abrechen
                     </Button>
-                    <Button disabled={Object.values(fields)[1] === ''} variant="contained" onClick={handleFilesUpload} color="secondary">
+                    <Button variant="contained" onClick={handleFilesUpload} color="secondary">
                         Absenden
                     </Button>
                 </DialogActions>
