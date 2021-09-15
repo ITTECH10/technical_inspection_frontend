@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+        marginBottom: 32
     },
     tabPanelBox: {
         display: 'flex',
@@ -98,10 +99,14 @@ export default function FileCategoryTabs({ files, setOnHandleDeleteOpen }) {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                X
+                {files.filter(f => f.category === 'X').map((file, idx) => (
+                    <GalleryContent key={idx} image={file} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+                ))}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Y
+                {files.filter(f => f.category === 'Y').map((file, idx) => (
+                    <GalleryContent key={idx} image={file} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
+                ))}
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {files.filter(f => f.category === 'Z').map((file, idx) => (

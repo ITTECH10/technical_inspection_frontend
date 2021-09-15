@@ -32,6 +32,11 @@ const useStyles = makeStyles(theme => ({
         // justifyContent: 'space-between',
         alignItems: 'center'
     },
+    imageTitleBreak: {
+        [theme.breakpoints.up('sm')]: {
+            width: 164
+        }
+    },
     pdfIconBox: {
         // height: 25,
         width: 22,
@@ -93,9 +98,9 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                                 <Box className={classes.pdfIconBox}>
                                     <img alt="pdf" src={PdfIcon} className={classes.pdfIcon} />
                                 </Box>}
-                            <Typography>
-                                {image.format === 'jpg' || image.format === 'png' ? formatedTitle
-                                    : `${image.name}`
+                            <Typography noWrap={true} className={classes.imageTitleBreak}>
+                                {image.format === 'jpg' || image.format === 'png' ? `${image.name}`
+                                    : formatedTitle
                                 }
                             </Typography>
                         </Box>

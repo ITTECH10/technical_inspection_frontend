@@ -13,7 +13,6 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const [portalOpen, setPortalOpen] = useState(false)
     const { carImages, setCarImages, setLoading } = useData()
     const history = useHistory()
-    const fileUploadTimeout = React.useRef()
 
     const carId = history.location.pathname.split('/')[2]
 
@@ -26,15 +25,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const submitBtn = document.getElementById('imgSubmitBtn')
 
     useEffect(() => {
-        let caseTimeoutChanged = fileUploadTimeout.current
-        return () => {
-            clearTimeout(caseTimeoutChanged)
-        }
-    }, [fileUploadTimeout])
-
-    useEffect(() => {
         if (submitBtn && fields.photo !== '') {
-            // submitBtn.click()
             setPortalOpen(true)
         }
     }, [fields, submitBtn])
