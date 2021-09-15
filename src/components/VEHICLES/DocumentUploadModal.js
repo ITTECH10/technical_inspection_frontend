@@ -6,23 +6,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DocumentCategoryProvider from './DocumentCategoryProvider'
+import { withNamespaces } from 'react-i18next'
 
-const FILE_CATEGORIES = [
-    {
-        name: 'X',
-        icon: ''
-    },
-    {
-        name: 'Y',
-        icon: ''
-    },
-    {
-        name: 'Z',
-        icon: ''
-    },
-]
-
-export default function ImagePortal({ open, handleChange, setOpen, onHandleSubmit, fields }) {
+function DocumentUploadModal({ open, handleChange, setOpen, onHandleSubmit, fields, t }) {
     const handleClose = () => {
         setOpen(false);
     };
@@ -66,9 +53,9 @@ export default function ImagePortal({ open, handleChange, setOpen, onHandleSubmi
                         }}
                         helperText="Bitte selekten sie die file category."
                     >
-                        {FILE_CATEGORIES.map((fc) => (
-                            <option key={fc.name} value={fc.name}>
-                                {fc.name}
+                        {DocumentCategoryProvider.getDocumentCategories().map((fc) => (
+                            <option key={fc.categoryId} value={fc.categoryId}>
+                                {t(`${fc.name}`)}
                             </option>
                         ))}
                     </TextField>
@@ -85,3 +72,5 @@ export default function ImagePortal({ open, handleChange, setOpen, onHandleSubmi
         </div>
     );
 }
+
+export default withNamespaces()(DocumentUploadModal)

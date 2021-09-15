@@ -10,6 +10,7 @@ import { Typography, Dialog, Box } from '@material-ui/core';
 import DeleteVehicleFiles from './../VEHICLES/DeleteVehicleFiles'
 import { withNamespaces } from 'react-i18next';
 import PdfIcon from './../../assets/images/pdf-icon.svg'
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,8 +30,9 @@ const useStyles = makeStyles(theme => ({
     },
     fileNameBox: {
         display: 'flex',
+        flexDirection: 'column',
         // justifyContent: 'space-between',
-        alignItems: 'center'
+        // alignItems: 'center'
     },
     imageTitleBreak: {
         [theme.breakpoints.up('sm')]: {
@@ -95,14 +97,40 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                     <CardContent>
                         <Box className={classes.fileNameBox}>
                             {image.format === 'pdf' &&
-                                <Box className={classes.pdfIconBox}>
-                                    <img alt="pdf" src={PdfIcon} className={classes.pdfIcon} />
-                                </Box>}
+                                <Box>
+                                    <Box className={classes.pdfIconBox}>
+                                        <img alt="pdf" src={PdfIcon} className={classes.pdfIcon} />
+                                    </Box>
+                                </Box>
+                            }
                             <Typography noWrap={true} className={classes.imageTitleBreak}>
-                                {image.format === 'jpg' || image.format === 'png' ? `${image.name}`
+                                {image.format === 'jpg' || image.format === 'png' || image.format === 'pdf' ? `${image.name}`
                                     : formatedTitle
                                 }
                             </Typography>
+                            {image.format === 'pdf' &&
+                                <Typography noWrap={true} className={classes.imageTitleBreak}>
+                                    {formatedTitle}
+                                </Typography>}
+                            {
+                                image.documentPublisher ?
+                                    <Typography>
+                                        <Chip
+                                            label={image.documentPublisher}
+                                            color="primary"
+                                            size="large"
+                                            variant="default"
+                                        />
+                                    </Typography> :
+                                    <Typography>
+                                        <Chip
+                                            label="Not available"
+                                            color="primary"
+                                            size="large"
+                                            variant="default"
+                                        />
+                                    </Typography>
+                            }
                         </Box>
                     </CardContent>
                 </CardActionArea>

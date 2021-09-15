@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom'
 import { withNamespaces } from 'react-i18next';
-import ImagePortal from './ImagePortal';
+import DocumentUploadModal from './DocumentUploadModal';
 
 const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const [portalOpen, setPortalOpen] = useState(false)
@@ -19,7 +19,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const [fields, setFields] = useState({
         photo: '',
         fileName: '',
-        fileCategory: 'X'
+        fileCategory: 'DOCUMENT_TYPE_VERTRAG'
     })
 
     const submitBtn = document.getElementById('imgSubmitBtn')
@@ -81,7 +81,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
 
     return (
         <div>
-            <ImagePortal
+            <DocumentUploadModal
                 open={portalOpen}
                 setOpen={setPortalOpen}
                 handleChange={handleChange}

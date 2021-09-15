@@ -4,24 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import GalleryContent from './../UI/GalleryContent'
-
-const FILE_CATEGORIES = [
-    {
-        name: 'X',
-        icon: ''
-    },
-    {
-        name: 'Y',
-        icon: ''
-    },
-    {
-        name: 'Z',
-        icon: ''
-    },
-]
+import { withNamespaces } from 'react-i18next';
+import DocumentCategories from './DocumentCategoryProvider'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,7 +59,7 @@ function a11yProps(index) {
     };
 }
 
-export default function FileCategoryTabs({ files, setOnHandleDeleteOpen }) {
+function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -93,26 +79,24 @@ export default function FileCategoryTabs({ files, setOnHandleDeleteOpen }) {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    {FILE_CATEGORIES.map((fc, idx) => (
-                        <Tab key={idx} label={fc.name} {...a11yProps(idx)} />
+                    {DocumentCategories.getDocumentCategories().map((fc, idx) => (
+                        <Tab key={fc.categoryId} label={t(`${fc.name}`)} {...a11yProps(idx)} />
                     ))}
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                {files.filter(f => f.category === 'X').map((file, idx) => (
-                    <GalleryContent key={idx} image={file} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
-                ))}
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                {files.filter(f => f.category === 'Y').map((file, idx) => (
-                    <GalleryContent key={idx} image={file} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
-                ))}
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                {files.filter(f => f.category === 'Z').map((file, idx) => (
-                    <GalleryContent key={idx} image={file} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
-                ))}
-            </TabPanel>
+            {DocumentCategories.getDocumentCategories().map((fileCategory, idx) => {
+                return <TabPanel key={idx} value={value} index={idx}>
+                    {files.filter(file => file.category === fileCategory.categoryId).map((filteredFile, filteredFileIndex) => {
+                        return <GalleryContent
+                            key={filteredFileIndex}
+                            image={filteredFile}
+                            setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+                        />
+                    })}
+                </TabPanel>
+            })}
         </div>
     );
 }
+
+export default withNamespaces()(FileCategoryTabs)

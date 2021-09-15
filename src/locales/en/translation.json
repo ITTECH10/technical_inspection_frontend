@@ -117,5 +117,10 @@
     "Dashboard.financingStatusBtnLeasing": "Leasing",
     "Dashboard.admin.greeting": "Hi",
     "monthSingular": "month",
-    "monthPlural": "months"
+    "monthPlural": "months",
+    "DocumentCategoryNameVertrag": "Contracts",
+    "DocumentCategoryNameFahrzeugschein": "License id",
+    "DocumentCategoryNameSchaeden": "Damages",
+    "DocumentCategoryNameRechnungen": "Invoices",
+    "DocumentCategoryNameSonstiges": "Other"
 }
