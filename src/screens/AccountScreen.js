@@ -3,8 +3,13 @@ import { Grid, Typography, Box, Paper, TextField, useMediaQuery, Divider } from 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles'
 import { useData } from '../contexts/DataContext';
+import EditUserDetails from '../components/UI/Users/EditUserDetails';
 
 const useStyles = makeStyles(theme => ({
+    myProfileEdit: {
+        display: 'flex',
+        alignItems: 'center'
+    },
     gridContainer: {
         position: 'relative',
         height: '100%'
@@ -114,9 +119,12 @@ const AccountScreen = () => {
     return (
         <Grid container className={classes.gridContainer}>
             <Grid className={classes.gridChildTwo} xs={12} sm={12}>
-                <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
-                    Mein Profil
-                </Typography>
+                <Box className={classes.myProfileEdit}>
+                    <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
+                        Mein Profil
+                    </Typography>
+                    <EditUserDetails />
+                </Box>
                 <Divider style={{ marginBottom: 10 }} />
                 <Paper elevation={2} className={classes.gridTwoContent}>
                     <Box className={classes.imageBtnsContent}>

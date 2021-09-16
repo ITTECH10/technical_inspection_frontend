@@ -115,7 +115,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     }
 
     return (
-        user.role === 'admin' &&
         <div style={{ marginRight: 10 }}>
             <Tooltip title="Update Vehicle?">
                 <IconButton className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>

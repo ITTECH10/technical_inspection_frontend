@@ -112,7 +112,7 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user, getUserVehicles, myVehicles, setMyVehicles } = useData()
 
     const ordinaryIconSizePositioning = {
         position: 'absolute',
@@ -136,43 +136,96 @@ const DashboardScreen = ({ t }) => {
     const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
     const vehiclesWithLeasingsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
 
+    const myVehiclesWithAddedContract = myVehicles.filter(v => v.contractExpiresOn)
+    const myVehiclesWithCreditsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
+    const myVehiclesWithLeasingsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
+
     React.useEffect(() => {
-        getAllVehicles()
+        if (user.role === 'admin') {
+            getAllVehicles()
+        }
     }, [getAllVehicles])
+
+    React.useEffect(() => {
+        if (user.role === 'user') {
+            getUserVehicles(user._id)
+        }
+    }, [getUserVehicles])
 
     // const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
     const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
     const TUVExpiresInFourteenDays = vehicles.filter(v => v.TUVExpiresInFourteenDays)
     const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
 
+    const UserTUVExpiresInThirtyDays = myVehicles.filter(v => v.TUVExpiresInOneMonth)
+    const UserTUVExpiresInFourteenDays = myVehicles.filter(v => v.TUVExpiresInFourteenDays)
+    const UserTUVExpired = myVehicles.filter(v => new Date(v.TUV) < new Date())
+
     const handleNavigateFinansesVehicles = () => {
-        setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
+        if (user.role === 'admin') {
+            setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
+            setSelectedIndex(2)
+        }
+
+        if (user.role === 'user') {
+            setMyVehicles(myVehiclesWithCreditsContractExpiringInTwoMonths)
+            setSelectedIndex(1)
+        }
+
         history.push('/cars')
-        setSelectedIndex(2)
     }
 
     const handleNavigateCreditVehicles = () => {
-        setVehicles(vehiclesWithLeasingsContractExpiringInTwoMonths)
+        if (user.role === 'admin') {
+            setVehicles(vehiclesWithLeasingsContractExpiringInTwoMonths)
+            setSelectedIndex(2)
+        }
+
+        if (user.role === 'user') {
+            setMyVehicles(myVehiclesWithLeasingsContractExpiringInTwoMonths)
+            setSelectedIndex(1)
+        }
         history.push('/cars')
-        setSelectedIndex(2)
     }
 
     const handleNavigateTuvExpiredVehicles = () => {
-        setVehicles(TUVExpired)
+        if (user.role === 'admin') {
+            setVehicles(TUVExpired)
+            setSelectedIndex(2)
+        }
+
+        if (user.role === 'user') {
+            setMyVehicles(UserTUVExpired)
+            setSelectedIndex(1)
+        }
         history.push('/cars', { title: 'TÜV überfällig' })
-        setSelectedIndex(2)
     }
 
     const handleNavigateTuvFourteenVehicles = () => {
-        setVehicles(TUVExpiresInFourteenDays)
+        if (user.role === 'admin') {
+            setVehicles(TUVExpiresInFourteenDays)
+            setSelectedIndex(2)
+        }
+
+        if (user.role === 'user') {
+            setMyVehicles(UserTUVExpiresInFourteenDays)
+            setSelectedIndex(1)
+        }
         history.push('/cars', { title: 'TÜV läuft in 14 Tagen ab' })
-        setSelectedIndex(2)
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
-        setVehicles(TUVExpiresInThirtyDays)
+        if (user.role === 'admin') {
+            setVehicles(TUVExpiresInThirtyDays)
+            setSelectedIndex(2)
+        }
+
+        if (user.role === 'user') {
+            setMyVehicles(UserTUVExpiresInThirtyDays)
+            setSelectedIndex(1)
+        }
+
         history.push('/cars', { title: 'TÜV läuft in 30 Tagen ab' })
-        setSelectedIndex(2)
     }
 
     const handleCustomersNavigate = () => {
@@ -182,7 +235,13 @@ const DashboardScreen = ({ t }) => {
 
     const handleAllVehiclesNavigate = () => {
         history.push('/cars')
-        setSelectedIndex(2)
+        if (user.role === 'admin') {
+            setSelectedIndex(2)
+        }
+
+        if (user.role === 'user') {
+            setSelectedIndex(1)
+        }
     }
 
     return (
@@ -195,25 +254,26 @@ const DashboardScreen = ({ t }) => {
             </Box>
 
             <Box className={classes.boxFlexContainer}>
-                <Card className={classes.dashboardBoxOne} variant="outlined" elevation={3}>
-                    <CardContent>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('Dashboard.customersBox')}
-                            </Typography>
-                            <GroupIcon style={ordinaryIconSizePositioning} color="secondary" />
-                        </Box>
+                {user.role === 'admin' &&
+                    <Card className={classes.dashboardBoxOne} variant="outlined" elevation={3}>
+                        <CardContent>
+                            <Box className={classes.boxTitleFlex}>
+                                <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                    {t('Dashboard.customersBox')}
+                                </Typography>
+                                <GroupIcon style={ordinaryIconSizePositioning} color="secondary" />
+                            </Box>
 
-                        <Box className={classes.dashboardContentFlex}>
-                            <Typography className={classes.countTitle} variant="h4" component="h4">
-                                {users.length - 1}
-                            </Typography>
-                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
-                                {t('Dashboard.customersBtn')}
-                            </Button>
-                        </Box>
-                    </CardContent>
-                </Card>
+                            <Box className={classes.dashboardContentFlex}>
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
+                                    {users.length - 1}
+                                </Typography>
+                                <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
+                                    {t('Dashboard.customersBtn')}
+                                </Button>
+                            </Box>
+                        </CardContent>
+                    </Card>}
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
                         <Box className={classes.boxTitleFlex}>
@@ -225,10 +285,10 @@ const DashboardScreen = ({ t }) => {
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
-                                {vehicles.length}
+                                {user.role === 'admin' ? vehicles.length : myVehicles.length}
                             </Typography>
                             <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
-                                {t('Dashboard.vehiclesBtn')}
+                                {user.role === 'admin' ? t('Dashboard.vehiclesBtn') : t('MyVehicles')}
                             </Button>
                         </Box>
                     </CardContent>
@@ -245,7 +305,7 @@ const DashboardScreen = ({ t }) => {
                         <Box className={classes.tuvBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpiresInThirtyDays.length}
+                                    {user.role === 'admin' ? TUVExpiresInThirtyDays.length : UserTUVExpiresInThirtyDays.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
                                     {t('Dashboard.tuvBtn30')}
@@ -253,7 +313,7 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpiresInFourteenDays.length}
+                                    {user.role === 'admin' ? TUVExpiresInFourteenDays.length : UserTUVExpiresInFourteenDays.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
                                     {t('Dashboard.tuvBtn14')}
@@ -261,7 +321,7 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpired.length}
+                                    {user.role === 'admin' ? TUVExpired.length : UserTUVExpired.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
                                     {t('Dashboard.tuvBtnExpired')}
@@ -282,7 +342,7 @@ const DashboardScreen = ({ t }) => {
                         <Box className={classes.finansesBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {vehiclesWithCreditsContractExpiringInTwoMonths.length}
+                                    {user.role === 'admin' ? vehiclesWithCreditsContractExpiringInTwoMonths.length : myVehiclesWithCreditsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
                                     {t('Dashboard.financingStatusBtnFinancing')}
@@ -290,7 +350,7 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {vehiclesWithLeasingsContractExpiringInTwoMonths.length}
+                                    {user.role === 'admin' ? vehiclesWithLeasingsContractExpiringInTwoMonths.length : myVehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
                                     {t('Dashboard.financingStatusBtnLeasing')}

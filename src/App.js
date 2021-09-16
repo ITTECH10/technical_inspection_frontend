@@ -94,7 +94,8 @@ function App() {
             {/* <Route exact path="/banks" component={BankScreen} /> */}
           </Switch> :
           <Switch>
-            <Route exact path="/" component={CarScreen} />
+            <Route exact path="/" component={DashboardScreen} />
+            <Route exact path="/cars" component={CarScreen} />
             <Route exact path="/account" component={AccountScreen} />
             <GuardedRoute exact path="/changePassword" component={ChangeGeneratedPasswordScreen} condition={user.firstLogIn} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />

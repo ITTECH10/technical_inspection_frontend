@@ -80,8 +80,15 @@ function EditUserDetails({ userId, t }) {
         const data = { ...fields }
         axios.patch(`/users/${userId}`, data).then(res => {
             if (res.status === 202) {
-                setTimeout(() => {
+                if (user.role === 'user') {
+                    setUser(res.data.user)
+                }
+
+                if (user.role === 'admin') {
                     setSelectedUser(res.data.user)
+                }
+
+                setTimeout(() => {
                     setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)
@@ -103,7 +110,6 @@ function EditUserDetails({ userId, t }) {
     };
 
     return (
-        user.role === 'admin' &&
         <div style={{ marginRight: 10 }}>
             <Tooltip title={t('EditCustomersButton')}>
                 <IconButton className={classes.btnRoot} size="small" color="secondary" variant="contained" onClick={handleClickOpen}>
@@ -146,6 +152,7 @@ function EditUserDetails({ userId, t }) {
                             label={t('EmailInputLabel')}
                             type="email"
                             onChange={handleChange}
+                            disabled={user.role === 'user'}
                             fullWidth
                         />
                         <TextField

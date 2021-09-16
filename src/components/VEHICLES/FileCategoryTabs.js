@@ -4,10 +4,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+// import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import GalleryContent from './../UI/GalleryContent'
 import { withNamespaces } from 'react-i18next';
 import DocumentCategories from './DocumentCategoryProvider'
+
+// const content = value === idx ? (
+//     <GalleryContent
+//         key={filteredFileIndex}
+//         image={filteredFile}
+//         setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+//     />
+// ) : (
+//     <Typography variant="h2">
+//         Emir Salihovic
+//     </Typography>
+// )
+// return content
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
+
+const categories = DocumentCategories.getDocumentCategories()
 
 function TabPanel(props) {
     const classes = useStyles()
@@ -79,12 +95,12 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    {DocumentCategories.getDocumentCategories().map((fc, idx) => (
+                    {categories.map((fc, idx) => (
                         <Tab key={fc.categoryId} label={t(`${fc.name}`)} {...a11yProps(idx)} />
                     ))}
                 </Tabs>
             </AppBar>
-            {DocumentCategories.getDocumentCategories().map((fileCategory, idx) => {
+            {categories.map((fileCategory, idx) => {
                 return <TabPanel key={idx} value={value} index={idx}>
                     {files.filter(file => file.category === fileCategory.categoryId).map((filteredFile, filteredFileIndex) => {
                         return <GalleryContent

@@ -37,7 +37,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection } = selectedCar
+    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, registrationNumber, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toDateString()
     const formatedAu = new Date(AU).toDateString()
@@ -65,6 +65,10 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 <Box>
                     <Typography className={classes.inputTitle}>{t('ModelInputLabel')}</Typography>
                     <TextField className={classes.input} label={model} disabled />
+                </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>Kennzeichen</Typography>
+                    <TextField className={classes.input} label={registrationNumber} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('LTIInputLabel')}</Typography>
