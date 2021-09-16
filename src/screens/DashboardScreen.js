@@ -141,6 +141,21 @@ const DashboardScreen = ({ t }) => {
     const myVehiclesWithLeasingsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
 
     React.useEffect(() => {
+        let privacyPageTimeout
+
+        if (user && !user.policiesAccepted) {
+            privacyPageTimeout = setTimeout(() => {
+                history.push('/privacyPolicy')
+                history.go(0)
+            }, 2000)
+        }
+
+        return () => {
+            clearTimeout(privacyPageTimeout)
+        }
+    }, [history, user])
+
+    React.useEffect(() => {
         if (user.role === 'admin') {
             getAllVehicles()
         }
