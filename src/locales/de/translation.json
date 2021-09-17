@@ -121,5 +121,10 @@
     "DocumentCategoryNameFahrzeugschein": "Fahrzeugschein",
     "DocumentCategoryNameSchaeden": "Schäden",
     "DocumentCategoryNameRechnungen": "Rechnungen",
-    "DocumentCategoryNameSonstiges": "Sonstiges"
+    "DocumentCategoryNameSonstiges": "Sonstiges",
+    "DocumentCategoryKeinVertrag": "Noch keine Vertrags.",
+    "DocumentCategoryKeinFahrzeugschein": "Noch kein Fahrzeugschein.",
+    "DocumentCategoryKeinSchaeden": "Noch keine Schaeden.",
+    "DocumentCategoryKeinRechnungen": "Noch keine Rechnungen.",
+    "DocumentCategoryKeinSonstiges": "Noch keine Sonstiges."
 }

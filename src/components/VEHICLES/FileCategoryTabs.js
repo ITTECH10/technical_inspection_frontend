@@ -121,7 +121,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                             image={el}
                             setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                         />
-                    }) : <Typography variant="h6">Noch keine Vertrags.</Typography>}
+                    }) : <Typography variant="h6">{t('DocumentCategoryKeinVertrag')}</Typography>}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_FAHRZEUGSCHEIN').length > 0 ?
@@ -131,7 +131,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                             image={el}
                             setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                         />
-                    }) : <Typography variant="h6">Noch keine Fahrzeugschein.</Typography>}
+                    }) : <Typography variant="h6">{t('DocumentCategoryKeinFahrzeugschein')}</Typography>}
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_SCHADEN').length > 0 ?
@@ -141,7 +141,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                             image={el}
                             setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                         />
-                    }) : <Typography variant="h6">Noch kein schaeden.</Typography>}
+                    }) : <Typography variant="h6">{t('DocumentCategoryKeinSchaeden')}</Typography>}
             </TabPanel>
             <TabPanel value={value} index={3}>
                 {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_RECHNUNG').length > 0 ?
@@ -151,7 +151,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                             image={el}
                             setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                         />
-                    }) : <Typography variant="h6">Noch kein rechnungen.</Typography>}
+                    }) : <Typography variant="h6">{t('DocumentCategoryKeinRechnungen')}</Typography>}
             </TabPanel>
             <TabPanel value={value} index={4}>
                 {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_SONSTIGES').length > 0 ?
@@ -161,7 +161,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                             image={el}
                             setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                         />
-                    }) : <Typography variant="h6">Noch keine sonstiges.</Typography>}
+                    }) : <Typography variant="h6">{t('DocumentCategoryKeinSonstiges')}</Typography>}
             </TabPanel>
         </div>
     );

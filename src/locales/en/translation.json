@@ -122,5 +122,10 @@
     "DocumentCategoryNameFahrzeugschein": "License id",
     "DocumentCategoryNameSchaeden": "Damages",
     "DocumentCategoryNameRechnungen": "Invoices",
-    "DocumentCategoryNameSonstiges": "Other"
+    "DocumentCategoryNameSonstiges": "Other",
+    "DocumentCategoryKeinVertrag": "No contracts yet.",
+    "DocumentCategoryKeinFahrzeugschein": "No license ids yet.",
+    "DocumentCategoryKeinSchaeden": "No damages yet.",
+    "DocumentCategoryKeinRechnungen": "No invoices yet.",
+    "DocumentCategoryKeinSonstiges": "No others yet."
 }

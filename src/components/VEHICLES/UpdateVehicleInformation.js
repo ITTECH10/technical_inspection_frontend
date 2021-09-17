@@ -106,6 +106,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                 const selectedCarIndex = updatedVehicles.findIndex(el => el._id === carId)
                 const corespondingCar = updatedVehicles[selectedCarIndex]
                 corespondingCar.nextTechnicalInspection = res.data.updatedVehicle.nextTechnicalInspection
+                corespondingCar.technicalInspectionInNextTwoMonths = res.data.updatedVehicle.technicalInspectionInNextTwoMonths
                 corespondingCar.TUV = res.data.updatedVehicle.TUV
                 corespondingCar.AU = res.data.updatedVehicle.AU
 

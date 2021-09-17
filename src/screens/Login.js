@@ -72,7 +72,7 @@ const Login = ({ history, t }) => {
         password: ''
     })
     const [errors, setErrors] = useState({})
-    const { setAuthenticated, setAppLoading, appLoading } = useData()
+    const { setAuthenticated, setAppLoading, appLoading, setSelectedIndex } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
 
     const handleChange = (e) => {
@@ -95,6 +95,7 @@ const Login = ({ history, t }) => {
 
                 if (!appLoading) {
                     history.push('/')
+                    setSelectedIndex(0)
                 }
             }
         })
