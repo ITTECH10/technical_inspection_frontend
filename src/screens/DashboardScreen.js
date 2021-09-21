@@ -281,7 +281,7 @@ const DashboardScreen = ({ t }) => {
 
                             <Box className={classes.dashboardContentFlex}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {users.length - 1}
+                                    {users.filter(el => el.role !== 'admin').length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
                                     {t('Dashboard.customersBtn')}

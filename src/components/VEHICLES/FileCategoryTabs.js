@@ -4,37 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-// import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import GalleryContent from './../UI/GalleryContent'
 import { withNamespaces } from 'react-i18next';
 import DocumentCategories from './DocumentCategoryProvider'
 import { Typography } from '@material-ui/core';
-
-// const content = value === idx ? (
-//     <GalleryContent
-//         key={filteredFileIndex}
-//         image={filteredFile}
-//         setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-//     />
-// ) : (
-//     <Typography variant="h2">
-//         Emir Salihovic
-//     </Typography>
-// )
-// return content
-
-// {categories.map((fileCategory, idx) => {
-//     return <TabPanel key={idx} value={value} index={idx}>
-//         {files.filter(file => file.category === fileCategory.categoryId).map((filteredFile, filteredFileIndex) => {
-//             return <GalleryContent
-//                 key={filteredFileIndex}
-//                 image={filteredFile}
-//                 setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-//             />
-//         })}
-//     </TabPanel>
-// })}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -113,56 +87,18 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                     ))}
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_VERTRAG').length > 0 ?
-                    files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_VERTRAG').map((el, i) => {
-                        return <GalleryContent
-                            key={i}
-                            image={el}
-                            setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                        />
-                    }) : <Typography variant="h6">{t('DocumentCategoryKeinVertrag')}</Typography>}
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_FAHRZEUGSCHEIN').length > 0 ?
-                    files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_FAHRZEUGSCHEIN').map((el, i) => {
-                        return <GalleryContent
-                            key={i}
-                            image={el}
-                            setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                        />
-                    }) : <Typography variant="h6">{t('DocumentCategoryKeinFahrzeugschein')}</Typography>}
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_SCHADEN').length > 0 ?
-                    files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_SCHADEN').map((el, i) => {
-                        return <GalleryContent
-                            key={i}
-                            image={el}
-                            setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                        />
-                    }) : <Typography variant="h6">{t('DocumentCategoryKeinSchaeden')}</Typography>}
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_RECHNUNG').length > 0 ?
-                    files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_RECHNUNG').map((el, i) => {
-                        return <GalleryContent
-                            key={i}
-                            image={el}
-                            setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                        />
-                    }) : <Typography variant="h6">{t('DocumentCategoryKeinRechnungen')}</Typography>}
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                {files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_SONSTIGES').length > 0 ?
-                    files.filter((file, fileIdx) => file.category === 'DOCUMENT_TYPE_SONSTIGES').map((el, i) => {
-                        return <GalleryContent
-                            key={i}
-                            image={el}
-                            setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                        />
-                    }) : <Typography variant="h6">{t('DocumentCategoryKeinSonstiges')}</Typography>}
-            </TabPanel>
+            {categories.map((fileCategory, idx) => {
+                return <TabPanel key={idx} value={value} index={idx}>
+                    {files.filter((file, fileIdx) => file.category === fileCategory.categoryId).length > 0 ?
+                        files.filter(file => file.category === fileCategory.categoryId).map((filteredFile, filteredFileIndex) => {
+                            return <GalleryContent
+                                key={filteredFileIndex}
+                                image={filteredFile}
+                                setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+                            />
+                        }) : <Typography variant="h6">{t(fileCategory.noResults)}</Typography>}
+                </TabPanel>
+            })}
         </div>
     );
 }

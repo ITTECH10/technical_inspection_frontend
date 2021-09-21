@@ -35,10 +35,10 @@ function CustomersTableAdvanced({ t }) {
 
     const { query } = fields
 
-    const filteredContent = users && [...users].reverse().filter(el => el._id !== user._id).filter(x => x.firstName.toLowerCase().includes(query.toLowerCase()) || x.lastName.toLowerCase().includes(query.toLowerCase())).map(c => {
+    const filteredContent = users && [...users].reverse().filter(el => el._id !== user._id).filter(el => el.role !== 'admin').filter(x => x.firstName.toLowerCase().includes(query.toLowerCase()) || x.lastName.toLowerCase().includes(query.toLowerCase())).map(c => {
         return <CustomersRow key={c._id} customer={c} />
     })
-    const content = users && [...users].reverse().filter(el => el._id !== user._id).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(c => {
+    const content = users && [...users].reverse().filter(el => el._id !== user._id).filter(el => el.role !== 'admin').slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(c => {
         return <CustomersRow key={c._id} customer={c} />
     })
 
