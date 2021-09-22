@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { yellow, red } from '@material-ui/core/colors'
 import { useHistory } from 'react-router-dom'
 import { useData } from '../contexts/DataContext'
-import GroupIcon from '@material-ui/icons/Group';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import BuildIcon from '@material-ui/icons/Build';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
@@ -112,7 +111,9 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user } = useData()
+    const { setSelectedIndex, user, getUserVehicles, myVehicles, setMyVehicles } = useData()
+
+    const { _id } = user
 
     const ordinaryIconSizePositioning = {
         position: 'absolute',
@@ -132,9 +133,9 @@ const DashboardScreen = ({ t }) => {
         fill: '#eee'
     }
 
-    const vehiclesWithAddedContract = vehicles.filter(v => v.contractExpiresOn)
-    const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
-    const vehiclesWithLeasingsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
+    const myVehiclesWithAddedContract = myVehicles.filter(v => v.contractExpiresOn)
+    const myVehiclesWithCreditsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
+    const myVehiclesWithLeasingsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
 
     React.useEffect(() => {
         let privacyPageTimeout
@@ -152,86 +153,61 @@ const DashboardScreen = ({ t }) => {
     }, [history, user])
 
     React.useEffect(() => {
-        getAllVehicles()
-    }, [getAllVehicles])
+        getUserVehicles(_id)
+    }, [getUserVehicles, _id])
 
-    // const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
-    const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
-    const TUVExpiresInFourteenDays = vehicles.filter(v => v.TUVExpiresInFourteenDays)
-    const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
+    const UserTUVExpiresInThirtyDays = myVehicles.filter(v => v.TUVExpiresInOneMonth)
+    const UserTUVExpiresInFourteenDays = myVehicles.filter(v => v.TUVExpiresInFourteenDays)
+    const UserTUVExpired = myVehicles.filter(v => new Date(v.TUV) < new Date())
 
     const handleNavigateFinansesVehicles = () => {
-        setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
-        setSelectedIndex(2)
+        setMyVehicles(myVehiclesWithCreditsContractExpiringInTwoMonths)
+        setSelectedIndex(1)
 
         history.push('/cars')
     }
 
     const handleNavigateCreditVehicles = () => {
-        setVehicles(vehiclesWithLeasingsContractExpiringInTwoMonths)
-        setSelectedIndex(2)
+        setMyVehicles(myVehiclesWithLeasingsContractExpiringInTwoMonths)
+        setSelectedIndex(1)
+
         history.push('/cars')
     }
 
     const handleNavigateTuvExpiredVehicles = () => {
-        setVehicles(TUVExpired)
-        setSelectedIndex(2)
+        setMyVehicles(UserTUVExpired)
+        setSelectedIndex(1)
         history.push('/cars', { title: 'TÜV überfällig' })
     }
 
     const handleNavigateTuvFourteenVehicles = () => {
-        setVehicles(TUVExpiresInFourteenDays)
-        setSelectedIndex(2)
-
+        setMyVehicles(UserTUVExpiresInFourteenDays)
+        setSelectedIndex(1)
         history.push('/cars', { title: 'TÜV läuft in 14 Tagen ab' })
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
-        setVehicles(TUVExpiresInThirtyDays)
-        setSelectedIndex(2)
+        setMyVehicles(UserTUVExpiresInThirtyDays)
+        setSelectedIndex(1)
 
         history.push('/cars', { title: 'TÜV läuft in 30 Tagen ab' })
     }
 
-    const handleCustomersNavigate = () => {
-        history.push('/customers')
-        setSelectedIndex(1)
-    }
-
     const handleAllVehiclesNavigate = () => {
         history.push('/cars')
-        setSelectedIndex(2)
+        setSelectedIndex(1)
     }
 
     return (
         <Box className={classes.dashboardContainer}>
             <Box className={classes.titleDividerBox}>
                 <Typography className={classes.title} variant="h4">
-                    {`${t('Dashboard.admin.greeting')}, Admin`}
+                    {`Hallo, ${user.firstName} ${user.lastName}`}
                 </Typography>
                 <Divider className={classes.divider} />
             </Box>
 
             <Box className={classes.boxFlexContainer}>
-                <Card className={classes.dashboardBoxOne} variant="outlined" elevation={3}>
-                    <CardContent>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('Dashboard.customersBox')}
-                            </Typography>
-                            <GroupIcon style={ordinaryIconSizePositioning} color="secondary" />
-                        </Box>
-
-                        <Box className={classes.dashboardContentFlex}>
-                            <Typography className={classes.countTitle} variant="h4" component="h4">
-                                {users.filter(el => el.role !== 'admin').length}
-                            </Typography>
-                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
-                                {t('Dashboard.customersBtn')}
-                            </Button>
-                        </Box>
-                    </CardContent>
-                </Card>
                 <Card className={classes.dashboardBoxOne} variant="outlined">
                     <CardContent>
                         <Box className={classes.boxTitleFlex}>
@@ -243,10 +219,10 @@ const DashboardScreen = ({ t }) => {
 
                         <Box className={classes.dashboardContentFlex}>
                             <Typography className={classes.countTitle} variant="h4" component="h4">
-                                {vehicles.length}
+                                {myVehicles.length}
                             </Typography>
                             <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
-                                {t('Dashboard.vehiclesBtn')}
+                                {t('MyVehicles')}
                             </Button>
                         </Box>
                     </CardContent>
@@ -263,7 +239,7 @@ const DashboardScreen = ({ t }) => {
                         <Box className={classes.tuvBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpiresInThirtyDays.length}
+                                    {UserTUVExpiresInThirtyDays.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
                                     {t('Dashboard.tuvBtn30')}
@@ -271,7 +247,7 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpiresInFourteenDays.length}
+                                    {UserTUVExpiresInFourteenDays.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
                                     {t('Dashboard.tuvBtn14')}
@@ -279,7 +255,7 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpired.length}
+                                    {UserTUVExpired.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
                                     {t('Dashboard.tuvBtnExpired')}
@@ -300,7 +276,7 @@ const DashboardScreen = ({ t }) => {
                         <Box className={classes.finansesBoxBtnsFlex}>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {vehiclesWithCreditsContractExpiringInTwoMonths.length}
+                                    {myVehiclesWithCreditsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
                                     {t('Dashboard.financingStatusBtnFinancing')}
@@ -308,7 +284,7 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {vehiclesWithLeasingsContractExpiringInTwoMonths.length}
+                                    {myVehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
                                     {t('Dashboard.financingStatusBtnLeasing')}

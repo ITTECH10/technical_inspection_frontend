@@ -12,7 +12,6 @@ import { CSVLink } from "react-csv";
 const ExportUserData = ({ t }) => {
     const [data, setData] = React.useState('')
     const { users } = useData()
-    const isMounted = React.useRef()
 
     // const btnStyle = {
     //     display: 'flex',
@@ -37,21 +36,23 @@ const ExportUserData = ({ t }) => {
     // }
 
     React.useEffect(() => {
-        isMounted.current = true
+        let isMounted = true
+
+        if (isMounted) {
+            json2csv(users, (err, csv) => {
+                if (err) {
+                    console.log(err)
+                }
+                if (csv) {
+                    setData(csv)
+                }
+            })
+        }
 
         return () => {
-            isMounted.current = false
+            isMounted = false
         }
-    }, [isMounted])
-
-    json2csv(users, (err, csv) => {
-        if (err) {
-            console.log(err)
-        }
-        if (csv) {
-            setData(csv)
-        }
-    })
+    }, [users])
 
     const listItemStyle = {
         border: 'none',

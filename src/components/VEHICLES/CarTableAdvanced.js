@@ -24,14 +24,14 @@ const useStyles = makeStyles({
 
 function CarTableAdvanced({ t }) {
     const classes = useStyles();
-    const { myVehicles, setSelectedCarBank, user, selectedUser, vehicles, setVehicles } = useData()
+    const { myVehicles, setSelectedCarBank, user, selectedUser, vehicles } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const matches = useMediaQuery('(max-width: 600px)')
     let customersVehiclesFound, customersVehiclesRender, myVehiclesRender
 
     if (user.role === 'admin') {
-        customersVehiclesFound = vehicles.filter(v => v.vehicleOwner === selectedUser._id)
+        customersVehiclesFound = vehicles.filter(v => v.vehicleOwner._id === selectedUser._id)
 
         customersVehiclesRender = customersVehiclesFound.map(mv => (
             <CarRow key={mv._id} car={mv} />
@@ -76,7 +76,9 @@ function CarTableAdvanced({ t }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {user.role === 'admin' ? customersVehiclesRender : myVehiclesRender}
+                            {user.role === 'admin' ?
+                                customersVehiclesRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                : myVehiclesRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
                         </TableBody>
                     </Table>
                 </TableContainer>

@@ -2,32 +2,32 @@ class DocumentCategoryProvider {
     constructor() {
         this.FILE_CATEGORIES = [
             {
-                name: 'DocumentCategoryNameVertrag',
-                noResults: 'DocumentCategoryKeinVertrag',
+                categoryType: 'DocumentCategoryNameVertrag',
+                noDocumentsInCategory: 'DocumentCategoryKeinVertrag',
                 icon: '',
                 categoryId: "DOCUMENT_TYPE_VERTRAG"
             },
             {
-                name: 'DocumentCategoryNameFahrzeugschein',
-                noResults: 'DocumentCategoryKeinFahrzeugschein',
+                categoryType: 'DocumentCategoryNameFahrzeugschein',
+                noDocumentsInCategory: 'DocumentCategoryKeinFahrzeugschein',
                 icon: '',
                 categoryId: "DOCUMENT_TYPE_FAHRZEUGSCHEIN"
             },
             {
-                name: 'DocumentCategoryNameSchaeden',
-                noResults: 'DocumentCategoryKeinSchaeden',
+                categoryType: 'DocumentCategoryNameSchaeden',
+                noDocumentsInCategory: 'DocumentCategoryKeinSchaeden',
                 icon: '',
                 categoryId: "DOCUMENT_TYPE_SCHADEN"
             },
             {
-                name: 'DocumentCategoryNameRechnungen',
-                noResults: 'DocumentCategoryKeinRechnungen',
+                categoryType: 'DocumentCategoryNameRechnungen',
+                noDocumentsInCategory: 'DocumentCategoryKeinRechnungen',
                 icon: '',
                 categoryId: "DOCUMENT_TYPE_RECHNUNG"
             },
             {
-                name: 'DocumentCategoryNameSonstiges',
-                noResults: 'DocumentCategoryKeinSonstiges',
+                categoryType: 'DocumentCategoryNameSonstiges',
+                noDocumentsInCategory: 'DocumentCategoryKeinSonstiges',
                 icon: '',
                 categoryId: "DOCUMENT_TYPE_SONSTIGES"
             }

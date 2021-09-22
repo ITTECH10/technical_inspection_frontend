@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 function DeleteUser({ userId, t }) {
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false)
-  const { user, logout, users, setUsers } = useData()
+  const { user, users, setUsers } = useData()
   const history = useHistory()
   const classes = useStyles()
 

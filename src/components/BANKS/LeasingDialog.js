@@ -35,7 +35,9 @@ export default function FormDialog() {
 
     const fieldsInit = {
         leasingGiver: banks.length > 0 ? banks[0]._id : '',
+        maintenancePackage: "No",
         contractNumber: '',
+        boughtFrom: '',
         leasingStartDate: '',
         monthlyLeasingPayment: '',
         leasingLastsFor: '',
@@ -141,6 +143,36 @@ export default function FormDialog() {
                             onChange={handleChange}
                             fullWidth
                         />
+                        <TextField
+                            name="boughtFrom"
+                            margin="dense"
+                            id="contractNumber-boughtFrom"
+                            label="Gekauft von"
+                            required
+                            type="text"
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="maintenancePackage"
+                            id="standard-select-maintenancePackage"
+                            select
+                            label="Wartungspaket"
+                            onChange={handleChange}
+                            fullWidth
+                            required
+                            style={{ margin: "8px 0" }}
+                            SelectProps={{
+                                native: true,
+                            }}
+                            helperText="Hat das leasing ein wartungspaket?"
+                        >
+                            {["No", "Yes"].map((option, idx) => (
+                                <option key={idx} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </TextField>
                         <TextField
                             name="leasingStartDate"
                             margin="dense"

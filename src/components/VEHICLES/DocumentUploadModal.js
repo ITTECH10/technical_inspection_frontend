@@ -55,7 +55,7 @@ function DocumentUploadModal({ open, handleChange, setOpen, onHandleSubmit, fiel
                     >
                         {DocumentCategoryProvider.getDocumentCategories().map((fc) => (
                             <option key={fc.categoryId} value={fc.categoryId}>
-                                {t(`${fc.name}`)}
+                                {t(`${fc.categoryType}`)}
                             </option>
                         ))}
                     </TextField>

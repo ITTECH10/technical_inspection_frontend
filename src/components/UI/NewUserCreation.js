@@ -43,6 +43,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     lastName: '',
     email: '',
     phoneNumber: '',
+    smartphoneNumber: '',
     street: '',
     postCode: '',
     city: '',
@@ -67,6 +68,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     setBtnLoading(true)
 
     const data = { ...fields, confirmPassword: fields.password }
+
     axios.post('/users/signup', data).then(res => {
       if (res.status === 201) {
         const updatedUsers = [...users, { ...res.data.newUser }]
@@ -159,7 +161,18 @@ function NewCustomer({ handleAlertOpening, t }) {
               helperText={errors.phoneNumber && errors.phoneNumber}
               margin="dense"
               id="phoneNumber"
-              label={t('PhoneNumberInputLabel')}
+              label={t('PhoneNumberInputLabel') + ' ' + '(fax)'}
+              onChange={handleChange}
+              type="text"
+              fullWidth
+            />
+            <TextField
+              name="smartphoneNumber"
+              error={errors.smartphoneNumber && errors.smartphoneNumber}
+              helperText={errors.smartphoneNumber && errors.smartphoneNumber}
+              margin="dense"
+              id="smartphoneNumber"
+              label={t('PhoneNumberInputLabel') + ' ' + '(smartphone)'}
               onChange={handleChange}
               type="text"
               fullWidth

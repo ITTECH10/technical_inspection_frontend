@@ -37,7 +37,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, registrationNumber, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection } = selectedCar
+    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, registrationNumber, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toDateString()
     const formatedAu = new Date(AU).toDateString()
@@ -58,6 +58,10 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
             <Divider style={{ marginBottom: 10 }} />
 
             <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
+                <Box>
+                    <Typography className={classes.inputTitle}>Fahrgestellnummer</Typography>
+                    <TextField className={classes.input} label={chassisNumber} disabled />
+                </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('MarkInputLabel')}</Typography>
                     <TextField className={classes.input} label={mark} disabled />

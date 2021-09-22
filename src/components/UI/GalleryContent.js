@@ -114,14 +114,12 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                                 </Typography>}
                             {
                                 image.documentPublisher &&
-                                <Typography>
-                                    <Chip
-                                        label={image.documentPublisher}
-                                        color="primary"
-                                        size="large"
-                                        variant="default"
-                                    />
-                                </Typography>
+                                <Chip
+                                    label={image.documentPublisher}
+                                    color="primary"
+                                    size="medium"
+                                    variant="default"
+                                />
                             }
                         </Box>
                     </CardContent>

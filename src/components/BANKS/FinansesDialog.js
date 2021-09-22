@@ -35,6 +35,7 @@ function FinancingDialog({ t }) {
     const fieldsInit = {
         creditInstitute: banks.length > 0 ? banks[0]._id : '',
         contractNumber: '',
+        boughtFrom: '',
         creditStartDate: '',
         monthlyCreditPayment: '',
         interestRate: '',
@@ -134,6 +135,16 @@ function FinancingDialog({ t }) {
                             margin="dense"
                             id="contractNumber-finanses"
                             label="Vertragsnummer"
+                            onChange={handleChange}
+                            required
+                            type="text"
+                            fullWidth
+                        />
+                        <TextField
+                            name="boughtFrom"
+                            margin="dense"
+                            id="boughtFrom-finanses"
+                            label="Gekauft von"
                             onChange={handleChange}
                             required
                             type="text"

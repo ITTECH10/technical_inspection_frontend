@@ -22,7 +22,7 @@ const CarRow = ({ vehicle }) => {
             <TableCell>{vehicle.model}</TableCell>
             <TableCell>{vehicle.registrationNumber}</TableCell>
             <TableCell>
-                {vehicle.formatedName}
+                {`${vehicle.vehicleOwner.firstName} ${vehicle.vehicleOwner.lastName}`}
             </TableCell>
         </TableRow>
     )

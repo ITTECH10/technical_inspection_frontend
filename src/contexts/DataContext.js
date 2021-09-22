@@ -60,6 +60,7 @@ const DataContextProvider = ({ children }) => {
     const getAllVehicles = useCallback(() => {
         axios.get('/cars')
             .then(res => {
+                // console.log(res.data)
                 if (res.status === 200) {
                     setVehicles(res.data.vehicles)
                 }

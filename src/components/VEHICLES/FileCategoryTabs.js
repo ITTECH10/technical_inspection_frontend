@@ -83,7 +83,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                     aria-label="scrollable auto tabs example"
                 >
                     {categories.map((fc, idx) => (
-                        <Tab key={fc.categoryId} label={t(`${fc.name}`)} {...a11yProps(idx)} />
+                        <Tab key={fc.categoryId} label={t(`${fc.categoryType}`)} {...a11yProps(idx)} />
                     ))}
                 </Tabs>
             </AppBar>
@@ -96,7 +96,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                                 image={filteredFile}
                                 setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                             />
-                        }) : <Typography variant="h6">{t(fileCategory.noResults)}</Typography>}
+                        }) : <Typography variant="h6">{t(fileCategory.noDocumentsInCategory)}</Typography>}
                 </TabPanel>
             })}
         </div>

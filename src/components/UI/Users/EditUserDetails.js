@@ -34,7 +34,7 @@ function EditUserDetails({ userId, t }) {
     const [open, setOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { setSelectedUser, users, setUsers, setUser, user, selectedUser } = useData()
+    const { setSelectedUser, setUser, user, selectedUser } = useData()
     const classes = useStyles()
 
     if (user.role === 'user') {

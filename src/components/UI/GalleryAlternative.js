@@ -1,28 +1,11 @@
 import React from 'react'
 import { useData } from '../../contexts/DataContext'
-import { Typography, Box } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import GalleryContent from './GalleryContent'
+import { Typography } from '@material-ui/core'
 import { withNamespaces } from 'react-i18next'
 import FileCategoryTabs from './../VEHICLES/FileCategoryTabs'
 
-const useStyles = makeStyles(theme => ({
-    boxFlex: {
-        display: 'flex',
-        flexDirection: 'column',
-        [theme.breakpoints.up('md')]: {
-            flexDirection: 'row'
-        }
-    }
-}));
-
 const GalleryAlternativeReal = ({ t, setOnHandleDeleteOpen }) => {
     const { carImages } = useData()
-    const classes = useStyles()
-
-    const content = carImages.map(x => {
-        return <GalleryContent key={x.url} image={x} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
-    })
 
     return (
         <>
@@ -31,10 +14,6 @@ const GalleryAlternativeReal = ({ t, setOnHandleDeleteOpen }) => {
             </Typography>
 
             <FileCategoryTabs files={carImages} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
-
-            {/* <Box className={classes.boxFlex}>
-                {content}
-            </Box> */}
         </>
     )
 }

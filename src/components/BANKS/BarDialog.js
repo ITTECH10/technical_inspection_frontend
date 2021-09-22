@@ -33,7 +33,8 @@ function BarDialog({ t }) {
 
     const fieldsInit = {
         payedAt: '',
-        cashSum: ''
+        cashSum: '',
+        boughtFrom: ''
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
@@ -113,6 +114,16 @@ function BarDialog({ t }) {
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                        />
+                        <TextField
+                            name="boughtFrom"
+                            margin="dense"
+                            id="boughtFrom"
+                            onChange={handleChange}
+                            required
+                            label="Gekauft von"
+                            type="text"
+                            fullWidth
                         />
                         <TextField
                             name="cashSum"

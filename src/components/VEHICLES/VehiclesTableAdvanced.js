@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 
 function VehiclesTableAdvanced({ t }) {
     const classes = useStyles();
-    const { vehicles, user, users } = useData()
+    const { vehicles, user } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [adaptiveTitle, setAdaptiveTitle] = React.useState(t('VehiclesTitle'))
@@ -50,14 +50,14 @@ function VehiclesTableAdvanced({ t }) {
 
     const { query } = fields
 
-    const skipAdmin = users.slice(1, users.length)
+    // const skipAdmin = users.slice(1, users.length)
 
-    vehicles.map(v => v.vehicleOwner).map((el, idx) => {
-        return skipAdmin.find((u, idx) => u._id === el)
-    }).map((el, i) => {
-        vehicles[i].formatedName = `${el.firstName} ${el.lastName}`
-        return vehicles
-    })
+    // vehicles.map(v => v.vehicleOwner).map((el, idx) => {
+    //     return skipAdmin.find((u, idx) => u._id === el)
+    // }).map((el, i) => {
+    //     vehicles[i].formatedName = `${el.firstName} ${el.lastName}`
+    //     return vehicles
+    // })
 
     const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase())).map(v => (
         <VehicleItemRow key={v._id} vehicle={v} />

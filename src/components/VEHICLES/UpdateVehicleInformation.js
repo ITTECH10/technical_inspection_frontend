@@ -30,6 +30,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     const [btnLoading, setBtnLoading] = React.useState(false)
     const { vehicles, setVehicles, selectedCar, user, setSelectedCar, myVehicles, setMyVehicles } = useData()
     const [fields, setFields] = React.useState({
+        chassisNumber: '',
         mark: '',
         model: '',
         registrationNumber: '',
@@ -51,6 +52,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
 
     React.useEffect(() => {
         setFields({
+            chassisNumber: selectedCar.chassisNumber,
             mark: selectedCar.mark,
             model: selectedCar.model,
             registrationNumber: selectedCar.registrationNumber,
@@ -140,8 +142,18 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                     </DialogContentText>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            name="mark"
+                            name="chassisNumber"
                             autoFocus
+                            margin="dense"
+                            id="update-vehicle-chassisNumber"
+                            label="Fahrgestellnummer"
+                            onChange={handleChange}
+                            fullWidth
+                            required
+                            value={fields.chassisNumber}
+                        />
+                        <TextField
+                            name="mark"
                             margin="dense"
                             id="update-vehicle-mark"
                             label={t('MarkInputLabel')}

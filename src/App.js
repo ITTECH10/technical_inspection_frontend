@@ -16,6 +16,7 @@ import GuardedRoute from './utils/GuardedRoute'
 
 // LAZY LOADING 
 const DashboardScreen = React.lazy(() => import('./screens/DashboardScreen'))
+const UserDashboardScreen = React.lazy(() => import('./screens/UserDashboardScreen'))
 const CustomersScreen = React.lazy(() => import('./screens/CustomersScreen'))
 const CarScreen = React.lazy(() => import('./screens/CarScreen'))
 const CarDetailsScreen = React.lazy(() => import('./screens/CarDetailsScreen'))
@@ -94,7 +95,7 @@ function App() {
             {/* <Route exact path="/banks" component={BankScreen} /> */}
           </Switch> :
           <Switch>
-            <Route exact path="/" component={DashboardScreen} />
+            <Route exact path="/" component={UserDashboardScreen} />
             <Route exact path="/cars" component={CarScreen} />
             <Route exact path="/account" component={AccountScreen} />
             <GuardedRoute exact path="/changePassword" component={ChangeGeneratedPasswordScreen} condition={user.firstLogIn} />

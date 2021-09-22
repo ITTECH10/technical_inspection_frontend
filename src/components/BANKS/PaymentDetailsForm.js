@@ -43,6 +43,10 @@ const PaymentDetailsForm = ({ t }) => {
                         <TextField className={classes.input} label={formatedCashPayedAt} disabled fullWidth />
                     </Box>
                     <Box>
+                        <Typography className={classes.inputTitle}>Gekauft von</Typography>
+                        <TextField className={classes.input} label={selectedPayment.cashPayment.boughtFrom} disabled fullWidth />
+                    </Box>
+                    <Box>
                         <Typography className={classes.inputTitle}>{t('Payment.cash.sum')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.cashPayment.cashSum} disabled fullWidth />
                     </Box>
@@ -58,6 +62,10 @@ const PaymentDetailsForm = ({ t }) => {
                     <Box>
                         <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.creditPayment.contractNumber} disabled fullWidth />
+                    </Box>
+                    <Box>
+                        <Typography className={classes.inputTitle}>Gekauft von</Typography>
+                        <TextField className={classes.input} label={selectedPayment.creditPayment.boughtFrom} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('CreditStartDateInputLabel')}</Typography>
@@ -92,6 +100,14 @@ const PaymentDetailsForm = ({ t }) => {
                     <Box>
                         <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedPayment.leasingPayment.contractNumber} disabled fullWidth />
+                    </Box>
+                    <Box>
+                        <Typography className={classes.inputTitle}>Gekauft von</Typography>
+                        <TextField className={classes.input} label={selectedPayment.leasingPayment.boughtFrom} disabled fullWidth />
+                    </Box>
+                    <Box>
+                        <Typography className={classes.inputTitle}>Wartungspaket</Typography>
+                        <TextField className={classes.input} label={selectedPayment.leasingPayment.maintenancePackage === true ? "Yes" : "No"} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('LeasingStartDateInputLabel')}</Typography>

@@ -30,6 +30,7 @@ const UploadCarData = ({ t }) => {
 
     const [fields, setFields] = useState({
         photo: '',
+        chassisNumber: '',
         mark: '',
         model: '',
         HSN: '',
@@ -42,16 +43,15 @@ const UploadCarData = ({ t }) => {
         nextTechnicalInspection: '',
         TUV: '',
         AU: '',
-        // insuranceHouse: '',
         monthlyInsurancePayment: '',
         allowedYearlyKilometers: '',
-        // vehiclePaymentType: '',
         yearlyTax: ''
     })
 
     const formData = new FormData()
 
     if (user.role === 'admin') {
+        formData.append('chassisNumber', fields.chassisNumber)
         formData.append('HSN', fields.HSN)
         formData.append('TSN', fields.TSN)
         formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
@@ -66,6 +66,7 @@ const UploadCarData = ({ t }) => {
     }
 
     formData.append('photo', fields.photo)
+    formData.append('category', 'fa')
     formData.append('mark', fields.mark)
     formData.append('model', fields.model)
     formData.append('registrationNumber', fields.registrationNumber)
@@ -149,8 +150,17 @@ const UploadCarData = ({ t }) => {
                             <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
                             <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
                             <TextField
-                                name="mark"
+                                name="chassisNumber"
                                 autoFocus
+                                margin="dense"
+                                id="mark"
+                                label="Fahrgestellnummer"
+                                onChange={handleChange}
+                                required
+                                fullWidth
+                            />
+                            <TextField
+                                name="mark"
                                 margin="dense"
                                 id="mark"
                                 label={t('MarkInputLabel')}
@@ -313,7 +323,7 @@ const UploadCarData = ({ t }) => {
                         </form> :
                         <form onSubmit={handleSubmit} encType="multipart/form-data">
                             <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                            <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
+                            <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufugen</Button>
                             <TextField
                                 name="mark"
                                 autoFocus
@@ -355,7 +365,7 @@ const UploadCarData = ({ t }) => {
                                 <Button onClick={handleClose} color="primary" variant="contained">
                                     {t('CancelButton')}
                                 </Button>
-                                <Button type="submit" color="secondary" variant="contained">
+                                <Button disabled={fields.photo === '' && user.role === 'user'} type="submit" color="secondary" variant="contained">
                                     {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                                 </Button>
                             </DialogActions>

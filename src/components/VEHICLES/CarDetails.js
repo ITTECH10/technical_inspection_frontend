@@ -34,7 +34,11 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
     const history = useHistory()
     const { insuranceHouse, vehicleOwner } = selectedCar
     const { role } = user
-    const corelatedCar = users.find(u => u._id === vehicleOwner)
+    let corelatedCar
+
+    if (vehicleOwner) {
+        corelatedCar = users.find(u => u._id === vehicleOwner._id)
+    }
 
     const getCarInsurance = React.useCallback(() => {
         axios.get(`/insuranceHouse/${insuranceHouse}`)
@@ -55,7 +59,7 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
         if (user.role === 'admin') {
             setSelectedUser(corelatedCar)
         }
-    }, [carId, getSelectedCar, vehicleOwner, setSelectedUser, user.role, corelatedCar])
+    }, [carId, getSelectedCar, setSelectedUser, user.role, corelatedCar])
 
     useEffect(() => {
         if (selectedCar.insuranceHouse !== undefined && role === 'user') {
