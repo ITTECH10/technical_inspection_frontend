@@ -37,7 +37,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, registrationNumber, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
+    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toDateString()
     const formatedAu = new Date(AU).toDateString()
@@ -45,6 +45,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const formatedFirstVehicleReg = new Date(firstVehicleRegistration).toDateString()
     const formatedFirstVehOnOwner = new Date(firstVehicleRegistrationOnOwner).toDateString()
     const formatedNextTehInsp = new Date(nextTechnicalInspection).toDateString()
+    const formatedVaranty = new Date(varantyExpiresAt).toDateString()
 
     return (
         <Grid item xs={12}>
@@ -73,6 +74,10 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 <Box>
                     <Typography className={classes.inputTitle}>Kennzeichen</Typography>
                     <TextField className={classes.input} label={registrationNumber} disabled />
+                </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>Garantie Ablaufdatum</Typography>
+                    <TextField className={classes.input} label={formatedVaranty} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('LTIInputLabel')}</Typography>

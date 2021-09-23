@@ -76,7 +76,7 @@ function CustomersTableAdvanced({ t }) {
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={users.length - 1}
+                    count={users.filter(el => el.role !== 'admin').length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

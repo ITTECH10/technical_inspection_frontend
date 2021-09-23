@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { withNamespaces } from 'react-i18next';
+import banksInfoProvider from './BankInfoProvider'
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -20,9 +21,11 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-function FinancingDialog({ t }) {
+const banks = banksInfoProvider.getBankNames()
+
+function FinansesDialog({ t }) {
     const [open, setOpen] = React.useState(false);
-    const { banks, setSelectedCar, selectedPayment, setSelectedPayment } = useData()
+    const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
     const history = useHistory()
 
     let creditPaymentId
@@ -33,7 +36,7 @@ function FinancingDialog({ t }) {
     }
 
     const fieldsInit = {
-        creditInstitute: banks.length > 0 ? banks[0]._id : '',
+        creditInstitute: banks.length > 0 ? banks[0].bankName : '',
         contractNumber: '',
         boughtFrom: '',
         creditStartDate: '',
@@ -125,8 +128,8 @@ function FinancingDialog({ t }) {
                             helperText="Bitte selekten sie die bank."
                         >
                             {banks.map((option) => (
-                                <option key={option._id} value={option._id}>
-                                    {option.name}
+                                <option key={option.bankId} value={option.bankId}>
+                                    {option.bankName}
                                 </option>
                             ))}
                         </TextField>
@@ -216,4 +219,4 @@ function FinancingDialog({ t }) {
     );
 }
 
-export default withNamespaces()(FinancingDialog)
+export default withNamespaces()(FinansesDialog)

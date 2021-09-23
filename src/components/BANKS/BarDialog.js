@@ -94,7 +94,7 @@ function BarDialog({ t }) {
         <div>
             <Button variant="text" color="secondary" onClick={handleClickOpen}>
                 {t('Payment.cash.btn')}
-                {selectedPayment.cashPayment && <CheckCircleIcon style={{ marginLeft: 10 }} />}
+                {selectedPayment.cashPayment && <CheckCircleIcon style={{ marginLeft: 0 }} />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Barbezahlung</DialogTitle>

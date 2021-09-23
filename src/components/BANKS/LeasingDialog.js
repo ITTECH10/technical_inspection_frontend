@@ -13,6 +13,7 @@ import { useData } from '../../contexts/DataContext';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import banksInfoProvider from './BankInfoProvider'
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -21,9 +22,11 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function FormDialog() {
+const banks = banksInfoProvider.getBankNames()
+
+export default function LeasingDialog() {
     const [open, setOpen] = React.useState(false);
-    const { banks, setSelectedCar, selectedPayment, setSelectedPayment } = useData()
+    const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
     const history = useHistory()
 
     let leasingPaymentId
@@ -34,7 +37,7 @@ export default function FormDialog() {
     }
 
     const fieldsInit = {
-        leasingGiver: banks.length > 0 ? banks[0]._id : '',
+        leasingGiver: banks.length > 0 ? banks[0].bankName : '',
         maintenancePackage: "No",
         contractNumber: '',
         boughtFrom: '',
@@ -128,8 +131,8 @@ export default function FormDialog() {
                             helperText="Bitte selekten sie die bank."
                         >
                             {banks.map((option) => (
-                                <option key={option._id} value={option._id}>
-                                    {option.name}
+                                <option key={option.bankId} value={option.bankId}>
+                                    {option.bankName}
                                 </option>
                             ))}
                         </TextField>

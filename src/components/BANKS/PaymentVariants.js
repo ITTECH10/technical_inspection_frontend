@@ -4,13 +4,19 @@ import { makeStyles } from '@material-ui/core/styles'
 import BarDialog from './BarDialog'
 import FinansesDialog from './FinansesDialog'
 import LeasingDialog from './LeasingDialog'
+import SellCarDialog from '../VEHICLES/SellCarDialog'
 import { useData } from '../../contexts/DataContext'
 
 const useStyles = makeStyles(theme => ({
     flexContent: {
-        width: 320,
+        // width: 320,
         display: 'flex',
-        justifyContent: 'space-between'
+        flexDirection: 'column',
+        [theme.breakpoints.up('sm')]: {
+            width: 450,
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        }
     }
 }))
 
@@ -34,6 +40,7 @@ const PaymentVariants = () => {
                 <BarDialog />
                 <FinansesDialog />
                 <LeasingDialog />
+                <SellCarDialog />
             </Box>
         </Box>
     )

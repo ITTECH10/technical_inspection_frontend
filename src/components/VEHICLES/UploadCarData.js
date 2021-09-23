@@ -22,7 +22,11 @@ const UploadCarData = ({ t }) => {
     const [btnLoading, setBtnLoading] = useState(false)
     const { selectedUser, myVehicles, setMyVehicles, setVehicles, vehicles, user } = useData()
     const classes = useStyles()
-    let userId = user._id
+    let userId
+
+    if (user.role === 'user') {
+        userId = user._id
+    }
 
     if (selectedUser._id) {
         userId = selectedUser._id
@@ -35,6 +39,7 @@ const UploadCarData = ({ t }) => {
         model: '',
         HSN: '',
         TSN: '',
+        varantyExpiresAt: '',
         firstVehicleRegistration: '',
         firstVehicleRegistrationOnOwner: '',
         kilometersDriven: '',
@@ -54,6 +59,7 @@ const UploadCarData = ({ t }) => {
         formData.append('chassisNumber', fields.chassisNumber)
         formData.append('HSN', fields.HSN)
         formData.append('TSN', fields.TSN)
+        formData.append('varantyExpiresAt', fields.varantyExpiresAt)
         formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
         formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
         formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
@@ -134,246 +140,258 @@ const UploadCarData = ({ t }) => {
     };
 
     return (
-        <div>
-            <FloatingButton onHandleClick={handleClickOpen}>
-                <DriveEtaIcon />
-            </FloatingButton>
-            <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{t('NewVehicleFormTitle')}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {t('NewVehicleFormHint')}
-                    </DialogContentText>
-                    {user.role === 'admin' ?
-                        <form onSubmit={handleSubmit} encType="multipart/form-data">
-                            <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                            <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
-                            <TextField
-                                name="chassisNumber"
-                                autoFocus
-                                margin="dense"
-                                id="mark"
-                                label="Fahrgestellnummer"
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="mark"
-                                margin="dense"
-                                id="mark"
-                                label={t('MarkInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="model"
-                                margin="dense"
-                                id="model"
-                                label={t('ModelInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="HSN"
-                                margin="dense"
-                                id="HSN"
-                                label={t('HSNInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="TSN"
-                                margin="dense"
-                                id="TSN"
-                                label={t('TSNInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="registrationNumber"
-                                margin="dense"
-                                id="registrationNumber"
-                                label={t('RegistrationNumberInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="kilometersDriven"
-                                margin="dense"
-                                id="kilometersDriven"
-                                label={t('KilometersDrivenInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="firstVehicleRegistration"
-                                id="firstVehicleRegistration"
-                                label={t('FVRInputLabel')}
-                                onChange={handleChange}
-                                required
-                                type="date"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="firstVehicleRegistrationOnOwner"
-                                id="firstVehicleRegistrationOnOwner"
-                                label={t('FVROOInputLabel')}
-                                onChange={handleChange}
-                                required
-                                type="date"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="lastTechnicalInspection"
-                                id="lastTechnicalInspection"
-                                label={t('LTIInputLabel')}
-                                onChange={handleChange}
-                                required
-                                type="date"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="nextTechnicalInspection"
-                                id="nextTechnicalInspection"
-                                label={t('NTIInputLabel')}
-                                onChange={handleChange}
-                                required
-                                type="date"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="TUV"
-                                id="TUV"
-                                label={t('TUVInputLabel')}
-                                onChange={handleChange}
-                                required
-                                type="date"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="AU"
-                                id="AU"
-                                label={t('AUInputLabel')}
-                                onChange={handleChange}
-                                required
-                                type="date"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                name="monthlyInsurancePayment"
-                                margin="dense"
-                                id="monthlyInsurancePayment"
-                                label={t('MonthlyInsurancePaymentInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="allowedYearlyKilometers"
-                                margin="dense"
-                                id="allowedYearlyKilometers"
-                                label={t('AllowedYearlyKilometersInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="yearlyTax"
-                                margin="dense"
-                                id="yearlyTax"
-                                label={t('YearlyTaxInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <DialogActions>
-                                <Button onClick={handleClose} color="primary" variant="contained">
-                                    {t('CancelButton')}
-                                </Button>
-                                <Button type="submit" color="secondary" variant="contained">
-                                    {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
-                                </Button>
-                            </DialogActions>
-                        </form> :
-                        <form onSubmit={handleSubmit} encType="multipart/form-data">
-                            <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                            <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufugen</Button>
-                            <TextField
-                                name="mark"
-                                autoFocus
-                                margin="dense"
-                                id="mark"
-                                label={t('MarkInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="model"
-                                margin="dense"
-                                id="model"
-                                label={t('ModelInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="registrationNumber"
-                                margin="dense"
-                                id="registrationNumber"
-                                label={t('RegistrationNumberInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <TextField
-                                name="kilometersDriven"
-                                margin="dense"
-                                id="kilometersDriven"
-                                label={t('KilometersDrivenInputLabel')}
-                                onChange={handleChange}
-                                required
-                                fullWidth
-                            />
-                            <DialogActions>
-                                <Button onClick={handleClose} color="primary" variant="contained">
-                                    {t('CancelButton')}
-                                </Button>
-                                <Button disabled={fields.photo === '' && user.role === 'user'} type="submit" color="secondary" variant="contained">
-                                    {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
-                                </Button>
-                            </DialogActions>
-                        </form>
-                    }
-                </DialogContent>
-            </Dialog>
-        </div >
+        userId ?
+            <div>
+                <FloatingButton onHandleClick={handleClickOpen}>
+                    <DriveEtaIcon />
+                </FloatingButton>
+                <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">{t('NewVehicleFormTitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {t('NewVehicleFormHint')}
+                        </DialogContentText>
+                        {user.role === 'admin' ?
+                            <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
+                                <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
+                                <TextField
+                                    name="chassisNumber"
+                                    autoFocus
+                                    margin="dense"
+                                    id="mark"
+                                    label="Fahrgestellnummer"
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="mark"
+                                    margin="dense"
+                                    id="mark"
+                                    label={t('MarkInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="model"
+                                    margin="dense"
+                                    id="model"
+                                    label={t('ModelInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="HSN"
+                                    margin="dense"
+                                    id="HSN"
+                                    label={t('HSNInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="TSN"
+                                    margin="dense"
+                                    id="TSN"
+                                    label={t('TSNInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="registrationNumber"
+                                    margin="dense"
+                                    id="registrationNumber"
+                                    label={t('RegistrationNumberInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="kilometersDriven"
+                                    margin="dense"
+                                    id="kilometersDriven"
+                                    label={t('KilometersDrivenInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="varantyExpiresAt"
+                                    id="varantyExpiresAt"
+                                    label="Garantie Ablaufdatum"
+                                    onChange={handleChange}
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="firstVehicleRegistration"
+                                    id="firstVehicleRegistration"
+                                    label={t('FVRInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="firstVehicleRegistrationOnOwner"
+                                    id="firstVehicleRegistrationOnOwner"
+                                    label={t('FVROOInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="lastTechnicalInspection"
+                                    id="lastTechnicalInspection"
+                                    label={t('LTIInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="nextTechnicalInspection"
+                                    id="nextTechnicalInspection"
+                                    label={t('NTIInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="TUV"
+                                    id="TUV"
+                                    label={t('TUVInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="AU"
+                                    id="AU"
+                                    label={t('AUInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    type="date"
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    name="monthlyInsurancePayment"
+                                    margin="dense"
+                                    id="monthlyInsurancePayment"
+                                    label={t('MonthlyInsurancePaymentInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="allowedYearlyKilometers"
+                                    margin="dense"
+                                    id="allowedYearlyKilometers"
+                                    label={t('AllowedYearlyKilometersInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="yearlyTax"
+                                    margin="dense"
+                                    id="yearlyTax"
+                                    label={t('YearlyTaxInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <DialogActions>
+                                    <Button onClick={handleClose} color="primary" variant="contained">
+                                        {t('CancelButton')}
+                                    </Button>
+                                    <Button type="submit" color="secondary" variant="contained">
+                                        {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
+                                    </Button>
+                                </DialogActions>
+                            </form> :
+                            <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
+                                <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufugen</Button>
+                                <TextField
+                                    name="mark"
+                                    autoFocus
+                                    margin="dense"
+                                    id="mark"
+                                    label={t('MarkInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="model"
+                                    margin="dense"
+                                    id="model"
+                                    label={t('ModelInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="registrationNumber"
+                                    margin="dense"
+                                    id="registrationNumber"
+                                    label={t('RegistrationNumberInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="kilometersDriven"
+                                    margin="dense"
+                                    id="kilometersDriven"
+                                    label={t('KilometersDrivenInputLabel')}
+                                    onChange={handleChange}
+                                    required
+                                    fullWidth
+                                />
+                                <DialogActions>
+                                    <Button onClick={handleClose} color="primary" variant="contained">
+                                        {t('CancelButton')}
+                                    </Button>
+                                    <Button disabled={fields.photo === '' && user.role === 'user'} type="submit" color="secondary" variant="contained">
+                                        {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
+                                    </Button>
+                                </DialogActions>
+                            </form>
+                        }
+                    </DialogContent>
+                </Dialog>
+            </div > : null
     )
 }
 

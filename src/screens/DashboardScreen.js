@@ -27,23 +27,27 @@ const useStyles = makeStyles(theme => ({
     dashboardBoxOne: {
         position: 'relative',
         marginBottom: 10,
+        // margin: '0px 14px 10px 14px',
         [theme.breakpoints.up('md')]: {
             width: 300,
-            marginBottom: 0
+            marginBottom: 0,
+            marginRight: 20
         },
         boxShadow: '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)',
-        marginRight: 20,
+        // marginRight: 20,
     },
     dashboardBoxThree: {
         position: 'relative',
         marginBottom: 10,
+        // margin: '0px 14px 10px 14px',
         // flexGrow: 1,
         [theme.breakpoints.up('md')]: {
             width: 415,
-            marginBottom: 0
+            marginBottom: 0,
+            marginRight: 20
         },
         boxShadow: '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)',
-        marginRight: 20,
+        // marginRight: 20,
     },
     dashboardBoxBlueBox: {
         position: 'absolute',

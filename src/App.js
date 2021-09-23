@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import Loader from './utils/Loader'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import theme from './utils/theme'
+import { makeStyles } from '@material-ui/core/styles';
 
 import { useData } from './contexts/DataContext';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
@@ -27,10 +28,24 @@ const Login = React.lazy(() => import('./screens/Login'))
 const AccountScreen = React.lazy(() => import('./screens/AccountScreen'))
 
 function App() {
+  const useStyles = makeStyles(theme => ({
+    navbarFix: {
+      position: 'relative',
+      top: !loading && 64,
+      height: 'calc(100vh - 64px)',
+      marginLeft: !loading && 70,
+      marginRight: 'calc(70px - 56px)',
+      [theme.breakpoints.up('sm')]: {
+        marginLeft: !loading && 75,
+        marginRight: 0
+      }
+    }
+  }))
+
   const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getUserVehicles, getUserData, user, getAllUsers, getInsurances, getBanks, setUser } = useData()
+  const classes = useStyles()
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
-
   let storageUser = localStorage.user
   let storageSelectedUserRef = React.useRef(localStorage.selectedUser)
   let storageLanguage = localStorage.language
@@ -66,10 +81,10 @@ function App() {
       setAuthenticated(true)
       getAllUsers()
       getAllVehicles()
-      getInsurances()
-      getBanks()
+      // getInsurances()
+      // getBanks()
     }
-  }, [getAllUsers, user, getInsurances, getBanks, getAllVehicles, storageUser, setAuthenticated])
+  }, [getAllUsers, user, getAllVehicles, storageUser, setAuthenticated])
 
   let userId = user._id
   if (user && user.role === 'admin' && selectedUser) {
@@ -115,15 +130,16 @@ function App() {
     </React.Suspense>
   )
 
-  const navbarFix = {
-    position: 'relative',
-    top: !loading && 64,
-    height: 'calc(100vh - 64px)',
-    marginLeft: !loading && 75
-  }
+  // OLD CODE
+  // const navbarFix = {
+  //   position: 'relative',
+  //   top: !loading && 64,
+  //   height: 'calc(100vh - 64px)',
+  //   marginLeft: !loading && 70
+  // }
 
   const app = !appLoading ? (
-    <div style={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? navbarFix : null} className="App">
+    <div className={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? classes.navbarFix : null}>
       {authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' && !loading && <MenuCliped open={open} setOpen={setOpen} />}
       {authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' && !loading && <ScrollToTopButton />}
       {authenticated ? authRoutes : routes}
