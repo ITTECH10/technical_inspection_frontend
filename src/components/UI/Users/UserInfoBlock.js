@@ -73,14 +73,14 @@ const UserInfoBlock = ({ t }) => {
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`${t('PhoneNumberInputLabel') + ' ' + '(fax)'}: ${selectedUser.phoneNumber}`}
+                        value={`${t('PhoneNumberInputLabel')} ('fax'): ${selectedUser.phoneNumber}`}
                         disabled
                         fullWidth
                     />
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`${t('PhoneNumberInputLabel') + ' ' + '(smartphone)'}: ${selectedUser.smartphoneNumber}`}
+                        value={`${t('PhoneNumberInputLabel')} ('smartphone'): ${selectedUser.smartphoneNumber}`}
                         disabled
                         fullWidth
                     />

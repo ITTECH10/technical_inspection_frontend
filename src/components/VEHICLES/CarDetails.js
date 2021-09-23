@@ -8,9 +8,11 @@ import VehicleDetailsGrid from './VehicleDetailsGrid'
 // import InsuranceHouseGrid from '../INSURANCES/InsuranceHouseGrid'
 // import BankGrid from '../BANKS/BankGrid'
 import PaymentVariants from '../BANKS/PaymentVariants'
+import InsurancePaymentVariants from '../INSURANCES/InsurancePaymentVariants'
 import GalleryAlternative from './../UI/GalleryAlternative'
 import UserInfoBlock from '../UI/Users/UserInfoBlock'
 import PaymentDetailsForm from '../BANKS/PaymentDetailsForm'
+import InsurancePaymentDetailsForm from '../INSURANCES/InsurancePaymentDetailsForm'
 import { withNamespaces } from 'react-i18next'
 
 const useStyles = makeStyles((theme) => ({
@@ -75,11 +77,19 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
                 setOnHandleUpdateOpen={setOnHandleUpdateOpen}
             />
             {/* <InsuranceHouseGrid /> */}
+
             <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('Payment.title')}</Typography>
             <Divider style={{ marginBottom: 10 }} />
             <Paper>
                 <PaymentVariants />
                 <PaymentDetailsForm />
+            </Paper>
+
+            <Typography variant="h5" align="left" style={{ margin: '10px 0' }}>{t('InsurancesTitle')}</Typography>
+            <Divider style={{ marginBottom: 10 }} />
+            <Paper>
+                <InsurancePaymentVariants />
+                <InsurancePaymentDetailsForm />
             </Paper>
             {carImages.length > 0 &&
                 <GalleryAlternative

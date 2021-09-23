@@ -52,8 +52,6 @@ function NewCustomer({ handleAlertOpening, t }) {
     confirmPassword: ''
   })
 
-  const [errors, setErrors] = useState({})
-
   const { users, setUsers } = useData()
 
   const handleChange = (e) => {
@@ -83,7 +81,6 @@ function NewCustomer({ handleAlertOpening, t }) {
     })
       .catch(err => {
         setBtnLoading(false)
-        setErrors(JSON.parse(err.response.data.message))
       })
   }
 
@@ -93,7 +90,6 @@ function NewCustomer({ handleAlertOpening, t }) {
 
   const handleClose = () => {
     setOpen(false);
-    setErrors({})
   };
 
   return (
@@ -111,8 +107,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             <TextField
               autoFocus
               name="firstName"
-              error={errors.firstName && errors.firstName}
-              helperText={errors.firstName && errors.firstName}
+              required
               margin="dense"
               id="firstName"
               label={t('FirstNameInputLabel')}
@@ -122,8 +117,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="lastName"
-              error={errors.lastName && errors.lastName}
-              helperText={errors.lastName && errors.lastName}
+              required
               margin="dense"
               id="lastName"
               label={t('LastNameInputLabel')}
@@ -133,8 +127,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="birthDate"
-              error={errors.birthDate && errors.birthDate}
-              helperText={errors.birthDate && errors.birthDate}
+              required
               id="birthDate"
               label={t('BirthDateInputLabel')}
               onChange={handleChange}
@@ -146,8 +139,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="email"
-              error={errors.email && errors.email}
-              helperText={errors.email && errors.email}
+              required
               margin="dense"
               id="mail"
               label={t('EmailInputLabel')}
@@ -157,30 +149,27 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="phoneNumber"
-              error={errors.phoneNumber && errors.phoneNumber}
-              helperText={errors.phoneNumber && errors.phoneNumber}
+              required
               margin="dense"
               id="phoneNumber"
-              label={t('PhoneNumberInputLabel') + ' ' + '(fax)'}
+              label={`${t('PhoneNumberInputLabel')} (fax)`}
               onChange={handleChange}
               type="text"
               fullWidth
             />
             <TextField
               name="smartphoneNumber"
-              error={errors.smartphoneNumber && errors.smartphoneNumber}
-              helperText={errors.smartphoneNumber && errors.smartphoneNumber}
+              required
               margin="dense"
               id="smartphoneNumber"
-              label={t('PhoneNumberInputLabel') + ' ' + '(smartphone)'}
+              label={`${t('PhoneNumberInputLabel')} (smartphone)`}
               onChange={handleChange}
               type="text"
               fullWidth
             />
             <TextField
               name="street"
-              error={errors.street && errors.street}
-              helperText={errors.street && errors.street}
+              required
               margin="dense"
               id="street"
               label={t('StreetInputLabel')}
@@ -190,8 +179,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="postCode"
-              error={errors.postCode && errors.postCode}
-              helperText={errors.postCode && errors.postCode}
+              required
               margin="dense"
               id="pwd"
               label="Post code"
@@ -201,8 +189,7 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="city"
-              error={errors.city && errors.city}
-              helperText={errors.city && errors.city}
+              required
               margin="dense"
               id="confirm-pwd"
               label="City"
@@ -214,7 +201,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               <Button onClick={handleClose} color="primary" variant="contained">
                 {t('CancelButton')}
               </Button>
-              <Button disabled={Object.values(fields).filter((el, i) => i !== 8).every(el => el === '')} type="submit" color="secondary" variant="contained">
+              <Button disabled={Object.values(fields).filter((el, i) => i !== 9).every(el => el === '')} type="submit" color="secondary" variant="contained">
                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
               </Button>
             </DialogActions>

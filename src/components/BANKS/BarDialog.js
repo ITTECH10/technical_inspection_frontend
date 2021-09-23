@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
         marginTop: theme.spacing(1),
         width: '100%'
-    },
+    }
 }))
 
 function BarDialog({ t }) {
@@ -94,7 +94,7 @@ function BarDialog({ t }) {
         <div>
             <Button variant="text" color="secondary" onClick={handleClickOpen}>
                 {t('Payment.cash.btn')}
-                {selectedPayment.cashPayment && <CheckCircleIcon style={{ marginLeft: 0 }} />}
+                {selectedPayment.cashPayment && <CheckCircleIcon />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Barbezahlung</DialogTitle>

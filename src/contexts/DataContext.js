@@ -47,6 +47,17 @@ const DataContextProvider = ({ children }) => {
         })
     }, [])
 
+    const getCorespondingInsurance = useCallback((insuranceId) => {
+        axios.get(`/insuranceHouse/${insuranceId}`).then(res => {
+            if (res.status === 200) {
+                setSelectedCarInsurance(res.data.insurance)
+            }
+        }).catch(err => {
+            console.log(err.response)
+        })
+    }, [])
+
+
     const acceptPrivacyPolicy = useCallback((id) => {
         axios(`/users/me/privacyPolicy/${id}`)
             .then(res => {
@@ -228,6 +239,7 @@ const DataContextProvider = ({ children }) => {
         vehiclesPage,
         setVehiclesPage,
         getCorespondingPayment,
+        getCorespondingInsurance,
         selectedPayment,
         setSelectedPayment,
         selectedIndex,

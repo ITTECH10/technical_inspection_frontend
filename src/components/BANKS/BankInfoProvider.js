@@ -2,16 +2,19 @@ class BankInfoProvider {
     constructor() {
         this.banks = [
             {
+                bankId: 1,
                 bankName: 'Munich Bank',
-                bankId: 1
+                bankTranslationKey: "MUNICH_BANK_TYPE_1"
             },
             {
+                bankId: 2,
                 bankName: 'Dortmund Bank',
-                bankId: 2
+                bankTranslationKey: "DORTMUND_BANK_TYPE_2"
             },
             {
+                bankId: 3,
                 bankName: 'Berlin Bank',
-                bankId: 3
+                bankTranslationKey: "BERLIN_BANK_TYPE_3"
             },
         ]
     }
