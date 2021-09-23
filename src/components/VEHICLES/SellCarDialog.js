@@ -82,7 +82,7 @@ function SellCarDialog({ t }) {
     return (
         <div>
             <Alerts message={t('AlertGeneralSuccessful')} open={carSoldAlert} handleOpening={setCarSoldAlert} />
-            <Button disabled={selectedCar.carIsSold} variant="outlined" color="secondary" onClick={handleClickOpen}>
+            <Button disabled={selectedCar.carIsSold} variant="text" color="secondary" onClick={handleClickOpen}>
                 {selectedCar.carIsSold ? 'Fahrzeug Verkauft' : 'Fahrzeug Verkaufen?'}
             </Button>
             <Dialog open={open} onClose={handleClose}>

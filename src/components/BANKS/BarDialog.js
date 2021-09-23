@@ -17,6 +17,12 @@ const useStyles = makeStyles(theme => ({
     textField: {
         marginTop: theme.spacing(1),
         width: '100%'
+    },
+    btnLabel: {
+        marginRight: 20,
+        [theme.breakpoints.up('sm')]: {
+            marginRight: 0
+        }
     }
 }))
 
@@ -92,7 +98,7 @@ function BarDialog({ t }) {
 
     return (
         <div>
-            <Button variant="text" color="secondary" onClick={handleClickOpen}>
+            <Button variant="text" color="secondary" onClick={handleClickOpen} classes={{ label: classes.btnLabel }}>
                 {t('Payment.cash.btn')}
                 {selectedPayment.cashPayment && <CheckCircleIcon />}
             </Button>
