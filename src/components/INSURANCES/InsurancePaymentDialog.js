@@ -8,13 +8,16 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { withNamespaces } from 'react-i18next';
-import insuranceInfoProvider from './InsuranceInfoProvider';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useData } from './../../contexts/DataContext'
 import axios from 'axios'
 import Alerts from './../UI/Alerts'
-
-const insurances = insuranceInfoProvider.getInsuranceNames()
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Box from '@material-ui/core/Box';
 
 function InsurancePaymentDialog({ t }) {
     const [open, setOpen] = React.useState(false);
@@ -22,8 +25,24 @@ function InsurancePaymentDialog({ t }) {
     const { user, selectedUser, setSelectedCar, selectedCar, selectedCarInsurance, setSelectedCarInsurance } = useData()
     const [insuranceAddedAlert, setInsuranceAddedAlert] = React.useState(false)
     const [insuranceUpdatedAlert, setInsuranceUpdatedAlert] = React.useState(false)
+    const [selectedKaskoOption, setSelectedKaskoOption] = React.useState("VK/TK")
+    const [fields, setFields] = React.useState({
+        insuranceHouse: '',
+        contractNumber: '',
+        vk: "0",
+        tk: "0"
+    })
 
     let userId, vehicleId, insuranceTimeout
+
+    React.useEffect(() => {
+        if (selectedKaskoOption === "TK") {
+            setFields({
+                ...fields,
+                vk: "0"
+            })
+        }
+    }, [selectedKaskoOption, fields])
 
     React.useEffect(() => {
         return () => {
@@ -35,12 +54,6 @@ function InsurancePaymentDialog({ t }) {
         userId = selectedUser._id
         vehicleId = selectedCar._id
     }
-
-    const [fields, setFields] = React.useState({
-        insuranceHouse: insurances.length > 0 ? insurances[0].insuranceName : '',
-        kasko: '0',
-        contractNumber: ''
-    })
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -55,6 +68,10 @@ function InsurancePaymentDialog({ t }) {
             ...fields,
             [e.target.name]: e.target.value
         })
+    }
+
+    const handleKaskoChange = (e) => {
+        setSelectedKaskoOption(e.target.value)
     }
 
     const handlePostSubmit = (e) => {
@@ -121,42 +138,14 @@ function InsurancePaymentDialog({ t }) {
                         </DialogContentText>
                         <TextField
                             name="insuranceHouse"
+                            margin="dense"
                             id="insuranceHouse-insurances"
-                            select
                             label="Gesellschaft"
                             onChange={handleChange}
+                            type="text"
                             fullWidth
                             required
-                            SelectProps={{
-                                native: true,
-                            }}
-                            helperText="Bitte selekten sie die Versicherung."
-                        >
-                            {insurances.map((option) => (
-                                <option key={option.insuranceId} value={option.insuranceName}>
-                                    {option.insuranceName}
-                                </option>
-                            ))}
-                        </TextField>
-                        <TextField
-                            name="kasko"
-                            id="insuranceHouse-kasko"
-                            select
-                            label="Kasko"
-                            style={{ marginTop: 10 }}
-                            onChange={handleChange}
-                            fullWidth
-                            SelectProps={{
-                                native: true,
-                            }}
-                            helperText="Bitte selekten sie das kasko."
-                        >
-                            {["0", "150", "300", "500", "1000", "2500"].map((option, idx) => (
-                                <option key={idx} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </TextField>
+                        />
                         <TextField
                             name="contractNumber"
                             margin="dense"
@@ -167,6 +156,84 @@ function InsurancePaymentDialog({ t }) {
                             type="number"
                             fullWidth
                         />
+                        <FormControl component="fieldset" style={{ marginTop: 10, width: '100%' }}>
+                            <FormLabel color="secondary" component="legend">Kasko</FormLabel>
+                            <RadioGroup aria-label="kasko" name="VK/TK" value="VK/TK" onChange={handleKaskoChange}>
+                                <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <FormControlLabel value="VK/TK" label="VK/TK" control={
+                                        <Radio
+                                            value="VK/TK"
+                                            checked={selectedKaskoOption === 'VK/TK'}
+                                        />}
+                                    />
+                                    <TextField
+                                        name="vk"
+                                        id="insuranceHouse-vk"
+                                        select
+                                        style={{ marginTop: 10, marginRight: 15 }}
+                                        onChange={handleChange}
+                                        fullWidth
+                                        disabled={selectedKaskoOption === "TK"}
+                                        SelectProps={{
+                                            native: true,
+                                        }}
+                                        helperText="SB VK (EURO)"
+                                    >
+                                        {["0", "150", "300", "500", "1000", "2500"].map((option, idx) => (
+                                            <option key={idx} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </TextField>
+                                    <TextField
+                                        name="tk"
+                                        id="insuranceHouse-tk"
+                                        select
+                                        style={{ marginTop: 10 }}
+                                        onChange={handleChange}
+                                        disabled={selectedKaskoOption === "TK"}
+                                        fullWidth
+                                        SelectProps={{
+                                            native: true,
+                                        }}
+                                        helperText="SB TK (EURO)"
+                                    >
+                                        {["0", "150", "300", "500", "1000", "2500"].map((option, idx) => (
+                                            <option key={idx} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </TextField>
+                                </Box>
+                                <Box style={{ display: 'flex' }}>
+                                    <FormControlLabel value="TK" label="TK" control={
+                                        <Radio
+                                            value="TK"
+                                            checked={selectedKaskoOption === 'TK'}
+                                        />}
+                                    />
+                                    <TextField
+                                        name="tk"
+                                        id="insuranceHouse-kasko"
+                                        select
+                                        style={{ marginTop: 10, marginLeft: 26 }}
+                                        onChange={handleChange}
+                                        fullWidth
+                                        disabled={selectedKaskoOption === "VK/TK"}
+                                        SelectProps={{
+                                            native: true,
+                                        }}
+                                        helperText="SB TK (EURO)"
+                                    >
+                                        {["0", "150", "300", "500", "1000", "2500"].map((option, idx) => (
+                                            <option key={idx} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </TextField>
+                                </Box>
+                            </RadioGroup>
+                        </FormControl>
                     </DialogContent>
                     <DialogActions>
                         <Button variant="contained" onClick={handleClose} color="primary">

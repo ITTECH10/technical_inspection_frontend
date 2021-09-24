@@ -40,18 +40,18 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('sm')]: {
             // height: 520
             width: '65%',
-            height: '100%'
+            // height: '100%'
         },
         [theme.breakpoints.up('md')]: {
             width: '50%'
         },
         [theme.breakpoints.up('lg')]: {
             width: '35%',
-            height: '100%'
+            // height: '100%'
         },
         [theme.breakpoints.up('xl')]: {
             width: '35%',
-            height: '100%',
+            // height: '100%',
             // margin: '0 auto'
         }
     },
@@ -229,12 +229,24 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Telephone
+                                        Phone number (fax)
                                     </Typography>
                                     <TextField
                                         variant="standard"
                                         disabled
                                         value={user.phoneNumber}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box className={classes.inputSingleBox}>
+                                <Box className={classes.inputContentVertical}>
+                                    <Typography style={{ fontWeight: '400' }}>
+                                        Phone number (smartphone)
+                                    </Typography>
+                                    <TextField
+                                        variant="standard"
+                                        disabled
+                                        value={user.smartphoneNumber}
                                     />
                                 </Box>
                             </Box>

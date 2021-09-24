@@ -23,16 +23,17 @@ const useStyles = makeStyles(theme => ({
 
 function SellCarDialog({ t }) {
     const [open, setOpen] = React.useState(false);
-    const { setSelectedCar, selectedCar } = useData()
+    const { selectedCar, vehicles, setVehicles } = useData()
     const classes = useStyles()
     const history = useHistory()
     const [btnLoading, setBtnLoading] = React.useState(false)
     const [carSoldAlert, setCarSoldAlert] = React.useState(false)
-    let sellCarTimeout
+    let sellCarTimeout, navigateTimeout
 
     React.useEffect(() => {
         return () => {
             clearTimeout(sellCarTimeout)
+            clearTimeout(navigateTimeout)
         }
     })
 
@@ -67,12 +68,20 @@ function SellCarDialog({ t }) {
 
         axios.put(`/cars/${carId}`, data).then(res => {
             if (res.status === 200) {
+                const updatedVehicles = [...vehicles]
+                const soldCarIndex = updatedVehicles.findIndex(el => el._id === carId)
+                updatedVehicles.splice(soldCarIndex, 1)
+
                 sellCarTimeout = setTimeout(() => {
-                    setSelectedCar(res.data.updatedVehicle)
+                    setVehicles(updatedVehicles)
                     setBtnLoading(false)
                     setOpen(false)
                     setCarSoldAlert(true)
                 }, 2000)
+
+                navigateTimeout = setTimeout(() => {
+                    history.goBack()
+                }, 4000)
             }
         }).catch(err => {
             console.log(err.response)
@@ -83,7 +92,7 @@ function SellCarDialog({ t }) {
         <div>
             <Alerts message={t('AlertGeneralSuccessful')} open={carSoldAlert} handleOpening={setCarSoldAlert} />
             <Button disabled={selectedCar.carIsSold} variant="text" color="secondary" onClick={handleClickOpen}>
-                {selectedCar.carIsSold ? 'Fahrzeug Verkauft' : 'Fahrzeug Verkaufen?'}
+                Als verkauft markieren?
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Fahrzeug Verkauft?</DialogTitle>
@@ -106,8 +115,6 @@ function SellCarDialog({ t }) {
                         />
                         <TextField
                             name="carIsSoldDate"
-                            //   error={errors.carIsSoldDate && errors.carIsSoldDate}
-                            //   helperText={errors.carIsSoldDate && errors.carIsSoldDate}
                             id="sell-car-car-is-sold-date"
                             label="Wann wurde das fahrzeug verkauft?"
                             onChange={handleChange}

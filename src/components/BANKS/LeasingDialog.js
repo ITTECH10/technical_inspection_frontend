@@ -119,23 +119,14 @@ export default function LeasingDialog() {
                     <form onSubmit={!selectedPayment.leasingPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="leasingGiver"
+                            margin="dense"
                             id="standard-select-currency-native"
-                            select
                             label="Leasinggeber"
                             onChange={handleChange}
                             fullWidth
+                            type="text"
                             required
-                            SelectProps={{
-                                native: true,
-                            }}
-                            helperText="Bitte selekten sie die bank."
-                        >
-                            {banks.map((option) => (
-                                <option key={option.bankId} value={option.bankId}>
-                                    {option.bankName}
-                                </option>
-                            ))}
-                        </TextField>
+                        />
                         <TextField
                             name="contractNumber"
                             margin="dense"
@@ -170,7 +161,7 @@ export default function LeasingDialog() {
                             }}
                             helperText="Hat das leasing ein wartungspaket?"
                         >
-                            {["No", "Yes"].map((option, idx) => (
+                            {["Nein", "Ja"].map((option, idx) => (
                                 <option key={idx} value={option}>
                                     {option}
                                 </option>

@@ -33,9 +33,14 @@ const InsurancePaymentDetailsForm = ({ t }) => {
                         <Typography className={classes.inputTitle}>Vertragsnummer</Typography>
                         <TextField className={classes.input} label={selectedCarInsurance.contractNumber} disabled fullWidth />
                     </Box>
+                    {selectedCarInsurance.fullKasko !== "0" &&
+                        <Box>
+                            <Typography className={classes.inputTitle}>Voll Kasko</Typography>
+                            <TextField className={classes.input} label={selectedCarInsurance.fullKasko} disabled fullWidth />
+                        </Box>}
                     <Box>
-                        <Typography className={classes.inputTitle}>Kasko</Typography>
-                        <TextField className={classes.input} label={selectedCarInsurance.kasko} disabled fullWidth />
+                        <Typography className={classes.inputTitle}>Teil Kasko</Typography>
+                        <TextField className={classes.input} label={selectedCarInsurance.partKasko} disabled fullWidth />
                     </Box>
                 </>
             )}

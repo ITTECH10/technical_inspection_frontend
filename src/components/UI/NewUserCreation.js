@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel'; import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
-// import { setAuthorizationHeader } from './../../utils/setAuthorizationHeader'
 import { useData } from './../../contexts/DataContext'
-// import { useHistory } from 'react-router-dom';
 import FloatingButton from './FloatingButton';
 import { makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
@@ -20,7 +22,6 @@ import { withNamespaces } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   textField: {
     marginTop: theme.spacing(1),
-    // marginBottom: theme.spacing(1),
     width: '100%'
   },
 }))
@@ -49,7 +50,10 @@ function NewCustomer({ handleAlertOpening, t }) {
     city: '',
     birthDate: '',
     password: generateId(),
-    confirmPassword: ''
+    confirmPassword: '',
+    customerType: 'firmenkunde',
+    customerPartner: '',
+    customerPartnerEmail: ''
   })
 
   const { users, setUsers } = useData()
@@ -104,8 +108,60 @@ function NewCustomer({ handleAlertOpening, t }) {
             {t('NewCustomerFormHint')}
           </DialogContentText>
           <form onSubmit={handleSubmit}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Welcher Kunde?</FormLabel>
+              <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                <FormControlLabel
+                  value="firmenkunde"
+                  control={
+                    <Radio
+                      name="customerType"
+                      color="secondary"
+                      checked={fields.customerType === 'firmenkunde'}
+                      onChange={handleChange}
+                    />}
+                  label="Firmenkunde"
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="privat"
+                  control={
+                    <Radio
+                      name="customerType"
+                      color="secondary"
+                      checked={fields.customerType === 'privat'}
+                      onChange={handleChange}
+                    />}
+                  label="Privat"
+                  labelPlacement="end"
+                />
+              </RadioGroup>
+            </FormControl>
+            {fields.customerType === 'firmenkunde' &&
+              <TextField
+                autoFocus
+                name="corespondencePartner"
+                required
+                margin="dense"
+                id="corespondencePartner"
+                label="Ansprechpartner"
+                onChange={handleChange}
+                type="text"
+                fullWidth
+              />}
+            {fields.customerType === 'firmenkunde' &&
+              <TextField
+                name="corespondencePartnerEmail"
+                required
+                margin="dense"
+                id="corespondencePartnerEmail"
+                label="Ansprechpartner-Email"
+                onChange={handleChange}
+                type="email"
+                fullWidth
+              />}
             <TextField
-              autoFocus
+              autoFocus={fields.customerType === 'privat'}
               name="firstName"
               required
               margin="dense"
@@ -201,7 +257,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               <Button onClick={handleClose} color="primary" variant="contained">
                 {t('CancelButton')}
               </Button>
-              <Button disabled={Object.values(fields).filter((el, i) => i !== 9).every(el => el === '')} type="submit" color="secondary" variant="contained">
+              <Button type="submit" color="secondary" variant="contained">
                 {btnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
               </Button>
             </DialogActions>

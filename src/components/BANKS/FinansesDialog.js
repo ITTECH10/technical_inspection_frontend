@@ -116,23 +116,14 @@ function FinansesDialog({ t }) {
                     <form onSubmit={!selectedPayment.creditPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="creditInstitute"
+                            margin="dense"
                             id="creditInstitute-finanses"
-                            select
                             label="Kreditinstitut"
                             onChange={handleChange}
                             fullWidth
+                            type="text"
                             required
-                            SelectProps={{
-                                native: true,
-                            }}
-                            helperText="Bitte selekten sie die bank."
-                        >
-                            {banks.map((option) => (
-                                <option key={option.bankId} value={option.bankId}>
-                                    {option.bankName}
-                                </option>
-                            ))}
-                        </TextField>
+                        />
                         <TextField
                             name="contractNumber"
                             margin="dense"
