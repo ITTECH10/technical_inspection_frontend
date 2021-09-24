@@ -37,12 +37,11 @@ function InsurancePaymentDialog({ t }) {
 
     React.useEffect(() => {
         if (selectedKaskoOption === "TK") {
-            setFields({
-                ...fields,
-                vk: "0"
-            })
+            setFields(prevState => (
+                { ...prevState, vk: '0' }
+            ))
         }
-    }, [selectedKaskoOption, fields])
+    }, [selectedKaskoOption])
 
     React.useEffect(() => {
         return () => {
