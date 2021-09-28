@@ -41,7 +41,7 @@ function VehiclesTableAdvanced({ t }) {
         if (dashboardAdaptiveTitle === '') {
             setDashboardAdaptiveTitle(t('VehiclesTitle'))
         }
-    }, [])
+    }, [dashboardAdaptiveTitle, setDashboardAdaptiveTitle, t])
 
     const matches = useMediaQuery('(max-width: 600px)')
 

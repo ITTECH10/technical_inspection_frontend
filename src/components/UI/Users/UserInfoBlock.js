@@ -80,7 +80,7 @@ const UserInfoBlock = ({ t }) => {
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`${t('PhoneNumberInputLabel')} ('fax'): ${selectedUser.phoneNumber}`}
+                        value={`${t('PhoneNumberInputLabel')}: ${selectedUser.phoneNumber}`}
                         disabled
                         fullWidth
                     />

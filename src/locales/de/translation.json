@@ -167,5 +167,8 @@
     "NextUUVInputLabel": "Nächste UVV",
     "DaysSingular": "tag",
     "DaysPlural": "tage",
-    "SmartphoneLabel": "Handy"
+    "SmartphoneLabel": "Handy",
+    "CustomersVehicles": "Kunden Fahrzeuge",
+    "AndGeneral": "und",
+    "CalculatedForTwoMonths": "ablauf in 2 monaten"
 }

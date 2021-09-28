@@ -4,12 +4,12 @@ import UploadInsuranceData from './../INSURANCES/UploadInsuranceData'
 import InsuranceTable from './InsurancesTable'
 
 const InsurancesTab = () => {
-    const {user} = useData()
+    const { user } = useData()
     return (
         <div>
             <InsuranceTable />
             {user.role === 'admin' && <UploadInsuranceData />}
-        </div> 
+        </div>
     )
 }
 

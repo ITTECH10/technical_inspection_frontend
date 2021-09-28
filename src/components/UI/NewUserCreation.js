@@ -230,7 +230,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               required
               margin="dense"
               id="phoneNumber"
-              label={`${t('PhoneNumberInputLabel')} (fax)`}
+              label={`${t('PhoneNumberInputLabel')}`}
               onChange={handleChange}
               type="text"
               fullWidth
@@ -240,7 +240,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               required
               margin="dense"
               id="smartphoneNumber"
-              label={`${t('PhoneNumberInputLabel')} (smartphone)`}
+              label={`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
               onChange={handleChange}
               type="text"
               fullWidth

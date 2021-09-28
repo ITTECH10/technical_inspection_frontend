@@ -20,7 +20,12 @@ function InsuranceDialog({ handleAlertOpening, t }) {
     };
 
     const content = insurances.map(insurance => (
-        <InsuranceList handleDialogClosing={setOpen} handleAlertOpening={handleAlertOpening} key={insurance._id} insurance={insurance} />
+        <InsuranceList
+            handleDialogClosing={setOpen}
+            handleAlertOpening={handleAlertOpening}
+            key={insurance._id}
+            insurance={insurance}
+        />
     ))
 
     return (

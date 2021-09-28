@@ -20,7 +20,7 @@ const UploadCarData = ({ t }) => {
     const [open, setOpen] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { selectedUser, myVehicles, setMyVehicles, setVehicles, vehicles, user } = useData()
+    const { selectedUser, myVehicles, setMyVehicles, setCustomersVehicles, customersVehicles, user, setVehicles, vehicles } = useData()
     const classes = useStyles()
     let userId
 
@@ -99,11 +99,13 @@ const UploadCarData = ({ t }) => {
             if (res.status === 201) {
                 // DO LATER
                 const updatedVehicles = [...vehicles, { ...res.data.newVehicle }]
-                const updatedCustomerVehicles = [...myVehicles, { ...res.data.newVehicle }]
+                const updatedCustomerVehicles = [...customersVehicles, { ...res.data.newVehicle }]
+                const updatedMyVehicles = [...myVehicles, { ...res.data.newVehicle }]
 
                 setTimeout(() => {
                     setVehicles(updatedVehicles)
-                    setMyVehicles(updatedCustomerVehicles)
+                    setCustomersVehicles(updatedCustomerVehicles)
+                    setMyVehicles(updatedMyVehicles)
                     setAlertOpen(true)
                     setBtnLoading(false)
                     setOpen(false)

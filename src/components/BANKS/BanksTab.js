@@ -4,12 +4,12 @@ import UploadBankData from './../BANKS/UploadBankData'
 import BanksTable from './BanksTable'
 
 const BanksTab = () => {
-    const {user} = useData()
+    const { user } = useData()
     return (
         <div>
             <BanksTable />
             {user.role === 'admin' && <UploadBankData />}
-        </div> 
+        </div>
     )
 }
 

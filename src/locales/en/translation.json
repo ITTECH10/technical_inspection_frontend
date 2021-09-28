@@ -168,5 +168,8 @@
     "NextUUVInputLabel": "NextUUV",
     "DaysSingular": "day",
     "DaysPlural": "days",
-    "SmartphoneLabel": "Smartphone"
+    "SmartphoneLabel": "Smartphone",
+    "CustomersVehicles": "Customers Vehicles",
+    "AndGeneral": "and",
+    "CalculatedForTwoMonths": "calculation based on two months"
 }

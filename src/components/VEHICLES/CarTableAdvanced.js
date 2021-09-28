@@ -24,25 +24,10 @@ const useStyles = makeStyles({
 
 function CarTableAdvanced({ t }) {
     const classes = useStyles();
-    const { myVehicles, user, selectedUser, vehicles } = useData()
+    const { myVehicles, user, selectedUser, customersVehicles } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const matches = useMediaQuery('(max-width: 600px)')
-    let customersVehiclesFound, customersVehiclesRender, myVehiclesRender
-
-    if (user.role === 'admin') {
-        customersVehiclesFound = vehicles.filter(v => v.vehicleOwner._id === selectedUser._id)
-
-        customersVehiclesRender = customersVehiclesFound.map(mv => (
-            <CarRow key={mv._id} car={mv} />
-        ))
-    }
-
-    if (user.role === 'user') {
-        myVehiclesRender = myVehicles.map(mv => (
-            <CarRow key={mv._id} car={mv} />
-        ))
-    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -53,11 +38,13 @@ function CarTableAdvanced({ t }) {
         setPage(0);
     };
 
+    console.log(customersVehicles)
+
     return (
         <>
             {selectedUser && <UserInfoBlock />}
             <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
-                {user.role === 'admin' ? "Kunden Fahrzeuge" : "Meine Fahrzeuge"}
+                {user.role === 'admin' ? t('CustomersVehicles') : t('MyVehicles')}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
             <Paper className={classes.root} >
@@ -68,20 +55,24 @@ function CarTableAdvanced({ t }) {
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                {user.role === 'admin' && <TableCell>TUV AU und NTI Status (ablauf in 2 monaten)</TableCell>}
+                                {user.role === 'admin' && <TableCell>TUV AU {t('AndGeneral')} NTI Status ({t('CalculatedForTwoMonths')})</TableCell>}
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {user.role === 'admin' ?
-                                customersVehiclesRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : myVehiclesRender.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
+                                customersVehicles.map(mv => (
+                                    <CarRow key={mv._id} car={mv} />
+                                )).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                : myVehicles.map(mv => (
+                                    <CarRow key={mv._id} car={mv} />
+                                )).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={user.role === 'admin' ? customersVehiclesRender.length : myVehiclesRender.length}
+                    count={user.role === 'admin' ? customersVehicles.length : myVehicles.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
