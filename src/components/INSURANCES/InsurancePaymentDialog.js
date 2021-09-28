@@ -16,7 +16,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+// import FormLabel from '@material-ui/core/FormLabel';
 import Box from '@material-ui/core/Box';
 
 function InsurancePaymentDialog({ t }) {
@@ -166,21 +166,22 @@ function InsurancePaymentDialog({ t }) {
                             type="number"
                             fullWidth
                         />
-                        <FormControl component="fieldset" style={{ marginTop: 10, width: '100%' }}>
+                        <FormControl component="fieldset" style={{ marginTop: 30, width: '100%' }}>
                             {/* <FormLabel color="secondary" component="legend">Kasko</FormLabel> */}
                             <RadioGroup aria-label="kasko" name="VK/TK" value="VK/TK" onChange={handleKaskoChange}>
-                                <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <FormControlLabel value="VK/TK" label="VK/TK" control={
+                                <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                    <FormControlLabel style={{ marginTop: 3 }} value="VK/TK" label="VK/TK" control={
                                         <Radio
                                             value="VK/TK"
                                             checked={selectedKaskoOption === 'VK/TK'}
+                                            style={{ padding: '0 10px' }}
                                         />}
                                     />
                                     <TextField
                                         name="vk"
                                         id="insuranceHouse-vk"
                                         select
-                                        style={{ marginTop: 10, marginRight: 15 }}
+                                        style={{ marginTop: 0, marginRight: 15 }}
                                         onChange={handleChange}
                                         fullWidth
                                         value={fields.vk}
@@ -200,7 +201,7 @@ function InsurancePaymentDialog({ t }) {
                                         name="tk"
                                         id="insuranceHouse-tk"
                                         select
-                                        style={{ marginTop: 10 }}
+                                        style={{ marginTop: 0 }}
                                         onChange={handleChange}
                                         disabled={selectedKaskoOption === "TK"}
                                         fullWidth
@@ -217,18 +218,19 @@ function InsurancePaymentDialog({ t }) {
                                         ))}
                                     </TextField>
                                 </Box>
-                                <Box style={{ display: 'flex' }}>
-                                    <FormControlLabel value="TK" label="TK" control={
+                                <Box style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                    <FormControlLabel value="TK" style={{ marginTop: 3 }} label="TK" control={
                                         <Radio
                                             value="TK"
                                             checked={selectedKaskoOption === 'TK'}
+                                            style={{ padding: '0 10px' }}
                                         />}
                                     />
                                     <TextField
                                         name="tk"
                                         id="insuranceHouse-kasko"
                                         select
-                                        style={{ marginTop: 10, marginLeft: 26 }}
+                                        style={{ marginTop: 0, marginLeft: 26 }}
                                         onChange={handleChange}
                                         fullWidth
                                         value={fields.tk}

@@ -13,47 +13,40 @@ const ExportUserData = ({ t }) => {
     const [data, setData] = React.useState('')
     const { users, vehicles } = useData()
 
-    // console.log('rendering...')
-
     let myData = []
 
     if (vehicles) {
         vehicles.map(el => {
+            // console.log(el)
             // console.log('looping...')
             myData.push({
-                firstName: el.vehicleOwner.firstName,
-                lastName: el.vehicleOwner.lastName,
+                Vorname: el.vehicleOwner.firstName,
+                Nachname: el.vehicleOwner.lastName,
                 email: el.vehicleOwner.email,
-                mark: el.mark,
-                model: el.model
+                Hersteller: el.mark,
+                Modell: el.model,
+                HSN: el.HSN,
+                TSN: el.TSN,
+                Fahrgestellnummer: el.chassisNumber ? el.chassisNumber : '',
+                Kennzeichen: el.registrationNumber,
+                GarantieAblaufdatum: el.varantyExpiresAt ? el.varantyExpiresAt : '',
+                LetzteUUV: el.lastUUV,
+                NächsteUVV: el.nextUUV,
+                LetzteTechnischeInspektion: el.lastTechnicalInspection,
+                NächsteTechnischeInspektion: el.nextTechnicalInspection,
+                TUV: el.TUV,
+                AU: el.AU,
+                ErstzulassungDesFahrzeugs: el.firstVehicleRegistration,
+                ZulassungAufDenBesitzer: el.firstVehicleRegistrationOnOwner,
+                Laufleistung: el.kilometersDriven,
+                MonatlicheVersicherungsleistung: el.monthlyInsurancePayment,
+                ZulässigeJahreskilometer: el.allowedYearlyKilometers,
+                JährlicheSteuer: el.yearlyTax
             })
         })
     }
 
-    // CONSIDER AGGREGATION ON BACKEND
-    // console.log(vehicles)
-
-    // const btnStyle = {
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     padding: '5px 8px',
-    //     fontSize: '0.875rem',
-    //     minWidth: '64px',
-    //     boxSizing: 'border-box',
-    //     transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-    //     fontFamily: "Roboto, 'Helvetica', 'Arial', sans-serif",
-    //     fontWeight: 500,
-    //     lineHeight: 1.75,
-    //     borderRadius: '4px',
-    //     letterSpacing: '0.02857em',
-    //     textTransform: 'uppercase',
-    //     border: 'none',
-    //     marginTop: 5,
-    //     backgroundColor: '#f21b3f',
-    //     color: '#fff',
-    //     cursor: 'pointer'
-    // }
+    console.log(myData)
 
     React.useEffect(() => {
         let isMounted = true
@@ -84,7 +77,7 @@ const ExportUserData = ({ t }) => {
 
     return (
         users.length >= 2 ?
-            <CSVLink filename={'users-data.csv'} className="btn-export" data={data.replaceAll(undefined, ',')} style={listItemStyle}>
+            <CSVLink filename={'users-data.csv'} className="btn-export" data={data.replaceAll(undefined, ' ').replaceAll('T00:00:00.000Z', ' ').replaceAll(null, ' ')} style={listItemStyle}>
                 <ListItem>
                     <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
                     <ListItemText primary={t('MenuExport')} />
