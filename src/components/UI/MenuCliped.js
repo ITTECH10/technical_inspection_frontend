@@ -149,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
 function ClippedDrawer({ open, setOpen, t }) {
     const classes = useStyles();
     const theme = useTheme();
-    const { user, setVehiclesPage, logout, getAllVehicles, selectedIndex, setSelectedIndex } = useData()
+    const { user, setVehiclesPage, logout, getAllVehicles, selectedIndex, setSelectedIndex, setDashboardAdaptiveTitle } = useData()
     const history = useHistory()
     let storageSelectedIndex = localStorage.menuSelectedIndex
 
@@ -170,6 +170,7 @@ function ClippedDrawer({ open, setOpen, t }) {
     const onHandleNavigation = (route, index) => {
         if (route === '/cars') {
             setVehiclesPage('allVehicles')
+            setDashboardAdaptiveTitle(t('VehiclesTitle'))
             if (user.role === 'admin') {
                 getAllVehicles()
             }

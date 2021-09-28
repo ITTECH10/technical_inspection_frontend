@@ -15,7 +15,6 @@ import { withNamespaces } from 'react-i18next';
 import { useData } from './../../contexts/DataContext';
 import VehicleItemRow from './VehicleItemRow';
 import SearchVehicles from './SearchVehicles';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -28,23 +27,21 @@ const useStyles = makeStyles({
 
 function VehiclesTableAdvanced({ t }) {
     const classes = useStyles();
-    const { vehicles, user } = useData()
+    const { vehicles, user, dashboardAdaptiveTitle, setDashboardAdaptiveTitle } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const [adaptiveTitle, setAdaptiveTitle] = React.useState(t('VehiclesTitle'))
-
-    const history = useHistory()
-
-    React.useEffect(() => {
-        if (history.location.state) {
-            setAdaptiveTitle(history.location.state.title)
-        }
-    }, [history.location.state])
+    // const [adaptiveTitle, setAdaptiveTitle] = React.useState(t('VehiclesTitle'))
 
     // FILTERING
     const [fields, setFields] = React.useState({
         query: ''
     })
+
+    React.useEffect(() => {
+        if (dashboardAdaptiveTitle === '') {
+            setDashboardAdaptiveTitle(t('VehiclesTitle'))
+        }
+    }, [])
 
     const matches = useMediaQuery('(max-width: 600px)')
 
@@ -79,7 +76,7 @@ function VehiclesTableAdvanced({ t }) {
     return (
         <>
             <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
-                {user.role === 'admin' && vehicles.length > 0 ? t('VehiclesTitle') : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
+                {user.role === 'admin' && vehicles.length > 0 ? dashboardAdaptiveTitle : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
             <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />

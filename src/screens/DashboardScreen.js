@@ -116,7 +116,7 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user, dashboardGeneratedTitle } = useData()
 
     const ordinaryIconSizePositioning = {
         position: 'absolute',
@@ -180,21 +180,25 @@ const DashboardScreen = ({ t }) => {
     const handleNavigateTuvExpiredVehicles = () => {
         setVehicles(TUVExpired)
         setSelectedIndex(2)
-        history.push('/cars', { title: 'TÜV überfällig' })
+
+        history.push('/cars')
+        dashboardGeneratedTitle('TÜV überfällig')
     }
 
     const handleNavigateTuvFourteenVehicles = () => {
         setVehicles(TUVExpiresInFourteenDays)
         setSelectedIndex(2)
 
-        history.push('/cars', { title: 'TÜV läuft in 14 Tagen ab' })
+        history.push('/cars')
+        dashboardGeneratedTitle('TÜV läuft in 14 Tagen ab')
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
         setVehicles(TUVExpiresInThirtyDays)
         setSelectedIndex(2)
 
-        history.push('/cars', { title: 'TÜV läuft in 30 Tagen ab' })
+        history.push('/cars')
+        dashboardGeneratedTitle('TÜV läuft in 30 Tagen ab')
     }
 
     const handleCustomersNavigate = () => {

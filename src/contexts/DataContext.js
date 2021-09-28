@@ -13,6 +13,7 @@ const DataContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
     const [appLoading, setAppLoading] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const [dashboardAdaptiveTitle, setDashboardAdaptiveTitle] = useState('')
 
     // USERS
     const [user, setUser] = useState({})
@@ -36,6 +37,10 @@ const DataContextProvider = ({ children }) => {
 
     // CONTRACTS
     const [selectedPayment, setSelectedPayment] = useState({})
+
+    const dashboardGeneratedTitle = (title) => {
+        setDashboardAdaptiveTitle(title)
+    }
 
     const getCorespondingPayment = useCallback((paymentId) => {
         axios.get(`/cars/payments/${paymentId}`).then(res => {
@@ -243,7 +248,10 @@ const DataContextProvider = ({ children }) => {
         selectedPayment,
         setSelectedPayment,
         selectedIndex,
-        setSelectedIndex
+        setSelectedIndex,
+        dashboardAdaptiveTitle,
+        dashboardGeneratedTitle,
+        setDashboardAdaptiveTitle
     }
 
     return (
