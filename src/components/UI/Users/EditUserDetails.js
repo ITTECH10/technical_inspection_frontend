@@ -15,6 +15,7 @@ import { useData } from './../../../contexts/DataContext'
 import Alerts from '../Alerts';
 import { makeStyles } from '@material-ui/core/styles';
 import { withNamespaces } from 'react-i18next';
+import { genders } from './../../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -44,8 +45,10 @@ function EditUserDetails({ userId, t }) {
     const [fields, setFields] = useState({
         firstName: selectedUser.firstName,
         lastName: selectedUser.lastName,
+        gender: selectedUser.gender,
         email: selectedUser.email,
         phoneNumber: selectedUser.phoneNumber,
+        smartphoneNumber: selectedUser.smartphoneNumber,
         street: selectedUser.street,
         postCode: selectedUser.postCode,
         city: selectedUser.city,
@@ -56,8 +59,10 @@ function EditUserDetails({ userId, t }) {
         setFields({
             firstName: selectedUser.firstName,
             lastName: selectedUser.lastName,
+            gender: selectedUser.gender,
             email: selectedUser.email,
             phoneNumber: selectedUser.phoneNumber,
+            smartphoneNumber: selectedUser.smartphoneNumber,
             street: selectedUser.street,
             postCode: selectedUser.postCode,
             city: selectedUser.city,
@@ -145,6 +150,26 @@ function EditUserDetails({ userId, t }) {
                             fullWidth
                         />
                         <TextField
+                            name="gender"
+                            id="standard-select-gender-edit"
+                            select
+                            value={fields.gender}
+                            label={t('GenderNewUser')}
+                            onChange={handleChange}
+                            fullWidth
+                            required
+                            style={{ margin: "8px 0" }}
+                            SelectProps={{
+                                native: true,
+                            }}
+                        >
+                            {genders.map((option, idx) => (
+                                <option key={option.id} value={option.text}>
+                                    {t(option.translationKey)}
+                                </option>
+                            ))}
+                        </TextField>
+                        <TextField
                             name="email"
                             margin="dense"
                             value={fields.email}
@@ -161,6 +186,16 @@ function EditUserDetails({ userId, t }) {
                             value={fields.phoneNumber}
                             id="phone-number"
                             label={t('PhoneNumberInputLabel')}
+                            type="text"
+                            onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="smartphoneNumber"
+                            margin="dense"
+                            value={fields.smartphoneNumber}
+                            id="smartphoneNumber-number"
+                            label={`${t('PhoneNumberInputLabel')} (smartphone)`}
                             type="text"
                             onChange={handleChange}
                             fullWidth

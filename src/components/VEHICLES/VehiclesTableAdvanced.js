@@ -79,7 +79,7 @@ function VehiclesTableAdvanced({ t }) {
     return (
         <>
             <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
-                {user.role === 'admin' && vehicles.length > 0 ? adaptiveTitle : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
+                {user.role === 'admin' && vehicles.length > 0 ? t('VehiclesTitle') : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
             <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />
@@ -91,7 +91,7 @@ function VehiclesTableAdvanced({ t }) {
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                <TableCell>Fahrzeugbesitzer</TableCell>
+                                <TableCell>{t('VehicleOwner')}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

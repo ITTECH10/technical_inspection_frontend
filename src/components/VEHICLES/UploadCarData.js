@@ -40,6 +40,8 @@ const UploadCarData = ({ t }) => {
         HSN: '',
         TSN: '',
         varantyExpiresAt: '',
+        lastUUV: '',
+        nextUUV: '',
         firstVehicleRegistration: '',
         firstVehicleRegistrationOnOwner: '',
         kilometersDriven: '',
@@ -60,6 +62,8 @@ const UploadCarData = ({ t }) => {
         formData.append('HSN', fields.HSN)
         formData.append('TSN', fields.TSN)
         formData.append('varantyExpiresAt', fields.varantyExpiresAt)
+        formData.append('lastUUV', fields.lastUUV)
+        formData.append('nextUUV', fields.nextUUV)
         formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
         formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
         formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
@@ -161,7 +165,7 @@ const UploadCarData = ({ t }) => {
                                     autoFocus
                                     margin="dense"
                                     id="mark"
-                                    label="Fahrgestellnummer"
+                                    label={t('ChassisNumber')}
                                     onChange={handleChange}
                                     required
                                     fullWidth
@@ -231,6 +235,30 @@ const UploadCarData = ({ t }) => {
                                         shrink: true,
                                     }}
                                 />
+                                {selectedUser.customerType === 'firmenkunde' &&
+                                    <TextField
+                                        name="lastUUV"
+                                        id="lastUUV"
+                                        label={t('LastUUVInputLabel')}
+                                        onChange={handleChange}
+                                        type="date"
+                                        className={classes.textField}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />}
+                                {selectedUser.customerType === 'firmenkunde' &&
+                                    <TextField
+                                        name="nextUUV"
+                                        id="nextUUV"
+                                        label={t('NextUUVInputLabel')}
+                                        onChange={handleChange}
+                                        type="date"
+                                        className={classes.textField}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />}
                                 <TextField
                                     name="firstVehicleRegistration"
                                     id="firstVehicleRegistration"

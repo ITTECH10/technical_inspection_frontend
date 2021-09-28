@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 function CarTableAdvanced({ t }) {
     const classes = useStyles();
-    const { myVehicles, setSelectedCarBank, user, selectedUser, vehicles } = useData()
+    const { myVehicles, user, selectedUser, vehicles } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const matches = useMediaQuery('(max-width: 600px)')
@@ -43,10 +43,6 @@ function CarTableAdvanced({ t }) {
             <CarRow key={mv._id} car={mv} />
         ))
     }
-
-    useEffect(() => {
-        setSelectedCarBank({})
-    }, [setSelectedCarBank])
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

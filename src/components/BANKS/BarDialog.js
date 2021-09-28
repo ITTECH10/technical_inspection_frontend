@@ -46,6 +46,14 @@ function BarDialog({ t }) {
     const [fields, setFields] = React.useState(fieldsInit)
     const classes = useStyles()
 
+    React.useEffect(() => {
+        setFields({
+            payedAt: selectedPayment.cashPayment ? selectedPayment.cashPayment.payedAt : '',
+            cashSum: selectedPayment.cashPayment ? selectedPayment.cashPayment.cashSum : '',
+            boughtFrom: selectedPayment.cashPayment ? selectedPayment.cashPayment.boughtFrom : ''
+        })
+    }, [selectedPayment, open])
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -103,17 +111,18 @@ function BarDialog({ t }) {
                 {selectedPayment.cashPayment && <CheckCircleIcon />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Barbezahlung</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('PaymentCashTitle')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Wann wurde das Auto abbgezahlt / gekauft?
+                        {t('BarDialogTitle')}
                     </DialogContentText>
                     <form onSubmit={!selectedPayment.cashPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="payedAt"
                             id="payedAt-bar"
                             onChange={handleChange}
-                            label="Bezahlt am"
+                            label={t('Payment.cash.payedAt')}
+                            value={fields.payedAt ? new Date(fields.payedAt).toISOString().split('T')[0] : '1970/12/31'}
                             type="date"
                             className={classes.textField}
                             required
@@ -125,9 +134,10 @@ function BarDialog({ t }) {
                             name="boughtFrom"
                             margin="dense"
                             id="boughtFrom"
+                            value={fields.boughtFrom}
                             onChange={handleChange}
                             required
-                            label="Gekauft von"
+                            label={t('BuyedBy')}
                             type="text"
                             fullWidth
                         />
@@ -135,15 +145,16 @@ function BarDialog({ t }) {
                             name="cashSum"
                             margin="dense"
                             id="cashSum"
+                            value={fields.cashSum}
                             onChange={handleChange}
                             required
-                            label="Summe"
+                            label={t('Payment.cash.sum')}
                             type="text"
                             fullWidth
                             style={{ marginBottom: 15 }}
                         />
                         <Button style={{ marginRight: 10 }} variant="contained" onClick={handleClose} color="primary">
-                            Schliessen
+                            {t('CancelButton')}
                         </Button>
                         <Button type="submit" variant="contained" color="secondary">
                             Speichern

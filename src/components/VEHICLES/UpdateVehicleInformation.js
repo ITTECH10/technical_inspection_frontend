@@ -36,6 +36,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         registrationNumber: '',
         HSN: '',
         TSN: '',
+        lastUUV: '',
+        nextUUV: '',
         firstVehicleRegistration: '',
         firstVehicleRegistrationOnOwner: '',
         kilometersDriven: '',
@@ -58,6 +60,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
             registrationNumber: selectedCar.registrationNumber,
             HSN: selectedCar.HSN,
             TSN: selectedCar.TSN,
+            lastUUV: selectedCar.lastUUV,
+            nextUUV: selectedCar.nextUUV,
             firstVehicleRegistration: selectedCar.firstVehicleRegistration,
             firstVehicleRegistrationOnOwner: selectedCar.firstVehicleRegistrationOnOwner,
             kilometersDriven: selectedCar.kilometersDriven,
@@ -135,10 +139,10 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                 </IconButton>
             </Tooltip>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Edit vehicle information</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('EditVehicleInformation')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To edit vehicle information, fill all the fields with '*' mark.
+                        {t('GeneralFormFullfilments')}
                     </DialogContentText>
                     <form onSubmit={handleSubmit}>
                         <TextField
@@ -221,6 +225,32 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             className={classes.textField}
                             required
                             value={selectedCar.firstVehicleRegistration && fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : '1970/12/31'}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            name="lastUUV"
+                            id="update-vehicle-lastUUV"
+                            label="Last UUV"
+                            onChange={handleChange}
+                            type="date"
+                            className={classes.textField}
+                            required
+                            value={selectedCar.lastUUV && fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : '1970/12/31'}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            name="nextUUV"
+                            id="update-vehicle-nextUUV"
+                            label="Next UUV"
+                            onChange={handleChange}
+                            type="date"
+                            className={classes.textField}
+                            required
+                            value={selectedCar.nextUUV && fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}

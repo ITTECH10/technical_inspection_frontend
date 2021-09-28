@@ -66,6 +66,13 @@ const UserInfoBlock = ({ t }) => {
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
+                        value={`${t('GenderNewUser')}: ${selectedUser.gender === 'Mr' ? t('GenderMale') : t('GenderFemale')}`}
+                        disabled
+                        fullWidth
+                    />
+                </Box>
+                <Box className={classes.userRow}>
+                    <TextField
                         value={`E-mail: ${selectedUser.email}`}
                         disabled
                         fullWidth
@@ -80,7 +87,7 @@ const UserInfoBlock = ({ t }) => {
                 </Box>
                 <Box className={classes.userRow}>
                     <TextField
-                        value={`${t('PhoneNumberInputLabel')} ('smartphone'): ${selectedUser.smartphoneNumber}`}
+                        value={`${t('PhoneNumberInputLabel')} ('smartphone'): ${selectedUser.smartphoneNumber ? selectedUser.smartphoneNumber : t('VehicleDetailsDataNotSetYet')}`}
                         disabled
                         fullWidth
                     />

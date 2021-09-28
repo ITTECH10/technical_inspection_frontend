@@ -4,6 +4,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles'
 import { useData } from '../contexts/DataContext';
 import EditUserDetails from '../components/UI/Users/EditUserDetails';
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     myProfileEdit: {
@@ -109,7 +110,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const AccountScreen = () => {
+const AccountScreen = ({ t }) => {
     const classes = useStyles()
     const { user } = useData()
 
@@ -121,7 +122,7 @@ const AccountScreen = () => {
             <Grid className={classes.gridChildTwo} xs={12} sm={12}>
                 <Box className={classes.myProfileEdit}>
                     <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
-                        Mein Profil
+                        {t('MyProfile')}
                     </Typography>
                     <EditUserDetails />
                 </Box>
@@ -141,7 +142,7 @@ const AccountScreen = () => {
                             <Box className={classes.userNameBoxFlex}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Vorname
+                                        {t('FirstNameInputLabel')}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -152,7 +153,7 @@ const AccountScreen = () => {
                                 </Box>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Nachname
+                                        {t('LastNameInputLabel')}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -166,7 +167,19 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Geburtstag
+                                        {t('GenderNewUser')}
+                                    </Typography>
+                                    <TextField
+                                        variant="standard"
+                                        disabled
+                                        value={user.gender === 'Mr' ? t('GenderMale') : t('GenderFemale')}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box className={classes.inputSingleBox}>
+                                <Box className={classes.inputContentVertical}>
+                                    <Typography style={{ fontWeight: '400' }}>
+                                        {t('BirthDateInputLabel')}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -179,7 +192,7 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Stadt
+                                        {t('CityInputLabel')}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -192,7 +205,7 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Strasse
+                                        {t('StreetInputLabel')}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -205,7 +218,7 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Postzahl
+                                        {t('PostNumberInputLabel')}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -229,7 +242,7 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Phone number (fax)
+                                        {`${t('PhoneNumberInputLabel')}`}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -241,7 +254,7 @@ const AccountScreen = () => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        Phone number (smartphone)
+                                        {`${t('PhoneNumberInputLabel')} (smartphone)`}
                                     </Typography>
                                     <TextField
                                         variant="standard"
@@ -258,4 +271,4 @@ const AccountScreen = () => {
     )
 }
 
-export default AccountScreen
+export default withNamespaces()(AccountScreen)

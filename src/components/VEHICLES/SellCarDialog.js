@@ -92,21 +92,21 @@ function SellCarDialog({ t }) {
         <div>
             <Alerts message={t('AlertGeneralSuccessful')} open={carSoldAlert} handleOpening={setCarSoldAlert} />
             <Button disabled={selectedCar.carIsSold} variant="text" color="secondary" onClick={handleClickOpen}>
-                Als verkauft markieren?
+                {t('AsSoldMark')}
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Fahrzeug Verkauft?</DialogTitle>
+                <DialogTitle>{t('SellCarDialogTitle')}</DialogTitle>
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <DialogContentText>
-                            Das fahrzeug wurde verkauft?
+                            {t('SellCarDialogHint')}
                         </DialogContentText>
                         <TextField
                             name="carIsSoldTo"
                             autoFocus
                             margin="dense"
                             id="sell-car-car-is-sold-to"
-                            label="Der käufer des fahrzeugs?"
+                            label={t('SellCarDialogBuyer')}
                             type="text"
                             fullWidth
                             variant="standard"
@@ -116,7 +116,7 @@ function SellCarDialog({ t }) {
                         <TextField
                             name="carIsSoldDate"
                             id="sell-car-car-is-sold-date"
-                            label="Wann wurde das fahrzeug verkauft?"
+                            label={t('SellCarDialogDate')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}

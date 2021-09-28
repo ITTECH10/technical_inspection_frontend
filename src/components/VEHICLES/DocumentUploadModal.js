@@ -27,14 +27,14 @@ function DocumentUploadModal({ open, handleChange, setOpen, onHandleSubmit, fiel
                 <DialogTitle id="form-dialog-title">Datei vor dem Hochladen bearbeiten?</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Sie können die Dateidetails im Formular unten bearbeiten
+                        {t('GeneralFormFullfilments')}
                     </DialogContentText>
                     <TextField
                         autoFocus
                         margin="dense"
                         id="name"
                         name="fileName"
-                        label="File name"
+                        label={t('DocumentUploadModalFileName')}
                         type="text"
                         onChange={handleChange}
                         fullWidth
@@ -44,14 +44,14 @@ function DocumentUploadModal({ open, handleChange, setOpen, onHandleSubmit, fiel
                         name="fileCategory"
                         id="file-categories-upload"
                         select
-                        label="File category"
+                        label={t('DocumentUploadModalFileCategory')}
                         onChange={handleChange}
                         fullWidth
                         required
                         SelectProps={{
                             native: true,
                         }}
-                        helperText="Bitte selekten sie die file category."
+                    // helperText="Bitte selekten sie die file category."
                     >
                         {DocumentCategoryProvider.getDocumentCategories().map((fc) => (
                             <option key={fc.categoryId} value={fc.categoryId}>
@@ -62,10 +62,10 @@ function DocumentUploadModal({ open, handleChange, setOpen, onHandleSubmit, fiel
                 </DialogContent>
                 <DialogActions>
                     <Button variant="contained" onClick={handleClose} color="primary">
-                        Abrechen
+                        {t('CancelButton')}
                     </Button>
                     <Button variant="contained" onClick={handleFilesUpload} color="secondary">
-                        Absenden
+                        {t('SubmitButton')}
                     </Button>
                 </DialogActions>
             </Dialog>

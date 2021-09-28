@@ -36,6 +36,15 @@ function InsurancePaymentDialog({ t }) {
     let userId, vehicleId, insuranceTimeout
 
     React.useEffect(() => {
+        setFields({
+            insuranceHouse: selectedCarInsurance ? selectedCarInsurance.insuranceHouse : '',
+            contractNumber: selectedCarInsurance ? selectedCarInsurance.contractNumber : '',
+            vk: selectedCarInsurance ? selectedCarInsurance.fullKasko : '',
+            tk: selectedCarInsurance ? selectedCarInsurance.partKasko : '',
+        })
+    }, [selectedCarInsurance, open])
+
+    React.useEffect(() => {
         if (selectedKaskoOption === "TK") {
             setFields(prevState => (
                 { ...prevState, vk: '0' }
@@ -125,24 +134,25 @@ function InsurancePaymentDialog({ t }) {
             <Alerts message={t('AlertGeneralSuccessful')} open={insuranceAddedAlert} handleOpening={setInsuranceAddedAlert} />
             <Alerts message={t('AlertGeneralUpdated')} open={insuranceUpdatedAlert} handleOpening={setInsuranceUpdatedAlert} />
             <Button variant="text" color="secondary" onClick={handleClickOpen}>
-                {selectedCarInsurance._id ? "Verbindet" : "Verbinden"}
+                {selectedCarInsurance._id ? t('ConnectedInsuranceButton') : t('ConnectInsuranceButton')}
                 {selectedCarInsurance._id && <CheckCircleIcon />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{`${t('InsurancesTitle')} verbindung`}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{`${t('InsurancesTitle')}`}</DialogTitle>
                 <form onSubmit={!selectedCarInsurance._id ? handlePostSubmit : handlePutSubmit}>
                     <DialogContent>
                         <DialogContentText>
-                            Füllen Sie die Felder mit dem * Zeichen unten aus
+                            {t('GeneralFormFullfilments')}
                         </DialogContentText>
                         <TextField
                             name="insuranceHouse"
                             margin="dense"
                             id="insuranceHouse-insurances"
-                            label="Gesellschaft"
+                            label={t('InsuranceGesellschaftInputLabel')}
                             onChange={handleChange}
                             type="text"
                             fullWidth
+                            value={fields.insuranceHouse}
                             required
                         />
                         <TextField
@@ -151,12 +161,13 @@ function InsurancePaymentDialog({ t }) {
                             id="insurance-contractNumber"
                             onChange={handleChange}
                             required
-                            label="Vertragsnummer"
+                            value={fields.contractNumber}
+                            label={t('ContractNumberInputLabel')}
                             type="number"
                             fullWidth
                         />
                         <FormControl component="fieldset" style={{ marginTop: 10, width: '100%' }}>
-                            <FormLabel color="secondary" component="legend">Kasko</FormLabel>
+                            {/* <FormLabel color="secondary" component="legend">Kasko</FormLabel> */}
                             <RadioGroup aria-label="kasko" name="VK/TK" value="VK/TK" onChange={handleKaskoChange}>
                                 <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <FormControlLabel value="VK/TK" label="VK/TK" control={
@@ -172,6 +183,7 @@ function InsurancePaymentDialog({ t }) {
                                         style={{ marginTop: 10, marginRight: 15 }}
                                         onChange={handleChange}
                                         fullWidth
+                                        value={fields.vk}
                                         disabled={selectedKaskoOption === "TK"}
                                         SelectProps={{
                                             native: true,
@@ -192,6 +204,7 @@ function InsurancePaymentDialog({ t }) {
                                         onChange={handleChange}
                                         disabled={selectedKaskoOption === "TK"}
                                         fullWidth
+                                        value={fields.tk}
                                         SelectProps={{
                                             native: true,
                                         }}
@@ -218,6 +231,7 @@ function InsurancePaymentDialog({ t }) {
                                         style={{ marginTop: 10, marginLeft: 26 }}
                                         onChange={handleChange}
                                         fullWidth
+                                        value={fields.tk}
                                         disabled={selectedKaskoOption === "VK/TK"}
                                         SelectProps={{
                                             native: true,

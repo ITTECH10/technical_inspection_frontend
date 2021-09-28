@@ -48,6 +48,19 @@ function FinansesDialog({ t }) {
 
     const [fields, setFields] = React.useState(fieldsInit)
 
+    React.useEffect(() => {
+        setFields({
+            creditInstitute: selectedPayment.creditPayment ? selectedPayment.creditPayment.creditInstitute : '',
+            contractNumber: selectedPayment.creditPayment ? selectedPayment.creditPayment.contractNumber : '',
+            boughtFrom: selectedPayment.creditPayment ? selectedPayment.creditPayment.boughtFrom : '',
+            creditStartDate: selectedPayment.creditPayment ? selectedPayment.creditPayment.creditStartDate : '',
+            monthlyCreditPayment: selectedPayment.creditPayment ? selectedPayment.creditPayment.monthlyCreditPayment : '',
+            interestRate: selectedPayment.creditPayment ? selectedPayment.creditPayment.interestRate : '',
+            creditLastsFor: selectedPayment.creditPayment ? selectedPayment.creditPayment.creditLastsFor : '',
+            closingRate: selectedPayment.creditPayment ? selectedPayment.creditPayment.closingRate : ''
+        })
+    }, [selectedPayment, open])
+
     const handleChange = (e) => {
         setFields({
             ...fields,
@@ -108,17 +121,18 @@ function FinansesDialog({ t }) {
                 {selectedPayment.creditPayment && <CheckCircleIcon style={{ marginLeft: 10 }} />}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Finanzierung</DialogTitle>
+                <DialogTitle id="form-dialog-title">{t('PaymentFinansingTitle')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Sie mussen die Felder mit mark '*' fullen.
+                        {t('GeneralFormFullfilments')}
                     </DialogContentText>
                     <form onSubmit={!selectedPayment.creditPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="creditInstitute"
                             margin="dense"
                             id="creditInstitute-finanses"
-                            label="Kreditinstitut"
+                            value={fields.creditInstitute}
+                            label={t('PaymentFinansingInstitution')}
                             onChange={handleChange}
                             fullWidth
                             type="text"
@@ -128,7 +142,8 @@ function FinansesDialog({ t }) {
                             name="contractNumber"
                             margin="dense"
                             id="contractNumber-finanses"
-                            label="Vertragsnummer"
+                            value={fields.contractNumber}
+                            label={t('ContractNumberInputLabel')}
                             onChange={handleChange}
                             required
                             type="text"
@@ -137,8 +152,9 @@ function FinansesDialog({ t }) {
                         <TextField
                             name="boughtFrom"
                             margin="dense"
+                            value={fields.boughtFrom}
                             id="boughtFrom-finanses"
-                            label="Gekauft von"
+                            label={t('BuyedBy')}
                             onChange={handleChange}
                             required
                             type="text"
@@ -147,9 +163,10 @@ function FinansesDialog({ t }) {
                         <TextField
                             name="creditStartDate"
                             margin="dense"
+                            value={fields.creditStartDate ? new Date(fields.creditStartDate).toISOString().split('T')[0] : '1970/12/31'}
                             onChange={handleChange}
                             id="creditStartDate-finanses"
-                            label="Kreditbeginn"
+                            label={t('CreditStartDateInputLabel')}
                             type="date"
                             required
                             className={classes.textField}
@@ -162,8 +179,9 @@ function FinansesDialog({ t }) {
                             margin="dense"
                             onChange={handleChange}
                             id="monthlyCreditPayment-finanses"
-                            label="Monatliche Rate"
+                            label={t('MonthlyCreditPaymentInputLabel')}
                             required
+                            value={fields.monthlyCreditPayment}
                             type="text"
                             fullWidth
                         />
@@ -172,8 +190,9 @@ function FinansesDialog({ t }) {
                             margin="dense"
                             onChange={handleChange}
                             id="interestRate-finanses"
-                            label="Zinssatz"
+                            label={t('CreditPaymentInterestInputLabel')}
                             required
+                            value={fields.interestRate}
                             type="text"
                             fullWidth
                         />
@@ -182,9 +201,10 @@ function FinansesDialog({ t }) {
                             margin="dense"
                             onChange={handleChange}
                             id="creditLastsFor-finanses"
-                            label="Kreditdauer (in Monaten)"
+                            label={`${t('CreditLastsForInputLabel')} (in monaten)`}
                             type="text"
                             fullWidth
+                            value={fields.creditLastsFor}
                             required
                         />
                         <TextField
@@ -192,9 +212,10 @@ function FinansesDialog({ t }) {
                             margin="dense"
                             onChange={handleChange}
                             id="closingRate-finanses"
-                            label="Schlussrate"
+                            label={t('PaymentFinansesClosingRate')}
                             type="text"
                             fullWidth
+                            value={fields.closingRate}
                             style={{ marginBottom: 15 }}
                         />
                         <Button style={{ marginRight: 10 }} variant="contained" onClick={handleClose} color="primary">

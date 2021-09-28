@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { generateId } from './../../utils/helpers'
 import { withNamespaces } from 'react-i18next';
+import { genders } from './../../utils/helpers'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -42,6 +43,7 @@ function NewCustomer({ handleAlertOpening, t }) {
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
+    gender: '',
     email: '',
     phoneNumber: '',
     smartphoneNumber: '',
@@ -109,7 +111,7 @@ function NewCustomer({ handleAlertOpening, t }) {
           </DialogContentText>
           <form onSubmit={handleSubmit}>
             <FormControl component="fieldset">
-              <FormLabel component="legend">Welcher Kunde?</FormLabel>
+              <FormLabel component="legend">{t('CustomerType')}</FormLabel>
               <RadioGroup row aria-label="position" name="position" defaultValue="top">
                 <FormControlLabel
                   value="firmenkunde"
@@ -120,7 +122,7 @@ function NewCustomer({ handleAlertOpening, t }) {
                       checked={fields.customerType === 'firmenkunde'}
                       onChange={handleChange}
                     />}
-                  label="Firmenkunde"
+                  label={t('CoorporateClient')}
                   labelPlacement="end"
                 />
                 <FormControlLabel
@@ -132,7 +134,7 @@ function NewCustomer({ handleAlertOpening, t }) {
                       checked={fields.customerType === 'privat'}
                       onChange={handleChange}
                     />}
-                  label="Privat"
+                  label={t('NonCoorporateClient')}
                   labelPlacement="end"
                 />
               </RadioGroup>
@@ -144,7 +146,7 @@ function NewCustomer({ handleAlertOpening, t }) {
                 required
                 margin="dense"
                 id="corespondencePartner"
-                label="Ansprechpartner"
+                label={t('ContactPartner')}
                 onChange={handleChange}
                 type="text"
                 fullWidth
@@ -155,7 +157,7 @@ function NewCustomer({ handleAlertOpening, t }) {
                 required
                 margin="dense"
                 id="corespondencePartnerEmail"
-                label="Ansprechpartner-Email"
+                label={t('ContactPartnerEmail')}
                 onChange={handleChange}
                 type="email"
                 fullWidth
@@ -181,6 +183,26 @@ function NewCustomer({ handleAlertOpening, t }) {
               type="text"
               fullWidth
             />
+            <TextField
+              name="gender"
+              id="standard-select-gender"
+              select
+              value={fields.gender}
+              label={t('GenderNewUser')}
+              onChange={handleChange}
+              fullWidth
+              required
+              style={{ margin: "8px 0" }}
+              SelectProps={{
+                native: true,
+              }}
+            >
+              {genders.map((option, idx) => (
+                <option key={option.id} value={option.text}>
+                  {t(option.translationKey)}
+                </option>
+              ))}
+            </TextField>
             <TextField
               name="birthDate"
               required
@@ -238,7 +260,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               required
               margin="dense"
               id="pwd"
-              label="Post code"
+              label={t("PostNumberInputLabel")}
               type="text"
               onChange={handleChange}
               fullWidth
@@ -248,7 +270,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               required
               margin="dense"
               id="confirm-pwd"
-              label="City"
+              label={t('CityInputLabel')}
               type="text"
               onChange={handleChange}
               fullWidth

@@ -7,3 +7,16 @@ export const generateId = (len) => {
     window.crypto.getRandomValues(arr)
     return Array.from(arr, dec2hex).join('')
 }
+
+export const genders = [
+    {
+        id: 1,
+        translationKey: "GenderMale",
+        text: "Mr"
+    },
+    {
+        id: 2,
+        translationKey: "GenderFemale",
+        text: "Mrs"
+    },
+]

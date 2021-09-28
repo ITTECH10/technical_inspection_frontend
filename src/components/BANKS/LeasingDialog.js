@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import banksInfoProvider from './BankInfoProvider'
+import { withNamespaces } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 const banks = banksInfoProvider.getBankNames()
 
-export default function LeasingDialog() {
+function LeasingDialog({ t }) {
     const [open, setOpen] = React.useState(false);
     const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
     const history = useHistory()
@@ -51,6 +52,23 @@ export default function LeasingDialog() {
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
+
+    React.useEffect(() => {
+        setFields({
+            leasingGiver: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.leasingGiver : '',
+            contractNumber: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.contractNumber : '',
+            boughtFrom: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.boughtFrom : '',
+            leasingStartDate: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.leasingStartDate : '',
+            monthlyLeasingPayment: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.monthlyLeasingPayment : '',
+            maintenancePackage: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.maintenancePackage : '',
+            leasingLastsFor: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.leasingLastsFor : '',
+            closingRate: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.closingRate : '',
+            remainingPayment: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.remainingPayment : '',
+            allowedYearlyKilometers: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.allowedYearlyKilometers : '',
+            costsForMoreKilometers: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.costsForMoreKilometers : '',
+            costsForLessKilometers: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.costsForLessKilometers : '',
+        })
+    }, [selectedPayment, open])
 
     const handleChange = (e) => {
         setFields({
@@ -114,16 +132,17 @@ export default function LeasingDialog() {
                 <DialogTitle id="form-dialog-title">Leasing</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Sie mussen die Felder mit mark '*' fullen.
+                        {t('GeneralFormFullfilments')}
                     </DialogContentText>
                     <form onSubmit={!selectedPayment.leasingPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
                         <TextField
                             name="leasingGiver"
                             margin="dense"
                             id="standard-select-currency-native"
-                            label="Leasinggeber"
+                            label={t('PaymentLeasingGiver')}
                             onChange={handleChange}
                             fullWidth
+                            value={fields.leasingGiver}
                             type="text"
                             required
                         />
@@ -131,8 +150,9 @@ export default function LeasingDialog() {
                             name="contractNumber"
                             margin="dense"
                             id="contractNumber-leasing"
-                            label="Vertragsnummer"
+                            label={t('ContractNumberInputLabel')}
                             required
+                            value={fields.contractNumber}
                             type="text"
                             onChange={handleChange}
                             fullWidth
@@ -141,8 +161,9 @@ export default function LeasingDialog() {
                             name="boughtFrom"
                             margin="dense"
                             id="contractNumber-boughtFrom"
-                            label="Gekauft von"
+                            label={t('BuyedBy')}
                             required
+                            value={fields.boughtFrom}
                             type="text"
                             onChange={handleChange}
                             fullWidth
@@ -151,7 +172,8 @@ export default function LeasingDialog() {
                             name="maintenancePackage"
                             id="standard-select-maintenancePackage"
                             select
-                            label="Wartungspaket"
+                            value={fields.maintenancePackage}
+                            label={t('MaintenancePackage')}
                             onChange={handleChange}
                             fullWidth
                             required
@@ -159,7 +181,7 @@ export default function LeasingDialog() {
                             SelectProps={{
                                 native: true,
                             }}
-                            helperText="Hat das leasing ein wartungspaket?"
+                            helperText={t('IsThereMaintenancePackage')}
                         >
                             {["Nein", "Ja"].map((option, idx) => (
                                 <option key={idx} value={option}>
@@ -171,8 +193,9 @@ export default function LeasingDialog() {
                             name="leasingStartDate"
                             margin="dense"
                             id="leasingStartDate-leasing"
-                            label="Kreditbeginn"
+                            label={t('LeasingStartDateInputLabel')}
                             type="date"
+                            value={fields.leasingStartDate ? new Date(fields.leasingStartDate).toISOString().split('T')[0] : '1970/12/31'}
                             onChange={handleChange}
                             required
                             className={classes.textField}
@@ -184,8 +207,9 @@ export default function LeasingDialog() {
                             name="monthlyLeasingPayment"
                             margin="dense"
                             id="monthlyLeasingPayment-leasing"
-                            label="Monatliche Leasingrate"
+                            label={t('MonthlyLeasingPaymentInputLabel')}
                             required
+                            value={fields.monthlyLeasingPayment}
                             type="text"
                             onChange={handleChange}
                             fullWidth
@@ -194,35 +218,38 @@ export default function LeasingDialog() {
                             name="leasingLastsFor"
                             margin="dense"
                             id="leasingLastsFor-leasing"
-                            label="Leasingdauer (in monate)"
+                            label={`${t('LeasingLastsForInputLabel')} (in ${t('monthPlural')})`}
                             required
+                            value={fields.leasingLastsFor}
                             type="text"
                             onChange={handleChange}
                             fullWidth
                         />
                         <Divider style={{ marginTop: 10 }} />
                         <Typography style={{ color: '#999', fontSize: 12, marginTop: 5 }}>
-                            Restvertleasingvertrag
+                            {t('PaymentRestwertLeasingContract')}
                         </Typography>
                         <TextField
                             name="remainingPayment"
                             margin="dense"
+                            value={fields.remainingPayment}
                             id="remainingPayment-finanses"
-                            label="Restwert"
+                            label={t('RestvertInputLabel')}
                             type="text"
                             onChange={handleChange}
                             fullWidth
                         />
                         <Divider style={{ marginTop: 10 }} />
-                        <Typography style={{ color: '#999', fontSize: 12, marginTop: 5 }}>
+                        {/* <Typography style={{ color: '#999', fontSize: 12, marginTop: 5 }}>
                             Kilometerleasing
-                        </Typography>
+                        </Typography> */}
                         <TextField
                             name="allowedYearlyKilometers"
                             margin="dense"
                             id="allowedYearlyKilometers-leasing"
-                            label="Jahrliche Kilometerleistung"
+                            label={t('AllowedYearlyKilometersInputLabel')}
                             type="text"
+                            value={fields.allowedYearlyKilometers}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -230,8 +257,9 @@ export default function LeasingDialog() {
                             name="costsForMoreKilometers"
                             margin="dense"
                             id="costsForMoreKilometers-leasing"
-                            label="Kosten fur Mehrkilometer"
+                            label={t('CostsForMoreKilometersInputLabel')}
                             type="text"
+                            value={fields.costsForMoreKilometers}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -239,17 +267,18 @@ export default function LeasingDialog() {
                             name="costsForLessKilometers"
                             margin="dense"
                             id="costsForLessKilometers-leasing"
-                            label="Kosten fur Minderkilometer"
+                            label={t('CostsForLessKilometers')}
+                            value={fields.costsForLessKilometers}
                             type="text"
                             onChange={handleChange}
                             fullWidth
                             style={{ marginBottom: 15 }}
                         />
                         <Button style={{ marginRight: 10 }} variant="contained" onClick={handleClose} color="primary">
-                            Schliessen
+                            {t('CancelButton')}
                         </Button>
                         <Button variant="contained" type="submit" color="secondary">
-                            Speichern
+                            {t('SubmitButton')}
                         </Button>
                     </form>
                 </DialogContent>
@@ -257,3 +286,5 @@ export default function LeasingDialog() {
         </div >
     );
 }
+
+export default withNamespaces()(LeasingDialog)

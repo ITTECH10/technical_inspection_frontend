@@ -11,7 +11,27 @@ import { CSVLink } from "react-csv";
 
 const ExportUserData = ({ t }) => {
     const [data, setData] = React.useState('')
-    const { users } = useData()
+    const { users, vehicles } = useData()
+
+    // console.log('rendering...')
+
+    let myData = []
+
+    if (vehicles) {
+        vehicles.map(el => {
+            // console.log('looping...')
+            myData.push({
+                firstName: el.vehicleOwner.firstName,
+                lastName: el.vehicleOwner.lastName,
+                email: el.vehicleOwner.email,
+                mark: el.mark,
+                model: el.model
+            })
+        })
+    }
+
+    // CONSIDER AGGREGATION ON BACKEND
+    // console.log(vehicles)
 
     // const btnStyle = {
     //     display: 'flex',
@@ -39,7 +59,7 @@ const ExportUserData = ({ t }) => {
         let isMounted = true
 
         if (isMounted) {
-            json2csv(users, (err, csv) => {
+            json2csv(myData, (err, csv) => {
                 if (err) {
                     console.log(err)
                 }
@@ -52,7 +72,7 @@ const ExportUserData = ({ t }) => {
         return () => {
             isMounted = false
         }
-    }, [users])
+    }, [myData])
 
     const listItemStyle = {
         border: 'none',
@@ -64,7 +84,7 @@ const ExportUserData = ({ t }) => {
 
     return (
         users.length >= 2 ?
-            <CSVLink filename={'users-data.csv'} className="btn-export" data={data.replaceAll(undefined, ',').replaceAll('T00:00:00.000Z', ',')} style={listItemStyle}>
+            <CSVLink filename={'users-data.csv'} className="btn-export" data={data.replaceAll(undefined, ',')} style={listItemStyle}>
                 <ListItem>
                     <ListItemIcon><GetAppIcon color="primary" /></ListItemIcon>
                     <ListItemText primary={t('MenuExport')} />

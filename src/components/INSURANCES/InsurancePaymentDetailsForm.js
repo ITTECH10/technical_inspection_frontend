@@ -26,20 +26,20 @@ const InsurancePaymentDetailsForm = ({ t }) => {
             {selectedCarInsurance && (
                 <>
                     <Box>
-                        <Typography className={classes.inputTitle}>Gesellschaft</Typography>
+                        <Typography className={classes.inputTitle}>{t('InsuranceGesellschaftInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedCarInsurance.insuranceHouse} disabled fullWidth />
                     </Box>
                     <Box>
-                        <Typography className={classes.inputTitle}>Vertragsnummer</Typography>
+                        <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedCarInsurance.contractNumber} disabled fullWidth />
                     </Box>
                     {selectedCarInsurance.fullKasko !== "0" &&
                         <Box>
-                            <Typography className={classes.inputTitle}>Voll Kasko</Typography>
+                            <Typography className={classes.inputTitle}>{t('FullKasko')}</Typography>
                             <TextField className={classes.input} label={selectedCarInsurance.fullKasko} disabled fullWidth />
                         </Box>}
                     <Box>
-                        <Typography className={classes.inputTitle}>Teil Kasko</Typography>
+                        <Typography className={classes.inputTitle}>{t('PartKasko')}</Typography>
                         <TextField className={classes.input} label={selectedCarInsurance.partKasko} disabled fullWidth />
                     </Box>
                 </>
@@ -48,7 +48,7 @@ const InsurancePaymentDetailsForm = ({ t }) => {
     )
 
     return (
-        selectedCarInsurance._id ? <SelectedInsurancePaymentDetails /> : <Typography style={{ padding: 10 }} variant="h6">Noch keine Versicherung details.</Typography>
+        selectedCarInsurance._id ? <SelectedInsurancePaymentDetails /> : <Typography style={{ padding: 10 }} variant="h6">{t('NoInsuranceConnectedYetTitle')}</Typography>
     )
 }
 
