@@ -38,8 +38,6 @@ function CarTableAdvanced({ t }) {
         setPage(0);
     };
 
-    console.log(customersVehicles)
-
     return (
         <>
             {selectedUser && <UserInfoBlock />}
