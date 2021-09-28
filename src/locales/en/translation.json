@@ -127,7 +127,7 @@
     "DocumentCategoryNameRechnungen": "Invoices",
     "DocumentCategoryNameSonstiges": "Other",
     "DocumentCategoryKeinVertrag": "No contracts yet.",
-    "DocumentCategoryKeinFahrzeugschein": "No license ids yet.",
+    "DocumentCategoryKeinFahrzeugschein": "No license id yet.",
     "DocumentCategoryKeinSchaeden": "No damages yet.",
     "DocumentCategoryKeinRechnungen": "No invoices yet.",
     "DocumentCategoryKeinSonstiges": "No others yet.",
@@ -160,7 +160,7 @@
     "DocumentUploadModalFileName": "Document name",
     "DocumentUploadModalFileCategory": "Document category",
     "MyProfile": "My profile",
-    "VehicleDetailsDataNotSetYet": "Not set yet",
+    "VehicleDetailsDataNotSetYet": "Not yet set",
     "GenderNewUser": "Gender",
     "GenderMale": "Mr",
     "GenderFemale": "Mrs",
@@ -171,5 +171,8 @@
     "SmartphoneLabel": "Smartphone",
     "CustomersVehicles": "Customers Vehicles",
     "AndGeneral": "and",
-    "CalculatedForTwoMonths": "calculation based on two months"
+    "CalculatedForTwoMonths": "calculation based on two months",
+    "TUVExpiredTitle": "TÜV Expired",
+    "TUVExpiresIn14Days": "TÜV expires in 14 days",
+    "TUVExpiresIn30Days": "TÜV expires in 30 days"
 }

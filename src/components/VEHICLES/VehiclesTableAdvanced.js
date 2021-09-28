@@ -37,12 +37,6 @@ function VehiclesTableAdvanced({ t }) {
         query: ''
     })
 
-    React.useEffect(() => {
-        if (dashboardAdaptiveTitle === '') {
-            setDashboardAdaptiveTitle(t('VehiclesTitle'))
-        }
-    }, [dashboardAdaptiveTitle, setDashboardAdaptiveTitle, t])
-
     const matches = useMediaQuery('(max-width: 600px)')
 
     const { query } = fields
@@ -73,10 +67,17 @@ function VehiclesTableAdvanced({ t }) {
         setPage(0);
     };
 
+    const AdaptiveTitle = dashboardAdaptiveTitle === 'Alle Fahrzeuge'
+        ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'TÜV überfällig'
+            ? t('TUVExpiredTitle') : dashboardAdaptiveTitle === 'TÜV läuft in 14 Tagen ab'
+                ? t('TUVExpiresIn14Days') : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
+                    ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
+                        ? t('VehiclesTitle') : null
+
     return (
         <>
             <Typography variant="h4" style={{ padding: !matches ? '10px 0' : 0 }}>
-                {user.role === 'admin' && vehicles.length > 0 ? dashboardAdaptiveTitle : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
+                {user.role === 'admin' && vehicles.length > 0 ? AdaptiveTitle : vehicles.length === 0 ? t('NoVehiclesYet') : t('MyVehicles')}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
             <SearchVehicles fields={fields} setFields={setFields} noVehicles={vehicles.length === 0} />

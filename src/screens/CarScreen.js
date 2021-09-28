@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box'
 const CarScreen = () => {
     const { user, selectedUser, vehiclesPage } = useData()
 
+    console.log(vehiclesPage)
+
     const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
         <Box>
             <VehiclesTableAdvanced />

@@ -170,5 +170,8 @@
     "SmartphoneLabel": "Handy",
     "CustomersVehicles": "Kunden Fahrzeuge",
     "AndGeneral": "und",
-    "CalculatedForTwoMonths": "ablauf in 2 monaten"
+    "CalculatedForTwoMonths": "ablauf in 2 monaten",
+    "TUVExpiredTitle": "TÜV überfällig",
+    "TUVExpiresIn14Days": "TÜV läuft in 14 Tagen ab",
+    "TUVExpiresIn30Days": "TÜV läuft in 30 Tagen ab"
 }

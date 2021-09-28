@@ -40,6 +40,10 @@ const DataContextProvider = ({ children }) => {
     const [selectedPayment, setSelectedPayment] = useState({})
 
     const dashboardGeneratedTitle = (title) => {
+        if (vehiclesPage === 'customersVehicles') {
+            setVehiclesPage('allVehicles')
+        }
+
         setDashboardAdaptiveTitle(title)
     }
 
