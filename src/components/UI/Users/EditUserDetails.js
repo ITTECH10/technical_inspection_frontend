@@ -195,7 +195,7 @@ function EditUserDetails({ userId, t }) {
                             margin="dense"
                             value={fields.smartphoneNumber}
                             id="smartphoneNumber-number"
-                            label={`${t('PhoneNumberInputLabel')} (smartphone)`}
+                            label={`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
                             type="text"
                             onChange={handleChange}
                             fullWidth

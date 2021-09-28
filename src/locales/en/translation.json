@@ -165,5 +165,8 @@
     "GenderMale": "Mr",
     "GenderFemale": "Mrs",
     "LastUUVInputLabel": "LastUUV",
-    "NextUUVInputLabel": "NextUUV"
+    "NextUUVInputLabel": "NextUUV",
+    "DaysSingular": "day",
+    "DaysPlural": "days",
+    "SmartphoneLabel": "Smartphone"
 }

@@ -4,9 +4,10 @@ import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 import Chip from '@material-ui/core/Chip';
+import { withNamespaces } from 'react-i18next';
 // import BuildIcon from '@material-ui/icons/Build';
 
-const CarRow = ({ car }) => {
+const CarRow = ({ car, t }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar, myVehicles, user } = useData()
     let selectedCar
@@ -44,7 +45,7 @@ const CarRow = ({ car }) => {
                 <TableCell>
                     {car.TUVExpiresInTwoMonths &&
                         <Chip
-                            label={`TUV in ${TUVDiff} days`}
+                            label={`TUV in ${TUVDiff} ${t('DaysPlural')}`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -53,7 +54,7 @@ const CarRow = ({ car }) => {
                     }
                     {car.AUExpiresInTwoMonths &&
                         <Chip
-                            label={`HU in ${HUDiff} days`}
+                            label={`HU in ${HUDiff} ${t('DaysPlural')}`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -62,7 +63,7 @@ const CarRow = ({ car }) => {
                     }
                     {car.technicalInspectionInNextTwoMonths &&
                         <Chip
-                            label={`NTI in ${NTIDiff} days`}
+                            label={`NTI in ${NTIDiff} ${t('DaysPlural')}`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -74,4 +75,4 @@ const CarRow = ({ car }) => {
     )
 }
 
-export default CarRow
+export default withNamespaces()(CarRow)

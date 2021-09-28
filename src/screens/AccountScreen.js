@@ -254,7 +254,7 @@ const AccountScreen = ({ t }) => {
                             <Box className={classes.inputSingleBox}>
                                 <Box className={classes.inputContentVertical}>
                                     <Typography style={{ fontWeight: '400' }}>
-                                        {`${t('PhoneNumberInputLabel')} (smartphone)`}
+                                        {`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
                                     </Typography>
                                     <TextField
                                         variant="standard"
