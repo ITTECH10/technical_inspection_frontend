@@ -20,3 +20,8 @@ export const genders = [
         text: "Mrs"
     },
 ]
+
+// export const roleDeteriminator = (canditateRole = 'admin') => {
+//     if (canditateRole !== user.role) return false
+//     return true
+// }

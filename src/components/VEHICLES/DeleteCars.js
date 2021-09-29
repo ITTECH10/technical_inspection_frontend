@@ -27,7 +27,7 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles()
   const [btnLoading, setBtnLoading] = useState(false)
-  const { vehicles, setVehicles, user } = useData()
+  const { vehicles, setVehicles, user, setCustomersVehicles, customersVehicles } = useData()
   const history = useHistory()
 
   const carId = history.location.pathname.split('/')[2]
@@ -54,8 +54,11 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
     axios.delete(`/cars/${carId}`).then(res => {
       if (res.status === 204) {
         const updatedVehicles = [...vehicles].filter(v => v._id !== carId)
+        const updatedCustomersVehicles = [...customersVehicles].filter(v => v._id !== carId)
+
         setOpen(false)
         setVehicles(updatedVehicles)
+        setCustomersVehicles(updatedCustomersVehicles)
         setOnHandleDeleteOpen(true)
         setBtnLoading(false)
 
