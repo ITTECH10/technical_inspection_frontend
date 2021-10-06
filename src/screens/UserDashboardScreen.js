@@ -8,6 +8,8 @@ import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import BuildIcon from '@material-ui/icons/Build';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import { withNamespaces } from 'react-i18next'
+import DashboardSellCarDialog from '../components/VEHICLES/DashboardSellCarDialog'
+import ReportCarDamageDialog from '../components/VEHICLES/ReportCarDamageDialog'
 
 const useStyles = makeStyles(theme => ({
     dashboardContainer: {},
@@ -58,6 +60,12 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
+    carOptionsBoxFlex: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '100%'
+    },
     finansesBoxBtnsFlex: {
         display: 'flex',
         justifyContent: 'space-around',
@@ -69,6 +77,22 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20,
+        marginRight: 10
+    },
+    dashboardContentFlexTuv: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+        marginRight: 10
+    },
+    carOptionsBtn: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
         marginRight: 10
     },
     dashboardContentFlex: {
@@ -294,6 +318,25 @@ const DashboardScreen = ({ t }) => {
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
                                     {t('Dashboard.financingStatusBtnLeasing')}
                                 </Button>
+                            </Box>
+                        </Box>
+                    </CardContent>
+                </Card>
+                <Card className={classes.dashboardBoxThree} variant="outlined">
+                    <CardContent style={{ height: '100%' }}>
+                        <Box className={classes.boxTitleFlex}>
+                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                {t('UserDashboardCarOptions')}
+                            </Typography>
+                            <BuildIcon style={distortedIconPositioning} color="secondary" />
+                        </Box>
+
+                        <Box className={classes.carOptionsBoxFlex}>
+                            <Box className={classes.carOptionsBtn}>
+                                <DashboardSellCarDialog />
+                            </Box>
+                            <Box className={classes.carOptionsBtn}>
+                                <ReportCarDamageDialog />
                             </Box>
                         </Box>
                     </CardContent>

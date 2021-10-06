@@ -103,6 +103,10 @@ const UploadCarData = ({ t }) => {
                 const updatedMyVehicles = [...myVehicles, { ...res.data.newVehicle }]
 
                 setTimeout(() => {
+                    setFields({
+                        ...fields,
+                        photo: ''
+                    })
                     setVehicles(updatedVehicles)
                     setCustomersVehicles(updatedCustomerVehicles)
                     setMyVehicles(updatedMyVehicles)

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
@@ -52,7 +57,10 @@ function EditUserDetails({ userId, t }) {
         street: selectedUser.street,
         postCode: selectedUser.postCode,
         city: selectedUser.city,
-        birthDate: selectedUser.birthDate
+        birthDate: selectedUser.birthDate,
+        customerType: selectedUser.customerType,
+        corespondencePartner: selectedUser.corespondencePartner,
+        corespondencePartnerEmail: selectedUser.corespondencePartnerEmail
     })
 
     React.useEffect(() => {
@@ -66,7 +74,10 @@ function EditUserDetails({ userId, t }) {
             street: selectedUser.street,
             postCode: selectedUser.postCode,
             city: selectedUser.city,
-            birthDate: selectedUser.birthDate
+            birthDate: selectedUser.birthDate,
+            customerType: selectedUser.customerType,
+            corespondencePartner: selectedUser.corespondencePartner,
+            corespondencePartnerEmail: selectedUser.corespondencePartnerEmail,
         })
     }, [selectedUser])
 
@@ -129,6 +140,60 @@ function EditUserDetails({ userId, t }) {
                         {t('EditCustomerFormHint')}
                     </DialogContentText>
                     <form onSubmit={handleSubmit}>
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">{t('CustomerType')}</FormLabel>
+                            <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                                <FormControlLabel
+                                    value="firmenkunde"
+                                    control={
+                                        <Radio
+                                            name="customerType"
+                                            color="secondary"
+                                            checked={fields.customerType === 'firmenkunde'}
+                                            onChange={handleChange}
+                                        />}
+                                    label={t('CoorporateClient')}
+                                    labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                    value="privat"
+                                    control={
+                                        <Radio
+                                            name="customerType"
+                                            color="secondary"
+                                            checked={fields.customerType === 'privat'}
+                                            onChange={handleChange}
+                                        />}
+                                    label={t('NonCoorporateClient')}
+                                    labelPlacement="end"
+                                />
+                            </RadioGroup>
+                        </FormControl>
+                        {fields.customerType === 'firmenkunde' &&
+                            <TextField
+                                autoFocus
+                                name="corespondencePartner"
+                                required
+                                margin="dense"
+                                value={fields.corespondencePartner}
+                                id="corespondencePartner"
+                                label={t('ContactPartner')}
+                                onChange={handleChange}
+                                type="text"
+                                fullWidth
+                            />}
+                        {fields.customerType === 'firmenkunde' &&
+                            <TextField
+                                name="corespondencePartnerEmail"
+                                required
+                                margin="dense"
+                                value={fields.corespondencePartnerEmail}
+                                id="corespondencePartnerEmail"
+                                label={t('ContactPartnerEmail')}
+                                onChange={handleChange}
+                                type="email"
+                                fullWidth
+                            />}
                         <TextField
                             name="firstName"
                             autoFocus

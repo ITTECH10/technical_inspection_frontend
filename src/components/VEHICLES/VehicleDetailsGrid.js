@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
 import DeleteCars from './DeleteCars'
 import UpdateVehicleInformation from './UpdateVehicleInformation'
+import ConfirmUserSellingCarDialog from './ConfirmUserSellingCarDialog'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -54,6 +55,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
             <Box className={classes.actionsFlexContainer}>
                 <Typography variant="h5">{t('VehicleDetailsTitle')}</Typography>
                 <Box className={classes.actionBtnsBoxFlex}>
+                    {selectedCar.markForSelling && <ConfirmUserSellingCarDialog />}
                     <UpdateVehicleInformation setOnHandleUpdateOpen={setOnHandleUpdateOpen} />
                     <DeleteCars setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
                 </Box>

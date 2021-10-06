@@ -52,6 +52,9 @@
     "DeleteDocumentFormHint": "Möchten Sie dieses Dokument wirklich löschen?",
     "DeleteVehicleFormHint": "Möchten Sie dieses Fahrzeug wirklich löschen?",
     "NewCustomerFormHint": "Um einen neuen Kunden anzulegen, füllen Sie einfach die Felder unten aus.",
+    "UserDashboardSellVehicleHint": "Um Ihr Fahrzeug zu verkaufen, wählen Sie bitte eine der unten aufgeführten Optionen aus?",
+    "UserDashboardReportDamageHint": "Um Schäden an Ihrem Fahrzeug zu melden, drücken Sie einfach die Taste unten.",
+    "UserDashboardReportDamageOptionsTitle": "Bitte erzählen Sie uns, was passiert ist.",
     "EmailInputLabel": "E-Mail",
     "FirstNameInputLabel": "Vorname",
     "LastNameInputLabel": "Nachname",
@@ -150,6 +153,7 @@
     "PaymentRestwertLeasingContract": "Restvertleasingvertrag",
     "SellCarDialogBuyer": "Der käufer des fahrzeugs?",
     "SellCarDialogTitle": "Fahrzeug verkauft?",
+    "SellCarDashboardBtn": "Fahrzeug verkaufen?",
     "SellCarDialogHint": "Das fahrzeug wurde verkauft?",
     "SellCarDialogDate": "Wann wurde das fahrzeug verkauft?",
     "FullKasko": "Voll kasko",
@@ -173,5 +177,12 @@
     "CalculatedForTwoMonths": "ablauf in 2 monaten",
     "TUVExpiredTitle": "TÜV überfällig",
     "TUVExpiresIn14Days": "TÜV läuft in 14 Tagen ab",
-    "TUVExpiresIn30Days": "TÜV läuft in 30 Tagen ab"
+    "TUVExpiresIn30Days": "TÜV läuft in 30 Tagen ab",
+    "UserDashboardCarOptions": "Weitere Fahrzeugoptionen...",
+    "UserDashboardReportDamage": "Schaden melden",
+    "UserConfirmCarSelling": "Möchten Sie dieses Fahrzeug wirklich verkaufen?",
+    "UserAbortSellingCarBtn": "Nicht zu verkaufen!",
+    "UserAdminEmailSentCarSelling": "E-Mail an Admin gesendet!",
+    "AdminHasBeenNotifiedAboutCarSelling": "Admin wurde benachrichtigt!",
+    "DamagedCarDescription": "Bitte erzähl uns mehr..."
 }

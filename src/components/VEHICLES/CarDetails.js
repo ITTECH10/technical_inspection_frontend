@@ -14,6 +14,7 @@ import UserInfoBlock from '../UI/Users/UserInfoBlock'
 import PaymentDetailsForm from '../BANKS/PaymentDetailsForm'
 import InsurancePaymentDetailsForm from '../INSURANCES/InsurancePaymentDetailsForm'
 import { withNamespaces } from 'react-i18next'
+import Loader from './../../utils/Loader'
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -70,32 +71,33 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
     }, [selectedCar, getCarInsurance, setSelectedUser, role])
 
     return (
-        <Grid container className={classes.mainContainer} direction="column">
-            {selectedUser && <UserInfoBlock />}
-            <VehicleDetailsGrid
-                setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                setOnHandleUpdateOpen={setOnHandleUpdateOpen}
-            />
-            {/* <InsuranceHouseGrid /> */}
-
-            <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('Payment.title')}</Typography>
-            <Divider style={{ marginBottom: 10 }} />
-            <Box>
-                <PaymentVariants />
-                <PaymentDetailsForm />
-            </Box>
-
-            <Typography variant="h5" align="left" style={{ margin: '10px 0' }}>{t('InsurancesTitle')}</Typography>
-            <Divider style={{ marginBottom: 10 }} />
-            <Box>
-                <InsurancePaymentVariants />
-                <InsurancePaymentDetailsForm />
-            </Box>
-            {carImages.length > 0 &&
-                <GalleryAlternative
+        selectedCar._id ?
+            <Grid container className={classes.mainContainer} direction="column">
+                {selectedUser && <UserInfoBlock />}
+                <VehicleDetailsGrid
                     setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                />}
-        </Grid>
+                    setOnHandleUpdateOpen={setOnHandleUpdateOpen}
+                />
+                {/* <InsuranceHouseGrid /> */}
+
+                <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('Payment.title')}</Typography>
+                <Divider style={{ marginBottom: 10 }} />
+                <Box>
+                    <PaymentVariants />
+                    <PaymentDetailsForm />
+                </Box>
+
+                <Typography variant="h5" align="left" style={{ margin: '10px 0' }}>{t('InsurancesTitle')}</Typography>
+                <Divider style={{ marginBottom: 10 }} />
+                <Box>
+                    <InsurancePaymentVariants />
+                    <InsurancePaymentDetailsForm />
+                </Box>
+                {carImages.length > 0 &&
+                    <GalleryAlternative
+                        setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+                    />}
+            </Grid> : <Loader />
     )
 }
 

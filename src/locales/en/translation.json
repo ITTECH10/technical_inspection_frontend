@@ -53,6 +53,9 @@
     "DeleteCustomerFormHint": "Beware, after deleting this profile there is no going back, before deleting copy the data somewhere safe.",
     "DeleteDocumentFormHint": "Are you sure you want to delete this document?",
     "DeleteVehicleFormHint": "Are you sure you want to delete this vehicle?",
+    "UserDashboardSellVehicleHint": "To sell your vehicle, please select an option listed bellow?",
+    "UserDashboardReportDamageHint": "To report damages associated with your vehicle, simply press the button bellow.",
+    "UserDashboardReportDamageOptionsTitle": "Please tell us what happened.",
     "EmailInputLabel": "E-mail",
     "FirstNameInputLabel": "First name",
     "LastNameInputLabel": "Last name",
@@ -152,6 +155,7 @@
     "PaymentRestwertLeasingContract": "Remaining leasing contract",
     "IsThereMaintenancePackage": "Has the leasing a maintenance package?",
     "SellCarDialogTitle": "Vehicle sold?",
+    "SellCarDashboardBtn": "Sell vehicle?",
     "SellCarDialogBuyer": "The buyer of the vehicle?",
     "SellCarDialogHint": "The vehicle is sold?",
     "SellCarDialogDate": "When was the vehicle sold?",
@@ -174,5 +178,12 @@
     "CalculatedForTwoMonths": "calculation based on two months",
     "TUVExpiredTitle": "TÜV Expired",
     "TUVExpiresIn14Days": "TÜV expires in 14 days",
-    "TUVExpiresIn30Days": "TÜV expires in 30 days"
+    "TUVExpiresIn30Days": "TÜV expires in 30 days",
+    "UserDashboardCarOptions": "More vehicle options...",
+    "UserDashboardReportDamage": "Report damage",
+    "UserConfirmCarSelling": "Are you sure you want to sell this vehicle?",
+    "UserAbortSellingCarBtn": "Not for sale!",
+    "UserAdminEmailSentCarSelling": "E-mail sent to Admin!",
+    "AdminHasBeenNotifiedAboutCarSelling": "Admin has been notified!",
+    "DamagedCarDescription": "Please tell us more..."
 }
