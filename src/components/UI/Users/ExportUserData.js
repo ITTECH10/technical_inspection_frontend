@@ -18,40 +18,40 @@ const ExportUserData = ({ t }) => {
     //     return []
     // }, [])
 
-    if (vehicles) {
-        vehicles.map(el => {
-            // console.log('looping...')
-            return myData.push({
-                Vorname: el.vehicleOwner.firstName,
-                Nachname: el.vehicleOwner.lastName,
-                email: el.vehicleOwner.email,
-                Hersteller: el.mark,
-                Modell: el.model,
-                HSN: el.HSN,
-                TSN: el.TSN,
-                Fahrgestellnummer: el.chassisNumber ? el.chassisNumber : '',
-                Kennzeichen: el.registrationNumber,
-                GarantieAblaufdatum: el.varantyExpiresAt ? el.varantyExpiresAt : '',
-                LetzteUUV: el.lastUUV,
-                NächsteUVV: el.nextUUV,
-                LetzteTechnischeInspektion: el.lastTechnicalInspection,
-                NächsteTechnischeInspektion: el.nextTechnicalInspection,
-                TUV: el.TUV,
-                AU: el.AU,
-                ErstzulassungDesFahrzeugs: el.firstVehicleRegistration,
-                ZulassungAufDenBesitzer: el.firstVehicleRegistrationOnOwner,
-                Laufleistung: el.kilometersDriven,
-                MonatlicheVersicherungsleistung: el.monthlyInsurancePayment,
-                ZulässigeJahreskilometer: el.allowedYearlyKilometers,
-                JährlicheSteuer: el.yearlyTax
-            })
-        })
-    }
-
     React.useEffect(() => {
         let isMounted = true
 
         if (isMounted) {
+            if (vehicles) {
+                vehicles.map(el => {
+                    // console.log('looping...')
+                    return myData.push({
+                        Vorname: el.vehicleOwner.firstName,
+                        Nachname: el.vehicleOwner.lastName,
+                        email: el.vehicleOwner.email,
+                        Hersteller: el.mark,
+                        Modell: el.model,
+                        HSN: el.HSN,
+                        TSN: el.TSN,
+                        Fahrgestellnummer: el.chassisNumber ? el.chassisNumber : '',
+                        Kennzeichen: el.registrationNumber,
+                        GarantieAblaufdatum: el.varantyExpiresAt ? el.varantyExpiresAt : '',
+                        LetzteUUV: el.lastUUV,
+                        NächsteUVV: el.nextUUV,
+                        LetzteTechnischeInspektion: el.lastTechnicalInspection,
+                        NächsteTechnischeInspektion: el.nextTechnicalInspection,
+                        TUV: el.TUV,
+                        AU: el.AU,
+                        ErstzulassungDesFahrzeugs: el.firstVehicleRegistration,
+                        ZulassungAufDenBesitzer: el.firstVehicleRegistrationOnOwner,
+                        Laufleistung: el.kilometersDriven,
+                        MonatlicheVersicherungsleistung: el.monthlyInsurancePayment,
+                        ZulässigeJahreskilometer: el.allowedYearlyKilometers,
+                        JährlicheSteuer: el.yearlyTax
+                    })
+                })
+            }
+
             json2csv(myData, (err, csv) => {
                 if (err) {
                     console.log(err)
