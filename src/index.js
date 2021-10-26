@@ -9,8 +9,8 @@ import DataContextProvider from './contexts/DataContext'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:8000/api/v1'
-// axios.defaults.baseURL = 'https://technical-inspection.herokuapp.com/api/v1'
+// axios.defaults.baseURL = 'http://localhost:8000/api/v1'
+axios.defaults.baseURL = 'https://technical-inspection.herokuapp.com/api/v1'
 
 ReactDOM.render(
   // <React.StrictMode>
