@@ -237,7 +237,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.lastUUV && fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : '1970/12/31'}
+                            // value={selectedCar.lastUUV && fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -250,7 +250,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.nextUUV && fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : '1970/12/31'}
+                            // value={selectedCar.nextUUV && fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : '1970/12/31'}
                             InputLabelProps={{
                                 shrink: true,
                             }}

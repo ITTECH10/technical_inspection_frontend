@@ -32,6 +32,15 @@ function VehiclesTableAdvanced({ t }) {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     // const [adaptiveTitle, setAdaptiveTitle] = React.useState(t('VehiclesTitle'))
 
+    const AdaptiveTitle = dashboardAdaptiveTitle === 'Alle Fahrzeuge'
+        ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'TÜV überfällig'
+            ? t('TUVExpiredTitle') : dashboardAdaptiveTitle === 'TÜV läuft in 14 Tagen ab'
+                ? t('TUVExpiresIn14Days') : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
+                    ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
+                        ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'Finanzierung'
+                            ? t('FinanzierungVehicles') : dashboardAdaptiveTitle === 'Leasing'
+                                ? t('LeasingVehicles') : null
+
     // FILTERING
     const [fields, setFields] = React.useState({
         query: ''
@@ -51,11 +60,11 @@ function VehiclesTableAdvanced({ t }) {
     // })
 
     const filteredContent = vehicles.filter(x => x.registrationNumber.toLowerCase().includes(query.toLowerCase()) || x.mark.toLowerCase().includes(query.toLowerCase()) || x.model.toLowerCase().includes(query.toLowerCase())).map(v => (
-        <VehicleItemRow key={v._id} vehicle={v} />
+        <VehicleItemRow dashboardAdaptiveTitle={dashboardAdaptiveTitle} key={v._id} vehicle={v} />
     ))
 
     const allCars = vehicles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(v => {
-        return <VehicleItemRow key={v._id} vehicle={v} />
+        return <VehicleItemRow dashboardAdaptiveTitle={dashboardAdaptiveTitle} key={v._id} vehicle={v} />
     })
 
     const handleChangePage = (event, newPage) => {
@@ -66,13 +75,6 @@ function VehiclesTableAdvanced({ t }) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    const AdaptiveTitle = dashboardAdaptiveTitle === 'Alle Fahrzeuge'
-        ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'TÜV überfällig'
-            ? t('TUVExpiredTitle') : dashboardAdaptiveTitle === 'TÜV läuft in 14 Tagen ab'
-                ? t('TUVExpiresIn14Days') : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
-                    ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
-                        ? t('VehiclesTitle') : null
 
     return (
         <>
@@ -90,6 +92,10 @@ function VehiclesTableAdvanced({ t }) {
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
                                 <TableCell>{t('VehicleOwner')}</TableCell>
+                                {
+                                    dashboardAdaptiveTitle !== '' &&
+                                    <TableCell>{t('Date')}</TableCell>
+                                }
                             </TableRow>
                         </TableHead>
                         <TableBody>

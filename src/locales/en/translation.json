@@ -187,5 +187,9 @@
     "AdminHasBeenNotifiedAboutCarSelling": "Admin has been notified!",
     "DamagedCarDescription": "Please tell us more...",
     "NoVehicleDocumentsYet": "Documents",
-    "NoPaymentDetailsYet": "No payment details yet"
+    "NoPaymentDetailsYet": "No payment details yet",
+    "Date": "Expires at",
+    "DateExpiring": "Expiration date",
+    "FinanzierungVehicles": "All Vehicles (Finanses)",
+    "LeasingVehicles": "All Vehicles (Leasing)"
 }

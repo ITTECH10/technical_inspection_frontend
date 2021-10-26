@@ -186,5 +186,9 @@
     "AdminHasBeenNotifiedAboutCarSelling": "SE-Carmanagement wurde benachrichtigt!",
     "DamagedCarDescription": "Schadenhergang",
     "NoVehicleDocumentsYet": "Dokumente",
-    "NoPaymentDetailsYet": "Noch keine Zahlungsdetails"
+    "NoPaymentDetailsYet": "Noch keine Zahlungsdetails",
+    "Date": "Fällig am",
+    "DateExpiring": "Fällig am",
+    "FinanzierungVehicles": "Alle Fahrzeuge (Finanzierung)",
+    "LeasingVehicles": "Alle Fahrzeuge (Leasing)"
 }

@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 
-const CarRow = ({ vehicle }) => {
+const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar, setCarImages } = useData()
 
@@ -14,6 +14,10 @@ const CarRow = ({ vehicle }) => {
         setCarImages([])
         history.push(`/cars/${selectedCar._id}`)
     }
+
+    const TuvDate = new Date(vehicle.TUV).toLocaleDateString()
+    const LeasingDate = new Date(vehicle.contractExpirationDate).toLocaleDateString()
+    const CreditDate = new Date(vehicle.contractExpirationDate).toLocaleDateString()
 
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()}>
@@ -25,6 +29,13 @@ const CarRow = ({ vehicle }) => {
             <TableCell>
                 {`${vehicle.vehicleOwner.firstName} ${vehicle.vehicleOwner.lastName}`}
             </TableCell>
+            {
+                dashboardAdaptiveTitle !== '' &&
+                <TableCell>
+                    {dashboardAdaptiveTitle === 'Finanzierung' ? CreditDate :
+                        dashboardAdaptiveTitle === 'Leasing' ? LeasingDate : TuvDate}
+                </TableCell>
+            }
         </TableRow>
     )
 }

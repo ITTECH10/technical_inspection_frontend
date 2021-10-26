@@ -34,6 +34,9 @@ const CarRow = ({ car, t }) => {
     const TUVDiff = Math.round(Math.abs((curDate - TUVDate) / oneDay)) + 1;
     const HUDiff = Math.round(Math.abs((curDate - AUDate) / oneDay)) + 1;
 
+    const carTuvExpired = new Date(car.TUV) < new Date()
+    const NTIExpired = new Date(car.nextTechnicalInspection) < new Date()
+
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()} key={car._id}>
             <TableCell component="th" scope="row">
@@ -64,6 +67,24 @@ const CarRow = ({ car, t }) => {
                     {car.technicalInspectionInNextTwoMonths &&
                         <Chip
                             label={`NTI in ${NTIDiff} ${t('DaysPlural')}`}
+                            color="primary"
+                            size="small"
+                            variant="default"
+                            style={{ cursor: 'pointer' }}
+                        />
+                    }
+                    {carTuvExpired &&
+                        <Chip
+                            label="TUV Abgelaufen"
+                            color="primary"
+                            size="small"
+                            variant="default"
+                            style={{ cursor: 'pointer' }}
+                        />
+                    }
+                    {NTIExpired &&
+                        <Chip
+                            label="NTI Abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"

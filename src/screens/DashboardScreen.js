@@ -169,12 +169,14 @@ const DashboardScreen = ({ t }) => {
         setSelectedIndex(2)
 
         history.push('/cars')
+        dashboardGeneratedTitle('Finanzierung')
     }
 
     const handleNavigateCreditVehicles = () => {
         setVehicles(vehiclesWithLeasingsContractExpiringInTwoMonths)
         setSelectedIndex(2)
         history.push('/cars')
+        dashboardGeneratedTitle('Leasing')
     }
 
     const handleNavigateTuvExpiredVehicles = () => {

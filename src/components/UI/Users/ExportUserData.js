@@ -64,7 +64,7 @@ const ExportUserData = ({ t }) => {
         return () => {
             isMounted = false
         }
-    }, [myData])
+    }, [])
 
     const listItemStyle = {
         border: 'none',
