@@ -35,6 +35,7 @@ const CarRow = ({ car, t }) => {
     const HUDiff = Math.round(Math.abs((curDate - AUDate) / oneDay)) + 1;
 
     const carTuvExpired = new Date(car.TUV) < new Date()
+    const carAuExpired = new Date(car.AU) < new Date()
     const NTIExpired = new Date(car.nextTechnicalInspection) < new Date()
 
     return (
@@ -76,6 +77,15 @@ const CarRow = ({ car, t }) => {
                     {carTuvExpired &&
                         <Chip
                             label="TUV Abgelaufen"
+                            color="primary"
+                            size="small"
+                            variant="default"
+                            style={{ cursor: 'pointer' }}
+                        />
+                    }
+                    {carAuExpired &&
+                        <Chip
+                            label="AU Abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"
