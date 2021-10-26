@@ -80,7 +80,7 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
                 />
                 {/* <InsuranceHouseGrid /> */}
 
-                <Typography variant="h5" align="left" style={{ marginBottom: 10 }}>{t('Payment.title')}</Typography>
+                <Typography variant="h5" align="left" style={{ margin: '10px 0' }}>{t('Payment.title')}</Typography>
                 <Divider style={{ marginBottom: 10 }} />
                 <Box>
                     <PaymentVariants />
@@ -93,10 +93,9 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
                     <InsurancePaymentVariants />
                     <InsurancePaymentDetailsForm />
                 </Box>
-                {carImages.length > 0 &&
-                    <GalleryAlternative
-                        setOnHandleDeleteOpen={setOnHandleDeleteOpen}
-                    />}
+                <GalleryAlternative
+                    setOnHandleDeleteOpen={setOnHandleDeleteOpen}
+                />
             </Grid> : <Loader />
     )
 }

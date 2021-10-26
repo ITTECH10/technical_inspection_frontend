@@ -9,9 +9,13 @@ const GalleryAlternativeReal = ({ t, setOnHandleDeleteOpen }) => {
 
     return (
         <>
-            <Typography variant="h5" align="left" style={{ marginTop: 10, marginBottom: 10 }}>
-                {t('VehicleDocumentsTitle')}
-            </Typography>
+            {carImages.length > 0 ?
+                <Typography variant="h6" align="left" style={{ marginTop: 10 }}>
+                    {t('VehicleDocumentsTitle')}
+                </Typography> :
+                <Typography variant="h6" align="left" style={{ marginTop: 10 }}>
+                    {t('NoVehicleDocumentsYet')}
+                </Typography>}
 
             <FileCategoryTabs files={carImages} setOnHandleDeleteOpen={setOnHandleDeleteOpen} />
         </>

@@ -6,11 +6,12 @@ import { useData } from '../../contexts/DataContext';
 
 const CarRow = ({ vehicle }) => {
     const history = useHistory()
-    const { vehicles, setSelectedCar } = useData()
+    const { vehicles, setSelectedCar, setCarImages } = useData()
 
     const onHandleCarRender = () => {
         const selectedCar = vehicles.find(v => v._id === vehicle._id)
         setSelectedCar(selectedCar)
+        setCarImages([])
         history.push(`/cars/${selectedCar._id}`)
     }
 

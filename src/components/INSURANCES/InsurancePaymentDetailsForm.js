@@ -48,7 +48,7 @@ const InsurancePaymentDetailsForm = ({ t }) => {
     )
 
     return (
-        selectedCarInsurance._id ? <SelectedInsurancePaymentDetails /> : <Typography style={{ padding: 10 }} variant="h6">{t('NoInsuranceConnectedYetTitle')}</Typography>
+        selectedCarInsurance._id ? <SelectedInsurancePaymentDetails /> : <Typography variant="h6">{t('NoInsuranceConnectedYetTitle')}</Typography>
     )
 }
 

@@ -185,5 +185,6 @@
     "UserAbortSellingCarBtn": "Not for sale!",
     "UserAdminEmailSentCarSelling": "E-mail sent to Admin!",
     "AdminHasBeenNotifiedAboutCarSelling": "Admin has been notified!",
-    "DamagedCarDescription": "Please tell us more..."
+    "DamagedCarDescription": "Please tell us more...",
+    "NoVehicleDocumentsYet": "No documents yet..."
 }

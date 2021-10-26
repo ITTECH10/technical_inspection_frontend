@@ -250,7 +250,7 @@ const DashboardScreen = ({ t }) => {
                             <Typography className={classes.countTitle} variant="h4" component="h4">
                                 {myVehicles.length}
                             </Typography>
-                            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
+                            <Button disabled={myVehicles.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
                                 {t('MyVehicles')}
                             </Button>
                         </Box>
@@ -270,7 +270,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {UserTUVExpiresInThirtyDays.length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
+                                <Button disabled={UserTUVExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
                                     {t('Dashboard.tuvBtn30')}
                                 </Button>
                             </Box>
@@ -278,7 +278,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {UserTUVExpiresInFourteenDays.length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
+                                <Button disabled={UserTUVExpiresInFourteenDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
                                     {t('Dashboard.tuvBtn14')}
                                 </Button>
                             </Box>
@@ -286,7 +286,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {UserTUVExpired.length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
+                                <Button disabled={UserTUVExpired.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
                                     {t('Dashboard.tuvBtnExpired')}
                                 </Button>
                             </Box>
@@ -307,7 +307,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {myVehiclesWithCreditsContractExpiringInTwoMonths.length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
+                                <Button disabled={myVehiclesWithCreditsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
                                     {t('Dashboard.financingStatusBtnFinancing')}
                                 </Button>
                             </Box>
@@ -315,7 +315,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {myVehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
+                                <Button disabled={myVehiclesWithLeasingsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
                                     {t('Dashboard.financingStatusBtnLeasing')}
                                 </Button>
                             </Box>
