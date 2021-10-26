@@ -49,22 +49,14 @@ const ExportUserData = ({ t }) => {
     }
 
     React.useEffect(() => {
-        let isMounted = true
-
-        if (isMounted) {
-            json2csv(myData, (err, csv) => {
-                if (err) {
-                    console.log(err)
-                }
-                if (csv) {
-                    setData(csv)
-                }
-            })
-        }
-
-        return () => {
-            isMounted = false
-        }
+        json2csv(myData, (err, csv) => {
+            if (err) {
+                console.log(err)
+            }
+            if (csv) {
+                setData(csv)
+            }
+        })
     }, [])
 
     const listItemStyle = {
