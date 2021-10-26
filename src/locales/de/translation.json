@@ -1,4 +1,4 @@
-{
+﻿{
     "LoginScreenLoginButton": "Anmelden",
     "LoginScreenForgotPassword": "Passwort vergessen?",
     "LoginScreenPrivacyPolicyWarning": "Wichtig! Um die App nutzen zu können, müssen Sie unsere Datenschutzbestimmungen bestätigen.",
@@ -9,7 +9,7 @@
     "VehicleDetailsTitle": "Fahrzeugdaten",
     "VehicleDocumentsTitle": "Fahrzeugdokumente",
     "InsuranceDetailsTitle": "Versicherungsdetails",
-    "NoInsuranceConnectedYetTitle": "Noch keine Versicherungverbindung",
+    "NoInsuranceConnectedYetTitle": "Es sind keine Versicherungsdetails vorhanden",
     "NoBankConnectedYetTitle": "Noch keine Bankverbindung",
     "BankDetailsTitle": "Bankdaten",
     "NoVehiclesYet": "Noch keine Fahrzeuge hinterlegt",
@@ -95,7 +95,7 @@
     "CostsForLessKilometers": "Vergütung bei Minderkilometer",
     "Payment.title": "Bezahlung",
     "PaymentCashTitle": "Barbezahlung",
-    "Payment.cash.btn": "Bar",
+    "Payment.cash.btn": "In bar bezahlt",
     "Payment.cash.payedAt": "Bezahlt am",
     "Payment.cash.sum": "Summe",
     "Payment.financing.btn": "Finanzierung",
@@ -123,15 +123,15 @@
     "monthSingular": "Monat",
     "monthPlural": "Monate",
     "DocumentCategoryNameVertrag": "Verträge",
-    "DocumentCategoryNameFahrzeugschein": "Fahrzeugschein",
+    "DocumentCategoryNameFahrzeugschein": "Fahrzeugscheine",
     "DocumentCategoryNameSchaeden": "Schäden",
     "DocumentCategoryNameRechnungen": "Rechnungen",
     "DocumentCategoryNameSonstiges": "Sonstiges",
-    "DocumentCategoryKeinVertrag": "Noch keine Verträge.",
-    "DocumentCategoryKeinFahrzeugschein": "Noch keinen Fahrzeugschein.",
-    "DocumentCategoryKeinSchaeden": "Noch keine Schäden.",
-    "DocumentCategoryKeinRechnungen": "Noch keine Rechnungen.",
-    "DocumentCategoryKeinSonstiges": "Keine sonstigen Dokumente.",
+    "DocumentCategoryKeinVertrag": "Noch keine Verträge hochgeladen",
+    "DocumentCategoryKeinFahrzeugschein": "Noch keine Fahrzeugscheine hochgeladen",
+    "DocumentCategoryKeinSchaeden": "Noch keine Schadensmeldungen hochgeladen",
+    "DocumentCategoryKeinRechnungen": "Noch keine Rechnungen hochgeladen",
+    "DocumentCategoryKeinSonstiges": "Noch keine sonstigen Dokumente hochgeladen",
     "VehicleOwner": "Fahrzeugbesitzer",
     "ContactPartner": "Ansprechpartner",
     "ContactPartnerEmail": "Email des Ansprechpartners",
@@ -185,5 +185,6 @@
     "UserAdminEmailSentCarSelling": "E-Mail an SE-Carmanagement gesendet!",
     "AdminHasBeenNotifiedAboutCarSelling": "SE-Carmanagement wurde benachrichtigt!",
     "DamagedCarDescription": "Schadenhergang",
-    "NoVehicleDocumentsYet": "Keine Dokumente vorhanden..."
+    "NoVehicleDocumentsYet": "Dokumente",
+    "NoPaymentDetailsYet": "Noch keine Zahlungsdetails"
 }

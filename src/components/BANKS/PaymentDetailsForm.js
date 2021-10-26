@@ -158,7 +158,7 @@ const PaymentDetailsForm = ({ t }) => {
                 ? <CreditPaymentForm /> :
                 selectedPayment.leasingPayment
                     ? <LeasingPaymentForm />
-                    : <Typography variant="h6">Noch keine Zahlungsdetails.</Typography>
+                    : <Typography variant="h6" style={{ fontSize: 14, marginLeft: 10 }}>{t('NoPaymentDetailsYet')}</Typography>
 
     )
 }

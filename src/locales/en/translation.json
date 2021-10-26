@@ -186,5 +186,6 @@
     "UserAdminEmailSentCarSelling": "E-mail sent to Admin!",
     "AdminHasBeenNotifiedAboutCarSelling": "Admin has been notified!",
     "DamagedCarDescription": "Please tell us more...",
-    "NoVehicleDocumentsYet": "No documents yet..."
+    "NoVehicleDocumentsYet": "Documents",
+    "NoPaymentDetailsYet": "No payment details yet"
 }

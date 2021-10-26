@@ -2,16 +2,16 @@ class DocumentCategoryProvider {
     constructor() {
         this.FILE_CATEGORIES = [
             {
-                categoryType: 'DocumentCategoryNameVertrag',
-                noDocumentsInCategory: 'DocumentCategoryKeinVertrag',
-                icon: '',
-                categoryId: "DOCUMENT_TYPE_VERTRAG"
-            },
-            {
                 categoryType: 'DocumentCategoryNameFahrzeugschein',
                 noDocumentsInCategory: 'DocumentCategoryKeinFahrzeugschein',
                 icon: '',
                 categoryId: "DOCUMENT_TYPE_FAHRZEUGSCHEIN"
+            },
+            {
+                categoryType: 'DocumentCategoryNameVertrag',
+                noDocumentsInCategory: 'DocumentCategoryKeinVertrag',
+                icon: '',
+                categoryId: "DOCUMENT_TYPE_VERTRAG"
             },
             {
                 categoryType: 'DocumentCategoryNameSchaeden',

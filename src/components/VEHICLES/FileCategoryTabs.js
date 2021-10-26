@@ -96,7 +96,7 @@ function FileCategoryTabs({ files, setOnHandleDeleteOpen, t }) {
                                 image={filteredFile}
                                 setOnHandleDeleteOpen={setOnHandleDeleteOpen}
                             />
-                        }) : <Typography variant="h6" >{t(fileCategory.noDocumentsInCategory)}</Typography>}
+                        }) : <Typography variant="h6" style={{ fontSize: 14, marginLeft: 10, marginTop: 10 }} >{t(fileCategory.noDocumentsInCategory)}</Typography>}
                 </TabPanel>
             })}
         </div>
