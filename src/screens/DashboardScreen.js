@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         // margin: '0px 14px 10px 14px',
         // flexGrow: 1,
         [theme.breakpoints.up('md')]: {
-            width: 415,
+            width: 300,
             marginBottom: 0,
             marginRight: 20
         },
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     },
     tuvBoxBtnsFlex: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center'
     },
     finansesBoxBtnsFlex: {
@@ -139,6 +139,8 @@ const DashboardScreen = ({ t }) => {
     const vehiclesWithAddedContract = vehicles.filter(v => v.contractExpiresOn)
     const vehiclesWithCreditsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
     const vehiclesWithLeasingsContractExpiringInTwoMonths = vehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
+    // MIGRATE TO BACKEND
+    const vehiclesWithNTIExpired = vehicles.filter(vehicle => new Date(vehicle.nextTechnicalInspection) < new Date())
 
     React.useEffect(() => {
         let privacyPageTimeout
@@ -160,8 +162,9 @@ const DashboardScreen = ({ t }) => {
     }, [getAllVehicles])
 
     // const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
-    const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
-    const TUVExpiresInFourteenDays = vehicles.filter(v => v.TUVExpiresInFourteenDays)
+    // FIX LATER// NOT OKAY// BECAUSE OF UPDATING VEHICLE IT PERSISTS // LATER IT IS WRONG
+    // const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
+    const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date && new Date(v.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
     const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
 
     const handleNavigateFinansesVehicles = () => {
@@ -187,12 +190,12 @@ const DashboardScreen = ({ t }) => {
         dashboardGeneratedTitle('TÜV überfällig')
     }
 
-    const handleNavigateTuvFourteenVehicles = () => {
-        setVehicles(TUVExpiresInFourteenDays)
+    const handleNavigateNtiExpiredVehicles = () => {
+        setVehicles(vehiclesWithNTIExpired)
         setSelectedIndex(2)
 
         history.push('/cars')
-        dashboardGeneratedTitle('TÜV läuft in 14 Tagen ab')
+        dashboardGeneratedTitle('SERVICE (NTI) überfällig')
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
@@ -211,6 +214,8 @@ const DashboardScreen = ({ t }) => {
     const handleAllVehiclesNavigate = () => {
         history.push('/cars')
         setSelectedIndex(2)
+
+        dashboardGeneratedTitle('Alle Fahrzeuge')
     }
 
     return (
@@ -281,17 +286,30 @@ const DashboardScreen = ({ t }) => {
                             </Box>
                             <Box className={classes.dashboardContentFlexTuv}>
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {TUVExpiresInFourteenDays.length}
-                                </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleNavigateTuvFourteenVehicles}>
-                                    {t('Dashboard.tuvBtn14')}
-                                </Button>
-                            </Box>
-                            <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {TUVExpired.length}
                                 </Typography>
                                 <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
+                                    {t('Dashboard.tuvBtnExpired')}
+                                </Button>
+                            </Box>
+                        </Box>
+                    </CardContent>
+                </Card>
+                <Card className={classes.dashboardBoxThree} variant="outlined">
+                    <CardContent>
+                        <Box className={classes.boxTitleFlex}>
+                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                {t('Dashboard.ntiBox')}
+                            </Typography>
+                            <BuildIcon style={distortedIconPositioning} color="secondary" />
+                        </Box>
+
+                        <Box className={classes.tuvBoxBtnsFlex}>
+                            <Box className={classes.dashboardContentFlexTuv}>
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
+                                    {vehiclesWithNTIExpired.length}
+                                </Typography>
+                                <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateNtiExpiredVehicles}>
                                     {t('Dashboard.tuvBtnExpired')}
                                 </Button>
                             </Box>

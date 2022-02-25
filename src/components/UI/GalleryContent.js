@@ -11,6 +11,7 @@ import DeleteVehicleFiles from './../VEHICLES/DeleteVehicleFiles'
 import { withNamespaces } from 'react-i18next';
 import PdfIcon from './../../assets/images/pdf-icon.svg'
 import Chip from '@material-ui/core/Chip';
+import { manipulateCloudinaryImage } from '../../utils/manipulateCloudinaryImage'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,13 +56,14 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
     const [open, setOpen] = React.useState(false)
 
     const formatedTitle = `${new Date(image.createdAt).toLocaleDateString()} ${new Date(image.createdAt).toLocaleTimeString()}`
+    const optimizedImage = manipulateCloudinaryImage(image.url, ['w_1700'])
 
     const imgBox = {
         borderRadius: 3,
         overflow: 'hidden',
         height: '100vh',
         width: '80vw',
-        background: `url(${`${image.url}`})`,
+        background: `url(${`${optimizedImage}`})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'contain'
@@ -90,7 +92,7 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                     {image.format === 'jpg' || image.format === 'png' ?
                         <CardMedia
                             className={classes.media}
-                            image={image.url}
+                            image={optimizedImage}
                             title="image"
                             style={{ backgroundSize: 'cover' }}
                         /> : null}

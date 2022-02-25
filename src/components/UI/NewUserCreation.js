@@ -19,6 +19,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { generateId } from './../../utils/helpers'
 import { withNamespaces } from 'react-i18next';
 import { genders } from './../../utils/helpers'
+import NumberFormat from 'react-number-format'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -57,6 +58,8 @@ function NewCustomer({ handleAlertOpening, t }) {
     customerPartner: '',
     customerPartnerEmail: ''
   })
+
+  console.log(fields)
 
   const { users, setUsers } = useData()
 
@@ -225,7 +228,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               type="email"
               fullWidth
             />
-            <TextField
+            {/* <TextField
               name="phoneNumber"
               required
               margin="dense"
@@ -234,6 +237,18 @@ function NewCustomer({ handleAlertOpening, t }) {
               onChange={handleChange}
               type="text"
               fullWidth
+            /> */}
+            <NumberFormat
+              name="phoneNumber"
+              onChange={handleChange}
+              format="+49 (###) ######"
+              mask="_"
+              allowEmptyFormatting
+              customInput={TextField}
+              fullWidth
+              label={`${t('PhoneNumberInputLabel')}`}
+              required
+              style={{ marginTop: 16 }}
             />
             <TextField
               name="smartphoneNumber"

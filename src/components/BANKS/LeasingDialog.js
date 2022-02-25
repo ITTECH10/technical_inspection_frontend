@@ -46,9 +46,10 @@ function LeasingDialog({ t }) {
         monthlyLeasingPayment: '',
         leasingLastsFor: '',
         remainingPayment: '',
-        allowedYearlyKilometers: '',
+        moreDetails: '',
         costsForMoreKilometers: '',
         costsForLessKilometers: '',
+        kilometersDrivenWhenPurchased: ''
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
@@ -64,9 +65,10 @@ function LeasingDialog({ t }) {
             leasingLastsFor: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.leasingLastsFor : '',
             closingRate: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.closingRate : '',
             remainingPayment: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.remainingPayment : '',
-            allowedYearlyKilometers: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.allowedYearlyKilometers : '',
+            moreDetails: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.moreDetails : '',
             costsForMoreKilometers: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.costsForMoreKilometers : '',
             costsForLessKilometers: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.costsForLessKilometers : '',
+            kilometersDrivenWhenPurchased: selectedPayment.leasingPayment ? selectedPayment.leasingPayment.kilometersDrivenWhenPurchased : ''
         })
     }, [selectedPayment, open])
 
@@ -244,12 +246,12 @@ function LeasingDialog({ t }) {
                             Kilometerleasing
                         </Typography> */}
                         <TextField
-                            name="allowedYearlyKilometers"
+                            name="moreDetails"
                             margin="dense"
-                            id="allowedYearlyKilometers-leasing"
-                            label={t('AllowedYearlyKilometersInputLabel')}
+                            id="moreDetails-leasing"
+                            label={t('MoreDetailsLeasingCreation')}
                             type="text"
-                            value={fields.allowedYearlyKilometers}
+                            value={fields.moreDetails}
                             onChange={handleChange}
                             fullWidth
                         />
@@ -271,6 +273,17 @@ function LeasingDialog({ t }) {
                             value={fields.costsForLessKilometers}
                             type="text"
                             onChange={handleChange}
+                            fullWidth
+                        />
+                        <TextField
+                            name="kilometersDrivenWhenPurchased"
+                            margin="dense"
+                            id="kilometersDrivenWhenPurchased"
+                            value={fields.kilometersDrivenWhenPurchased}
+                            onChange={handleChange}
+                            required
+                            label={t('Payment.cash.kilometersDrivenWhenPurchased')}
+                            type="number"
                             fullWidth
                             style={{ marginBottom: 15 }}
                         />

@@ -150,11 +150,11 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             autoFocus
                             margin="dense"
                             id="update-vehicle-chassisNumber"
-                            label="Fahrgestellnummer"
+                            label={t('ChassisNumber')}
                             onChange={handleChange}
                             fullWidth
                             required
-                            value={selectedCar.chassisNumber && fields.chassisNumber}
+                            value={fields.chassisNumber}
                         />
                         <TextField
                             name="mark"
@@ -184,7 +184,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             required
-                            value={selectedCar.HSN && fields.HSN}
+                            value={fields.HSN}
                         />
                         <TextField
                             name="TSN"
@@ -194,7 +194,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             required
-                            value={selectedCar.TSN && fields.TSN}
+                            value={fields.TSN}
                         />
                         <TextField
                             name="registrationNumber"
@@ -214,7 +214,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             required
-                            value={selectedCar.kilometersDriven && fields.kilometersDriven}
+                            value={fields.kilometersDriven}
                         />
                         <TextField
                             name="firstVehicleRegistration"
@@ -224,7 +224,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.firstVehicleRegistration && fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -237,7 +237,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            // value={selectedCar.lastUUV && fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -250,7 +250,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            // value={selectedCar.nextUUV && fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -263,7 +263,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.firstVehicleRegistrationOnOwner && fields.firstVehicleRegistrationOnOwner ? new Date(fields.firstVehicleRegistrationOnOwner).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.firstVehicleRegistrationOnOwner ? new Date(fields.firstVehicleRegistrationOnOwner).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -276,7 +276,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.lastTechnicalInspection && fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -289,7 +289,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.nextTechnicalInspection && fields.nextTechnicalInspection ? new Date(fields.nextTechnicalInspection).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.nextTechnicalInspection ? new Date(fields.nextTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -301,7 +301,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            value={selectedCar.TUV && fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             required
                             InputLabelProps={{
                                 shrink: true,
@@ -315,7 +315,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             className={classes.textField}
                             required
-                            value={selectedCar.AU && fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -327,7 +327,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('MonthlyInsurancePaymentInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            value={selectedCar.monthlyInsurancePayment && fields.monthlyInsurancePayment}
+                            value={fields.monthlyInsurancePayment}
                             required
                         />
                         <TextField
@@ -337,7 +337,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('AllowedYearlyKilometersInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            value={selectedCar.allowedYearlyKilometers && fields.allowedYearlyKilometers}
+                            value={fields.allowedYearlyKilometers}
                             required
                         />
                         <TextField
@@ -347,7 +347,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('YearlyTaxInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            value={selectedCar.yearlyTax && fields.yearlyTax}
+                            value={fields.yearlyTax}
                             required
                         />
                         <DialogActions>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Paper, Box, TextField, Button } from '@material-ui/core'
+import { Grid, Paper, Box, TextField, Button, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import AppLogo from './../assets/images/logo.svg'
 import axios from 'axios'
@@ -100,14 +100,11 @@ const Login = ({ history, t }) => {
             }
         })
             .catch(err => {
-                setErrors({
-                    message: 'Something Went wrong!'
-                })
-                // setErrors({
-                //     message: err.response.data.message ? err.response.data.message : {}
-                // })
-                setAppLoading(false)
                 // console.log(err.response)
+                setAppLoading(false)
+                setErrors({
+                    message: err.response ? err.response.data.message : 'Etwas ist schief gelaufen...'
+                })
             })
     }
 
@@ -126,12 +123,35 @@ const Login = ({ history, t }) => {
                             </Box>
                             <Box className={classes.inputContainer}>
                                 <form className={classes.inputForm} onSubmit={handleSubmit} id="form__login">
-                                    <TextField name="email" className={classes.input} id="mail-standard" onChange={handleChange} label="E-Mail" type="email" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
-                                    <TextField name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" error={errors.message && errors.message.length > 0} helperText={errors.message && errors.message} />
+                                    <TextField
+                                        name="email"
+                                        className={classes.input}
+                                        id="mail-standard"
+                                        onChange={handleChange}
+                                        label="E-Mail"
+                                        type="email"
+                                        error={errors.message && errors.message.length > 0}
+                                        helperText={errors.message && errors.message}
+                                    />
+                                    <TextField
+                                        name="password"
+                                        className={classes.input}
+                                        id="pwd-standard"
+                                        onChange={handleChange}
+                                        label="Password"
+                                        type="password"
+                                        error={errors.message && errors.message.length > 0}
+                                        helperText={errors.message && errors.message}
+                                    />
 
                                     <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">{t('LoginScreenLoginButton')}</Button>
                                 </form>
                                 <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
+                                <Box sx={{ display: 'flex', justifyContent: 'center', mt: .6 }}>
+                                    <Link href="https://www.se-carmanagement.de" target="_blank">
+                                        Zurück zur Hauptseite
+                                    </Link>
+                                </Box>
                             </Box>
                         </Box>
                     </Paper>

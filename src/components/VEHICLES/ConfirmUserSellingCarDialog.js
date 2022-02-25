@@ -87,7 +87,7 @@ function ConfirmUserSellingCarDialog({ t }) {
                             <Button onClick={declineCarSellingHandler} color="primary" variant="contained">
                                 {cancelBtnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('UserAbortSellingCarBtn')}
                             </Button>
-                            <Button disabled={selectedCar.adminNotifiedAboutCarSelling} type="submit" type="submit" color="secondary" variant="contained">
+                            <Button disabled={selectedCar.adminNotifiedAboutCarSelling} type="submit" color="secondary" variant="contained">
                                 {submitBtnLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>

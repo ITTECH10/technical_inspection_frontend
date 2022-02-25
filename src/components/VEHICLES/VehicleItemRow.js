@@ -19,6 +19,8 @@ const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     const LeasingDate = new Date(vehicle.contractExpirationDate).toLocaleDateString()
     const CreditDate = new Date(vehicle.contractExpirationDate).toLocaleDateString()
 
+    const NtiServiceDate = new Date(vehicle.nextTechnicalInspection).toLocaleDateString('de-DE')
+
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()}>
             <TableCell component="th" scope="row">
@@ -33,7 +35,8 @@ const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
                 dashboardAdaptiveTitle !== '' &&
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' ? CreditDate :
-                        dashboardAdaptiveTitle === 'Leasing' ? LeasingDate : TuvDate}
+                        dashboardAdaptiveTitle === 'Leasing' ? LeasingDate
+                            : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NtiServiceDate : TuvDate}
                 </TableCell>
             }
         </TableRow>

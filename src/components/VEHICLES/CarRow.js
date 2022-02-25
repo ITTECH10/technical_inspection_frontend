@@ -47,16 +47,34 @@ const CarRow = ({ car, t }) => {
             <TableCell>{car.registrationNumber}</TableCell>
             {user.role === 'admin' &&
                 <TableCell>
-                    {car.TUVExpiresInTwoMonths &&
+                    {/* {car.TUVExpiresInTwoMonths &&
                         <Chip
-                            label={`TUV in ${TUVDiff} ${t('DaysPlural')}`}
+                            label={`TÜV in ${TUVDiff} ${t('DaysPlural')}`}
+                            color="primary"
+                            size="small"
+                            variant="default"
+                            style={{ cursor: 'pointer', marginRight: 5 }}
+                        />
+                    } */}
+                    {new Date(TUVDate) > new Date() &&
+                        <Chip
+                            label={`TÜV in ${TUVDiff} ${t('DaysPlural')}`}
                             color="primary"
                             size="small"
                             variant="default"
                             style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     }
-                    {car.AUExpiresInTwoMonths &&
+                    {/* {car.AUExpiresInTwoMonths &&
+                        <Chip
+                            label={`HU in ${HUDiff} ${t('DaysPlural')}`}
+                            color="primary"
+                            size="small"
+                            variant="default"
+                            style={{ cursor: 'pointer', marginRight: 5 }}
+                        />
+                    } */}
+                    {new Date(AUDate) > new Date() &&
                         <Chip
                             label={`HU in ${HUDiff} ${t('DaysPlural')}`}
                             color="primary"
@@ -67,7 +85,7 @@ const CarRow = ({ car, t }) => {
                     }
                     {car.technicalInspectionInNextTwoMonths &&
                         <Chip
-                            label={`NTI in ${NTIDiff} ${t('DaysPlural')}`}
+                            label={`Service in ${NTIDiff} ${t('DaysPlural')}`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -76,11 +94,11 @@ const CarRow = ({ car, t }) => {
                     }
                     {carTuvExpired &&
                         <Chip
-                            label="TUV Abgelaufen"
+                            label="TÜV Abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     }
                     {carAuExpired &&
@@ -89,12 +107,12 @@ const CarRow = ({ car, t }) => {
                             color="primary"
                             size="small"
                             variant="default"
-                            style={{ cursor: 'pointer' }}
+                            style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     }
                     {NTIExpired &&
                         <Chip
-                            label="NTI Abgelaufen"
+                            label="Service Abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"

@@ -79,7 +79,7 @@ function EditUserDetails({ userId, t }) {
             corespondencePartner: selectedUser.corespondencePartner,
             corespondencePartnerEmail: selectedUser.corespondencePartnerEmail,
         })
-    }, [selectedUser])
+    }, [selectedUser, open])
 
     const handleChange = (e) => {
         setFields({
@@ -173,7 +173,6 @@ function EditUserDetails({ userId, t }) {
                             <TextField
                                 autoFocus
                                 name="corespondencePartner"
-                                required
                                 margin="dense"
                                 value={fields.corespondencePartner}
                                 id="corespondencePartner"
@@ -186,7 +185,6 @@ function EditUserDetails({ userId, t }) {
                             <TextField
                                 name="corespondencePartnerEmail"
                                 required
-                                margin="dense"
                                 value={fields.corespondencePartnerEmail}
                                 id="corespondencePartnerEmail"
                                 label={t('ContactPartnerEmail')}

@@ -3,6 +3,7 @@ import { Paper, Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
+import NumberFormat from 'react-number-format'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -48,7 +49,29 @@ const PaymentDetailsForm = ({ t }) => {
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('Payment.cash.sum')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.cashPayment.cashSum} disabled fullWidth />
+                        <NumberFormat
+                            value={selectedPayment.cashPayment.cashSum && selectedPayment.cashPayment.cashSum}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            style={{ marginTop: '1rem' }}
+                            fullWidth
+                            disabled
+                            prefix="€"
+                        />
+                    </Box>
+                    <Box>
+                        <Typography className={classes.inputTitle}>{t('Payment.cash.kilometersDrivenWhenPurchased')}</Typography>
+                        {/* <TextField className={classes.input} label={selectedPayment.cashPayment.kilometersDrivenWhenPurchased} disabled fullWidth /> */}
+                        <NumberFormat
+                            value={selectedPayment.cashPayment.kilometersDrivenWhenPurchased && selectedPayment.cashPayment.kilometersDrivenWhenPurchased}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            style={{ marginTop: '1rem' }}
+                            fullWidth
+                            disabled
+                        />
                     </Box>
                 </>
             )}
@@ -73,11 +96,29 @@ const PaymentDetailsForm = ({ t }) => {
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('MonthlyCreditPaymentInputLabel')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.creditPayment.monthlyCreditPayment} disabled fullWidth />
+                        <NumberFormat
+                            value={selectedPayment.creditPayment.monthlyCreditPayment && selectedPayment.creditPayment.monthlyCreditPayment}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            style={{ marginTop: '1rem' }}
+                            fullWidth
+                            disabled
+                            prefix="€"
+                        />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('CreditPaymentInterestInputLabel')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.creditPayment.interestRate} disabled fullWidth />
+                        <NumberFormat
+                            value={selectedPayment.creditPayment.interestRate && selectedPayment.creditPayment.interestRate}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            style={{ marginTop: '1rem' }}
+                            fullWidth
+                            disabled
+                            prefix="€"
+                        />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('CreditLastsForInputLabel')}</Typography>
@@ -86,8 +127,29 @@ const PaymentDetailsForm = ({ t }) => {
                     {selectedPayment.creditPayment.closingRate &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('PaymentFinansesClosingRate')}</Typography>
-                            <TextField className={classes.input} label={selectedPayment.creditPayment.closingRate} disabled fullWidth />
+                            <NumberFormat
+                                value={selectedPayment.creditPayment.closingRate && selectedPayment.creditPayment.closingRate}
+                                thousandSeparator={true}
+                                customInput={TextField}
+                                className={classes.input}
+                                style={{ marginTop: '1rem' }}
+                                fullWidth
+                                disabled
+                                prefix="€"
+                            />
                         </Box>}
+                    <Box>
+                        <Typography className={classes.inputTitle}>{t('Payment.cash.kilometersDrivenWhenPurchased')}</Typography>
+                        <NumberFormat
+                            value={selectedPayment.creditPayment.kilometersDrivenWhenPurchased && selectedPayment.creditPayment.kilometersDrivenWhenPurchased}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            style={{ marginTop: '1rem' }}
+                            fullWidth
+                            disabled
+                        />
+                    </Box>
                 </>
             )}
         </Paper>
@@ -128,10 +190,10 @@ const PaymentDetailsForm = ({ t }) => {
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.remainingPayment} disabled fullWidth />
                         </Box>
                     }
-                    {selectedPayment.leasingPayment.allowedYearlyKilometers &&
+                    {selectedPayment.leasingPayment.moreDetails &&
                         <Box>
-                            <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel')}</Typography>
-                            <TextField className={classes.input} label={selectedPayment.leasingPayment.allowedYearlyKilometers} disabled fullWidth />
+                            <Typography className={classes.inputTitle}>{t('MoreDetailsLeasingCreation')}</Typography>
+                            <TextField className={classes.input} label={selectedPayment.leasingPayment.moreDetails} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForMoreKilometers &&
@@ -146,6 +208,10 @@ const PaymentDetailsForm = ({ t }) => {
                             <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForLessKilometers} disabled fullWidth />
                         </Box>
                     }
+                    <Box>
+                        <Typography className={classes.inputTitle}>{t('Payment.cash.kilometersDrivenWhenPurchased')}</Typography>
+                        <TextField className={classes.input} label={selectedPayment.leasingPayment.kilometersDrivenWhenPurchased} disabled fullWidth />
+                    </Box>
                 </>
             )}
         </Paper>

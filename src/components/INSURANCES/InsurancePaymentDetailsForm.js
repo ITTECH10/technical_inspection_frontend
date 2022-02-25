@@ -3,6 +3,7 @@ import { Paper, Box, Typography, TextField } from '@material-ui/core'
 import { useData } from '../../contexts/DataContext'
 import { makeStyles } from '@material-ui/core/styles'
 import { withNamespaces } from 'react-i18next'
+import NumberFormat from 'react-number-format'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -36,11 +37,27 @@ const InsurancePaymentDetailsForm = ({ t }) => {
                     {selectedCarInsurance.fullKasko !== "0" &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('FullKasko')}</Typography>
-                            <TextField className={classes.input} label={selectedCarInsurance.fullKasko} disabled fullWidth />
+                            <NumberFormat
+                                customInput={TextField}
+                                value={selectedCarInsurance.fullKasko}
+                                prefix="€"
+                                className={classes.input}
+                                disabled
+                                style={{ marginTop: '1rem' }}
+                                fullWidth
+                            />
                         </Box>}
                     <Box>
                         <Typography className={classes.inputTitle}>{t('PartKasko')}</Typography>
-                        <TextField className={classes.input} label={selectedCarInsurance.partKasko} disabled fullWidth />
+                        <NumberFormat
+                            customInput={TextField}
+                            value={selectedCarInsurance.partKasko}
+                            prefix="€"
+                            className={classes.input}
+                            disabled
+                            style={{ marginTop: '1rem' }}
+                            fullWidth
+                        />
                     </Box>
                 </>
             )}

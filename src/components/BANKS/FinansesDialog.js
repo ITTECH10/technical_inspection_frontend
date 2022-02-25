@@ -43,7 +43,8 @@ function FinansesDialog({ t }) {
         monthlyCreditPayment: '',
         interestRate: '',
         creditLastsFor: '',
-        closingRate: ''
+        closingRate: '',
+        kilometersDrivenWhenPurchased: ''
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
@@ -57,7 +58,8 @@ function FinansesDialog({ t }) {
             monthlyCreditPayment: selectedPayment.creditPayment ? selectedPayment.creditPayment.monthlyCreditPayment : '',
             interestRate: selectedPayment.creditPayment ? selectedPayment.creditPayment.interestRate : '',
             creditLastsFor: selectedPayment.creditPayment ? selectedPayment.creditPayment.creditLastsFor : '',
-            closingRate: selectedPayment.creditPayment ? selectedPayment.creditPayment.closingRate : ''
+            closingRate: selectedPayment.creditPayment ? selectedPayment.creditPayment.closingRate : '',
+            kilometersDrivenWhenPurchased: selectedPayment.creditPayment ? selectedPayment.creditPayment.kilometersDrivenWhenPurchased : ''
         })
     }, [selectedPayment, open])
 
@@ -216,6 +218,17 @@ function FinansesDialog({ t }) {
                             type="text"
                             fullWidth
                             value={fields.closingRate}
+                        />
+                        <TextField
+                            name="kilometersDrivenWhenPurchased"
+                            margin="dense"
+                            id="kilometersDrivenWhenPurchased"
+                            value={fields.kilometersDrivenWhenPurchased}
+                            onChange={handleChange}
+                            required
+                            label={t('Payment.cash.kilometersDrivenWhenPurchased')}
+                            type="number"
+                            fullWidth
                             style={{ marginBottom: 15 }}
                         />
                         <Button style={{ marginRight: 10 }} variant="contained" onClick={handleClose} color="primary">

@@ -40,7 +40,8 @@ function BarDialog({ t }) {
     const fieldsInit = {
         payedAt: '',
         cashSum: '',
-        boughtFrom: ''
+        boughtFrom: '',
+        kilometersDrivenWhenPurchased: ''
     }
 
     const [fields, setFields] = React.useState(fieldsInit)
@@ -50,7 +51,8 @@ function BarDialog({ t }) {
         setFields({
             payedAt: selectedPayment.cashPayment ? selectedPayment.cashPayment.payedAt : '',
             cashSum: selectedPayment.cashPayment ? selectedPayment.cashPayment.cashSum : '',
-            boughtFrom: selectedPayment.cashPayment ? selectedPayment.cashPayment.boughtFrom : ''
+            boughtFrom: selectedPayment.cashPayment ? selectedPayment.cashPayment.boughtFrom : '',
+            kilometersDrivenWhenPurchased: selectedPayment.cashPayment ? selectedPayment.cashPayment.kilometersDrivenWhenPurchased : ''
         })
     }, [selectedPayment, open])
 
@@ -150,6 +152,18 @@ function BarDialog({ t }) {
                             required
                             label={t('Payment.cash.sum')}
                             type="text"
+                            fullWidth
+                            style={{ marginBottom: 15 }}
+                        />
+                        <TextField
+                            name="kilometersDrivenWhenPurchased"
+                            margin="dense"
+                            id="kilometersDrivenWhenPurchased"
+                            value={fields.kilometersDrivenWhenPurchased}
+                            onChange={handleChange}
+                            required
+                            label={t('Payment.cash.kilometersDrivenWhenPurchased')}
+                            type="number"
                             fullWidth
                             style={{ marginBottom: 15 }}
                         />

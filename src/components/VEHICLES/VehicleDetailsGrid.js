@@ -6,6 +6,7 @@ import { withNamespaces } from 'react-i18next'
 import DeleteCars from './DeleteCars'
 import UpdateVehicleInformation from './UpdateVehicleInformation'
 import ConfirmUserSellingCarDialog from './ConfirmUserSellingCarDialog'
+import NumberFormat from 'react-number-format'
 
 const useStyles = makeStyles(theme => ({
     inputTitle: {
@@ -124,20 +125,38 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                     <TextField className={classes.input} label={TSN ? TSN : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel')}</Typography>
-                    <TextField className={classes.input} label={allowedYearlyKilometers ? allowedYearlyKilometers : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel') + ' ' + '(km)'}</Typography>
+                    <NumberFormat
+                        value={allowedYearlyKilometers && allowedYearlyKilometers}
+                        thousandSeparator={true}
+                        customInput={TextField}
+                        className={classes.input}
+                        style={{ marginTop: '1rem' }}
+                        disabled
+                    />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('KilometersDrivenInputLabel')}</Typography>
-                    <TextField className={classes.input} label={kilometersDriven ? kilometersDriven : t('VehicleDetailsDataNotSetYet')} disabled />
-                </Box>
-                <Box>
-                    <Typography className={classes.inputTitle}>{t('MonthlyInsurancePaymentInputLabel')}</Typography>
-                    <TextField className={classes.input} label={monthlyInsurancePayment ? monthlyInsurancePayment : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <NumberFormat
+                        value={kilometersDriven && kilometersDriven}
+                        thousandSeparator={true}
+                        customInput={TextField}
+                        className={classes.input}
+                        style={{ marginTop: '1rem' }}
+                        disabled
+                    />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('YearlyTaxInputLabel')}</Typography>
-                    <TextField className={classes.input} label={yearlyTax ? yearlyTax : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <NumberFormat
+                        value={yearlyTax && yearlyTax}
+                        thousandSeparator={true}
+                        customInput={TextField}
+                        className={classes.input}
+                        style={{ marginTop: '1rem' }}
+                        disabled
+                        prefix="€"
+                    />
                 </Box>
             </Paper>
         </Grid>
