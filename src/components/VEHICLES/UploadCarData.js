@@ -2,11 +2,24 @@ import React, { useState } from 'react'
 import FloatingButton from '../UI/FloatingButton'
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import { makeStyles } from '@material-ui/core/styles'
-import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, CircularProgress } from '@material-ui/core';
+import {
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    TextField,
+    DialogActions,
+    Button,
+    CircularProgress,
+    Box, FormControlLabel, Switch, Collapse, Paper
+} from '@material-ui/core';
 import Alerts from './../UI/Alerts'
 import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
 import { withNamespaces } from 'react-i18next';
+import Link from "@material-ui/core/Link";
+import {Image} from "@material-ui/icons";
+import dummyRegistrationImage from './../../assets/images/Fahrzeugschein_big.jpg'
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -18,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
 
 const UploadCarData = ({ t }) => {
     const [open, setOpen] = useState(false)
+    const [showDummyVehicleRegistration, setShowDummyVehicleRegistration] = React.useState(false);
+
+
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const { selectedUser, myVehicles, setMyVehicles, setCustomersVehicles, customersVehicles, user, setVehicles, vehicles } = useData()
@@ -149,6 +165,20 @@ const UploadCarData = ({ t }) => {
         setOpen(false);
     };
 
+    const handleShowDummyVehicleRegistration = () => {
+        setShowDummyVehicleRegistration((prev) => (!prev))
+    }
+
+    const dummyVehicleRegistration = (
+        <Box
+            component="img"
+            sx={{
+                width: '100%',
+            }}
+            src={dummyRegistrationImage}
+        />
+    );
+
     return (
         userId ?
             <div>
@@ -165,7 +195,20 @@ const UploadCarData = ({ t }) => {
                         {user.role === 'admin' ?
                             <form onSubmit={handleSubmit} encType="multipart/form-data">
                                 <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                                <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
+                                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
+                                </Box>
+                                <Box sx={{marginTop: 10}}>
+                                    <FormControlLabel
+                                        control={<Switch checked={showDummyVehicleRegistration} onChange={handleShowDummyVehicleRegistration} />}
+                                        label={t("FahrzeugscheinErklaerungsLink")}
+                                    />
+                                    <Box>
+                                        <div>
+                                            <Collapse in={showDummyVehicleRegistration}>{dummyVehicleRegistration}</Collapse>
+                                        </div>
+                                    </Box>
+                                </Box>
                                 <TextField
                                     name="chassisNumber"
                                     autoFocus

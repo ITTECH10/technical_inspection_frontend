@@ -193,5 +193,6 @@
     "Date": "Fällig am",
     "DateExpiring": "Fällig am",
     "FinanzierungVehicles": "Alle Fahrzeuge (Finanzierung)",
-    "LeasingVehicles": "Alle Fahrzeuge (Leasing)"
+    "LeasingVehicles": "Alle Fahrzeuge (Leasing)",
+    "FahrzeugscheinErklaerungsLink": "Beispiel eines Fahrzeugscheins einblenden"
 }

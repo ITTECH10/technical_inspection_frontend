@@ -194,5 +194,6 @@
     "Date": "Expires at",
     "DateExpiring": "Expiration date",
     "FinanzierungVehicles": "All Vehicles (Finanses)",
-    "LeasingVehicles": "All Vehicles (Leasing)"
+    "LeasingVehicles": "All Vehicles (Leasing)",
+    "FahrzeugscheinErklaerungsLink": "Show an example of a licence registration"
 }
