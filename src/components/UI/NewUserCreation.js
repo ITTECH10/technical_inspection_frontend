@@ -226,7 +226,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               type="email"
               fullWidth
             />
-            {/* <TextField
+            {<TextField
               name="phoneNumber"
               required
               margin="dense"
@@ -235,19 +235,19 @@ function NewCustomer({ handleAlertOpening, t }) {
               onChange={handleChange}
               type="text"
               fullWidth
-            /> */}
-            <NumberFormat
-              name="phoneNumber"
-              onChange={handleChange}
-              format="+49 (###) ######"
-              mask="_"
-              allowEmptyFormatting
-              customInput={TextField}
-              fullWidth
-              label={`${t('PhoneNumberInputLabel')}`}
-              required
-              style={{ marginTop: 16 }}
-            />
+            />}
+            {/*<NumberFormat*/}
+            {/*  name="phoneNumber"*/}
+            {/*  onChange={handleChange}*/}
+            {/*  format="+49 (###) ######"*/}
+            {/*  mask="_"*/}
+            {/*  allowEmptyFormatting*/}
+            {/*  customInput={TextField}*/}
+            {/*  fullWidth*/}
+            {/*  label={`${t('PhoneNumberInputLabel')}`}*/}
+            {/*  required*/}
+            {/*  style={{ marginTop: 16 }}*/}
+            {/*/>*/}
             <TextField
               name="smartphoneNumber"
               required

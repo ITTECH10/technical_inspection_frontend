@@ -22,7 +22,7 @@ import DriveEtaIcon from '@material-ui/icons/DriveEta';
 // import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExportUserData from './Users/ExportUserData';
-import Logo from './../../assets/images/logo.svg'
+import Logo from './../../assets/images/logo.png'
 import LanguageMenu from './LanguageMenu'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CloseIcon from '@material-ui/icons/Close';
@@ -129,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
     logoBox: {
         height: 'auto',
         width: '28%',
+        marginLeft: 10,
         [theme.breakpoints.up('sm')]: {
             width: '15%'
         },

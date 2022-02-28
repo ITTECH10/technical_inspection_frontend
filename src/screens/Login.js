@@ -147,10 +147,20 @@ const Login = ({ history, t }) => {
                                     <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">{t('LoginScreenLoginButton')}</Button>
                                 </form>
                                 <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
-                                <Box sx={{ display: 'flex', justifyContent: 'center', mt: .6 }}>
-                                    <Link href="https://www.se-carmanagement.de" target="_blank">
-                                        Zurück zur Hauptseite
-                                    </Link>
+                                <Box sx={{display: 'flex',
+                                    flexDirection: 'column' ,
+                                    justifyContent: 'center',
+                                    textAlign: 'center'}}>
+                                    <Box sx={{
+                                        marginTop: 20,
+                                        mt: .6 }}>
+                                        Haben Sie noch keinen Zugang, dann setzen Sie sich bitte mit uns in Verbindung.
+                                    </Box>
+                                    <Box sx={{marginTop: 20}}>
+                                        <Link href="https://www.se-carmanagement.de" target="_blank">
+                                            Zurück zur Hauptseite
+                                        </Link>
+                                    </Box>
                                 </Box>
                             </Box>
                         </Box>
