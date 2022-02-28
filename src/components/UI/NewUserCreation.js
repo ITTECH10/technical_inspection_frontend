@@ -59,8 +59,6 @@ function NewCustomer({ handleAlertOpening, t }) {
     customerPartnerEmail: ''
   })
 
-  console.log(fields)
-
   const { users, setUsers } = useData()
 
   const handleChange = (e) => {

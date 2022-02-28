@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
     logo: {
         height: '100%',
         width: '100%',
-        filter: 'brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)'
+        // filter: 'brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)'
     }
 }));
 
