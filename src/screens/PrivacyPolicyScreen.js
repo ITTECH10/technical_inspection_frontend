@@ -47,10 +47,6 @@ const PrivacyPolicyScreen = ({ t }) => {
         }
     }, [navigateTimeout])
 
-    // React.useEffect(() => {
-    //     localStorage.setItem('privacyAccepted', privacyAccepted)
-    // }, [privacyAccepted])
-
     const handlePrivacyAcception = () => {
         acceptPrivacyPolicy(user._id)
         setAlertOpen(true)

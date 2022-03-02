@@ -19,7 +19,7 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const [fields, setFields] = useState({
         photo: '',
         fileName: '',
-        fileCategory: 'DOCUMENT_TYPE_VERTRAG'
+        fileCategory: 'DOCUMENT_TYPE_FAHRZEUGSCHEIN'
     })
 
     const submitBtn = document.getElementById('imgSubmitBtn')

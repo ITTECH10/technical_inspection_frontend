@@ -28,6 +28,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const generatedPassword = generateId()
+
 function NewCustomer({ handleAlertOpening, t }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
@@ -52,7 +54,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     postCode: '',
     city: '',
     birthDate: '',
-    password: generateId(),
+    password: generatedPassword,
     confirmPassword: '',
     customerType: 'firmenkunde',
     customerPartner: '',
