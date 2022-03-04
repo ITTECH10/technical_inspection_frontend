@@ -25,7 +25,7 @@ function ReportCarDamageDialog({ t }) {
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
     const [adminNotifiedAlert, setAdminNotifiedAlert] = React.useState(false)
-    const { myVehicles } = useData()
+    const { myVehicles, setGeneralAlertOptions } = useData()
 
     const [fields, setFields] = React.useState({
         damagedVehicle: '',
@@ -61,8 +61,14 @@ function ReportCarDamageDialog({ t }) {
                     setAdminNotifiedAlert(true)
                 }
             }).catch(err => {
-                console.log(err)
+                // console.log(err)
                 setBtnLoading(false)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

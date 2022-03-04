@@ -22,7 +22,7 @@ import Box from '@material-ui/core/Box';
 function InsurancePaymentDialog({ t }) {
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
-    const { user, selectedUser, setSelectedCar, selectedCar, selectedCarInsurance, setSelectedCarInsurance } = useData()
+    const { user, selectedUser, setSelectedCar, selectedCar, selectedCarInsurance, setSelectedCarInsurance, setGeneralAlertOptions } = useData()
     const [insuranceAddedAlert, setInsuranceAddedAlert] = React.useState(false)
     const [insuranceUpdatedAlert, setInsuranceUpdatedAlert] = React.useState(false)
     const [selectedKaskoOption, setSelectedKaskoOption] = React.useState("VK/TK")
@@ -101,7 +101,13 @@ function InsurancePaymentDialog({ t }) {
                 }, 2000)
             }
         }).catch(err => {
-            console.log(err.response)
+            // console.log(err.response)
+            setGeneralAlertOptions({
+                open: true,
+                message: err.response ? err.response.data.message : 'Server-Fehler......',
+                severity: 'error',
+                hideAfter: 5000
+            })
         })
     }
 
@@ -125,7 +131,13 @@ function InsurancePaymentDialog({ t }) {
                 }, 2000)
             }
         }).catch(err => {
-            console.log(err.response)
+            // console.log(err.response)
+            setGeneralAlertOptions({
+                open: true,
+                message: err.response ? err.response.data.message : 'Server-Fehler......',
+                severity: 'error',
+                hideAfter: 5000
+            })
         })
     }
 

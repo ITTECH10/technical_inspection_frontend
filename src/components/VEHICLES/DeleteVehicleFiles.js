@@ -13,7 +13,7 @@ import { withNamespaces } from 'react-i18next';
 function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = React.useState(false)
-    const { carImages, setCarImages } = useData()
+    const { carImages, setCarImages, setGeneralAlertOptions } = useData()
     let deleteTimeout
 
     useEffect(() => {
@@ -50,6 +50,12 @@ function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

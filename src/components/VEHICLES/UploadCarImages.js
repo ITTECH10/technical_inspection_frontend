@@ -11,7 +11,7 @@ import DocumentUploadModal from './DocumentUploadModal';
 
 const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
     const [portalOpen, setPortalOpen] = useState(false)
-    const { carImages, setCarImages, setLoading } = useData()
+    const { carImages, setCarImages, setLoading, setGeneralAlertOptions } = useData()
     const history = useHistory()
 
     const carId = history.location.pathname.split('/')[2]
@@ -56,6 +56,12 @@ const UploadCarImages = ({ t, onHandleAddOpen, setOnHandleAddOpen }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

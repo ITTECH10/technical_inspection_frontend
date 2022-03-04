@@ -25,7 +25,7 @@ const banks = banksInfoProvider.getBankNames()
 
 function FinansesDialog({ t }) {
     const [open, setOpen] = React.useState(false);
-    const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
+    const { setSelectedCar, selectedPayment, setSelectedPayment, setGeneralAlertOptions } = useData()
     const history = useHistory()
 
     let creditPaymentId
@@ -95,6 +95,12 @@ function FinansesDialog({ t }) {
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

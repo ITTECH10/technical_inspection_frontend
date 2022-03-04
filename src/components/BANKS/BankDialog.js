@@ -10,7 +10,7 @@ import axios from 'axios'
 import { withNamespaces } from 'react-i18next';
 
 function BankDialog({ handleAlertOpening, t }) {
-    const { banks, selectedCar, setSelectedCar } = useData()
+    const { banks, selectedCar, setSelectedCar, setGeneralAlertOptions } = useData()
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = useState(false)
 
@@ -42,6 +42,12 @@ function BankDialog({ handleAlertOpening, t }) {
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

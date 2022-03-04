@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useData } from '../contexts/DataContext';
 import EditUserDetails from '../components/UI/Users/EditUserDetails';
 import { withNamespaces } from 'react-i18next';
+import Page from '../components/Page'
 
 const useStyles = makeStyles(theme => ({
     myProfileEdit: {
@@ -118,156 +119,158 @@ const AccountScreen = ({ t }) => {
     const matches = useMediaQuery('(max-width: 600px)')
 
     return (
-        <Grid container className={classes.gridContainer}>
-            <Grid className={classes.gridChildTwo} xs={12} sm={12}>
-                <Box className={classes.myProfileEdit}>
-                    <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
-                        {t('MyProfile')}
-                    </Typography>
-                    <EditUserDetails />
-                </Box>
-                <Divider style={{ marginBottom: 10 }} />
-                <Paper elevation={2} className={classes.gridTwoContent}>
-                    <Box className={classes.imageBtnsContent}>
-                        <Box className={classes.circleContainer}>
-                            <AccountCircleIcon color="primary" className={classes.circleIcon} />
-                        </Box>
-                    </Box>
-                    <Box className={classes.userContent}>
-                        <Typography align="center" variant="h6" style={{ letterSpacing: '.05em' }}>
-                            {`${user.firstName} ${user.lastName}`}
+        <Page title="Konto">
+            <Grid container className={classes.gridContainer}>
+                <Grid className={classes.gridChildTwo} xs={12} sm={12}>
+                    <Box className={classes.myProfileEdit}>
+                        <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
+                            {t('MyProfile')}
                         </Typography>
+                        <EditUserDetails />
+                    </Box>
+                    <Divider style={{ marginBottom: 10 }} />
+                    <Paper elevation={2} className={classes.gridTwoContent}>
+                        <Box className={classes.imageBtnsContent}>
+                            <Box className={classes.circleContainer}>
+                                <AccountCircleIcon color="primary" className={classes.circleIcon} />
+                            </Box>
+                        </Box>
+                        <Box className={classes.userContent}>
+                            <Typography align="center" variant="h6" style={{ letterSpacing: '.05em' }}>
+                                {`${user.firstName} ${user.lastName}`}
+                            </Typography>
 
-                        <Box className={classes.inputsContent}>
-                            <Box className={classes.userNameBoxFlex}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('FirstNameInputLabel')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.firstName}
-                                        style={{ width: '97%' }}
-                                    />
+                            <Box className={classes.inputsContent}>
+                                <Box className={classes.userNameBoxFlex}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('FirstNameInputLabel')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.firstName}
+                                            style={{ width: '97%' }}
+                                        />
+                                    </Box>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('LastNameInputLabel')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.lastName}
+                                            fullWidth
+                                        />
+                                    </Box>
                                 </Box>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('LastNameInputLabel')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.lastName}
-                                        fullWidth
-                                    />
-                                </Box>
-                            </Box>
 
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('GenderNewUser')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.gender === 'Mr' ? t('GenderMale') : t('GenderFemale')}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('GenderNewUser')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.gender === 'Mr' ? t('GenderMale') : t('GenderFemale')}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('BirthDateInputLabel')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={formatedBirthDate}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('BirthDateInputLabel')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={formatedBirthDate}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
 
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('CityInputLabel')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.city}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('CityInputLabel')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.city}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
 
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('StreetInputLabel')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.street}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('StreetInputLabel')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.street}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
 
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {t('PostNumberInputLabel')}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.postCode}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {t('PostNumberInputLabel')}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.postCode}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        E-mail
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.email}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            E-mail
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.email}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {`${t('PhoneNumberInputLabel')}`}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.phoneNumber}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {`${t('PhoneNumberInputLabel')}`}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.phoneNumber}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
-                            <Box className={classes.inputSingleBox}>
-                                <Box className={classes.inputContentVertical}>
-                                    <Typography style={{ fontWeight: '400' }}>
-                                        {`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
-                                    </Typography>
-                                    <TextField
-                                        variant="standard"
-                                        disabled
-                                        value={user.smartphoneNumber}
-                                    />
+                                <Box className={classes.inputSingleBox}>
+                                    <Box className={classes.inputContentVertical}>
+                                        <Typography style={{ fontWeight: '400' }}>
+                                            {`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
+                                        </Typography>
+                                        <TextField
+                                            variant="standard"
+                                            disabled
+                                            value={user.smartphoneNumber}
+                                        />
+                                    </Box>
                                 </Box>
                             </Box>
                         </Box>
-                    </Box>
-                </Paper>
+                    </Paper>
+                </Grid>
             </Grid>
-        </Grid>
+        </Page>
     )
 }
 

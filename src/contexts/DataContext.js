@@ -14,6 +14,12 @@ const DataContextProvider = ({ children }) => {
     const [appLoading, setAppLoading] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [dashboardAdaptiveTitle, setDashboardAdaptiveTitle] = useState('')
+    const [generalAlertOptions, setGeneralAlertOptions] = useState({
+        open: false,
+        message: '',
+        severity: '',
+        hideAfter: 5000
+    })
 
     // USERS
     const [user, setUser] = useState({})
@@ -54,6 +60,12 @@ const DataContextProvider = ({ children }) => {
             }
         }).catch(err => {
             // console.log(err.response)
+            setGeneralAlertOptions({
+                open: true,
+                message: 'Beim Abrufen der Zahlungsdaten ist ein Fehler aufgetreten.',
+                severity: 'error',
+                hideAfter: 5000
+            })
         })
     }, [])
 
@@ -63,7 +75,13 @@ const DataContextProvider = ({ children }) => {
                 setSelectedCarInsurance(res.data.insurance)
             }
         }).catch(err => {
-            console.log(err.response)
+            // console.log(err.response)
+            setGeneralAlertOptions({
+                open: true,
+                message: 'Beim Abrufen der Versicherungsdaten ist ein Fehler aufgetreten.',
+                severity: 'error',
+                hideAfter: 5000
+            })
         })
     }, [])
 
@@ -75,6 +93,12 @@ const DataContextProvider = ({ children }) => {
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -89,6 +113,12 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 // setAppLoading(false)
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Beim Abrufen aller Fahrzeuge ist ein Fehler aufgetreten.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -98,6 +128,12 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Es gab einen Fehler beim Laden von Fahrzeugbildern.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 
@@ -123,6 +159,12 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 // setAppLoading(false)
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Es gab einen Fehler beim Laden von Kunden.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -141,11 +183,17 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 setAppLoading(false)
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Es ist ein Fehler beim Laden Ihrer Kontodaten aufgetreten.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
     const getSelectedUser = useCallback((id) => {
-        axios(`/users/${id}`).then(res => {
+        axios(`/userst/${id}`).then(res => {
             if (res.status === 200) {
                 setSelectedUser(res.data.user)
                 localStorage.setItem('selectedUser', JSON.stringify(res.data.user))
@@ -154,6 +202,12 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 // setLoading(false)
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Es ist ein Fehler beim Laden von Kundendaten aufgetreten.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -166,6 +220,12 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Beim Laden der Fahrzeugdaten ist ein Fehler aufgetreten.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -181,6 +241,12 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 // setAppLoading(false)
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Beim Laden der Daten von Kundenfahrzeugen ist ein Fehler aufgetreten.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -192,6 +258,12 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Es gab einen Fehler beim Laden von Versicherungen.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -203,6 +275,12 @@ const DataContextProvider = ({ children }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: 'Es gab einen Fehler beim Laden von Banken.',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }, [])
 
@@ -258,7 +336,9 @@ const DataContextProvider = ({ children }) => {
         setSelectedIndex,
         dashboardAdaptiveTitle,
         dashboardGeneratedTitle,
-        setDashboardAdaptiveTitle
+        setDashboardAdaptiveTitle,
+        generalAlertOptions,
+        setGeneralAlertOptions
     }
 
     return (

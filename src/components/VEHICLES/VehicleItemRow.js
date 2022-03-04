@@ -4,7 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 
-const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
+const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar, setCarImages } = useData()
 
@@ -15,9 +15,9 @@ const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
         history.push(`/cars/${selectedCar._id}`)
     }
 
-    const TuvDate = new Date(vehicle.TUV).toLocaleDateString()
-    const LeasingDate = new Date(vehicle.contractExpirationDate).toLocaleDateString()
-    const CreditDate = new Date(vehicle.contractExpirationDate).toLocaleDateString()
+    const TuvDate = new Date(vehicle.TUV).toLocaleDateString('de-DE')
+    const LeasingDate = new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE')
+    const CreditDate = new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE')
 
     const NtiServiceDate = new Date(vehicle.nextTechnicalInspection).toLocaleDateString('de-DE')
 
@@ -34,8 +34,8 @@ const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
             {
                 dashboardAdaptiveTitle !== '' &&
                 <TableCell>
-                    {dashboardAdaptiveTitle === 'Finanzierung' ? CreditDate :
-                        dashboardAdaptiveTitle === 'Leasing' ? LeasingDate
+                    {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' ? CreditDate :
+                        dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate
                             : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NtiServiceDate : TuvDate}
                 </TableCell>
             }
@@ -43,4 +43,4 @@ const CarRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     )
 }
 
-export default CarRow
+export default VehicleItemRow

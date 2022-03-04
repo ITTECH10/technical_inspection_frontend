@@ -11,7 +11,7 @@ import { CircularProgress } from '@material-ui/core';
 import { withNamespaces } from 'react-i18next';
 
 const InsuranceList = ({ insurance, t, handleAlertOpening, handleDialogClosing }) => {
-    const { selectedCar, setSelectedCar } = useData()
+    const { selectedCar, setSelectedCar, setGeneralAlertOptions } = useData()
     const [buttonLoading, setButtonLoading] = useState(false)
 
     const { name, _id } = insurance
@@ -34,6 +34,12 @@ const InsuranceList = ({ insurance, t, handleAlertOpening, handleDialogClosing }
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

@@ -5,6 +5,7 @@ import Alerts from '../components/UI/Alerts'
 import { useHistory } from 'react-router'
 import { useData } from '../contexts/DataContext'
 import { withNamespaces } from 'react-i18next'
+import Page from '../components/Page'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -63,7 +64,7 @@ const PrivacyPolicyScreen = ({ t }) => {
     }
 
     return (
-        <>
+        <Page title="Datenschutzbestimmungen">
             <Alerts message={t('AlertPrivacyPolicyAccepted')} open={alertOpen} handleOpening={setAlertOpen} severity={alertMsg.startsWith('Thank you') ? 'success' : 'error'} />
             <Grid container className={classes.mainContainer}>
                 <Grid sm={3} item />
@@ -102,7 +103,7 @@ const PrivacyPolicyScreen = ({ t }) => {
                 </Grid>
                 <Grid sm={3} item />
             </Grid>
-        </>
+        </Page>
     )
 }
 

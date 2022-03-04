@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 function SellCarDialog({ t }) {
     const [open, setOpen] = React.useState(false);
-    const { selectedCar, vehicles, setVehicles } = useData()
+    const { selectedCar, vehicles, setVehicles, setGeneralAlertOptions } = useData()
     const classes = useStyles()
     const history = useHistory()
     const [btnLoading, setBtnLoading] = React.useState(false)
@@ -84,7 +84,13 @@ function SellCarDialog({ t }) {
                 }, 4000)
             }
         }).catch(err => {
-            console.log(err.response)
+            // console.log(err.response)
+            setGeneralAlertOptions({
+                open: true,
+                message: err.response ? err.response.data.message : 'Server-Fehler......',
+                severity: 'error',
+                hideAfter: 5000
+            })
         })
     }
 

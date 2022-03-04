@@ -28,7 +28,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
-    const { vehicles, setVehicles, selectedCar, user, setSelectedCar, myVehicles, setMyVehicles } = useData()
+    const { vehicles, setVehicles, selectedCar, user, setSelectedCar, myVehicles, setMyVehicles, setGeneralAlertOptions } = useData()
     const [fields, setFields] = React.useState({
         chassisNumber: '',
         mark: '',
@@ -128,6 +128,12 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

@@ -27,7 +27,7 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles()
   const [btnLoading, setBtnLoading] = useState(false)
-  const { vehicles, setVehicles, user, setCustomersVehicles, customersVehicles } = useData()
+  const { vehicles, setVehicles, user, setCustomersVehicles, customersVehicles, setGeneralAlertOptions } = useData()
   const history = useHistory()
 
   const carId = history.location.pathname.split('/')[2]
@@ -68,6 +68,12 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
       }
     })
       .catch(err => {
+        setGeneralAlertOptions({
+          open: true,
+          message: err.response ? err.response.data.message : 'Server-Fehler......',
+          severity: 'error',
+          hideAfter: 5000
+        })
         // console.log(err.response)
       })
   }

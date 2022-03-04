@@ -18,7 +18,7 @@ function UploadInsuranceData({ t }) {
   const [open, setOpen] = React.useState(false);
   const [btnLoading, setBtnLoading] = useState(false)
   const [alertOpen, setAlertOpen] = useState(false)
-  const { insurances, setInsurances } = useData()
+  const { insurances, setInsurances, setGeneralAlertOptions } = useData()
 
   const [fields, setFields] = useState({
     name: '',
@@ -57,7 +57,12 @@ function UploadInsuranceData({ t }) {
     })
       .catch(err => {
         setBtnLoading(false)
-        // console.log(err.response)
+        setGeneralAlertOptions({
+          open: true,
+          message: err.response ? err.response.data.message : 'Server-Fehler......',
+          severity: 'error',
+          hideAfter: 5000
+        })
       })
   }
 

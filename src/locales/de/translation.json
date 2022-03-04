@@ -192,7 +192,7 @@
     "NoPaymentDetailsYet": "Noch keine Zahlungsdetails",
     "Date": "Fällig am",
     "DateExpiring": "Fällig am",
-    "FinanzierungVehicles": "Alle Fahrzeuge (Finanzierung)",
-    "LeasingVehicles": "Alle Fahrzeuge (Leasing)",
+    "FinanzierungVehicles": "Finanzenstatus (ablauf in 8 monate)",
+    "LeasingVehicles": "Leasingstatus (Ablauf in 8 monate)",
     "FahrzeugscheinErklaerungsLink": "Beispiel eines Fahrzeugscheins einblenden"
 }

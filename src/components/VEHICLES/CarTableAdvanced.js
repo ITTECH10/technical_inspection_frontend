@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 function CarTableAdvanced({ t }) {
     const classes = useStyles();
-    const { myVehicles, user, selectedUser, customersVehicles } = useData()
+    const { myVehicles, user, selectedUser, customersVehicles, dashboardAdaptiveTitle } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const matches = useMediaQuery('(max-width: 600px)')
@@ -38,11 +38,20 @@ function CarTableAdvanced({ t }) {
         setPage(0);
     };
 
+    const AdaptiveTitle = dashboardAdaptiveTitle === 'Meine Fahrzeuge'
+        ? t('MyVehicles') : dashboardAdaptiveTitle === 'TÜV überfällig'
+            ? t('TUVExpiredTitle') : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig'
+                ? t('Dashboard.ntiBox') : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
+                    ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
+                        ? t('MyVehicles') : dashboardAdaptiveTitle === 'Finanzierung'
+                            ? t('FinanzierungVehicles') : dashboardAdaptiveTitle === 'Leasing'
+                                ? t('LeasingVehicles') : null
+
     return (
         <>
             {selectedUser && <UserInfoBlock />}
             <Typography variant="h5" style={{ padding: !matches ? '10px 0' : 0 }}>
-                {user.role === 'admin' ? t('CustomersVehicles') : t('MyVehicles')}
+                {user.role === 'admin' ? t('CustomersVehicles') : AdaptiveTitle}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
             <Paper className={classes.root} >
@@ -54,6 +63,10 @@ function CarTableAdvanced({ t }) {
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
                                 {user.role === 'admin' && <TableCell>TUV AU {t('AndGeneral')} Service Status ({t('CalculatedForTwoMonths')})</TableCell>}
+                                {
+                                    dashboardAdaptiveTitle !== '' &&
+                                    <TableCell>{t('Date')}</TableCell>
+                                }
                             </TableRow>
                         </TableHead>
                         <TableBody>

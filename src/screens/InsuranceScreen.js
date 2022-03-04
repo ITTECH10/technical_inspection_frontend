@@ -5,12 +5,13 @@ import { Typography, Divider } from '@material-ui/core'
 import { useData } from '../contexts/DataContext'
 import Loader from './../utils/Loader'
 import { withNamespaces } from 'react-i18next'
+import Page from '../components/Page'
 
 const InsuranceScreen = ({ t }) => {
     const { appLoading, insurances } = useData()
     return (
         !appLoading && insurances.length > 0 ?
-            <React.Fragment>
+            <Page title="Versicherungen">
                 <Typography variant="h4" style={{ padding: '10px 0' }}>
                     {t('InsurancesTitle')}
                 </Typography>
@@ -18,7 +19,7 @@ const InsuranceScreen = ({ t }) => {
 
                 <InsuranceTable />
                 <UploadInsuranceData />
-            </React.Fragment> : <Loader />
+            </Page> : <Loader />
     )
 }
 

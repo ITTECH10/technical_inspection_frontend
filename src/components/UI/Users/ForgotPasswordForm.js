@@ -1,4 +1,6 @@
 import React from 'react';
+import { useData } from '../../../contexts/DataContext'
+// mui
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,8 +14,9 @@ import Alerts from '../Alerts';
 import { CircularProgress } from '@material-ui/core';
 import { withNamespaces } from 'react-i18next';
 
-function FormDialog({ onDisableLoginForm, t }) {
+function ForgotPasswordForm({ onDisableLoginForm, t }) {
     const [open, setOpen] = React.useState(false);
+    const { setGeneralAlertOptions } = useData()
     const [buttonLoading, setButtonLoading] = React.useState()
     const [alertOpen, setAlertOpen] = React.useState(false)
     const [fields, setFields] = React.useState({
@@ -55,6 +58,15 @@ function FormDialog({ onDisableLoginForm, t }) {
             }
         })
             .catch(err => {
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
+                setOpen(false)
+                setButtonLoading(false)
+                onDisableLoginForm(false)
                 // console.log(err.response)
             })
     }
@@ -98,4 +110,4 @@ function FormDialog({ onDisableLoginForm, t }) {
     );
 }
 
-export default withNamespaces()(FormDialog)
+export default withNamespaces()(ForgotPasswordForm)

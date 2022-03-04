@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import Alerts from './../components/UI/Alerts'
 import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { withNamespaces } from 'react-i18next'
+import Page from '../components/Page'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -50,15 +51,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ResetPasswordScreen = ({ t }) => {
-    const { setAuthenticated } = useData()
+    const { setAuthenticated, setGeneralAlertOptions } = useData()
     const [fields, setFields] = React.useState({
         password: '',
         confirmPassword: ''
     })
     const [buttonLoading, setButtonLoading] = React.useState(false)
     const [alertOpen, setAlertOpen] = React.useState(false)
-    const [errorMessage, setErrorMessage] = React.useState()
-    const [errorAlertOpen, setErrorAlertOpen] = React.useState(false)
 
     const history = useHistory()
 
@@ -92,17 +91,20 @@ const ResetPasswordScreen = ({ t }) => {
         })
             .catch(err => {
                 // console.log(err.response)
-                setErrorMessage('Something went wrong!')
-                setErrorAlertOpen(true)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 
     const classes = useStyles()
 
     return (
-        <>
+        <Page title="Passwort zurücksetzen">
             <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
-            <Alerts severity="error" message={errorMessage} open={errorAlertOpen} handleOpening={setErrorAlertOpen} />
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={3} className={classes.gridChildOne} />
 
@@ -125,9 +127,14 @@ const ResetPasswordScreen = ({ t }) => {
                     </Paper>
                 </Grid>
 
-                <Grid item xs={false} sm={3} className={classes.gridChildThree} />
+                <Grid
+                    item
+                    xs={false}
+                    sm={3}
+                    className={classes.gridChildThree}
+                />
             </Grid>
-        </>
+        </Page>
     )
 }
 

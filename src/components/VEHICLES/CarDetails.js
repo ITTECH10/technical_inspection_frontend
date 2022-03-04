@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
-    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, carImages } = useData()
+    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, carImages, setGeneralAlertOptions } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehicleOwner } = selectedCar
@@ -51,6 +51,12 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
                 }
             })
             .catch(err => {
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
                 // console.log(err.response)
             })
     }, [insuranceHouse, setSelectedCarInsurance])

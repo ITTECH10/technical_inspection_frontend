@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 function DeleteUser({ userId, t }) {
   const [open, setOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false)
-  const { user, users, setUsers } = useData()
+  const { user, users, setUsers, setGeneralAlertOptions } = useData()
   const history = useHistory()
   const classes = useStyles()
 
@@ -63,6 +63,12 @@ function DeleteUser({ userId, t }) {
     })
       .catch(err => {
         // console.log(err.response)
+        setGeneralAlertOptions({
+          open: true,
+          message: err.response ? err.response.data.message : 'Server-Fehler......',
+          severity: 'error',
+          hideAfter: 5000
+        })
       })
   }
 

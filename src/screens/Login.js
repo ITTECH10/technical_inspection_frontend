@@ -8,6 +8,7 @@ import { useData } from '../contexts/DataContext'
 import ForgotPasswordForm from './../components/UI/Users/ForgotPasswordForm'
 import PoliciesFooter from '../components/UI/Users/PoliciesFooter'
 import { withNamespaces } from 'react-i18next'
+import Page from '../components/Page'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -72,7 +73,7 @@ const Login = ({ history, t }) => {
         password: ''
     })
     const [errors, setErrors] = useState({})
-    const { setAuthenticated, setAppLoading, appLoading, setSelectedIndex } = useData()
+    const { setAuthenticated, setAppLoading, appLoading, setSelectedIndex, setGeneralAlertOptions } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
 
     const handleChange = (e) => {
@@ -101,9 +102,13 @@ const Login = ({ history, t }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setDisableSubmiting(false)
                 setAppLoading(false)
-                setErrors({
-                    message: err.response ? err.response.data.message : 'Etwas ist schief gelaufen...'
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server error...',
+                    severity: 'error',
+                    hideAfter: 5000
                 })
             })
     }
@@ -111,7 +116,7 @@ const Login = ({ history, t }) => {
     const classes = useStyles()
 
     return (
-        <>
+        <Page title="Anmelden">
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={4} className={classes.gridChildOne} />
 
@@ -147,16 +152,19 @@ const Login = ({ history, t }) => {
                                     <Button disabled={disableSubmiting} className={classes.btnSubmit} color="primary" variant="contained" type="submit">{t('LoginScreenLoginButton')}</Button>
                                 </form>
                                 <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
-                                <Box sx={{display: 'flex',
-                                    flexDirection: 'column' ,
+                                <Box sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
                                     justifyContent: 'center',
-                                    textAlign: 'center'}}>
+                                    textAlign: 'center'
+                                }}>
                                     <Box sx={{
                                         marginTop: 20,
-                                        mt: .6 }}>
+                                        mt: .6
+                                    }}>
                                         Haben Sie noch keinen Zugang, dann setzen Sie sich bitte mit uns in Verbindung.
                                     </Box>
-                                    <Box sx={{marginTop: 20}}>
+                                    <Box sx={{ marginTop: 20 }}>
                                         <Link href="https://www.se-carmanagement.de" target="_blank">
                                             Zurück zur Hauptseite
                                         </Link>
@@ -170,7 +178,7 @@ const Login = ({ history, t }) => {
                 <Grid item xs={false} sm={4} className={classes.gridChildThree} />
             </Grid>
             <PoliciesFooter />
-        </>
+        </Page>
     )
 }
 

@@ -193,7 +193,7 @@
     "NoPaymentDetailsYet": "No payment details yet",
     "Date": "Expires at",
     "DateExpiring": "Expiration date",
-    "FinanzierungVehicles": "All Vehicles (Finanses)",
-    "LeasingVehicles": "All Vehicles (Leasing)",
+    "FinanzierungVehicles": "Credit status (calculations based on 8 months)",
+    "LeasingVehicles": "Leasing status (calculations based on 8 months)",
     "FahrzeugscheinErklaerungsLink": "Show an example of a licence registration"
 }

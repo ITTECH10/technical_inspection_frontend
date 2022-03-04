@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { useData } from '../contexts/DataContext'
 import Alerts from '../components/UI/Alerts'
+import Page from '../components/Page'
 
 const useStyles = makeStyles(theme => ({
     mainContainer: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 const ChangeGeneratedPasswordScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
-    const { user } = useData()
+    const { user, setGeneralAlertOptions } = useData()
 
     const [fields, setFields] = React.useState({
         currentPassword: '',
@@ -72,7 +73,6 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
     })
 
     const [alertOpen, setAlertOpen] = React.useState(false)
-    const [errors, setErrors] = React.useState({})
     const [buttonLoading, setButtonLoading] = React.useState(false)
 
     const handleChange = (e) => {
@@ -103,10 +103,11 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
             .catch(err => {
                 // console.log(err.response)
                 setButtonLoading(false)
-                setErrors({
-                    ...errors,
-                    operationalMSG: !err.response.data.message.startsWith('{') && err.response.data.message,
-                    nonOperationalMSG: err.response.data.message.startsWith('{') && JSON.parse(err.response.data.message)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
                 })
             })
     }
@@ -123,13 +124,19 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
                 }
             })
             .catch(err => {
-                console.log(err.response)
+                // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 
     return (
         user.firstLogIn &&
-        <>
+        <Page title="Generiertes Passwort ändern">
             <Alerts message="Password changed!" open={alertOpen} handleOpening={setAlertOpen} />
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={4} className={classes.gridChildOne} />
@@ -156,8 +163,6 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
                                         label="Current password"
                                         type="password"
                                         onChange={handleChange}
-                                        error={errors.operationalMSG}
-                                        helperText={errors.operationalMSG && errors.operationalMSG}
                                     />
                                     <TextField
                                         fullWidth
@@ -167,8 +172,6 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
                                         label="New password"
                                         type="password"
                                         onChange={handleChange}
-                                        error={errors.operationalMSG || errors.nonOperationalMSG}
-                                        helperText={errors.operationalMSG ? errors.operationalMSG : errors.nonOperationalMSG ? errors.nonOperationalMSG.password : null}
                                     />
                                     <TextField
                                         fullWidth
@@ -178,8 +181,6 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
                                         label="Confirm password"
                                         type="password"
                                         onChange={handleChange}
-                                        error={errors.operationalMSG || errors.nonOperationalMSG}
-                                        helperText={errors.operationalMSG ? errors.operationalMSG : errors.nonOperationalMSG ? errors.nonOperationalMSG.confirmPassword : null}
                                     />
 
                                     <Box style={{ textAlign: 'center' }}>
@@ -198,7 +199,7 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
 
                 <Grid item xs={false} sm={4} className={classes.gridChildThree} />
             </Grid>
-        </>
+        </Page>
     )
 }
 

@@ -14,7 +14,7 @@ import axios from 'axios'
 
 function DashboardSellCarDialog({ t }) {
     const [open, setOpen] = React.useState(false);
-    const { myVehicles, setSelectedCar } = useData()
+    const { myVehicles, setSelectedCar, setGeneralAlertOptions } = useData()
     const history = useHistory()
     const [btnLoading, setBtnLoading] = React.useState(false)
 
@@ -46,7 +46,13 @@ function DashboardSellCarDialog({ t }) {
                 }
             }).catch(err => {
                 setBtnLoading(false)
-                console.log(err.response)
+                // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

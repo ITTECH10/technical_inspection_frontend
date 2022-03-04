@@ -5,18 +5,23 @@ import { useData } from '../contexts/DataContext'
 import Loader from '../utils/Loader'
 import VehiclesTableAdvanced from './../components/VEHICLES/VehiclesTableAdvanced'
 import Box from '@material-ui/core/Box'
+import Page from '../components/Page'
 
 const CarScreen = () => {
     const { user, selectedUser, vehiclesPage } = useData()
 
     const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
-        <Box>
-            <VehiclesTableAdvanced />
-        </Box>
+        <Page title="Fahrzeuge">
+            <Box>
+                <VehiclesTableAdvanced />
+            </Box>
+        </Page>
     ) : (
-        <Box>
-            <CarTableAdvanced />
-        </Box>
+        <Page title="Fahrzeuge">
+            <Box>
+                <CarTableAdvanced />
+            </Box>
+        </Page>
     )
 
     return (

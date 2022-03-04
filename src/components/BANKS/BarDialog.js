@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 function BarDialog({ t }) {
     const [open, setOpen] = React.useState(false);
     const history = useHistory()
-    const { setSelectedCar, selectedPayment, setSelectedPayment } = useData()
+    const { setSelectedCar, selectedPayment, setSelectedPayment, setGeneralAlertOptions } = useData()
     let cashPaymentId
     const carId = history.location.pathname.split('/')[2]
 
@@ -85,6 +85,12 @@ function BarDialog({ t }) {
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 
@@ -103,6 +109,12 @@ function BarDialog({ t }) {
             })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

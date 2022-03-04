@@ -225,7 +225,6 @@ const PaymentDetailsForm = ({ t }) => {
                 selectedPayment.leasingPayment
                     ? <LeasingPaymentForm />
                     : <Typography variant="h6" style={{ fontSize: 14, marginLeft: 10 }}>{t('NoPaymentDetailsYet')}</Typography>
-
     )
 }
 

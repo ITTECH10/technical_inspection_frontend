@@ -40,7 +40,7 @@ function EditUserDetails({ userId, t }) {
     const [open, setOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { setSelectedUser, setUser, user, selectedUser } = useData()
+    const { setSelectedUser, setUser, user, selectedUser, setGeneralAlertOptions } = useData()
     const classes = useStyles()
 
     if (user.role === 'user') {
@@ -113,7 +113,12 @@ function EditUserDetails({ userId, t }) {
         })
             .catch(err => {
                 setBtnLoading(false)
-                // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 

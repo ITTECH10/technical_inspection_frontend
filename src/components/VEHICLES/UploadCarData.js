@@ -11,14 +11,12 @@ import {
     DialogActions,
     Button,
     CircularProgress,
-    Box, FormControlLabel, Switch, Collapse, Paper
+    Box, FormControlLabel, Switch, Collapse
 } from '@material-ui/core';
 import Alerts from './../UI/Alerts'
 import axios from 'axios'
 import { useData } from '../../contexts/DataContext';
 import { withNamespaces } from 'react-i18next';
-import Link from "@material-ui/core/Link";
-import {Image} from "@material-ui/icons";
 import dummyRegistrationImage from './../../assets/images/Fahrzeugschein_big.jpg'
 
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +31,9 @@ const UploadCarData = ({ t }) => {
     const [open, setOpen] = useState(false)
     const [showDummyVehicleRegistration, setShowDummyVehicleRegistration] = React.useState(false);
 
-
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
-    const { selectedUser, myVehicles, setMyVehicles, setCustomersVehicles, customersVehicles, user, setVehicles, vehicles } = useData()
+    const { selectedUser, myVehicles, setMyVehicles, setCustomersVehicles, customersVehicles, user, setVehicles, vehicles, setGeneralAlertOptions } = useData()
     const classes = useStyles()
     let userId
 
@@ -134,6 +131,12 @@ const UploadCarData = ({ t }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             })
     }
 
@@ -195,10 +198,10 @@ const UploadCarData = ({ t }) => {
                         {user.role === 'admin' ?
                             <form onSubmit={handleSubmit} encType="multipart/form-data">
                                 <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >{t('AddPhotoButton')}</Button>
                                 </Box>
-                                <Box sx={{marginTop: 10}}>
+                                <Box sx={{ marginTop: 10 }}>
                                     <FormControlLabel
                                         control={<Switch checked={showDummyVehicleRegistration} onChange={handleShowDummyVehicleRegistration} />}
                                         label={t("FahrzeugscheinErklaerungsLink")}
@@ -418,6 +421,17 @@ const UploadCarData = ({ t }) => {
                             </form> :
                             <form onSubmit={handleSubmit} encType="multipart/form-data">
                                 <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
+                                <Box sx={{ marginTop: 10 }}>
+                                    <FormControlLabel
+                                        control={<Switch checked={showDummyVehicleRegistration} onChange={handleShowDummyVehicleRegistration} />}
+                                        label={t("FahrzeugscheinErklaerungsLink")}
+                                    />
+                                    <Box>
+                                        <div>
+                                            <Collapse in={showDummyVehicleRegistration}>{dummyVehicleRegistration}</Collapse>
+                                        </div>
+                                    </Box>
+                                </Box>
                                 <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufugen</Button>
                                 <TextField
                                     name="mark"

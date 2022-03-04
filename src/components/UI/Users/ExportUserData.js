@@ -11,7 +11,7 @@ import { CSVLink } from "react-csv";
 
 const ExportUserData = ({ t }) => {
     const [data, setData] = React.useState('')
-    const { users, vehicles } = useData()
+    const { users, vehicles, setGeneralAlertOptions } = useData()
     let myData = []
 
     // let myData = React.useMemo(() => {
@@ -52,6 +52,12 @@ const ExportUserData = ({ t }) => {
         json2csv(myData, (err, csv) => {
             if (err) {
                 console.log(err)
+                setGeneralAlertOptions({
+                    open: true,
+                    message: err.response ? err.response.data.message : 'Server-Fehler......',
+                    severity: 'error',
+                    hideAfter: 5000
+                })
             }
             if (csv) {
                 // console.log(csv)

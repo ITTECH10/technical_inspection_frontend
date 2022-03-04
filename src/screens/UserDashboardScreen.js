@@ -10,6 +10,7 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import { withNamespaces } from 'react-i18next'
 import DashboardSellCarDialog from '../components/VEHICLES/DashboardSellCarDialog'
 import ReportCarDamageDialog from '../components/VEHICLES/ReportCarDamageDialog'
+import Page from '../components/Page'
 
 const useStyles = makeStyles(theme => ({
     dashboardContainer: {},
@@ -150,8 +151,8 @@ const DashboardScreen = ({ t }) => {
     }
 
     const myVehiclesWithAddedContract = myVehicles.filter(v => v.contractExpiresOn)
-    const myVehiclesWithCreditsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'credit')
-    const myVehiclesWithLeasingsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && v.contractExpiresInNextTwoMonths && v.vehiclePaymentTypeVariant === 'leasing')
+    const myVehiclesWithCreditsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && new Date(v.contractExpirationDate) < new Date(new Date().setMonth(new Date().getMonth() + 8)) && v.vehiclePaymentTypeVariant === 'credit')
+    const myVehiclesWithLeasingsContractExpiringInTwoMonths = myVehiclesWithAddedContract.filter(v => new Date(v.contractExpirationDate) > new Date() && new Date(v.contractExpirationDate) < new Date(new Date().setMonth(new Date().getMonth() + 8)) && v.vehiclePaymentTypeVariant === 'leasing')
 
     // MIGRATE TO BACKEND
     const myVehiclesWithNTIExpired = myVehiclesWithAddedContract.filter(myVehicle => new Date(myVehicle.nextTechnicalInspection) < new Date())
@@ -185,6 +186,7 @@ const DashboardScreen = ({ t }) => {
         setMyVehicles(myVehiclesWithCreditsContractExpiringInTwoMonths)
         setSelectedIndex(1)
 
+        dashboardGeneratedTitle('Finanzierung')
         history.push('/cars')
     }
 
@@ -193,6 +195,7 @@ const DashboardScreen = ({ t }) => {
         setSelectedIndex(1)
 
         history.push('/cars')
+        dashboardGeneratedTitle('Leasing')
     }
 
     const handleNavigateTuvExpiredVehicles = () => {
@@ -222,137 +225,141 @@ const DashboardScreen = ({ t }) => {
     const handleAllVehiclesNavigate = () => {
         history.push('/cars')
         setSelectedIndex(1)
+
+        dashboardGeneratedTitle('Meine Fahrzeuge')
     }
 
     return (
-        <Box className={classes.dashboardContainer}>
-            <Box className={classes.titleDividerBox}>
-                <Typography className={classes.title} variant="h4">
-                    {`Hallo, ${user.firstName} ${user.lastName}`}
-                </Typography>
-                <Divider className={classes.divider} />
+        <Page title="Dashboard">
+            <Box className={classes.dashboardContainer}>
+                <Box className={classes.titleDividerBox}>
+                    <Typography className={classes.title} variant="h4">
+                        {`Hallo, ${user.firstName} ${user.lastName}`}
+                    </Typography>
+                    <Divider className={classes.divider} />
+                </Box>
+
+                <Box className={classes.boxFlexContainer}>
+                    <Card className={classes.dashboardBoxOne} variant="outlined">
+                        <CardContent>
+                            <Box className={classes.boxTitleFlex}>
+                                <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                    {t('Dashboard.vehicleBox')}
+                                </Typography>
+                                <DriveEtaIcon style={ordinaryIconSizePositioning} color="secondary" />
+                            </Box>
+
+                            <Box className={classes.dashboardContentFlex}>
+                                <Typography className={classes.countTitle} variant="h4" component="h4">
+                                    {myVehicles.length}
+                                </Typography>
+                                <Button disabled={myVehicles.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
+                                    {t('MyVehicles')}
+                                </Button>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                    <Card className={classes.dashboardBoxThree} variant="outlined">
+                        <CardContent>
+                            <Box className={classes.boxTitleFlex}>
+                                <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                    {t('Dashboard.tuvBox')}
+                                </Typography>
+                                <BuildIcon style={distortedIconPositioning} color="secondary" />
+                            </Box>
+
+                            <Box className={classes.tuvBoxBtnsFlex}>
+                                <Box className={classes.dashboardContentFlexTuv}>
+                                    <Typography className={classes.countTitle} variant="h4" component="h4">
+                                        {UserTUVExpiresInThirtyDays.length}
+                                    </Typography>
+                                    <Button disabled={UserTUVExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
+                                        {t('Dashboard.tuvBtn30')}
+                                    </Button>
+                                </Box>
+                                <Box className={classes.dashboardContentFlexTuv}>
+                                    <Typography className={classes.countTitle} variant="h4" component="h4">
+                                        {UserTUVExpired.length}
+                                    </Typography>
+                                    <Button disabled={UserTUVExpired.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
+                                        {t('Dashboard.tuvBtnExpired')}
+                                    </Button>
+                                </Box>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                    <Card className={classes.dashboardBoxOne} variant="outlined">
+                        <CardContent>
+                            <Box className={classes.boxTitleFlex}>
+                                <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                    {t('Dashboard.financingStatusBox')}
+                                </Typography>
+                                <LocalAtmIcon style={ordinaryIconSizePositioning} color="secondary" />
+                            </Box>
+
+                            <Box className={classes.finansesBoxBtnsFlex}>
+                                <Box className={classes.dashboardContentFlexTuv}>
+                                    <Typography className={classes.countTitle} variant="h4" component="h4">
+                                        {myVehiclesWithCreditsContractExpiringInTwoMonths.length}
+                                    </Typography>
+                                    <Button disabled={myVehiclesWithCreditsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
+                                        {t('Dashboard.financingStatusBtnFinancing')}
+                                    </Button>
+                                </Box>
+                                <Box className={classes.dashboardContentFlexTuv}>
+                                    <Typography className={classes.countTitle} variant="h4" component="h4">
+                                        {myVehiclesWithLeasingsContractExpiringInTwoMonths.length}
+                                    </Typography>
+                                    <Button disabled={myVehiclesWithLeasingsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
+                                        {t('Dashboard.financingStatusBtnLeasing')}
+                                    </Button>
+                                </Box>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                    <Card className={classes.dashboardBoxThree} variant="outlined">
+                        <CardContent>
+                            <Box className={classes.boxTitleFlex}>
+                                <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                    {t('Dashboard.ntiBox')}
+                                </Typography>
+                                <BuildIcon style={distortedIconPositioning} color="secondary" />
+                            </Box>
+
+                            <Box>
+                                <Box className={classes.dashboardContentFlexTuv}>
+                                    <Typography className={classes.countTitle} variant="h4" component="h4">
+                                        {myVehiclesWithNTIExpired.length}
+                                    </Typography>
+                                    <Button disabled={myVehiclesWithNTIExpired.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateNtiExpiredVehicles}>
+                                        {t('Dashboard.tuvBtnExpired')}
+                                    </Button>
+                                </Box>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                    <Card className={classes.dashboardBoxThree} variant="outlined">
+                        <CardContent style={{ height: '100%' }}>
+                            <Box className={classes.boxTitleFlex}>
+                                <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
+                                    {t('UserDashboardCarOptions')}
+                                </Typography>
+                                <BuildIcon style={distortedIconPositioning} color="secondary" />
+                            </Box>
+
+                            <Box className={classes.carOptionsBoxFlex}>
+                                <Box className={classes.carOptionsBtn}>
+                                    <DashboardSellCarDialog />
+                                </Box>
+                                <Box className={classes.carOptionsBtn}>
+                                    <ReportCarDamageDialog />
+                                </Box>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Box>
             </Box>
-
-            <Box className={classes.boxFlexContainer}>
-                <Card className={classes.dashboardBoxOne} variant="outlined">
-                    <CardContent>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('Dashboard.vehicleBox')}
-                            </Typography>
-                            <DriveEtaIcon style={ordinaryIconSizePositioning} color="secondary" />
-                        </Box>
-
-                        <Box className={classes.dashboardContentFlex}>
-                            <Typography className={classes.countTitle} variant="h4" component="h4">
-                                {myVehicles.length}
-                            </Typography>
-                            <Button disabled={myVehicles.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
-                                {t('MyVehicles')}
-                            </Button>
-                        </Box>
-                    </CardContent>
-                </Card>
-                <Card className={classes.dashboardBoxThree} variant="outlined">
-                    <CardContent>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('Dashboard.tuvBox')}
-                            </Typography>
-                            <BuildIcon style={distortedIconPositioning} color="secondary" />
-                        </Box>
-
-                        <Box className={classes.tuvBoxBtnsFlex}>
-                            <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {UserTUVExpiresInThirtyDays.length}
-                                </Typography>
-                                <Button disabled={UserTUVExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
-                                    {t('Dashboard.tuvBtn30')}
-                                </Button>
-                            </Box>
-                            <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {UserTUVExpired.length}
-                                </Typography>
-                                <Button disabled={UserTUVExpired.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
-                                    {t('Dashboard.tuvBtnExpired')}
-                                </Button>
-                            </Box>
-                        </Box>
-                    </CardContent>
-                </Card>
-                <Card className={classes.dashboardBoxOne} variant="outlined">
-                    <CardContent>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('Dashboard.financingStatusBox')}
-                            </Typography>
-                            <LocalAtmIcon style={ordinaryIconSizePositioning} color="secondary" />
-                        </Box>
-
-                        <Box className={classes.finansesBoxBtnsFlex}>
-                            <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {myVehiclesWithCreditsContractExpiringInTwoMonths.length}
-                                </Typography>
-                                <Button disabled={myVehiclesWithCreditsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
-                                    {t('Dashboard.financingStatusBtnFinancing')}
-                                </Button>
-                            </Box>
-                            <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {myVehiclesWithLeasingsContractExpiringInTwoMonths.length}
-                                </Typography>
-                                <Button disabled={myVehiclesWithLeasingsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
-                                    {t('Dashboard.financingStatusBtnLeasing')}
-                                </Button>
-                            </Box>
-                        </Box>
-                    </CardContent>
-                </Card>
-                <Card className={classes.dashboardBoxThree} variant="outlined">
-                    <CardContent>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('Dashboard.ntiBox')}
-                            </Typography>
-                            <BuildIcon style={distortedIconPositioning} color="secondary" />
-                        </Box>
-
-                        <Box>
-                            <Box className={classes.dashboardContentFlexTuv}>
-                                <Typography className={classes.countTitle} variant="h4" component="h4">
-                                    {myVehiclesWithNTIExpired.length}
-                                </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateNtiExpiredVehicles}>
-                                    {t('Dashboard.tuvBtnExpired')}
-                                </Button>
-                            </Box>
-                        </Box>
-                    </CardContent>
-                </Card>
-                <Card className={classes.dashboardBoxThree} variant="outlined">
-                    <CardContent style={{ height: '100%' }}>
-                        <Box className={classes.boxTitleFlex}>
-                            <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                {t('UserDashboardCarOptions')}
-                            </Typography>
-                            <BuildIcon style={distortedIconPositioning} color="secondary" />
-                        </Box>
-
-                        <Box className={classes.carOptionsBoxFlex}>
-                            <Box className={classes.carOptionsBtn}>
-                                <DashboardSellCarDialog />
-                            </Box>
-                            <Box className={classes.carOptionsBtn}>
-                                <ReportCarDamageDialog />
-                            </Box>
-                        </Box>
-                    </CardContent>
-                </Card>
-            </Box>
-        </Box>
+        </Page>
     )
 }
 
