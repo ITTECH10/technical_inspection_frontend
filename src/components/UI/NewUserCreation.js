@@ -54,7 +54,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     postCode: '',
     city: '',
     birthDate: '',
-    password: generatedPassword,
+    password: '123456',
     confirmPassword: '',
     customerType: 'firmenkunde',
     customerPartner: '',

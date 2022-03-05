@@ -12,8 +12,6 @@ const CarRow = ({ car, t }) => {
     const { vehicles, setSelectedCar, myVehicles, user, dashboardAdaptiveTitle } = useData()
     let selectedCar
 
-    console.log(dashboardAdaptiveTitle)
-
     if (user.role === 'admin') {
         selectedCar = vehicles.find(v => v._id === car._id)
     }
@@ -27,12 +25,12 @@ const CarRow = ({ car, t }) => {
     }
 
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    const curDate = new Date().toLocaleDateString('de-DE')
-    const NTIDate = new Date(car.nextTechnicalInspection).toLocaleDateString('de-DE')
-    const TUVDate = new Date(car.TUV).toLocaleDateString('de-DE')
-    const AUDate = new Date(car.AU).toLocaleDateString('de-DE')
-    const CreditDate = new Date(car.contractExpirationDate).toLocaleDateString('de-DE')
-    const LeasingDate = new Date(car.contractExpirationDate).toLocaleDateString('de-DE')
+    const curDate = new Date()
+    const NTIDate = new Date(car.nextTechnicalInspection)
+    const TUVDate = new Date(car.TUV)
+    const AUDate = new Date(car.AU)
+    const CreditDate = new Date(car.contractExpirationDate)
+    const LeasingDate = new Date(car.contractExpirationDate)
 
     const NTIDiff = Math.round(Math.abs((curDate - NTIDate) / oneDay)) + 1;
     const TUVDiff = Math.round(Math.abs((curDate - TUVDate) / oneDay)) + 1;
@@ -126,9 +124,9 @@ const CarRow = ({ car, t }) => {
                 </TableCell>}
             {user.role !== 'admin' && dashboardAdaptiveTitle !== '' && (
                 <TableCell>
-                    {dashboardAdaptiveTitle === 'Finanzierung' && car.vehiclePaymentTypeVariant === 'credit' ? CreditDate :
-                        dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate
-                            : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NTIDate : TUVDate}
+                    {dashboardAdaptiveTitle === 'Finanzierung' && car.vehiclePaymentTypeVariant === 'credit' ? CreditDate.toLocaleDateString('de-DE') :
+                        dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate.toLocaleDateString('de-DE')
+                            : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NTIDate.toLocaleDateString('de-DE') : TUVDate.toLocaleDateString('de-DE')}
                 </TableCell>
             )}
         </TableRow>

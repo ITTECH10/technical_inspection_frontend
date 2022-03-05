@@ -86,11 +86,11 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('LastUUVInputLabel')}</Typography>
-                    <TextField className={classes.input} label={lastUUV ? formatedLastUUV : 'Not set yet'} disabled />
+                    <TextField className={classes.input} label={lastUUV ? formatedLastUUV : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('NextUUVInputLabel')}</Typography>
-                    <TextField className={classes.input} label={nextUUV ? formatedNextUUV : 'Not set yet'} disabled />
+                    <TextField className={classes.input} label={nextUUV ? formatedNextUUV : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('LTIInputLabel')}</Typography>
