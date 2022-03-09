@@ -21,8 +21,12 @@ let theme = createTheme({
                 flex: 'none'
             }
         },
-        '.& .MuiInputBase-root.Mui-disabled': {
-            color: '#333 !important'
+        MuiInputBase: {
+            root: {
+                "&$disabled": {
+                    color: '#333'
+                }
+            }
         }
     }
 }, deDE);

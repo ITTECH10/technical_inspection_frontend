@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     inputTitle: {
         fontSize: 13,
         lineHeight: 0,
-        marginTop: 10,
+        margin: '8px 0',
         fontWeight: '600'
     },
     input: {
@@ -41,11 +41,11 @@ const PaymentDetailsForm = ({ t }) => {
                 <>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('Payment.cash.payedAt')}</Typography>
-                        <TextField className={classes.input} label={formatedCashPayedAt} disabled fullWidth />
+                        <TextField className={classes.input} value={formatedCashPayedAt} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>Gekauft von</Typography>
-                        <TextField className={classes.input} label={selectedPayment.cashPayment.boughtFrom} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.cashPayment.boughtFrom} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('Payment.cash.sum')}</Typography>
@@ -54,7 +54,6 @@ const PaymentDetailsForm = ({ t }) => {
                             thousandSeparator={true}
                             customInput={TextField}
                             className={classes.input}
-                            style={{ marginTop: '1rem' }}
                             fullWidth
                             disabled
                             prefix="€"
@@ -68,7 +67,6 @@ const PaymentDetailsForm = ({ t }) => {
                             thousandSeparator={true}
                             customInput={TextField}
                             className={classes.input}
-                            style={{ marginTop: '1rem' }}
                             fullWidth
                             disabled
                         />
@@ -84,15 +82,15 @@ const PaymentDetailsForm = ({ t }) => {
                 <>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.creditPayment.contractNumber} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.creditPayment.contractNumber} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('BuyedBy')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.creditPayment.boughtFrom} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.creditPayment.boughtFrom} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('CreditStartDateInputLabel')}</Typography>
-                        <TextField className={classes.input} label={formatedFinansesCreditStartDate} disabled fullWidth />
+                        <TextField className={classes.input} value={formatedFinansesCreditStartDate} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('MonthlyCreditPaymentInputLabel')}</Typography>
@@ -101,7 +99,6 @@ const PaymentDetailsForm = ({ t }) => {
                             thousandSeparator={true}
                             customInput={TextField}
                             className={classes.input}
-                            style={{ marginTop: '1rem' }}
                             fullWidth
                             disabled
                             prefix="€"
@@ -114,7 +111,6 @@ const PaymentDetailsForm = ({ t }) => {
                             thousandSeparator={true}
                             customInput={TextField}
                             className={classes.input}
-                            style={{ marginTop: '1rem' }}
                             fullWidth
                             disabled
                             prefix="€"
@@ -122,7 +118,7 @@ const PaymentDetailsForm = ({ t }) => {
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('CreditLastsForInputLabel')}</Typography>
-                        <TextField className={classes.input} label={`${selectedPayment.creditPayment.creditLastsFor} ${selectedPayment.creditPayment.creditLastsFor === 1 ? t('monthSingular') : t('monthPlural')}`} disabled fullWidth />
+                        <TextField className={classes.input} value={`${selectedPayment.creditPayment.creditLastsFor} ${selectedPayment.creditPayment.creditLastsFor === 1 ? t('monthSingular') : t('monthPlural')}`} disabled fullWidth />
                     </Box>
                     {selectedPayment.creditPayment.closingRate &&
                         <Box>
@@ -132,7 +128,6 @@ const PaymentDetailsForm = ({ t }) => {
                                 thousandSeparator={true}
                                 customInput={TextField}
                                 className={classes.input}
-                                style={{ marginTop: '1rem' }}
                                 fullWidth
                                 disabled
                                 prefix="€"
@@ -145,7 +140,6 @@ const PaymentDetailsForm = ({ t }) => {
                             thousandSeparator={true}
                             customInput={TextField}
                             className={classes.input}
-                            style={{ marginTop: '1rem' }}
                             fullWidth
                             disabled
                         />
@@ -161,56 +155,56 @@ const PaymentDetailsForm = ({ t }) => {
                 <>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.leasingPayment.contractNumber} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.leasingPayment.contractNumber} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('BuyedBy')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.leasingPayment.boughtFrom} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.leasingPayment.boughtFrom} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('MaintenancePackage')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.leasingPayment.maintenancePackage === true ? "Yes" : "No"} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.leasingPayment.maintenancePackage === true ? "Yes" : "No"} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('LeasingStartDateInputLabel')}</Typography>
-                        <TextField className={classes.input} label={formatedLeasingStartDate} disabled fullWidth />
+                        <TextField className={classes.input} value={formatedLeasingStartDate} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('MonthlyLeasingPaymentInputLabel')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.leasingPayment.monthlyLeasingPayment} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.leasingPayment.monthlyLeasingPayment} disabled fullWidth />
                     </Box>
                     <Box>
                         <Typography className={classes.inputTitle}>{t('LeasingLastsForInputLabel')}</Typography>
-                        <TextField className={classes.input} label={`${t('LeasingLastsForInputLabel')}: ${selectedPayment.leasingPayment.leasingLastsFor} months`} disabled fullWidth />
+                        <TextField className={classes.input} value={`${t('LeasingLastsForInputLabel')}: ${selectedPayment.leasingPayment.leasingLastsFor} months`} disabled fullWidth />
                     </Box>
 
                     {selectedPayment.leasingPayment.remainingPayment &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('RestvertInputLabel')}</Typography>
-                            <TextField className={classes.input} label={selectedPayment.leasingPayment.remainingPayment} disabled fullWidth />
+                            <TextField className={classes.input} value={selectedPayment.leasingPayment.remainingPayment} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.moreDetails &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('MoreDetailsLeasingCreation')}</Typography>
-                            <TextField className={classes.input} label={selectedPayment.leasingPayment.moreDetails} disabled fullWidth />
+                            <TextField className={classes.input} value={selectedPayment.leasingPayment.moreDetails} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForMoreKilometers &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('CostsForMoreKilometersInputLabel')}</Typography>
-                            <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForMoreKilometers} disabled fullWidth />
+                            <TextField className={classes.input} value={selectedPayment.leasingPayment.costsForMoreKilometers} disabled fullWidth />
                         </Box>
                     }
                     {selectedPayment.leasingPayment.costsForLessKilometers &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('CostsForLessKilometers')}</Typography>
-                            <TextField className={classes.input} label={selectedPayment.leasingPayment.costsForLessKilometers} disabled fullWidth />
+                            <TextField className={classes.input} value={selectedPayment.leasingPayment.costsForLessKilometers} disabled fullWidth />
                         </Box>
                     }
                     <Box>
                         <Typography className={classes.inputTitle}>{t('Payment.cash.kilometersDrivenWhenPurchased')}</Typography>
-                        <TextField className={classes.input} label={selectedPayment.leasingPayment.kilometersDrivenWhenPurchased} disabled fullWidth />
+                        <TextField className={classes.input} value={selectedPayment.leasingPayment.kilometersDrivenWhenPurchased} disabled fullWidth />
                     </Box>
                 </>
             )}

@@ -12,16 +12,12 @@ const useStyles = makeStyles(theme => ({
     inputTitle: {
         fontSize: 13,
         lineHeight: 0,
-        marginTop: 10,
+        margin: '8px 0',
         fontWeight: '600'
     },
     input: {
         marginBottom: 10,
-        width: '100%',
-        '&:disabled': {
-            backgroundColor: '#333 !important',
-            color: '#333 !important',
-        }
+        width: '100%'
     },
     actionsFlexContainer: {
         display: 'flex',
@@ -70,63 +66,63 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
             <Paper elevation={3} style={{ padding: 12, marginBottom: 5 }}>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('ChassisNumber')}</Typography>
-                    <TextField className={classes.input} label={chassisNumber ? chassisNumber : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={chassisNumber ? chassisNumber : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('MarkInputLabel')}</Typography>
-                    <TextField className={classes.input} label={mark} disabled />
+                    <TextField className={classes.input} value={mark} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('ModelInputLabel')}</Typography>
-                    <TextField className={classes.input} label={model} disabled />
+                    <TextField className={classes.input} value={model} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('RegistrationNumberInputLabel')}</Typography>
-                    <TextField className={classes.input} label={registrationNumber} disabled />
+                    <TextField className={classes.input} value={registrationNumber} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('VarantyExpirationDate')}</Typography>
-                    <TextField className={classes.input} label={varantyExpiresAt ? formatedVaranty : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={varantyExpiresAt ? formatedVaranty : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('LastUUVInputLabel')}</Typography>
-                    <TextField className={classes.input} label={lastUUV ? formatedLastUUV : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={lastUUV ? formatedLastUUV : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('NextUUVInputLabel')}</Typography>
-                    <TextField className={classes.input} label={nextUUV ? formatedNextUUV : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={nextUUV ? formatedNextUUV : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('LTIInputLabel')}</Typography>
-                    <TextField className={classes.input} label={lastTechnicalInspection ? formatedLastTechnicalInspection : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={lastTechnicalInspection ? formatedLastTechnicalInspection : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('NTIInputLabel')}</Typography>
-                    <TextField className={classes.input} label={nextTechnicalInspection ? formatedNextTehInsp : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={nextTechnicalInspection ? formatedNextTehInsp : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('AUInputLabel')}</Typography>
-                    <TextField className={classes.input} label={AU ? formatedAu : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={AU ? formatedAu : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('TUVInputLabel')}</Typography>
-                    <TextField className={classes.input} label={TUV ? formatedTuv : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={TUV ? formatedTuv : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('FVRInputLabel')}</Typography>
-                    <TextField className={classes.input} label={firstVehicleRegistration ? formatedFirstVehicleReg : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={firstVehicleRegistration ? formatedFirstVehicleReg : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('FVROOInputLabel')}</Typography>
-                    <TextField className={classes.input} label={firstVehicleRegistrationOnOwner ? formatedFirstVehOnOwner : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={firstVehicleRegistrationOnOwner ? formatedFirstVehOnOwner : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('HSNInputLabel')}</Typography>
-                    <TextField className={classes.input} label={HSN ? HSN : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={HSN ? HSN : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('TSNInputLabel')}</Typography>
-                    <TextField className={classes.input} label={TSN ? TSN : t('VehicleDetailsDataNotSetYet')} disabled />
+                    <TextField className={classes.input} value={TSN ? TSN : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel') + ' ' + '(km)'}</Typography>
