@@ -194,5 +194,6 @@
     "DateExpiring": "Fällig am",
     "FinanzierungVehicles": "Finanzierungsstatus (Ablauf in 8 Monaten)",
     "LeasingVehicles": "Leasingstatus (Ablauf in 8 Monaten)",
-    "FahrzeugscheinErklaerungsLink": "Beispiel eines Fahrzeugscheins einblenden"
+    "FahrzeugscheinErklaerungsLink": "Beispiel eines Fahrzeugscheins einblenden",
+    "companynameLabel" : "Firmenname"
 }
