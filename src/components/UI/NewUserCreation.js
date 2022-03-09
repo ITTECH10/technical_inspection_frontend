@@ -255,7 +255,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               required
               margin="dense"
               id="smartphoneNumber"
-              label={`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
+              label={`${t('SmartphoneLabel')}`}
               onChange={handleChange}
               type="text"
               fullWidth
