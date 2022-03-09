@@ -17,4 +17,4 @@ const MailOnClick = ({ t }) => {
     )
 }
 
-export default withNameSpaces()(MailOnClick)
+export default withNamespaces()(MailOnClick)
