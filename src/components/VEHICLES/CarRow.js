@@ -58,7 +58,7 @@ const CarRow = ({ car, t }) => {
                             style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     } */}
-                    {new Date(TUVDate) > new Date() &&
+                    {new Date(TUVDate) > new Date() && new Date(TUVDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
                             label={`TÜV in ${TUVDiff} ${t('DaysPlural')}`}
                             color="primary"
@@ -76,16 +76,16 @@ const CarRow = ({ car, t }) => {
                             style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     } */}
-                    {new Date(AUDate) > new Date() &&
+                    {new Date(AUDate) > new Date() && new Date(AUDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
-                            label={`HU in ${HUDiff} ${t('DaysPlural')}`}
+                            label={`AU in ${HUDiff} ${t('DaysPlural')}`}
                             color="primary"
                             size="small"
                             variant="default"
                             style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     }
-                    {car.technicalInspectionInNextTwoMonths &&
+                    {new Date(NTIDate) > new Date() && new Date(NTIDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
                             label={`Service in ${NTIDiff} ${t('DaysPlural')}`}
                             color="primary"
