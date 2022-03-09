@@ -24,7 +24,7 @@ const CarDetailsScreen = React.lazy(() => import('./screens/CarDetailsScreen'))
 // const InsuranceScreen = React.lazy(() => import('./screens/InsuranceScreen'))
 // const BankScreen = React.lazy(() => import('./screens/BankScreen'))
 const PrivacyPolicyScreen = React.lazy(() => import('./screens/PrivacyPolicyScreen'))
-const Login = React.lazy(() => import('./screens/Login'))
+const Login = React.lazy(() => import('./screens/NewLogin'))
 const AccountScreen = React.lazy(() => import('./screens/AccountScreen'))
 
 function App() {

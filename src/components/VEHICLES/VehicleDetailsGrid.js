@@ -41,15 +41,15 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
 
     const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, lastUUV, nextUUV, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
-    const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toDateString()
-    const formatedAu = new Date(AU).toDateString()
-    const formatedTuv = new Date(TUV).toDateString()
-    const formatedFirstVehicleReg = new Date(firstVehicleRegistration).toDateString()
-    const formatedFirstVehOnOwner = new Date(firstVehicleRegistrationOnOwner).toDateString()
-    const formatedNextTehInsp = new Date(nextTechnicalInspection).toDateString()
-    const formatedVaranty = new Date(varantyExpiresAt).toDateString()
-    const formatedLastUUV = new Date(lastUUV).toDateString()
-    const formatedNextUUV = new Date(nextUUV).toDateString()
+    const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toLocaleDateString()
+    const formatedAu = new Date(AU).toLocaleDateString()
+    const formatedTuv = new Date(TUV).toLocaleDateString()
+    const formatedFirstVehicleReg = new Date(firstVehicleRegistration).toLocaleDateString()
+    const formatedFirstVehOnOwner = new Date(firstVehicleRegistrationOnOwner).toLocaleDateString()
+    const formatedNextTehInsp = new Date(nextTechnicalInspection).toLocaleDateString()
+    const formatedVaranty = new Date(varantyExpiresAt).toLocaleDateString()
+    const formatedLastUUV = new Date(lastUUV).toLocaleDateString()
+    const formatedNextUUV = new Date(nextUUV).toLocaleDateString()
 
     return (
         <Grid item xs={12}>
