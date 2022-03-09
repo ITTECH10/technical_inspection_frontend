@@ -56,7 +56,7 @@ const NewLogin = ({ history, t }) => {
     }
 
     return (
-        <Page title="Anmelden">
+        <Page title="Fuhrparkmanager">
             <Helmet>
                 <link rel="stylesheet" href="style.css" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -70,13 +70,13 @@ const NewLogin = ({ history, t }) => {
                     <Box>
                         <Box className="info">
                             <Box className="street"><span className="material-icons red-color right-margin">place</span>
-                                <Typography><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
+                                <Typography style={{fontFamily: 'Eurostile, sans-serif'}}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
                             </Box>
                             <Box className="telephone"><span className="material-icons red-color right-margin">phone</span>
-                                <p><a href="+4981212243822">+49 8121 22 43 8 – 22</a></p>
+                                <Typography style={{fontFamily: 'Eurostile, sans-serif'}}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
                             </Box>
                             <Box className="mail"><span className="material-icons red-color right-margin">mail</span>
-                                <p><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></p>
+                                <Typography style={{fontFamily: 'Eurostile, sans-serif'}}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
                             </Box>
                         </Box>
                     </Box>

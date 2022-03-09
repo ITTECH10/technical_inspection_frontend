@@ -62,7 +62,7 @@ function CarTableAdvanced({ t }) {
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                {user.role === 'admin' && <TableCell>TUV AU {t('AndGeneral')} Service Status ({t('CalculatedForTwoMonths')})</TableCell>}
+                                {user.role === 'admin' && <TableCell>TÜV, AU und Service fällig?</TableCell>}
                                 {
                                     dashboardAdaptiveTitle !== '' &&
                                     <TableCell>{t('Date')}</TableCell>

@@ -36,7 +36,7 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' ? CreditDate :
                         dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate
-                            : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NtiServiceDate : TuvDate}
+                            : dashboardAdaptiveTitle === 'Service überfällig' ? NtiServiceDate : TuvDate}
                 </TableCell>
             }
         </TableRow>
