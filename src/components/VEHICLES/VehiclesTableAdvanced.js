@@ -35,11 +35,12 @@ function VehiclesTableAdvanced({ t }) {
     const AdaptiveTitle = dashboardAdaptiveTitle === 'Alle Fahrzeuge'
         ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'TÜV überfällig'
             ? t('TUVExpiredTitle') : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig'
-                ? t('Dashboard.ntiBox') : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
-                    ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
-                        ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'Finanzierung'
-                            ? t('FinanzierungVehicles') : dashboardAdaptiveTitle === 'Leasing'
-                                ? t('LeasingVehicles') : null
+                ? t('Dashboard.ntiBox') : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab'
+                    ? 'Service läuft in 30 Tagen ab' : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
+                        ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
+                            ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'Finanzierung'
+                                ? t('FinanzierungVehicles') : dashboardAdaptiveTitle === 'Leasing'
+                                    ? t('LeasingVehicles') : null
 
     // FILTERING
     const [fields, setFields] = React.useState({

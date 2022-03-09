@@ -12,6 +12,8 @@ const CarRow = ({ car, t }) => {
     const { vehicles, setSelectedCar, myVehicles, user, dashboardAdaptiveTitle } = useData()
     let selectedCar
 
+    console.log(dashboardAdaptiveTitle)
+
     if (user.role === 'admin') {
         selectedCar = vehicles.find(v => v._id === car._id)
     }
@@ -126,7 +128,9 @@ const CarRow = ({ car, t }) => {
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' && car.vehiclePaymentTypeVariant === 'credit' ? CreditDate.toLocaleDateString('de-DE') :
                         dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate.toLocaleDateString('de-DE')
-                            : dashboardAdaptiveTitle === 'Service überfällig' ? NTIDate.toLocaleDateString('de-DE') : TUVDate.toLocaleDateString('de-DE')}
+                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' ? NTIDate.toLocaleDateString('de-DE')
+                                : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NTIDate.toLocaleDateString('de-DE')
+                                    : TUVDate.toLocaleDateString('de-DE')}
                 </TableCell>
             )}
         </TableRow>

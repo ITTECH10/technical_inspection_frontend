@@ -167,6 +167,7 @@ const DashboardScreen = ({ t }) => {
     // const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
     const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date && new Date(v.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
     const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
+    const NTIExpiresInThirtyDays = vehicles.filter(v => new Date(v.nextTechnicalInspection) > new Date && new Date(v.nextTechnicalInspection) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
 
     const handleNavigateFinansesVehicles = () => {
         setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
@@ -197,6 +198,14 @@ const DashboardScreen = ({ t }) => {
 
         history.push('/cars')
         dashboardGeneratedTitle('SERVICE (NTI) überfällig')
+    }
+
+    const handleNavigateNtiThirtyDaysVehicles = () => {
+        setVehicles(NTIExpiresInThirtyDays)
+        setSelectedIndex(2)
+
+        history.push('/cars')
+        dashboardGeneratedTitle('Service läuft in 30 Tagen ab')
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
@@ -307,6 +316,14 @@ const DashboardScreen = ({ t }) => {
                             </Box>
 
                             <Box className={classes.tuvBoxBtnsFlex}>
+                                <Box className={classes.dashboardContentFlexTuv}>
+                                    <Typography className={classes.countTitle} variant="h4" component="h4">
+                                        {NTIExpiresInThirtyDays.length}
+                                    </Typography>
+                                    <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateNtiThirtyDaysVehicles}>
+                                        {t('Dashboard.tuvBtn30')}
+                                    </Button>
+                                </Box>
                                 <Box className={classes.dashboardContentFlexTuv}>
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {vehiclesWithNTIExpired.length}

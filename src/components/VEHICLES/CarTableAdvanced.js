@@ -45,7 +45,8 @@ function CarTableAdvanced({ t }) {
                     ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
                         ? t('MyVehicles') : dashboardAdaptiveTitle === 'Finanzierung'
                             ? t('FinanzierungVehicles') : dashboardAdaptiveTitle === 'Leasing'
-                                ? t('LeasingVehicles') : null
+                                ? t('LeasingVehicles') : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab'
+                                    ? 'Service läuft in 30 Tagen ab' : null
 
     return (
         <>

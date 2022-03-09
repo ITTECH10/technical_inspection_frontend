@@ -8,6 +8,9 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar, setCarImages } = useData()
 
+    console.log(dashboardAdaptiveTitle)
+
+
     const onHandleCarRender = () => {
         const selectedCar = vehicles.find(v => v._id === vehicle._id)
         setSelectedCar(selectedCar)
@@ -36,7 +39,7 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' ? CreditDate :
                         dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate
-                            : dashboardAdaptiveTitle === 'Service überfällig' ? NtiServiceDate : TuvDate}
+                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' ? NtiServiceDate : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NtiServiceDate : TuvDate}
                 </TableCell>
             }
         </TableRow>
