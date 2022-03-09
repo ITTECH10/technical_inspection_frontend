@@ -195,5 +195,6 @@
     "FinanzierungVehicles": "Finanzierungsstatus (Ablauf in 8 Monaten)",
     "LeasingVehicles": "Leasingstatus (Ablauf in 8 Monaten)",
     "FahrzeugscheinErklaerungsLink": "Beispiel eines Fahrzeugscheins einblenden",
-    "companynameLabel" : "Firmenname"
+    "companynameLabel" : "Firmenname",
+    "tooltip.sendmailtocustomer": "Eine E-Mail an diesen Kunden senden"
 }
