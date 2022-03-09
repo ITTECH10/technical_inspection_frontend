@@ -146,7 +146,7 @@
     "MaintenancePackage": "Wartungspaket",
     "IsThereMaintenancePackage": "Ist das Wartungspaket enthalten?",
     "BuyedBy": "Gekauft von",
-    "CustomerType": "Welcher Kunde?",
+    "CustomerType": "Kundentyp",
     "GeneralFormFullfilments": "Füllen Sie die Felder mit dem * Zeichen unten aus",
     "InsuranceGesellschaftInputLabel": "Gesellschaft",
     "BarDialogTitle": "Wann wurde das Auto abbezahlt / gekauft?",
