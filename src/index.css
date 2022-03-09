@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  font-family: 'Eurostile';
+  font-family: 'Eurostile' !important;
+  font-weight: bold;
 }
 
 body {
