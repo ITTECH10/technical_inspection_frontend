@@ -20,6 +20,9 @@ let theme = createTheme({
             spacer: {
                 flex: 'none'
             }
+        },
+        '.& .MuiInputBase-root.Mui-disabled': {
+            color: '#333 !important'
         }
     }
 }, deDE);

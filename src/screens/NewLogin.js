@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useData } from '../contexts/DataContext'
 // mui
-import { Box, Typography, TextField } from '@material-ui/core'
+import { Box, Typography, TextField, IconButton as Icon } from '@material-ui/core'
 // others
 import { Helmet } from 'react-helmet-async';
 import Page from '../components/Page'
 import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { withNamespaces } from 'react-i18next'
+import PlaceIcon from '@material-ui/icons/Place';
+import PhoneIcon from '@material-ui/icons/Phone';
+import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const NewLogin = ({ history, t }) => {
     const [fields, setFields] = useState({
@@ -69,14 +73,23 @@ const NewLogin = ({ history, t }) => {
                     <Box className="separator" />
                     <Box>
                         <Box className="info">
-                            <Box className="street"><span className="material-icons red-color right-margin">place</span>
-                                <Typography style={{fontFamily: 'Eurostile, sans-serif'}}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
+                            <Box className="street">
+                                <Icon>
+                                    <PlaceIcon color="error" />
+                                </Icon>
+                                <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
                             </Box>
-                            <Box className="telephone"><span className="material-icons red-color right-margin">phone</span>
-                                <Typography style={{fontFamily: 'Eurostile, sans-serif'}}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
+                            <Box className="telephone">
+                                <Icon>
+                                    <PhoneIcon color="error" />
+                                </Icon>
+                                <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
                             </Box>
-                            <Box className="mail"><span className="material-icons red-color right-margin">mail</span>
-                                <Typography style={{fontFamily: 'Eurostile, sans-serif'}}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
+                            <Box className="mail">
+                                <Icon>
+                                    <MailIcon color="error" />
+                                </Icon>
+                                <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
                             </Box>
                         </Box>
                     </Box>
@@ -131,7 +144,9 @@ const NewLogin = ({ history, t }) => {
                                     />
                                 </Box>
                                 <button className="button login__submit" type="submit">
-                                    <span className="material-icons">login</span>
+                                    <Icon style={{ '&:hover': { boxShadow: 'none !important' } }}>
+                                        <ExitToAppIcon style={{ color: '#fff' }} />
+                                    </Icon>
                                     <span className="button__text">Anmelden</span>
                                 </button>
                                 <Box className="forgot_password">

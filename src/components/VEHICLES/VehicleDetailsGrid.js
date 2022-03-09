@@ -17,7 +17,11 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
         marginBottom: 10,
-        width: '100%'
+        width: '100%',
+        '&:disabled': {
+            backgroundColor: '#333 !important',
+            color: '#333 !important',
+        }
     },
     actionsFlexContainer: {
         display: 'flex',

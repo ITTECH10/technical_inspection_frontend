@@ -6,6 +6,10 @@
   font-weight: bold;
 }
 
+/* .MuiInputBase-input.Mui-disabled {
+  color: #333333 !important;
+} */
+
 body {
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
