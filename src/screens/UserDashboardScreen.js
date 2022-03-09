@@ -330,7 +330,7 @@ const DashboardScreen = ({ t }) => {
                         <CardContent>
                             <Box className={classes.boxTitleFlex}>
                                 <Typography className={classes.mainBoxTitle} variant="h5" component="h5">
-                                    {t('Dashboard.ntiBox')}
+                                    {t('Dashboard.ntiBoxSingle')}
                                 </Typography>
                                 <BuildIcon style={distortedIconPositioning} color="secondary" />
                             </Box>

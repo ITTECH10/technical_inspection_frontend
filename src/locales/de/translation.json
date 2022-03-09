@@ -113,7 +113,8 @@
     "Dashboard.customersBox": "Kunden",
     "Dashboard.vehicleBox": "Verwaltete Fahrzeuge",
     "Dashboard.tuvBox": "TÜV/AU Status (fällig)",
-    "Dashboard.ntiBox": "Servicestatus (fällig)",
+    "Dashboard.ntiBox": "Servicestatus (Überfällig)",
+    "Dashboard.ntiBoxSingle": "Servicestatus",
     "Dashboard.financingStatusBox": "Finanzierungs- und Leasingstatus (Ablauf in 8 Monaten)",
     "Dashboard.customersBtn": "Alle Kunden",
     "Dashboard.vehiclesBtn": "Alle Fahrzeuge",
@@ -195,6 +196,6 @@
     "FinanzierungVehicles": "Finanzierungsstatus (Ablauf in 8 Monaten)",
     "LeasingVehicles": "Leasingstatus (Ablauf in 8 Monaten)",
     "FahrzeugscheinErklaerungsLink": "Beispiel eines Fahrzeugscheins einblenden",
-    "companynameLabel" : "Firmenname",
+    "companynameLabel": "Firmenname",
     "tooltip.sendmailtocustomer": "Eine E-Mail an diesen Kunden senden"
 }
