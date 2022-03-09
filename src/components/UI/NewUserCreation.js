@@ -57,6 +57,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     password: generatedPassword,
     confirmPassword: '',
     customerType: 'firmenkunde',
+    companyName: '',
     customerPartner: '',
     customerPartnerEmail: ''
   })
@@ -142,6 +143,17 @@ function NewCustomer({ handleAlertOpening, t }) {
                 />
               </RadioGroup>
             </FormControl>
+            {fields.customerType === 'firmenkunde' &&
+              <TextField
+                autoFocus
+                name="companyName"
+                margin="dense"
+                id="companyName"
+                label={t('companynameLabel')}
+                onChange={handleChange}
+                type="text"
+                fullWidth
+              />}
             {fields.customerType === 'firmenkunde' &&
               <TextField
                 autoFocus
