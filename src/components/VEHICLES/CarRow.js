@@ -60,7 +60,7 @@ const CarRow = ({ car, t }) => {
                     } */}
                     {new Date(TUVDate) > new Date() && new Date(TUVDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
-                            label={`TÜV in ${TUVDiff} ${t('DaysPlural')}`}
+                            label={`TÜV fällig in ${TUVDiff} Tag(en)`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -78,7 +78,7 @@ const CarRow = ({ car, t }) => {
                     } */}
                     {new Date(AUDate) > new Date() && new Date(AUDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
-                            label={`AU in ${HUDiff} ${t('DaysPlural')}`}
+                            label={`AU fällig in ${HUDiff} Tag(en)`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -87,7 +87,7 @@ const CarRow = ({ car, t }) => {
                     }
                     {new Date(NTIDate) > new Date() && new Date(NTIDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
-                            label={`Service in ${NTIDiff} ${t('DaysPlural')}`}
+                            label={`Service fällig in ${NTIDiff} Tag(en)`}
                             color="primary"
                             size="small"
                             variant="default"
@@ -96,7 +96,7 @@ const CarRow = ({ car, t }) => {
                     }
                     {carTuvExpired &&
                         <Chip
-                            label="TÜV Abgelaufen"
+                            label="TÜV abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"
@@ -105,7 +105,7 @@ const CarRow = ({ car, t }) => {
                     }
                     {carAuExpired &&
                         <Chip
-                            label="AU Abgelaufen"
+                            label="AU abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"
@@ -114,7 +114,7 @@ const CarRow = ({ car, t }) => {
                     }
                     {NTIExpired &&
                         <Chip
-                            label="Service Abgelaufen"
+                            label="Service abgelaufen"
                             color="primary"
                             size="small"
                             variant="default"
