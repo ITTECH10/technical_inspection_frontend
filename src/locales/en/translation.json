@@ -195,5 +195,6 @@
     "DateExpiring": "Expiration date",
     "FinanzierungVehicles": "Credit status (calculations based on 8 months)",
     "LeasingVehicles": "Leasing status (calculations based on 8 months)",
-    "FahrzeugscheinErklaerungsLink": "Show an example of a licence registration"
+    "FahrzeugscheinErklaerungsLink": "Show an example of a licence registration",
+    "companynameLabel": "Company name"
 }
