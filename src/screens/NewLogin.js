@@ -163,7 +163,7 @@ const NewLogin = ({ history, t }) => {
                     </Box>
                 </Box>
                 <Box component="footer" sx={{ fontSize: matches ? '1rem' : '.65rem', color: '#fff' }}>
-                    <Box sx={{ flexDirection: 'column', ml: matches ? 0 : 1 }}>
+                    <Box sx={{ flexDirection: 'column', ml: 1 }}>
                         <Box sx={{ mb: 1 }}>&copy; Copyright SE-Carmanagement 2021 - 2022 | Anschaffung, Fuhrparkmanagement und
                             Schadenservice</Box>
                         <Box>
