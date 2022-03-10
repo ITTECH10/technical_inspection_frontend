@@ -178,8 +178,8 @@ const DashboardScreen = ({ t }) => {
 
     // NOT OKAY ->> see dashboardScreen
     // const UserTUVExpiresInThirtyDays = myVehicles.filter(v => v.TUVExpiresInOneMonth)
-    const UserTUVExpiresInThirtyDays = myVehicles.filter(myVehicle => new Date(myVehicle.TUV) > new Date && new Date(myVehicle.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
-    const UserNTIExpiresInThirtyDays = myVehicles.filter(v => new Date(v.nextTechnicalInspection) > new Date && new Date(v.nextTechnicalInspection) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
+    const UserTUVExpiresInThirtyDays = myVehicles.filter(myVehicle => new Date(myVehicle.TUV) > new Date() && new Date(myVehicle.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
+    const UserNTIExpiresInThirtyDays = myVehicles.filter(v => new Date(v.nextTechnicalInspection) > new Date() && new Date(v.nextTechnicalInspection) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
     // MIGRATE TO BACKEND
     const UserTUVExpired = myVehicles.filter(v => new Date(v.TUV) < new Date())
 

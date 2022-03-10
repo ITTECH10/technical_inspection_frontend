@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useData } from '../contexts/DataContext'
 // mui
-import { Box, Typography, TextField, IconButton as Icon } from '@material-ui/core'
+import { Box, Typography, TextField, IconButton as Icon, useMediaQuery } from '@material-ui/core'
 // others
 import { Helmet } from 'react-helmet-async';
 import Page from '../components/Page'
@@ -21,6 +21,8 @@ const NewLogin = ({ history, t }) => {
     const [errors, setErrors] = useState({})
     const { setAuthenticated, setAppLoading, appLoading, setSelectedIndex, setGeneralAlertOptions } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
+
+    const matches = useMediaQuery('(min-width:600px)');
 
     const handleChange = (e) => {
         setFields({
@@ -66,35 +68,36 @@ const NewLogin = ({ history, t }) => {
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
             </Helmet>
             <Box className="wrapper">
-                <Box component="header" className="header-login">
-                    <Box className="logo">
-                        <img src="logo.svg" />
-                    </Box>
-                    <Box className="separator" />
-                    <Box>
-                        <Box className="info">
-                            <Box className="street">
-                                <Icon>
-                                    <PlaceIcon color="error" />
-                                </Icon>
-                                <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
-                            </Box>
-                            <Box className="telephone">
-                                <Icon>
-                                    <PhoneIcon color="error" />
-                                </Icon>
-                                <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
-                            </Box>
-                            <Box className="mail">
-                                <Icon>
-                                    <MailIcon color="error" />
-                                </Icon>
-                                <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
+                {matches &&
+                    <Box component="header" className="header-login">
+                        <Box className="logo">
+                            <img src="logo.svg" />
+                        </Box>
+                        <Box className="separator" />
+                        <Box>
+                            <Box className="info">
+                                <Box className="street">
+                                    <Icon>
+                                        <PlaceIcon color="error" />
+                                    </Icon>
+                                    <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
+                                </Box>
+                                <Box className="telephone">
+                                    <Icon>
+                                        <PhoneIcon color="error" />
+                                    </Icon>
+                                    <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
+                                </Box>
+                                <Box className="mail">
+                                    <Icon>
+                                        <MailIcon color="error" />
+                                    </Icon>
+                                    <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
+                                </Box>
                             </Box>
                         </Box>
-                    </Box>
-                </Box>
-                <Box component="main">
+                    </Box>}
+                <Box sx={{ px: matches ? 0 : '20px' }} component="main">
                     <Box className="screen">
                         <Box className="screen__content">
                             <Box className="logo-button">
@@ -156,7 +159,7 @@ const NewLogin = ({ history, t }) => {
                         </Box>
                     </Box>
                 </Box>
-                <Box component="footer">
+                <Box component="footer" sx={{ fontSize: matches ? '1rem' : '.5rem' }}>
                     <Box className="copyright">
                         <Box className="column">&copy; Copyright SE-Carmanagement 2021 - 2022 | Anschaffung, Fuhrparkmanagement und
                             Schadenservice</Box>
