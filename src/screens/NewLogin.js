@@ -3,15 +3,17 @@ import axios from 'axios'
 import { useData } from '../contexts/DataContext'
 // mui
 import { Box, Typography, TextField, IconButton as Icon, useMediaQuery } from '@material-ui/core'
+import PlaceIcon from '@material-ui/icons/Place';
+import PhoneIcon from '@material-ui/icons/Phone';
+import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // others
 import { Helmet } from 'react-helmet-async';
 import Page from '../components/Page'
 import { setAuthorizationHeader } from './../utils/setAuthorizationHeader'
 import { withNamespaces } from 'react-i18next'
-import PlaceIcon from '@material-ui/icons/Place';
-import PhoneIcon from '@material-ui/icons/Phone';
-import MailIcon from '@material-ui/icons/Mail';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ForgotPasswordForm from './../components/UI/Users/ForgotPasswordForm'
+import PoliciesFooter from '../components/UI/Users/PoliciesFooter'
 
 const NewLogin = ({ history, t }) => {
     const [fields, setFields] = useState({
@@ -147,14 +149,15 @@ const NewLogin = ({ history, t }) => {
                                     />
                                 </Box>
                                 <button className="button login__submit" type="submit">
-                                    <Icon style={{ '&:hover': { boxShadow: 'none !important' } }}>
+                                    <Icon style={{ '&:hover': { boxShadow: 'none !important' }, padding: '5px' }}>
                                         <ExitToAppIcon style={{ color: '#fff' }} />
                                     </Icon>
                                     <span className="button__text">Anmelden</span>
                                 </button>
-                                <Box className="forgot_password">
+                                {/* <Box className="forgot_password">
                                     <a href="">Passwort vergessen</a>
-                                </Box>
+                                </Box> */}
+                                <ForgotPasswordForm onDisableLoginForm={setDisableSubmiting} />
                             </Box>
                         </Box>
                     </Box>
@@ -171,6 +174,7 @@ const NewLogin = ({ history, t }) => {
                     </Box>
                 </Box>
             </Box>
+            <PoliciesFooter />
         </Page>
     )
 }
