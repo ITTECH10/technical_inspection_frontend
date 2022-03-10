@@ -82,19 +82,19 @@ const NewLogin = ({ history, t }) => {
                                     <Icon>
                                         <PlaceIcon color="error" />
                                     </Icon>
-                                    <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
+                                    <Typography ><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
                                 </Box>
                                 <Box className="telephone">
                                     <Icon>
                                         <PhoneIcon color="error" />
                                     </Icon>
-                                    <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
+                                    <Typography ><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
                                 </Box>
                                 <Box className="mail">
                                     <Icon>
                                         <MailIcon color="error" />
                                     </Icon>
-                                    <Typography style={{ fontFamily: 'Eurostile, sans-serif' }}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
+                                    <Typography ><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
                                 </Box>
                             </Box>
                         </Box>
@@ -162,10 +162,19 @@ const NewLogin = ({ history, t }) => {
                         </Box>
                     </Box>
                 </Box>
-                <Box component="footer" sx={{ fontSize: matches ? '1rem' : '.5rem' }}>
-                    <Box className="copyright">
-                        <Box className="column">&copy; Copyright SE-Carmanagement 2021 - 2022 | Anschaffung, Fuhrparkmanagement und
+                <Box component="footer" sx={{ fontSize: matches ? '1rem' : '.5rem', color: '#fff' }}>
+                    <Box sx={{ flexDirection: 'column', ml: matches ? 0 : 1 }}>
+                        <Box sx={{ mb: 1 }}>&copy; Copyright SE-Carmanagement 2021 - 2022 | Anschaffung, Fuhrparkmanagement und
                             Schadenservice</Box>
+                        <Box>
+                            <a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a>
+                        </Box>
+                        <Box sx={{ my: .5 }}>
+                            <a href="+4981212243822">+49 8121 22 43 8 – 22</a>
+                        </Box>
+                        <Box>
+                            <a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a>
+                        </Box>
                     </Box>
                     <Box className="separator"></Box>
                     <Box className="links">
