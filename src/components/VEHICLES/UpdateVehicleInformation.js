@@ -238,7 +238,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                         <TextField
                             name="lastUUV"
                             id="update-vehicle-lastUUV"
-                            label="Last UUV"
+                            label={t('lastUUVInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
@@ -251,7 +251,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                         <TextField
                             name="nextUUV"
                             id="update-vehicle-nextUUV"
-                            label="Next UUV"
+                            label={t('nextUUVInputLabel')}
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}

@@ -8,9 +8,6 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar, setCarImages } = useData()
 
-    console.log(dashboardAdaptiveTitle)
-
-
     const onHandleCarRender = () => {
         const selectedCar = vehicles.find(v => v._id === vehicle._id)
         setSelectedCar(selectedCar)
@@ -18,11 +15,11 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
         history.push(`/cars/${selectedCar._id}`)
     }
 
-    const TuvDate = new Date(vehicle.TUV).toLocaleDateString('de-DE')
-    const LeasingDate = new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE')
-    const CreditDate = new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE')
+    const TuvDate = vehicle.TUV && new Date(vehicle.TUV).toLocaleDateString('de-DE')
+    const LeasingDate = vehicle.contractExpirationDate && new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE')
+    const CreditDate = vehicle.contractExpirationDate && new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE')
 
-    const NtiServiceDate = new Date(vehicle.nextTechnicalInspection).toLocaleDateString('de-DE')
+    const NtiServiceDate = vehicle.nextTechnicalInspection && new Date(vehicle.nextTechnicalInspection).toLocaleDateString('de-DE')
 
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()}>
