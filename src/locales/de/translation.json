@@ -53,7 +53,7 @@
     "DeleteVehicleFormHint": "Möchten Sie dieses Fahrzeug endgültig löschen?",
     "NewCustomerFormHint": "Um einen neuen Kunden anzulegen, füllen Sie die Felder unten aus.",
     "UserDashboardSellVehicleHint": "Um Ihr Fahrzeug zu verkaufen, wählen Sie bitte eine der unten aufgeführten Optionen aus.",
-    "UserDashboardReportDamageHint": "Um Schäden an Ihrem Fahrzeug an uns zu melden, drücken Sie die Taste unten.",
+    "UserDashboardReportDamageHint": "Um Schäden an Ihrem Fahrzeug an uns zu melden, erklären uns einfach, wie der Schaden entstanden ist.",
     "UserDashboardReportDamageOptionsTitle": "Bitte beschreiben Sie kurz, wie der Schaden entstanden ist",
     "EmailInputLabel": "E-Mail",
     "FirstNameInputLabel": "Vorname",
