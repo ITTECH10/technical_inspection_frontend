@@ -432,7 +432,7 @@ const UploadCarData = ({ t }) => {
                                         </div>
                                     </Box>
                                 </Box>
-                                <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufugen</Button>
+                                <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufügen - Pflichtfeld</Button>
                                 <TextField
                                     name="mark"
                                     autoFocus

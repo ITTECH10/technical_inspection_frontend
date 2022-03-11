@@ -96,8 +96,8 @@ const PrivacyPolicyScreen = ({ t }) => {
                         </Typography>
 
                         <Box className={classes.privacyActionBtns}>
-                            <Button onClick={handlePrivacyAcception} variant="contained" color='primary'>I agree</Button>
-                            <Button onClick={handlePrivacyDissagrement} variant="contained" color='primary' style={{ marginLeft: 10 }}>I dissagree</Button>
+                            <Button onClick={handlePrivacyAcception} variant="contained" color='primary'>Ich akzeptiere</Button>
+                            <Button onClick={handlePrivacyDissagrement} variant="contained" color='primary' style={{ marginLeft: 10 }}>Abbrechen</Button>
                         </Box>
                     </Paper>
                 </Grid>
