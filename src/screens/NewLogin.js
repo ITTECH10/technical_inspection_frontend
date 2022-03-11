@@ -23,7 +23,7 @@ const NewLogin = ({ history, t }) => {
     const { setAuthenticated, setAppLoading, appLoading, setSelectedIndex, setGeneralAlertOptions } = useData()
     const [disableSubmiting, setDisableSubmiting] = useState(false)
 
-    const matches = useMediaQuery('(min-width:600px)');
+    const matches = useMediaQuery('(min-width:900px)');
 
     const handleChange = (e) => {
         setFields({
@@ -70,35 +70,35 @@ const NewLogin = ({ history, t }) => {
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
             </Helmet>
             <Box className="wrapper">
-                {matches &&
-                    <Box component="header" className="header-login">
-                        <Box className="logo">
-                            <img src="logo.svg" />
-                        </Box>
-                        <Box className="separator" />
+                <Box component="header" sx={{ height: matches ? 85 : 60 }} className="header-login">
+                    <Box className="logo" sx={{ width: matches ? 200 : 100, marginTop: matches ? 20 : 16, marginLeft: matches ? 40 : 10 }}>
+                        <img src="logo.svg" />
+                    </Box>
+                    <Box className="separator" />
+                    {matches &&
                         <Box>
                             <Box className="info">
                                 <Box className="street">
                                     <Icon>
                                         <PlaceIcon color="error" />
                                     </Icon>
-                                    <Typography ><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
+                                    <Typography sx={{ fontSize: '.7rem' }}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
                                 </Box>
                                 <Box className="telephone">
                                     <Icon>
                                         <PhoneIcon color="error" />
                                     </Icon>
-                                    <Typography ><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
+                                    <Typography sx={{ fontSize: '.7rem' }}><a href="+4981212243822">+49 8121 22 43 8 – 22</a></Typography>
                                 </Box>
                                 <Box className="mail">
                                     <Icon>
                                         <MailIcon color="error" />
                                     </Icon>
-                                    <Typography ><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
+                                    <Typography sx={{ fontSize: '.7rem' }}><a href="mailto:info@se-carmanagement.de">info@se-carmanagement.de</a></Typography>
                                 </Box>
                             </Box>
-                        </Box>
-                    </Box>}
+                        </Box>}
+                </Box>
                 <Box sx={{ px: matches ? 0 : '20px' }} component="main">
                     <Box className="screen">
                         <Box className="screen__content">
@@ -163,7 +163,7 @@ const NewLogin = ({ history, t }) => {
                     </Box>
                 </Box>
                 <Box component="footer" sx={{ fontSize: matches ? '1rem' : '.65rem', color: '#fff' }}>
-                    <Box sx={{ flexDirection: { xs: 'column', md: 'row' }, ml: 1 }}>
+                    <Box sx={{ flexDirection: { xs: 'column', md: 'row' }, ml: '35px' }}>
                         <Box sx={{ mb: 1 }}>&copy; Copyright SE-Carmanagement 2021 - 2022 | Anschaffung, Fuhrparkmanagement und
                             Schadenservice</Box>
                         {!matches &&
