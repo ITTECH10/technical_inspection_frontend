@@ -85,11 +85,11 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                     <TextField className={classes.input} value={varantyExpiresAt ? formatedVaranty : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>{t('LastUUVInputLabel')}</Typography>
+                    <Typography className={classes.inputTitle}>{t('lastUUVInputLabel')}</Typography>
                     <TextField className={classes.input} value={lastUUV ? formatedLastUUV : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>{t('NextUUVInputLabel')}</Typography>
+                    <Typography className={classes.inputTitle}>{t('nextUUVInputLabel')}</Typography>
                     <TextField className={classes.input} value={nextUUV ? formatedNextUUV : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
