@@ -229,7 +229,7 @@ const DashboardScreen = ({ t }) => {
     }
 
     return (
-        <Page title="Dashboard">
+        <Page title="SE Carmanagement | Fuhrparkmanager">
             <Box className={classes.dashboardContainer}>
                 <Box className={classes.titleDividerBox}>
                     <Typography className={classes.title} variant="h4">

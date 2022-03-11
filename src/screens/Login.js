@@ -116,7 +116,7 @@ const Login = ({ history, t }) => {
     const classes = useStyles()
 
     return (
-        <Page title="Anmelden">
+        <Page title="SE Carmanagement | Anmelden">
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={4} className={classes.gridChildOne} />
 

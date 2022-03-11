@@ -11,7 +11,7 @@ const InsuranceScreen = ({ t }) => {
     const { appLoading, insurances } = useData()
     return (
         !appLoading && insurances.length > 0 ?
-            <Page title="Versicherungen">
+            <Page title="SE Carmanagement | Versicherungen">
                 <Typography variant="h4" style={{ padding: '10px 0' }}>
                     {t('InsurancesTitle')}
                 </Typography>

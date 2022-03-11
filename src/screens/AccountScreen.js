@@ -119,7 +119,7 @@ const AccountScreen = ({ t }) => {
     const matches = useMediaQuery('(max-width: 600px)')
 
     return (
-        <Page title="Konto">
+        <Page title="SE Carmanagement | Konto">
             <Grid container className={classes.gridContainer}>
                 <Grid className={classes.gridChildTwo} xs={12} sm={12}>
                     <Box className={classes.myProfileEdit}>

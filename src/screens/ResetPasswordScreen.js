@@ -103,7 +103,7 @@ const ResetPasswordScreen = ({ t }) => {
     const classes = useStyles()
 
     return (
-        <Page title="Passwort zurücksetzen">
+        <Page title="SE Carmanagement | Passwort zurücksetzen">
             <Alerts message={t('AlertGeneralSuccessful')} open={alertOpen} handleOpening={setAlertOpen} />
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={3} className={classes.gridChildOne} />

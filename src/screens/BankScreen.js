@@ -11,7 +11,7 @@ const BankScreen = ({ t }) => {
     const { appLoading, banks } = useData()
     return (
         !appLoading && banks.length > 0 ?
-            <Page title="Banken">
+            <Page title="SE Carmanagement | Banken">
                 <Typography variant="h4" style={{ padding: '10px 0' }}>
                     {t('BanksTitle')}
                 </Typography>

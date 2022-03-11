@@ -64,7 +64,7 @@ const NewLogin = ({ history, t }) => {
     }
 
     return (
-        <Page title="Fuhrparkmanager">
+        <Page title="SE Carmanagement | Fuhrparkmanager">
             <Helmet>
                 <link rel="stylesheet" href="style.css" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />

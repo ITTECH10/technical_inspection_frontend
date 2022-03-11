@@ -136,7 +136,7 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
 
     return (
         user.firstLogIn &&
-        <Page title="Generiertes Passwort ändern">
+        <Page title="SE Carmanagement | Generiertes Passwort ändern">
             <Alerts message="Passwort geändert!" open={alertOpen} handleOpening={setAlertOpen} />
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={4} className={classes.gridChildOne} />

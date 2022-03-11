@@ -64,7 +64,7 @@ const PrivacyPolicyScreen = ({ t }) => {
     }
 
     return (
-        <Page title="Datenschutzbestimmungen">
+        <Page title="SE Carmanagement | Datenschutzbestimmungen">
             <Alerts message={t('AlertPrivacyPolicyAccepted')} open={alertOpen} handleOpening={setAlertOpen} severity={alertMsg.startsWith('Thank you') ? 'success' : 'error'} />
             <Grid container className={classes.mainContainer}>
                 <Grid sm={3} item />
