@@ -10,7 +10,7 @@ const CustomersScreen = ({ t }) => {
     const [open, setOpen] = useState(false)
 
     return (
-        <Page title="Bildschirm Kunden">
+        <Page title="SE Carmanagement | Kundenbereich">
             <Box>
                 <CustomersTableAdvanced />
                 <NewUserCreation handleAlertOpening={setOpen} />

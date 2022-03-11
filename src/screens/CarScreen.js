@@ -11,13 +11,13 @@ const CarScreen = () => {
     const { user, selectedUser, vehiclesPage } = useData()
 
     const renderVehicles = vehiclesPage === 'allVehicles' && user.role === 'admin' ? (
-        <Page title="Fahrzeuge">
+        <Page title="SE Carmanagement | Alle Fahrzeuge">
             <Box>
                 <VehiclesTableAdvanced />
             </Box>
         </Page>
     ) : (
-        <Page title="Fahrzeuge">
+        <Page title="SE Carmanagement | Alle Fahrzeuge">
             <Box>
                 <CarTableAdvanced />
             </Box>

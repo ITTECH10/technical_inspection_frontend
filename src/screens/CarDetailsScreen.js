@@ -15,7 +15,7 @@ const CarDetailsScreen = ({ t }) => {
 
     return (
         !loading ?
-            <Page title="Fahrzeugdetails">
+            <Page title="SE Carmanagement | Fahrzeugdetails">
                 <Alerts message={t('AlertGeneralSuccessful')} open={onHandleAddOpen} handleOpening={setOnHandleAddOpen} />
                 <Alerts message={t('AlertGeneralUpdated')} open={onHandleUpdateOpen} handleOpening={setOnHandleUpdateOpen} />
                 <Alerts severity="error" message={t('AlertGeneralDeleted')} open={onHandleDeleteOpen} handleOpening={setOnHandleDeleteOpen} />
