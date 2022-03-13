@@ -28,19 +28,19 @@ const CarRow = ({ car, t }) => {
 
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const curDate = new Date()
-    const NTIDate = car.nextTechnicalInspection ? new Date(car.nextTechnicalInspection) : ''
-    const TUVDate = car.TUV ? new Date(car.TUV) : ''
-    const AUDate = car.AU ? new Date(car.AU) : ''
-    const CreditDate = car.contractExpirationDate ? new Date(car.contractExpirationDate) : ''
-    const LeasingDate = car.contractExpirationDate ? new Date(car.contractExpirationDate) : ''
+    const NTIDate = new Date(car.nextTechnicalInspection)
+    const TUVDate = new Date(car.TUV)
+    const AUDate = new Date(car.AU)
+    const CreditDate = new Date(car.contractExpirationDate)
+    const LeasingDate = new Date(car.contractExpirationDate)
 
     const NTIDiff = Math.round(Math.abs((curDate - NTIDate) / oneDay)) + 1;
     const TUVDiff = Math.round(Math.abs((curDate - TUVDate) / oneDay)) + 1;
     const HUDiff = Math.round(Math.abs((curDate - AUDate) / oneDay)) + 1;
 
-    const carTuvExpired = car.TUV ? new Date(car.TUV) < new Date() : ''
-    const carAuExpired = car.AU ? new Date(car.AU) < new Date() : ''
-    const NTIExpired = car.nextTechnicalInspection ? new Date(car.nextTechnicalInspection) < new Date() : ''
+    const carTuvExpired = new Date(car.TUV) < new Date()
+    const carAuExpired = new Date(car.AU) < new Date()
+    const NTIExpired = new Date(car.nextTechnicalInspection) < new Date()
 
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()} key={car._id}>
@@ -126,11 +126,11 @@ const CarRow = ({ car, t }) => {
                 </TableCell>}
             {user.role !== 'admin' && dashboardAdaptiveTitle !== '' && (
                 <TableCell>
-                    {dashboardAdaptiveTitle === 'Finanzierung' && car.vehiclePaymentTypeVariant === 'credit' ? CreditDate.toLocaleDateString('de-DE') :
-                        dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate.toLocaleDateString('de-DE')
-                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' ? NTIDate.toLocaleDateString('de-DE')
-                                : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NTIDate.toLocaleDateString('de-DE')
-                                    : TUVDate.toLocaleDateString('de-DE')}
+                    {dashboardAdaptiveTitle === 'Finanzierung' && car.vehiclePaymentTypeVariant === 'credit' && car.contractExpirationDate ? CreditDate.toLocaleDateString('de-DE') :
+                        dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' && car.contractExpirationDate ? LeasingDate.toLocaleDateString('de-DE')
+                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' && car.nextTechnicalInspection ? NTIDate.toLocaleDateString('de-DE')
+                                : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' && car.nextTechnicalInspection ? NTIDate.toLocaleDateString('de-DE')
+                                    : car.TUV && TUVDate.toLocaleDateString('de-DE')}
                 </TableCell>
             )}
         </TableRow>

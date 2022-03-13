@@ -5,6 +5,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import Box from '@material-ui/core/Box';
+import Switch from '@material-ui/core/Switch';
 import FormLabel from '@material-ui/core/FormLabel'; import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -19,7 +22,6 @@ import AddIcon from '@material-ui/icons/Add';
 import { generateId } from './../../utils/helpers'
 import { withNamespaces } from 'react-i18next';
 import { genders } from './../../utils/helpers'
-import NumberFormat from 'react-number-format'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -32,8 +34,17 @@ const generatedPassword = generateId()
 
 function NewCustomer({ handleAlertOpening, t }) {
   const [open, setOpen] = React.useState(false);
+  const [adacChecked, setAdacChecked] = useState(false)
+  const [protectionLetterChecked, setProtectionLetterChecked] = useState(false)
   const [btnLoading, setBtnLoading] = useState(false)
   const classes = useStyles()
+
+  const handleProtectionLetterSwitchOn = () => {
+    if (protectionLetterChecked) {
+      setAdacChecked(false)
+    }
+    setProtectionLetterChecked(prevState => !prevState)
+  }
 
   let userCreationTimeout = React.useRef()
 
@@ -46,8 +57,9 @@ function NewCustomer({ handleAlertOpening, t }) {
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
-    gender: '',
+    gender: genders[0].text,
     email: '',
+    membershipNumber: '',
     phoneNumber: '',
     smartphoneNumber: '',
     street: '',
@@ -75,7 +87,14 @@ function NewCustomer({ handleAlertOpening, t }) {
     e.preventDefault()
     setBtnLoading(true)
 
-    const data = { ...fields, confirmPassword: fields.password }
+    const data = {
+      ...fields,
+      confirmPassword: fields.password,
+      protectionLetter: protectionLetterChecked,
+      ADAC: adacChecked,
+      membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' ? fields.membershipNumber : undefined,
+      companyName: fields.customerType === 'firmenkunde' ? fields.companyName : undefined
+    }
 
     axios.post('/users/signup', data).then(res => {
       if (res.status === 201) {
@@ -143,6 +162,33 @@ function NewCustomer({ handleAlertOpening, t }) {
                 />
               </RadioGroup>
             </FormControl>
+            <Box style={{ marginTop: 10 }}>
+              <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
+              <FormGroup style={{ flexDirection: 'row' }}>
+                <FormControlLabel
+                  control={<Switch checked={protectionLetterChecked} />}
+                  onChange={handleProtectionLetterSwitchOn}
+                  label="Schutzbrief"
+                />
+                <FormControlLabel
+                  disabled={!protectionLetterChecked}
+                  control={<Switch checked={adacChecked} />}
+                  onChange={() => setAdacChecked(prevState => !prevState)}
+                  label="ADAC"
+                />
+              </FormGroup>
+            </Box>
+            {protectionLetterChecked && adacChecked &&
+              <TextField
+                autoFocus
+                name="membershipNumber"
+                margin="dense"
+                id="membershipNumber"
+                label="Mitgliednummer"
+                onChange={handleChange}
+                type="text"
+                fullWidth
+              />}
             {fields.customerType === 'firmenkunde' &&
               <TextField
                 autoFocus
@@ -156,7 +202,6 @@ function NewCustomer({ handleAlertOpening, t }) {
               />}
             {fields.customerType === 'firmenkunde' &&
               <TextField
-                autoFocus
                 name="corespondencePartner"
                 required
                 margin="dense"

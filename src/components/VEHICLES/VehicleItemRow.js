@@ -15,7 +15,7 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
         history.push(`/cars/${selectedCar._id}`)
     }
 
-    const TuvDate = vehicle.TUV ? new Date(vehicle.TUV).toLocaleDateString('de-DE') : ''
+    const TuvDate = new Date(vehicle.TUV).toLocaleDateString('de-DE')
     const LeasingDate = vehicle.contractExpirationDate ? new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE') : ''
     const CreditDate = vehicle.contractExpirationDate ? new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE') : ''
 
@@ -34,9 +34,9 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
             {
                 dashboardAdaptiveTitle !== '' &&
                 <TableCell>
-                    {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' ? CreditDate :
-                        dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' ? LeasingDate
-                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' ? NtiServiceDate : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' ? NtiServiceDate : TuvDate}
+                    {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' && vehicle.contractExpirationDate ? CreditDate :
+                        dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' && vehicle.contractExpirationDate ? LeasingDate
+                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' && vehicle.nextTechnicalInspection ? NtiServiceDate : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' && vehicle.nextTechnicalInspection ? NtiServiceDate : vehicle.TUV && TuvDate}
                 </TableCell>
             }
         </TableRow>

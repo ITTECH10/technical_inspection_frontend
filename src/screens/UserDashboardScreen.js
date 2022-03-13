@@ -232,9 +232,10 @@ const DashboardScreen = ({ t }) => {
     }
 
     const handleAllVehiclesNavigate = () => {
-        history.push('/cars')
+        setMyVehicles(myVehicles)
         setSelectedIndex(1)
 
+        history.push('/cars')
         dashboardGeneratedTitle('Meine Fahrzeuge')
     }
 
