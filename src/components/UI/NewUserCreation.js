@@ -32,28 +32,17 @@ const useStyles = makeStyles(theme => ({
 
 const generatedPassword = generateId()
 
+const initialFields = {
+
+}
+
 function NewCustomer({ handleAlertOpening, t }) {
+  const { users, setUsers } = useData()
   const [open, setOpen] = React.useState(false);
   const [adacChecked, setAdacChecked] = useState(false)
   const [protectionLetterChecked, setProtectionLetterChecked] = useState(false)
   const [btnLoading, setBtnLoading] = useState(false)
   const classes = useStyles()
-
-  const handleProtectionLetterSwitchOn = () => {
-    if (protectionLetterChecked) {
-      setAdacChecked(false)
-    }
-    setProtectionLetterChecked(prevState => !prevState)
-  }
-
-  let userCreationTimeout = React.useRef()
-
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(userCreationTimeout.current)
-    }
-  }, [userCreationTimeout])
-
   const [fields, setFields] = useState({
     firstName: '',
     lastName: '',
@@ -74,7 +63,17 @@ function NewCustomer({ handleAlertOpening, t }) {
     customerPartnerEmail: ''
   })
 
-  const { users, setUsers } = useData()
+  const handleProtectionLetterSwitchOn = () => {
+    if (protectionLetterChecked) {
+      setAdacChecked(false)
+    }
+    setProtectionLetterChecked(prevState => !prevState)
+  }
+
+  const resetSwitchStates = () => {
+    setProtectionLetterChecked(false)
+    setAdacChecked(false)
+  }
 
   const handleChange = (e) => {
     setFields({
@@ -93,19 +92,19 @@ function NewCustomer({ handleAlertOpening, t }) {
       protectionLetter: protectionLetterChecked,
       ADAC: adacChecked,
       membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' ? fields.membershipNumber : undefined,
-      companyName: fields.customerType === 'firmenkunde' ? fields.companyName : undefined
+      companyName: fields.customerType === 'firmenkunde' ? fields.companyName : undefined,
+      customerPartner: fields.customerType === 'firmenkunde' ? fields.customerPartner : undefined,
+      customerPartnerEmail: fields.customerType === 'firmenkunde' ? fields.customerPartnerEmail : undefined,
     }
 
     axios.post('/users/signup', data).then(res => {
       if (res.status === 201) {
         const updatedUsers = [...users, { ...res.data.newUser }]
 
-        userCreationTimeout.current = setTimeout(() => {
-          setUsers(updatedUsers)
-          setBtnLoading(false)
-          setOpen(false)
-          handleAlertOpening(true)
-        }, 2000)
+        setUsers(updatedUsers)
+        setBtnLoading(false)
+        setOpen(false)
+        handleAlertOpening(true)
       }
     })
       .catch(err => {
@@ -119,6 +118,8 @@ function NewCustomer({ handleAlertOpening, t }) {
 
   const handleClose = () => {
     setOpen(false);
+    setFields(initialFields)
+    resetSwitchStates()
   };
 
   return (
@@ -202,10 +203,10 @@ function NewCustomer({ handleAlertOpening, t }) {
               />}
             {fields.customerType === 'firmenkunde' &&
               <TextField
-                name="corespondencePartner"
+                name="customerPartner"
                 required
                 margin="dense"
-                id="corespondencePartner"
+                id="customerPartner"
                 label={t('ContactPartner')}
                 onChange={handleChange}
                 type="text"
@@ -213,10 +214,10 @@ function NewCustomer({ handleAlertOpening, t }) {
               />}
             {fields.customerType === 'firmenkunde' &&
               <TextField
-                name="corespondencePartnerEmail"
+                name="customerPartnerEmail"
                 required
                 margin="dense"
-                id="corespondencePartnerEmail"
+                id="customerPartnerEmail"
                 label={t('ContactPartnerEmail')}
                 onChange={handleChange}
                 type="email"
