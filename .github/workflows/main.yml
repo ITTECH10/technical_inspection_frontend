@@ -1,0 +1,43 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    
+    name: Perform Install, Build and Deploy
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node Server ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Perform NPM Install
+      run: npm ci
+    
+    - name: Perform NPM Build
+      run: CI=false && npm run build --if-present
+    
+    - name: SFTP Deploy to App Folder
+      uses: Creepios/sftp-action@v1.0.3
+      with:
+        host: ${{ secrets.ftp_host}}
+        port: 22
+        username: ${{ secrets.ftp_username}}
+        password: ${{ secrets.ftp_password}}
+        localPath: './build/'
+        remotePath: './'
