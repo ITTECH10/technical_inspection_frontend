@@ -35,9 +35,9 @@ jobs:
     - name: SFTP Deploy to App Folder
       uses: Creepios/sftp-action@v1.0.3
       with:
-        host: ${{secrets.ftp_host}}
+        host: ${{secrets.FTP_HOST}}
         port: 22
-        username: ${{secrets.ftp_username}}
-        password: ${{secrets.ftp_password}}
+        username: ${{secrets.FTP_USERNAME}}
+        password: ${{secrets.FTP_PASSWORD}}
         localPath: './build/'
         remotePath: './'
