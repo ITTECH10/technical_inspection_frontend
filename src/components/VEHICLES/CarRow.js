@@ -12,7 +12,7 @@ const CarRow = ({ car, t }) => {
     const { vehicles, setSelectedCar, myVehicles, user, dashboardAdaptiveTitle } = useData()
     let selectedCar
 
-    console.log(dashboardAdaptiveTitle)
+    // console.log(dashboardAdaptiveTitle)
 
     if (user.role === 'admin') {
         selectedCar = vehicles.find(v => v._id === car._id)
@@ -102,7 +102,7 @@ const CarRow = ({ car, t }) => {
                             color="primary"
                             size="small"
                             variant="default"
-                            style={{ cursor: 'pointer', marginRight: 5 }}
+                            style={{ cursor: 'pointer', marginLeft: 5 }}
                         />
                     }
                     {carAuExpired &&
@@ -111,7 +111,7 @@ const CarRow = ({ car, t }) => {
                             color="primary"
                             size="small"
                             variant="default"
-                            style={{ cursor: 'pointer', marginRight: 5 }}
+                            style={{ cursor: 'pointer', marginLeft: 5 }}
                         />
                     }
                     {NTIExpired &&

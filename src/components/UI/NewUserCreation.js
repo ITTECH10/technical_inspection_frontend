@@ -32,10 +32,6 @@ const useStyles = makeStyles(theme => ({
 
 const generatedPassword = generateId()
 
-const initialFields = {
-
-}
-
 function NewCustomer({ handleAlertOpening, t }) {
   const { users, setUsers } = useData()
   const [open, setOpen] = React.useState(false);
@@ -44,23 +40,23 @@ function NewCustomer({ handleAlertOpening, t }) {
   const [btnLoading, setBtnLoading] = useState(false)
   const classes = useStyles()
   const [fields, setFields] = useState({
-    firstName: '',
-    lastName: '',
+    firstName: undefined,
+    lastName: undefined,
     gender: genders[0].text,
-    email: '',
-    membershipNumber: '',
-    phoneNumber: '',
-    smartphoneNumber: '',
-    street: '',
-    postCode: '',
-    city: '',
-    birthDate: '',
+    email: undefined,
+    membershipNumber: undefined,
+    phoneNumber: undefined,
+    smartphoneNumber: undefined,
+    street: undefined,
+    postCode: undefined,
+    city: undefined,
+    birthDate: undefined,
     password: generatedPassword,
-    confirmPassword: '',
+    confirmPassword: undefined,
     customerType: 'firmenkunde',
-    companyName: '',
-    customerPartner: '',
-    customerPartnerEmail: ''
+    companyName: undefined,
+    customerPartner: undefined,
+    customerPartnerEmail: undefined
   })
 
   const handleProtectionLetterSwitchOn = () => {
@@ -118,7 +114,6 @@ function NewCustomer({ handleAlertOpening, t }) {
 
   const handleClose = () => {
     setOpen(false);
-    setFields(initialFields)
     resetSwitchStates()
   };
 
@@ -163,33 +158,6 @@ function NewCustomer({ handleAlertOpening, t }) {
                 />
               </RadioGroup>
             </FormControl>
-            <Box style={{ marginTop: 10 }}>
-              <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
-              <FormGroup style={{ flexDirection: 'row' }}>
-                <FormControlLabel
-                  control={<Switch checked={protectionLetterChecked} />}
-                  onChange={handleProtectionLetterSwitchOn}
-                  label="Schutzbrief"
-                />
-                <FormControlLabel
-                  disabled={!protectionLetterChecked}
-                  control={<Switch checked={adacChecked} />}
-                  onChange={() => setAdacChecked(prevState => !prevState)}
-                  label="ADAC"
-                />
-              </FormGroup>
-            </Box>
-            {protectionLetterChecked && adacChecked &&
-              <TextField
-                autoFocus
-                name="membershipNumber"
-                margin="dense"
-                id="membershipNumber"
-                label="Mitgliednummer"
-                onChange={handleChange}
-                type="text"
-                fullWidth
-              />}
             {fields.customerType === 'firmenkunde' &&
               <TextField
                 autoFocus
@@ -266,7 +234,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             </TextField>
             <TextField
               name="birthDate"
-              required
               id="birthDate"
               label={t('BirthDateInputLabel')}
               onChange={handleChange}
@@ -288,7 +255,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             {<TextField
               name="phoneNumber"
-              required
               margin="dense"
               id="phoneNumber"
               label={`${t('PhoneNumberInputLabel')}`}
@@ -310,7 +276,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             {/*/>*/}
             <TextField
               name="smartphoneNumber"
-              required
               margin="dense"
               id="smartphoneNumber"
               label={`${t('SmartphoneLabel')}`}
@@ -348,6 +313,33 @@ function NewCustomer({ handleAlertOpening, t }) {
               onChange={handleChange}
               fullWidth
             />
+            <Box style={{ marginTop: 10 }}>
+              <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
+              <FormGroup style={{ flexDirection: 'row' }}>
+                <FormControlLabel
+                  control={<Switch checked={protectionLetterChecked} />}
+                  onChange={handleProtectionLetterSwitchOn}
+                  label="Schutzbrief"
+                />
+                <FormControlLabel
+                  disabled={!protectionLetterChecked}
+                  control={<Switch checked={adacChecked} />}
+                  onChange={() => setAdacChecked(prevState => !prevState)}
+                  label="ADAC"
+                />
+              </FormGroup>
+            </Box>
+            {protectionLetterChecked && adacChecked &&
+              <TextField
+                autoFocus
+                name="membershipNumber"
+                margin="dense"
+                id="membershipNumber"
+                label="Mitgliedsnummer"
+                onChange={handleChange}
+                type="text"
+                fullWidth
+              />}
             <DialogActions>
               <Button onClick={handleClose} color="primary" variant="contained">
                 {t('CancelButton')}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useData } from '../contexts/DataContext'
 // mui
-import { Box, Typography, TextField, IconButton as Icon, useMediaQuery } from '@material-ui/core'
+import { Box, Typography, TextField, IconButton as Icon, useMediaQuery, Button } from '@material-ui/core'
 import PlaceIcon from '@material-ui/icons/Place';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
@@ -34,7 +34,7 @@ const NewLogin = ({ history, t }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setDisableSubmiting(true)
+        // setDisableSubmiting(false)
 
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
@@ -52,13 +52,13 @@ const NewLogin = ({ history, t }) => {
         })
             .catch(err => {
                 // console.log(err.response)
-                setDisableSubmiting(false)
+                // setDisableSubmiting(false)
                 setAppLoading(false)
                 setGeneralAlertOptions({
                     open: true,
                     message: err.response ? err.response.data.message : 'Server error...',
                     severity: 'error',
-                    hideAfter: 5000
+                    hideAfter: 2000
                 })
             })
     }
@@ -85,6 +85,7 @@ const NewLogin = ({ history, t }) => {
                                     <Typography sx={{ fontSize: '.7rem' }}><a href="https://goo.gl/maps/th6gNdvVJ6ihiUA3A">Geltinger Str. 23, 85652 Pliening</a></Typography>
                                 </Box>
                                 <Box className="telephone">
+
                                     <Icon>
                                         <PhoneIcon color="error" />
                                     </Icon>
@@ -148,11 +149,9 @@ const NewLogin = ({ history, t }) => {
                                         placeholder="Passwort"
                                     />
                                 </Box>
-                                <button className="button login__submit" type="submit">
-                                    <Icon style={{ '&:hover': { boxShadow: 'none !important' }, padding: '5px' }}>
-                                        <ExitToAppIcon style={{ color: '#fff' }} />
-                                    </Icon>
-                                    <span className="button__text">Anmelden</span>
+                                <button className="button login__submit" type="submit" disabled={disableSubmiting}>
+                                    <ExitToAppIcon style={{ color: '#fff' }} />
+                                    <span style={{ marginLeft: '5px' }} className="button__text">Anmelden</span>
                                 </button>
                                 {/* <Box className="forgot_password">
                                     <a href="">Passwort vergessen</a>

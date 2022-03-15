@@ -62,7 +62,7 @@ function ForgotPasswordForm({ onDisableLoginForm, t }) {
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 5000
+                    hideAfter: 2500
                 })
                 setOpen(false)
                 setButtonLoading(false)

@@ -36,6 +36,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         registrationNumber: '',
         HSN: '',
         TSN: '',
+        varantyExpiresAt: '',
         lastUUV: '',
         nextUUV: '',
         firstVehicleRegistration: '',
@@ -132,7 +133,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 5000
+                    hideAfter: 2500
                 })
             })
     }
@@ -159,7 +160,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('ChassisNumber')}
                             onChange={handleChange}
                             fullWidth
-                            required
+                            required={user.role === 'admin'}
                             value={fields.chassisNumber}
                         />
                         <TextField
@@ -189,7 +190,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('HSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            required
+                            required={user.role === 'admin'}
                             value={fields.HSN}
                         />
                         <TextField
@@ -199,7 +200,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('TSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            required
+                            required={user.role === 'admin'}
                             value={fields.TSN}
                         />
                         <TextField
@@ -223,6 +224,18 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             value={fields.kilometersDriven}
                         />
                         <TextField
+                            name="varantyExpiresAt"
+                            id="varantyExpiresAt"
+                            label="Garantie Ablaufdatum"
+                            onChange={handleChange}
+                            type="date"
+                            required
+                            className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
                             name="firstVehicleRegistration"
                             id="update-vehicle-firstVehicleRegistration"
                             label={t('FVRInputLabel')}
@@ -242,7 +255,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            required
+                            required={user.role === 'admin'}
                             value={fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -255,7 +268,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            required
+                            required={user.role === 'admin'}
                             value={fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -281,7 +294,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            required
+                            required={user.role === 'admin'}
                             value={fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -334,7 +347,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             value={fields.monthlyInsurancePayment}
-                            required
+                            required={user.role === 'admin'}
                         />
                         <TextField
                             name="allowedYearlyKilometers"
@@ -344,7 +357,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             value={fields.allowedYearlyKilometers}
-                            required
+                            required={user.role === 'admin'}
                         />
                         <TextField
                             name="yearlyTax"
@@ -354,7 +367,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             value={fields.yearlyTax}
-                            required
+                            required={user.role === 'admin'}
                         />
                         <DialogActions>
                             <Button variant="contained" onClick={handleClose} color="primary">

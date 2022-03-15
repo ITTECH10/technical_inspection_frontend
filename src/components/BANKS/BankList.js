@@ -39,7 +39,7 @@ const BankList = ({ bank, t, handleAlertOpening, handleDialogClosing }) => {
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 5000
+                    hideAfter: 2500
                 })
             })
     }

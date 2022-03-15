@@ -32,7 +32,7 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
                 {`${vehicle.vehicleOwner.firstName} ${vehicle.vehicleOwner.lastName}`}
             </TableCell>
             {
-                dashboardAdaptiveTitle !== '' &&
+                dashboardAdaptiveTitle !== '' && dashboardAdaptiveTitle !== 'Alle Fahrzeuge' &&
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' && vehicle.contractExpirationDate ? CreditDate :
                         dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' && vehicle.contractExpirationDate ? LeasingDate

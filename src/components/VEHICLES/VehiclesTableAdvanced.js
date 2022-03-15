@@ -94,8 +94,8 @@ function VehiclesTableAdvanced({ t }) {
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
                                 <TableCell>{t('VehicleOwner')}</TableCell>
                                 {
-                                    dashboardAdaptiveTitle !== '' &&
-                                    <TableCell>{t('Date')}</TableCell>
+                                    dashboardAdaptiveTitle !== '' && dashboardAdaptiveTitle !== 'Alle Fahrzeuge' &&
+                                    <TableCell TableCell > {t('Date')}</TableCell>
                                 }
                             </TableRow>
                         </TableHead>

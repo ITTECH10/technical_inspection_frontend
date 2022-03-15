@@ -126,14 +126,14 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel') + ' ' + '(km)'}</Typography>
-                    <NumberFormat
-                        value={allowedYearlyKilometers && allowedYearlyKilometers}
-                        thousandSeparator={true}
-                        customInput={TextField}
-                        className={classes.input}
-                        style={{ marginTop: '1rem' }}
-                        disabled
-                    />
+                    {allowedYearlyKilometers ?
+                        <NumberFormat
+                            value={allowedYearlyKilometers}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            disabled
+                        /> : <TextField className={classes.input} value={allowedYearlyKilometers ? allowedYearlyKilometers : t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('KilometersDrivenInputLabel')}</Typography>
@@ -142,21 +142,20 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                         thousandSeparator={true}
                         customInput={TextField}
                         className={classes.input}
-                        style={{ marginTop: '1rem' }}
                         disabled
                     />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('YearlyTaxInputLabel')}</Typography>
-                    <NumberFormat
-                        value={yearlyTax && yearlyTax}
-                        thousandSeparator={true}
-                        customInput={TextField}
-                        className={classes.input}
-                        style={{ marginTop: '1rem' }}
-                        disabled
-                        prefix="€"
-                    />
+                    {yearlyTax ?
+                        <NumberFormat
+                            value={yearlyTax}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            disabled
+                            prefix="€"
+                        /> : <TextField className={classes.input} value={yearlyTax ? yearlyTax : t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
             </Paper>
         </Grid>

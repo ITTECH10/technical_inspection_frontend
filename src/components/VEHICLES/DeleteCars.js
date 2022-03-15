@@ -72,7 +72,7 @@ function DeleteCars({ t, setOnHandleDeleteOpen }) {
           open: true,
           message: err.response ? err.response.data.message : 'Server-Fehler......',
           severity: 'error',
-          hideAfter: 5000
+          hideAfter: 2500
         })
         // console.log(err.response)
       })

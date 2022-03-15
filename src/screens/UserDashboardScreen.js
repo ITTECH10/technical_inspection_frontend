@@ -341,7 +341,7 @@ const DashboardScreen = ({ t }) => {
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {UserNTIExpiresInThirtyDays.length}
                                     </Typography>
-                                    <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateNtiThirtyDaysVehicles}>
+                                    <Button disabled={UserNTIExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateNtiThirtyDaysVehicles}>
                                         {t('Dashboard.tuvBtn30')}
                                     </Button>
                                 </Box>

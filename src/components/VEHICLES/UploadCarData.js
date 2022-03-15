@@ -72,20 +72,20 @@ const UploadCarData = ({ t }) => {
 
     if (user.role === 'admin') {
         formData.append('chassisNumber', fields.chassisNumber)
-        formData.append('HSN', fields.HSN)
-        formData.append('TSN', fields.TSN)
-        formData.append('varantyExpiresAt', fields.varantyExpiresAt)
-        formData.append('lastUUV', fields.lastUUV)
-        formData.append('nextUUV', fields.nextUUV)
+        fields.HSN !== '' && formData.append('HSN', fields.HSN)
+        fields.TSN !== '' && formData.append('TSN', fields.TSN)
+        fields.varantyExpiresAt !== '' && formData.append('varantyExpiresAt', fields.varantyExpiresAt)
+        fields.lastUUV !== '' && formData.append('lastUUV', fields.lastUUV)
+        fields.nextUUV !== '' && formData.append('nextUUV', fields.nextUUV)
         formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
         formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
-        formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
+        fields.lastTechnicalInspection !== '' && formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
         formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
         formData.append('AU', fields.AU)
         formData.append('TUV', fields.TUV)
-        formData.append('monthlyInsurancePayment', fields.monthlyInsurancePayment)
-        formData.append('allowedYearlyKilometers', fields.allowedYearlyKilometers)
-        formData.append('yearlyTax', fields.yearlyTax)
+        fields.monthlyInsurancePayment !== '' && formData.append('monthlyInsurancePayment', fields.monthlyInsurancePayment)
+        fields.allowedYearlyKilometers !== '' && formData.append('allowedYearlyKilometers', fields.allowedYearlyKilometers)
+        fields.yearlyTax !== '' && formData.append('yearlyTax', fields.yearlyTax)
     }
 
     formData.append('photo', fields.photo)
@@ -135,7 +135,7 @@ const UploadCarData = ({ t }) => {
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 5000
+                    hideAfter: 2500
                 })
             })
     }
@@ -159,6 +159,8 @@ const UploadCarData = ({ t }) => {
             [e.target.name]: e.target.value
         })
     }
+
+    // console.log(fields)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -219,7 +221,6 @@ const UploadCarData = ({ t }) => {
                                     id="mark"
                                     label={t('ChassisNumber')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <TextField
@@ -246,7 +247,6 @@ const UploadCarData = ({ t }) => {
                                     id="HSN"
                                     label={t('HSNInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <TextField
@@ -255,7 +255,6 @@ const UploadCarData = ({ t }) => {
                                     id="TSN"
                                     label={t('TSNInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <TextField
@@ -340,7 +339,6 @@ const UploadCarData = ({ t }) => {
                                     id="lastTechnicalInspection"
                                     label={t('LTIInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     type="date"
                                     className={classes.textField}
                                     InputLabelProps={{
@@ -389,7 +387,6 @@ const UploadCarData = ({ t }) => {
                                     id="monthlyInsurancePayment"
                                     label={t('MonthlyInsurancePaymentInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <TextField
@@ -398,7 +395,6 @@ const UploadCarData = ({ t }) => {
                                     id="allowedYearlyKilometers"
                                     label={t('AllowedYearlyKilometersInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <TextField
@@ -407,7 +403,6 @@ const UploadCarData = ({ t }) => {
                                     id="yearlyTax"
                                     label={t('YearlyTaxInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <DialogActions>

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
+import Box from '@material-ui/core/Box';
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -41,6 +44,8 @@ function EditUserDetails({ userId, t }) {
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const { setSelectedUser, setUser, user, selectedUser, setGeneralAlertOptions } = useData()
+    const [protectionLetterChecked, setProtectionLetterChecked] = useState(selectedUser.protectionLetter)
+    const [adacChecked, setAdacChecked] = useState(selectedUser.ADAC)
     const classes = useStyles()
 
     if (user.role === 'user') {
@@ -59,8 +64,10 @@ function EditUserDetails({ userId, t }) {
         city: selectedUser.city,
         birthDate: selectedUser.birthDate,
         customerType: selectedUser.customerType,
-        corespondencePartner: selectedUser.corespondencePartner,
-        corespondencePartnerEmail: selectedUser.corespondencePartnerEmail
+        customerPartner: selectedUser.customerPartner,
+        customerPartnerEmail: selectedUser.customerPartnerEmail,
+        companyName: selectedUser.companyName,
+        membershipNumber: selectedUser.membershipNumber,
     })
 
     React.useEffect(() => {
@@ -76,8 +83,10 @@ function EditUserDetails({ userId, t }) {
             city: selectedUser.city,
             birthDate: selectedUser.birthDate,
             customerType: selectedUser.customerType,
-            corespondencePartner: selectedUser.corespondencePartner,
-            corespondencePartnerEmail: selectedUser.corespondencePartnerEmail,
+            customerPartner: selectedUser.corespondencePartner,
+            customerPartnerEmail: selectedUser.corespondencePartnerEmail,
+            companyName: selectedUser.companyName,
+            membershipNumber: selectedUser.membershipNumber
         })
     }, [selectedUser, open])
 
@@ -88,12 +97,28 @@ function EditUserDetails({ userId, t }) {
         })
     }
 
+    const handleProtectionLetterSwitchOn = () => {
+        if (protectionLetterChecked) {
+            setAdacChecked(false)
+        }
+        setProtectionLetterChecked(prevState => !prevState)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(fields).every(val => val === '')) return
         setBtnLoading(true)
 
-        const data = { ...fields }
+        const data = {
+            ...fields,
+            protectionLetter: protectionLetterChecked,
+            ADAC: adacChecked,
+            membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' ? fields.membershipNumber : undefined,
+            companyName: fields.customerType === 'firmenkunde' ? fields.companyName : undefined,
+            customerPartner: fields.customerType === 'firmenkunde' ? fields.customerPartner : undefined,
+            customerPartnerEmail: fields.customerType === 'firmenkunde' ? fields.customerPartnerEmail : undefined,
+        }
+
         axios.patch(`/users/${userId}`, data).then(res => {
             if (res.status === 202) {
                 if (user.role === 'user') {
@@ -104,11 +129,9 @@ function EditUserDetails({ userId, t }) {
                     setSelectedUser(res.data.user)
                 }
 
-                setTimeout(() => {
-                    setAlertOpen(true)
-                    setBtnLoading(false)
-                    setOpen(false)
-                }, 2000)
+                setAlertOpen(true)
+                setBtnLoading(false)
+                setOpen(false)
             }
         })
             .catch(err => {
@@ -117,7 +140,7 @@ function EditUserDetails({ userId, t }) {
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 5000
+                    hideAfter: 2500
                 })
             })
     }
@@ -177,21 +200,34 @@ function EditUserDetails({ userId, t }) {
                         {fields.customerType === 'firmenkunde' &&
                             <TextField
                                 autoFocus
-                                name="corespondencePartner"
+                                name="companyName"
                                 margin="dense"
-                                value={fields.corespondencePartner}
-                                id="corespondencePartner"
-                                label={t('ContactPartner')}
+                                id="companyName"
+                                label={t('companynameLabel')}
                                 onChange={handleChange}
+                                required
                                 type="text"
                                 fullWidth
                             />}
                         {fields.customerType === 'firmenkunde' &&
                             <TextField
-                                name="corespondencePartnerEmail"
+                                name="customerPartner"
+                                margin="dense"
+                                value={fields.customerPartner}
+                                id="customerPartner"
+                                label={t('ContactPartner')}
+                                onChange={handleChange}
                                 required
-                                value={fields.corespondencePartnerEmail}
-                                id="corespondencePartnerEmail"
+                                type="text"
+                                fullWidth
+                            />}
+                        {fields.customerType === 'firmenkunde' &&
+                            <TextField
+                                autoFocus={fields.customerType === 'privat'}
+                                name="customerPartnerEmail"
+                                required
+                                value={fields.customerPartnerEmail}
+                                id="customerPartnerEmail"
                                 label={t('ContactPartnerEmail')}
                                 onChange={handleChange}
                                 type="email"
@@ -199,7 +235,7 @@ function EditUserDetails({ userId, t }) {
                             />}
                         <TextField
                             name="firstName"
-                            autoFocus
+                            autoFocus={fields.customerType === 'privat'}
                             margin="dense"
                             value={fields.firstName}
                             id="first-name"
@@ -207,6 +243,7 @@ function EditUserDetails({ userId, t }) {
                             onChange={handleChange}
                             type="text"
                             fullWidth
+                            required
                         />
                         <TextField
                             name="lastName"
@@ -216,6 +253,7 @@ function EditUserDetails({ userId, t }) {
                             label={t('LastNameInputLabel')}
                             onChange={handleChange}
                             fullWidth
+                            required
                         />
                         <TextField
                             name="gender"
@@ -247,6 +285,20 @@ function EditUserDetails({ userId, t }) {
                             onChange={handleChange}
                             disabled={user.role === 'user'}
                             fullWidth
+                            required
+                        />
+                        <TextField
+                            name="birthDate"
+                            id="birthDate-edit"
+                            label={t('BirthDateInputLabel')}
+                            value={fields.birthDate ? new Date(fields.birthDate).toISOString().split('T')[0] : '1970/12/31'}
+                            onChange={handleChange}
+                            type="date"
+                            required
+                            className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                         />
                         <TextField
                             name="phoneNumber"
@@ -255,6 +307,7 @@ function EditUserDetails({ userId, t }) {
                             id="phone-number"
                             label={t('PhoneNumberInputLabel')}
                             type="text"
+                            required
                             onChange={handleChange}
                             fullWidth
                         />
@@ -265,6 +318,7 @@ function EditUserDetails({ userId, t }) {
                             id="smartphoneNumber-number"
                             label={`${t('SmartphoneLabel')}`}
                             type="text"
+                            required
                             onChange={handleChange}
                             fullWidth
                         />
@@ -277,6 +331,7 @@ function EditUserDetails({ userId, t }) {
                             type="text"
                             onChange={handleChange}
                             fullWidth
+                            required
                         />
                         <TextField
                             name="postCode"
@@ -287,6 +342,7 @@ function EditUserDetails({ userId, t }) {
                             type="text"
                             onChange={handleChange}
                             fullWidth
+                            required
                         />
                         <TextField
                             name="city"
@@ -297,19 +353,34 @@ function EditUserDetails({ userId, t }) {
                             type="text"
                             onChange={handleChange}
                             fullWidth
+                            required
                         />
-                        <TextField
-                            name="birthDate"
-                            id="birthDate-edit"
-                            label={t('BirthDateInputLabel')}
-                            value={fields.birthDate ? new Date(fields.birthDate).toISOString().split('T')[0] : '1970/12/31'}
-                            onChange={handleChange}
-                            type="date"
-                            className={classes.textField}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
+                        <Box style={{ marginTop: 10 }}>
+                            <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
+                            <FormGroup style={{ flexDirection: 'row' }}>
+                                <FormControlLabel
+                                    control={<Switch checked={protectionLetterChecked} />}
+                                    onChange={handleProtectionLetterSwitchOn}
+                                    label="Schutzbrief"
+                                />
+                                <FormControlLabel
+                                    disabled={!protectionLetterChecked}
+                                    control={<Switch checked={adacChecked} />}
+                                    onChange={() => setAdacChecked(prevState => !prevState)}
+                                    label="ADAC"
+                                />
+                            </FormGroup>
+                        </Box>
+                        {protectionLetterChecked && adacChecked &&
+                            <TextField
+                                name="membershipNumber"
+                                margin="dense"
+                                id="membershipNumber"
+                                label="Mitgliedsnummer"
+                                onChange={handleChange}
+                                type="text"
+                                fullWidth
+                            />}
                         <DialogActions>
                             <Button onClick={handleClose} color="primary" variant="contained">
                                 {t('CancelButton')}
