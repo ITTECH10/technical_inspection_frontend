@@ -35,9 +35,10 @@ jobs:
     - name: SFTP Deploy to App Folder
       uses: Creepios/sftp-action@v1.0.3
       with:
-        host: ${{ secrets.ftp_host}}
+        host: 'access774016195.webspace-data.io'
         port: 22
-        username: ${{ secrets.ftp_username}}
-        password: ${{ secrets.ftp_password}}
+        agent: ''
+        username: 'u96548892-app'
+        password: 'ba-n@4K3Xm-&KJj'
         localPath: './build/'
         remotePath: './'
