@@ -37,7 +37,8 @@ jobs:
       with:
         host: 'access774016195.webspace-data.io'
         port: 22
-        username: 'u96548892-app'
-        password: 'ba-n@4K3Xm-&KJj'
+        agent: ''
+        username: ${{secrets.FTP_USERNAME}}
+        password: ${{secrets.FTP_PASSWORD}}
         localPath: './build/'
         remotePath: './'
