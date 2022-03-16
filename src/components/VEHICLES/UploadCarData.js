@@ -129,11 +129,12 @@ const UploadCarData = ({ t }) => {
         })
             .catch(err => {
                 // console.log(err.response)
+                setOpen(false)
                 setGeneralAlertOptions({
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 2500
+                    hideAfter: 6000
                 })
             })
     }
@@ -246,6 +247,8 @@ const UploadCarData = ({ t }) => {
                                     label={t('HSNInputLabel')}
                                     onChange={handleChange}
                                     fullWidth
+                                    error={fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
+                                    helperText={fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
                                 />
                                 <TextField
                                     name="TSN"
@@ -254,6 +257,8 @@ const UploadCarData = ({ t }) => {
                                     label={t('TSNInputLabel')}
                                     onChange={handleChange}
                                     fullWidth
+                                    error={fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
+                                    helperText={fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
                                 />
                                 <TextField
                                     name="registrationNumber"
