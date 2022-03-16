@@ -16,7 +16,7 @@ const Page = forwardRef(({ children, title = '', shouldNavigate = true, ...other
     const history = useHistory()
 
     useEffect(() => {
-        if (user && !user.policiesAccepted && shouldNavigate && authenticated) {
+        if (user && !user.policiesAccepted && user.role === 'user' && shouldNavigate && authenticated) {
             history.push('/privacyPolicy')
         } else if (user.firstLogIn) {
             history.push('/changePassword')
