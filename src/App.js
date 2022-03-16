@@ -115,7 +115,7 @@ function App() {
             <Route exact path="/account" component={AccountScreen} />
             <GuardedRoute exact path="/changePassword" component={ChangeGeneratedPasswordScreen} condition={user.firstLogIn} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
-            <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
+            <GuardedRoute exact path="/privacyPolicy" component={PrivacyPolicyScreen} condition={!user.policiesAccepted} />
           </Switch>}
       </React.Suspense>
     </ErrorBoundary>
