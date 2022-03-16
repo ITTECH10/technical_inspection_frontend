@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
 const ChangeGeneratedPasswordScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
-    const { user, setGeneralAlertOptions } = useData()
+    const { user, setGeneralAlertOptions, setUser } = useData()
 
     const [fields, setFields] = React.useState({
         currentPassword: '',
@@ -94,6 +94,9 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
                 if (res.status === 200) {
                     setButtonLoading(false)
                     setAlertOpen(true)
+                    const copiedUser = { ...user }
+                    copiedUser.firstLogIn = false
+                    setUser(copiedUser)
 
                     history.push('/')
                 }
