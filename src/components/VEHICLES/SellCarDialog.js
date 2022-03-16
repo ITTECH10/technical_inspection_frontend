@@ -32,7 +32,6 @@ function SellCarDialog({ t }) {
 
     React.useEffect(() => {
         return () => {
-            clearTimeout(sellCarTimeout)
             clearTimeout(navigateTimeout)
         }
     })
