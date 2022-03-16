@@ -32,12 +32,10 @@ function BankDialog({ handleAlertOpening, t }) {
         axios.patch(`/cars/${selectedCar._id}`, data)
             .then(res => {
                 if (res.status === 202) {
-                    setTimeout(() => {
-                        setSelectedCar(res.data.vehicle)
-                        setButtonLoading(false)
-                        handleAlertOpening(true)
-                        setOpen(false)
-                    }, 2000)
+                    setSelectedCar(res.data.vehicle)
+                    setButtonLoading(false)
+                    handleAlertOpening(true)
+                    setOpen(false)
                 }
             })
             .catch(err => {

@@ -110,12 +110,12 @@ function App() {
             {/* <Route exact path="/banks" component={BankScreen} /> */}
           </Switch> :
           <Switch>
-            <Route exact path="/" component={UserDashboardScreen} />
+            <GuardedRoute exact path="/" component={UserDashboardScreen} condition={user.policiesAccepted} route="/privacyPolicy" />
             <Route exact path="/cars" component={CarScreen} />
             <Route exact path="/account" component={AccountScreen} />
             <GuardedRoute exact path="/changePassword" component={ChangeGeneratedPasswordScreen} condition={user.firstLogIn} />
             <Route exact path="/cars/:id" component={CarDetailsScreen} />
-            <Route exact path="/privacyPolicy" component={PrivacyPolicyScreen} />
+            <GuardedRoute exact path="/privacyPolicy" component={PrivacyPolicyScreen} condition={user.policiesAccepted} />
           </Switch>}
       </React.Suspense>
     </ErrorBoundary>
@@ -140,8 +140,8 @@ function App() {
 
   const app = !appLoading ? (
     <div className={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? classes.navbarFix : null}>
-      {authenticated && user.policiesAccepted && !loading && <MenuCliped open={open} setOpen={setOpen} />}
-      {authenticated && user.policiesAccepted && !loading && <ScrollToTopButton />}
+      {authenticated && user.policiesAccepted && !user.firstLogIn && !loading && <MenuCliped open={open} setOpen={setOpen} />}
+      {authenticated && user.policiesAccepted && !user.firstLogIn && !loading && <ScrollToTopButton />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />

@@ -46,12 +46,10 @@ function UploadInsuranceData({ t }) {
       if (res.status === 201) {
         const updatedInsurances = [...insurances, res.data.newInsuranceHouse]
 
-        setTimeout(() => {
-          setInsurances(updatedInsurances)
-          setBtnLoading(false)
-          setOpen(false)
-          setAlertOpen(true)
-        }, 2000)
+        setInsurances(updatedInsurances)
+        setBtnLoading(false)
+        setOpen(false)
+        setAlertOpen(true)
         //fix loader later
       }
     })

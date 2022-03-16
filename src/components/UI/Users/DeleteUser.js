@@ -55,10 +55,8 @@ function DeleteUser({ userId, t }) {
         const updatedUsers = copyUsers.filter(user => user._id !== userId)
         setUsers(updatedUsers)
 
-        setTimeout(() => {
-          setAlertOpen(false)
-          history.push('/')
-        }, 3000)
+        setAlertOpen(false)
+        history.push('/')
       }
     })
       .catch(err => {

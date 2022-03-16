@@ -24,13 +24,11 @@ const BankList = ({ bank, t, handleAlertOpening, handleDialogClosing }) => {
                 // console.log(res.data)
                 if (res.status === 202) {
                     // console.log(res.data)
-                    setTimeout(() => {
-                        setSelectedCar(res.data.vehicle)
+                    setSelectedCar(res.data.vehicle)
 
-                        setButtonLoading(false)
-                        handleAlertOpening(true)
-                        handleDialogClosing(false)
-                    }, 2000)
+                    setButtonLoading(false)
+                    handleAlertOpening(true)
+                    handleDialogClosing(false)
                 }
             })
             .catch(err => {

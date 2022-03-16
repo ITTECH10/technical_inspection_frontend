@@ -46,12 +46,10 @@ function UploadBankData({ t }) {
       if (res.status === 201) {
         const updatedBanks = [...banks, res.data.newBanksLeasing]
 
-        setTimeout(() => {
-          setBanks(updatedBanks)
-          setBtnLoading(false)
-          setOpen(false)
-          setAlertOpen(true)
-        }, 2000)
+        setBanks(updatedBanks)
+        setBtnLoading(false)
+        setOpen(false)
+        setAlertOpen(true)
         //fix loader later
       }
     })

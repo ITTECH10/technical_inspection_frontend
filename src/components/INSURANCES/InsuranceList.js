@@ -23,13 +23,11 @@ const InsuranceList = ({ insurance, t, handleAlertOpening, handleDialogClosing }
         axios.patch(`/cars/${selectedCar._id}`, data)
             .then(res => {
                 if (res.status === 202) {
-                    setTimeout(() => {
-                        setSelectedCar(res.data.vehicle)
+                    setSelectedCar(res.data.vehicle)
 
-                        setButtonLoading(false)
-                        handleAlertOpening(true)
-                        handleDialogClosing(false)
-                    }, 2000)
+                    setButtonLoading(false)
+                    handleAlertOpening(true)
+                    handleDialogClosing(false)
                 }
             })
             .catch(err => {

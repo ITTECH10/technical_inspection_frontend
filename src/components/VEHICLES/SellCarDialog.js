@@ -28,7 +28,7 @@ function SellCarDialog({ t }) {
     const history = useHistory()
     const [btnLoading, setBtnLoading] = React.useState(false)
     const [carSoldAlert, setCarSoldAlert] = React.useState(false)
-    let sellCarTimeout, navigateTimeout
+    let navigateTimeout
 
     React.useEffect(() => {
         return () => {
@@ -72,12 +72,10 @@ function SellCarDialog({ t }) {
                 const soldCarIndex = updatedVehicles.findIndex(el => el._id === carId)
                 updatedVehicles.splice(soldCarIndex, 1)
 
-                sellCarTimeout = setTimeout(() => {
-                    setVehicles(updatedVehicles)
-                    setBtnLoading(false)
-                    setOpen(false)
-                    setCarSoldAlert(true)
-                }, 2000)
+                setVehicles(updatedVehicles)
+                setBtnLoading(false)
+                setOpen(false)
+                setCarSoldAlert(true)
 
                 navigateTimeout = setTimeout(() => {
                     history.goBack()

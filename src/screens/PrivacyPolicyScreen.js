@@ -40,23 +40,13 @@ const PrivacyPolicyScreen = ({ t }) => {
     const history = useHistory()
     const { logout, acceptPrivacyPolicy, user } = useData()
 
-    const navigateTimeout = React.useRef()
-
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(navigateTimeout.current)
-        }
-    }, [navigateTimeout])
-
     const handlePrivacyAcception = () => {
         acceptPrivacyPolicy(user._id)
         setAlertOpen(true)
         setAlertMsg("Vielen Dank, dass Sie unsere Datenschutzbestimmungen gelesen und akzeptiert haben!")
 
-        navigateTimeout.current = setTimeout(() => {
-            history.push('/changePassword')
-            history.go(0)
-        }, 1500)
+        history.push('/changePassword')
+        history.go(0)
     }
 
     const handlePrivacyDissagrement = () => {

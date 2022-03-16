@@ -81,12 +81,10 @@ const ResetPasswordScreen = ({ t }) => {
             if (res.status === 200) {
                 setAlertOpen(true)
 
-                setTimeout(() => {
-                    setAuthorizationHeader(res.data.token)
-                    setButtonLoading(false)
-                    setAuthenticated(true)
-                    history.push('/')
-                }, 2000)
+                setAuthorizationHeader(res.data.token)
+                setButtonLoading(false)
+                setAuthenticated(true)
+                history.push('/')
             }
         })
             .catch(err => {

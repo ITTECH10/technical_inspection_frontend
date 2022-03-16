@@ -14,13 +14,6 @@ function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
     const [open, setOpen] = React.useState(false);
     const [buttonLoading, setButtonLoading] = React.useState(false)
     const { carImages, setCarImages, setGeneralAlertOptions } = useData()
-    let deleteTimeout
-
-    useEffect(() => {
-        return () => {
-            clearTimeout(deleteTimeout)
-        }
-    }, [deleteTimeout])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,12 +33,10 @@ function DeleteVehicleFiles({ fileId, setOnHandleDeleteOpen, t }) {
                 if (res.status === 204) {
                     const updatedImages = carImages.filter(x => x._id !== fileId)
 
-                    deleteTimeout = setTimeout(() => {
-                        setCarImages(updatedImages)
-                        setOpen(false)
-                        setButtonLoading(false)
-                        setOnHandleDeleteOpen(true)
-                    }, 2000)
+                    setCarImages(updatedImages)
+                    setOpen(false)
+                    setButtonLoading(false)
+                    setOnHandleDeleteOpen(true)
                 }
             })
             .catch(err => {

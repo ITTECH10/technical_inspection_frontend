@@ -117,14 +117,12 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                 corespondingCar.TUV = res.data.updatedVehicle.TUV
                 corespondingCar.AU = res.data.updatedVehicle.AU
 
-                setTimeout(() => {
-                    setVehicles(updatedVehicles)
-                    setMyVehicles(updatedVehicles)
-                    setSelectedCar(res.data.updatedVehicle)
-                    setBtnLoading(false)
-                    handleClose()
-                    setOnHandleUpdateOpen(true)
-                }, 2000)
+                setVehicles(updatedVehicles)
+                setMyVehicles(updatedVehicles)
+                setSelectedCar(res.data.updatedVehicle)
+                setBtnLoading(false)
+                handleClose()
+                setOnHandleUpdateOpen(true)
             }
         })
             .catch(err => {

@@ -95,9 +95,7 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
                     setButtonLoading(false)
                     setAlertOpen(true)
 
-                    setTimeout(() => {
-                        history.push('/')
-                    }, 2000)
+                    history.push('/')
                 }
             })
             .catch(err => {
@@ -121,6 +119,7 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
             .then(res => {
                 if (res.status === 200) {
                     history.push('/')
+                    history.go(0)
                 }
             })
             .catch(err => {
@@ -136,7 +135,7 @@ const ChangeGeneratedPasswordScreen = ({ t }) => {
 
     return (
         user.firstLogIn &&
-        <Page title="SE Carmanagement | Generiertes Passwort ändern">
+        <Page title="SE Carmanagement | Generiertes Passwort ändern" shouldNavigate={false}>
             <Alerts message="Passwort geändert!" open={alertOpen} handleOpening={setAlertOpen} />
             <Grid container className={classes.mainContainer}>
                 <Grid item xs={false} sm={4} className={classes.gridChildOne} />

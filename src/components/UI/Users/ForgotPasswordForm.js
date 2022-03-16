@@ -49,12 +49,10 @@ function ForgotPasswordForm({ onDisableLoginForm, t }) {
         const data = { email: fields.emailForgot }
         axios.post('/users/forgotPassword', data).then(res => {
             if (res.data.message === 'success') {
-                setTimeout(() => {
-                    setOpen(false)
-                    setAlertOpen(true)
-                    setButtonLoading(false)
-                    onDisableLoginForm(false)
-                }, 2000)
+                setOpen(false)
+                setAlertOpen(true)
+                setButtonLoading(false)
+                onDisableLoginForm(false)
             }
         })
             .catch(err => {

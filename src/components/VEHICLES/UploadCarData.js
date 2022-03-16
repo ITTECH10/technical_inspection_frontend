@@ -115,18 +115,16 @@ const UploadCarData = ({ t }) => {
                 const updatedCustomerVehicles = [...customersVehicles, { ...res.data.newVehicle }]
                 const updatedMyVehicles = [...myVehicles, { ...res.data.newVehicle }]
 
-                setTimeout(() => {
-                    setFields({
-                        ...fields,
-                        photo: ''
-                    })
-                    setVehicles(updatedVehicles)
-                    setCustomersVehicles(updatedCustomerVehicles)
-                    setMyVehicles(updatedMyVehicles)
-                    setAlertOpen(true)
-                    setBtnLoading(false)
-                    setOpen(false)
-                }, 2000)
+                setFields({
+                    ...fields,
+                    photo: ''
+                })
+                setVehicles(updatedVehicles)
+                setCustomersVehicles(updatedCustomerVehicles)
+                setMyVehicles(updatedMyVehicles)
+                setAlertOpen(true)
+                setBtnLoading(false)
+                setOpen(false)
             }
         })
             .catch(err => {

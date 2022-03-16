@@ -11,13 +11,15 @@ import Loader from '../utils/Loader'
 
 // ----------------------------------------------------------------------
 
-const Page = forwardRef(({ children, title = '', ...other }, ref) => {
+const Page = forwardRef(({ children, title = '', shouldNavigate = true, ...other }, ref) => {
     const { appLoading, user, authenticated } = useData()
     const history = useHistory()
 
     useEffect(() => {
-        if (user && !user.policiesAccepted && authenticated) {
+        if (user && !user.policiesAccepted && shouldNavigate && authenticated) {
             history.push('/privacyPolicy')
+        } else if (user.firstLogIn) {
+            history.push('/changePassword')
         }
     }, [history, user])
 

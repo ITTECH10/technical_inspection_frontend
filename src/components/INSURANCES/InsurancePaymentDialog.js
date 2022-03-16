@@ -33,7 +33,7 @@ function InsurancePaymentDialog({ t }) {
         tk: "0"
     })
 
-    let userId, vehicleId, insuranceTimeout
+    let userId, vehicleId
 
     React.useEffect(() => {
         setFields({
@@ -51,12 +51,6 @@ function InsurancePaymentDialog({ t }) {
             ))
         }
     }, [selectedKaskoOption])
-
-    React.useEffect(() => {
-        return () => {
-            clearTimeout(insuranceTimeout)
-        }
-    })
 
     if (user.role === 'admin' && selectedUser && selectedCar) {
         userId = selectedUser._id
@@ -93,12 +87,10 @@ function InsurancePaymentDialog({ t }) {
                 const updatedVehicle = { ...selectedCar }
                 updatedVehicle.insuranceHouse = res.data.newInsuranceHouse._id
 
-                insuranceTimeout = setTimeout(() => {
-                    setSelectedCar(updatedVehicle)
-                    setBtnLoading(false)
-                    setOpen(false)
-                    setInsuranceAddedAlert(true)
-                }, 2000)
+                setSelectedCar(updatedVehicle)
+                setBtnLoading(false)
+                setOpen(false)
+                setInsuranceAddedAlert(true)
             }
         }).catch(err => {
             // console.log(err.response)
@@ -122,13 +114,11 @@ function InsurancePaymentDialog({ t }) {
                 const updatedVehicle = { ...selectedCar }
                 updatedVehicle.insuranceHouse = res.data.insurance._id
 
-                insuranceTimeout = setTimeout(() => {
-                    setSelectedCar(updatedVehicle)
-                    setSelectedCarInsurance(res.data.insurance)
-                    setBtnLoading(false)
-                    setOpen(false)
-                    setInsuranceUpdatedAlert(true)
-                }, 2000)
+                setSelectedCar(updatedVehicle)
+                setSelectedCarInsurance(res.data.insurance)
+                setBtnLoading(false)
+                setOpen(false)
+                setInsuranceUpdatedAlert(true)
             }
         }).catch(err => {
             // console.log(err.response)
