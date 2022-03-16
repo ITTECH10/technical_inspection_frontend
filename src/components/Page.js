@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useData } from '../contexts/DataContext'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types';
@@ -11,14 +12,14 @@ import Loader from '../utils/Loader'
 // ----------------------------------------------------------------------
 
 const Page = forwardRef(({ children, title = '', ...other }, ref) => {
-    const { appLoading, logedInPacient, authenticated } = useData()
+    const { appLoading, user, authenticated } = useData()
     const history = useHistory()
 
-    //   useEffect(() => {
-    //     if (authenticated && (logedInPacient && !logedInPacient.policiesAccepted)) {
-    //       navigate('/datenshutz')
-    //     }
-    //   }, [authenticated, logedInPacient])
+    useEffect(() => {
+        if (user && !user.policiesAccepted && authenticated) {
+            history.push('/privacyPolicy')
+        }
+    }, [history, user])
 
     return (
         !appLoading ?

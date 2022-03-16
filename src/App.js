@@ -140,8 +140,8 @@ function App() {
 
   const app = !appLoading ? (
     <div className={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? classes.navbarFix : null}>
-      {authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' && !loading && <MenuCliped open={open} setOpen={setOpen} />}
-      {authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' && !loading && <ScrollToTopButton />}
+      {authenticated && user.policiesAccepted && !loading && <MenuCliped open={open} setOpen={setOpen} />}
+      {authenticated && user.policiesAccepted && !loading && <ScrollToTopButton />}
       {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />

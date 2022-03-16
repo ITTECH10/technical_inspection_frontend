@@ -56,7 +56,7 @@ const PrivacyPolicyScreen = ({ t }) => {
         navigateTimeout.current = setTimeout(() => {
             history.push('/changePassword')
             history.go(0)
-        }, 3000)
+        }, 1500)
     }
 
     const handlePrivacyDissagrement = () => {
