@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 const generatedPassword = generateId()
 
 function NewCustomer({ handleAlertOpening, t }) {
-  const { users, setUsers } = useData()
+  const { users, setUsers, setGeneralAlertOptions } = useData()
   const [open, setOpen] = React.useState(false);
   const [adacChecked, setAdacChecked] = useState(false)
   const [protectionLetterChecked, setProtectionLetterChecked] = useState(false)
@@ -105,6 +105,13 @@ function NewCustomer({ handleAlertOpening, t }) {
     })
       .catch(err => {
         setBtnLoading(false)
+        setOpen(false)
+        setGeneralAlertOptions({
+          open: true,
+          message: err.response ? err.response.data.message : 'Server-Fehler......',
+          severity: 'error',
+          hideAfter: 6000
+        })
       })
   }
 
