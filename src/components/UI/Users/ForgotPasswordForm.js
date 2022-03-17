@@ -31,6 +31,7 @@ function ForgotPasswordForm({ onDisableLoginForm, t }) {
     const handleClose = () => {
         setOpen(false);
         onDisableLoginForm(false)
+        setFields({ emailForgot: '' })
     };
 
     const handleChange = e => {
@@ -52,7 +53,8 @@ function ForgotPasswordForm({ onDisableLoginForm, t }) {
                 setOpen(false)
                 setAlertOpen(true)
                 setButtonLoading(false)
-                onDisableLoginForm(false)
+                handleClose()
+                // onDisableLoginForm(false)
             }
         })
             .catch(err => {
@@ -64,7 +66,8 @@ function ForgotPasswordForm({ onDisableLoginForm, t }) {
                 })
                 setOpen(false)
                 setButtonLoading(false)
-                onDisableLoginForm(false)
+                handleClose()
+                // onDisableLoginForm(false)
                 // console.log(err.response)
             })
     }
@@ -97,7 +100,7 @@ function ForgotPasswordForm({ onDisableLoginForm, t }) {
                             <Button onClick={handleClose} color="primary" variant="contained">
                                 {t('CancelButton')}
                             </Button>
-                            <Button type="submit" color="primary" variant="contained" disabled={!fields.emailForgot}>
+                            <Button type="submit" color="primary" variant="contained" disabled={fields.emailForgot === ''}>
                                 {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : t('SubmitButton')}
                             </Button>
                         </DialogActions>

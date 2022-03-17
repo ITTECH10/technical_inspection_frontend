@@ -34,12 +34,10 @@ const NewLogin = ({ history, t }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // setDisableSubmiting(false)
+        if (disableSubmiting) return
 
         const data = { ...fields }
         axios.post('/users/login', data).then(res => {
-            // console.log(res.data)
-            // setAppLoading(true)
             if (res.status === 201) {
                 setAuthorizationHeader(res.data.token)
                 setAuthenticated(true)
@@ -51,8 +49,6 @@ const NewLogin = ({ history, t }) => {
             }
         })
             .catch(err => {
-                // console.log(err.response)
-                // setDisableSubmiting(false)
                 setAppLoading(false)
                 setGeneralAlertOptions({
                     open: true,
@@ -147,9 +143,10 @@ const NewLogin = ({ history, t }) => {
                                         }}
                                         fullWidth
                                         placeholder="Passwort"
+                                        autoComplete="on"
                                     />
                                 </Box>
-                                <button className="button login__submit" type="submit" disabled={disableSubmiting}>
+                                <button className="button login__submit" type="submit">
                                     <ExitToAppIcon style={{ color: '#fff' }} />
                                     <span style={{ marginLeft: '5px' }} className="button__text">Anmelden</span>
                                 </button>
