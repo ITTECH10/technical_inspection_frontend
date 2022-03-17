@@ -105,7 +105,7 @@ function NewCustomer({ handleAlertOpening, t }) {
     })
       .catch(err => {
         setBtnLoading(false)
-        setOpen(false)
+        // setOpen(false)
         setGeneralAlertOptions({
           open: true,
           message: err.response ? err.response.data.message : 'Server-Fehler......',

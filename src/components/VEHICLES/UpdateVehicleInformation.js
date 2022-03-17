@@ -189,9 +189,9 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             required={user.role === 'admin'}
-                            value={fields.HSN}
-                            error={fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
-                            helperText={fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
+                            value={fields.HSN && fields.HSN}
+                            error={fields.HSN && fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
+                            helperText={fields.HSN && fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
                         />
                         <TextField
                             name="TSN"
@@ -201,9 +201,9 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             required={user.role === 'admin'}
-                            value={fields.TSN}
-                            error={fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
-                            helperText={fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
+                            value={fields.TSN && fields.TSN}
+                            error={fields.TSN && fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
+                            helperText={fields.TSN && fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
                         />
                         <TextField
                             name="registrationNumber"

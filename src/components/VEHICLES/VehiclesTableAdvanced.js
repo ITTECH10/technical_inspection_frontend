@@ -27,10 +27,9 @@ const useStyles = makeStyles({
 
 function VehiclesTableAdvanced({ t }) {
     const classes = useStyles();
-    const { vehicles, user, dashboardAdaptiveTitle, setDashboardAdaptiveTitle } = useData()
+    const { vehicles, user, dashboardAdaptiveTitle } = useData()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    // const [adaptiveTitle, setAdaptiveTitle] = React.useState(t('VehiclesTitle'))
 
     const AdaptiveTitle = dashboardAdaptiveTitle === 'Alle Fahrzeuge'
         ? t('VehiclesTitle') : dashboardAdaptiveTitle === 'TÜV überfällig'

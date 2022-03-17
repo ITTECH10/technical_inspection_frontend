@@ -129,7 +129,8 @@ const UploadCarData = ({ t }) => {
         })
             .catch(err => {
                 // console.log(err.response)
-                setOpen(false)
+                // setOpen(false)
+                setBtnLoading(false)
                 setGeneralAlertOptions({
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',

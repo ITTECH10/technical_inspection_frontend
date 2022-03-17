@@ -15,6 +15,7 @@ import { withNamespaces } from 'react-i18next';
 import { useData } from './../../contexts/DataContext';
 import CarRow from './CarRow';
 import UserInfoBlock from '../UI/Users/UserInfoBlock';
+import SearchVehicles from './SearchVehicles'
 
 const useStyles = makeStyles({
     root: {
@@ -28,6 +29,16 @@ function CarTableAdvanced({ t }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const matches = useMediaQuery('(max-width: 600px)')
+    // FILTERING
+    const [fields, setFields] = React.useState({
+        query: ''
+    })
+
+    const { query } = fields
+
+    const myVehiclesFiltered = myVehicles.filter(myVehicle => myVehicle.registrationNumber.toLowerCase().includes(query.toLowerCase()) || myVehicle.mark.toLowerCase().includes(query.toLowerCase()) || myVehicle.model.toLowerCase().includes(query.toLowerCase())).map(myVehicle => (
+        <CarRow key={myVehicle._id} car={myVehicle} />
+    )).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -55,6 +66,7 @@ function CarTableAdvanced({ t }) {
                 {user.role === 'admin' ? t('CustomersVehicles') : AdaptiveTitle}
             </Typography>
             <Divider style={{ marginBottom: 10 }} />
+            <SearchVehicles fields={fields} setFields={setFields} noVehicles={myVehicles.length === 0} />
             <Paper className={classes.root} >
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
@@ -75,16 +87,14 @@ function CarTableAdvanced({ t }) {
                                 customersVehicles.map(mv => (
                                     <CarRow key={mv._id} car={mv} />
                                 )).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : myVehicles.map(mv => (
-                                    <CarRow key={mv._id} car={mv} />
-                                )).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
+                                : myVehiclesFiltered}
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={user.role === 'admin' ? customersVehicles.length : myVehicles.length}
+                    count={user.role === 'admin' ? customersVehicles.length : myVehiclesFiltered.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

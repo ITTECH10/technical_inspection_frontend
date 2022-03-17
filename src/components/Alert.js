@@ -22,7 +22,7 @@ export default function Alerts() {
     };
 
     return (
-        <Box spacing={2} sx={{ width: '100%', position: 'absolute' }}>
+        <Box spacing={2} sx={{ width: '100%', position: 'absolute', zIndex: 1000000 }}>
             <Snackbar
                 open={generalAlertOptions.open}
                 onClose={handleClose}
