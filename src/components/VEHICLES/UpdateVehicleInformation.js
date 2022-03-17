@@ -131,7 +131,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                     open: true,
                     message: err.response ? err.response.data.message : 'Server-Fehler......',
                     severity: 'error',
-                    hideAfter: 2500
+                    hideAfter: 10000
                 })
             })
     }

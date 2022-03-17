@@ -110,7 +110,7 @@ function NewCustomer({ handleAlertOpening, t }) {
           open: true,
           message: err.response ? err.response.data.message : 'Server-Fehler......',
           severity: 'error',
-          hideAfter: 6000
+          hideAfter: 10000
         })
       })
   }
