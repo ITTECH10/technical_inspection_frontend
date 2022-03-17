@@ -75,7 +75,7 @@ function ReportCarDamageDialog({ t }) {
     return (
         <div>
             <Alerts message={t('UserAdminEmailSentCarSelling')} open={adminNotifiedAlert} handleOpening={setAdminNotifiedAlert} />
-            <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleClickOpen}>
+            <Button disabled={myVehicles.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnWarning} onClick={handleClickOpen}>
                 {t('UserDashboardReportDamage')}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

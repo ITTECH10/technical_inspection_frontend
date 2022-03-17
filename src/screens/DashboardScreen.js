@@ -117,7 +117,7 @@ const useStyles = makeStyles(theme => ({
 const DashboardScreen = ({ t }) => {
     const classes = useStyles()
     const history = useHistory()
-    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, user, dashboardGeneratedTitle } = useData()
+    const { users, vehicles, setVehicles, getAllVehicles, setSelectedIndex, dashboardGeneratedTitle } = useData()
 
     const ordinaryIconSizePositioning = {
         position: 'absolute',
@@ -157,9 +157,9 @@ const DashboardScreen = ({ t }) => {
     // const oneMonthAhead = new Date(new Date().setMonth(new Date().getMonth() + 1))
     // FIX LATER// NOT OKAY// BECAUSE OF UPDATING VEHICLE IT PERSISTS // LATER IT IS WRONG
     // const TUVExpiresInThirtyDays = vehicles.filter(v => v.TUVExpiresInOneMonth)
-    const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date && new Date(v.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
+    const TUVExpiresInThirtyDays = vehicles.filter(v => new Date(v.TUV) > new Date() && new Date(v.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
     const TUVExpired = vehicles.filter(v => new Date(v.TUV) < new Date())
-    const NTIExpiresInThirtyDays = vehicles.filter(v => new Date(v.nextTechnicalInspection) > new Date && new Date(v.nextTechnicalInspection) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
+    const NTIExpiresInThirtyDays = vehicles.filter(v => new Date(v.nextTechnicalInspection) > new Date() && new Date(v.nextTechnicalInspection) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
 
     const handleNavigateFinansesVehicles = () => {
         setVehicles(vehiclesWithCreditsContractExpiringInTwoMonths)
@@ -244,7 +244,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {users.filter(el => el.role !== 'admin').length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
+                                <Button disabled={users.filter(el => el.role !== 'admin').length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleCustomersNavigate}>
                                     {t('Dashboard.customersBtn')}
                                 </Button>
                             </Box>
@@ -263,7 +263,7 @@ const DashboardScreen = ({ t }) => {
                                 <Typography className={classes.countTitle} variant="h4" component="h4">
                                     {vehicles.length}
                                 </Typography>
-                                <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
+                                <Button disabled={vehicles.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleAllVehiclesNavigate}>
                                     {t('Dashboard.vehiclesBtn')}
                                 </Button>
                             </Box>
@@ -283,7 +283,7 @@ const DashboardScreen = ({ t }) => {
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {TUVExpiresInThirtyDays.length}
                                     </Typography>
-                                    <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
+                                    <Button disabled={TUVExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
                                         {t('Dashboard.tuvBtn30')}
                                     </Button>
                                 </Box>
@@ -291,7 +291,7 @@ const DashboardScreen = ({ t }) => {
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {TUVExpired.length}
                                     </Typography>
-                                    <Button size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
+                                    <Button disabled={TUVExpired.length === 0} size="small" variant="text" style={{ marginTop: 20 }} className={classes.btnDanger} onClick={handleNavigateTuvExpiredVehicles}>
                                         {t('Dashboard.tuvBtnExpired')}
                                     </Button>
                                 </Box>
@@ -312,7 +312,7 @@ const DashboardScreen = ({ t }) => {
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {NTIExpiresInThirtyDays.length}
                                     </Typography>
-                                    <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateNtiThirtyDaysVehicles}>
+                                    <Button disabled={NTIExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateNtiThirtyDaysVehicles}>
                                         {t('Dashboard.tuvBtn30')}
                                     </Button>
                                 </Box>
@@ -341,7 +341,7 @@ const DashboardScreen = ({ t }) => {
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {vehiclesWithCreditsContractExpiringInTwoMonths.length}
                                     </Typography>
-                                    <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
+                                    <Button disabled={vehiclesWithCreditsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateFinansesVehicles}>
                                         {t('Dashboard.financingStatusBtnFinancing')}
                                     </Button>
                                 </Box>
@@ -349,7 +349,7 @@ const DashboardScreen = ({ t }) => {
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
                                         {vehiclesWithLeasingsContractExpiringInTwoMonths.length}
                                     </Typography>
-                                    <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
+                                    <Button disabled={vehiclesWithLeasingsContractExpiringInTwoMonths.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateCreditVehicles}>
                                         {t('Dashboard.financingStatusBtnLeasing')}
                                     </Button>
                                 </Box>

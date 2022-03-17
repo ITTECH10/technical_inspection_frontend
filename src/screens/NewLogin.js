@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useData } from '../contexts/DataContext'
 // mui
-import { Box, Typography, TextField, IconButton as Icon, useMediaQuery, Button } from '@material-ui/core'
+import { Box, Typography, TextField, IconButton as Icon, useMediaQuery } from '@material-ui/core'
 import PlaceIcon from '@material-ui/icons/Place';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
@@ -68,7 +68,7 @@ const NewLogin = ({ history, t }) => {
             <Box className="wrapper">
                 <Box component="header" sx={{ height: matches ? 85 : 60 }} className="header-login">
                     <Box className="logo" sx={{ width: matches ? 200 : 100, marginTop: matches ? 20 : 16, marginLeft: matches ? 40 : 10 }}>
-                        <img src="logo.svg" />
+                        <img alt="logo" src="logo.svg" />
                     </Box>
                     <Box className="separator" />
                     {matches &&

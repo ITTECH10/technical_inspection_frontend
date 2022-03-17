@@ -157,6 +157,18 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                             prefix="€"
                         /> : <TextField className={classes.input} value={yearlyTax ? yearlyTax : t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>{t('MonthlyInsurancePaymentInputLabel')}</Typography>
+                    {monthlyInsurancePayment ?
+                        <NumberFormat
+                            value={monthlyInsurancePayment}
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            className={classes.input}
+                            disabled
+                            prefix="€"
+                        /> : <TextField className={classes.input} value={monthlyInsurancePayment ? monthlyInsurancePayment : t('VehicleDetailsDataNotSetYet')} disabled />}
+                </Box>
             </Paper>
         </Grid>
     )

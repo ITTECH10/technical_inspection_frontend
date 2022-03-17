@@ -124,7 +124,7 @@ const CarRow = ({ car, t }) => {
                         />
                     }
                 </TableCell>}
-            {user.role !== 'admin' && dashboardAdaptiveTitle !== '' && (
+            {user.role !== 'admin' && dashboardAdaptiveTitle !== '' && dashboardAdaptiveTitle !== 'Meine Fahrzeuge' && (
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' && car.vehiclePaymentTypeVariant === 'credit' && car.contractExpirationDate ? CreditDate.toLocaleDateString('de-DE') :
                         dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' && car.contractExpirationDate ? LeasingDate.toLocaleDateString('de-DE')

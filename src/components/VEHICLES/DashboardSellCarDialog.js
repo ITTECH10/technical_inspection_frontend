@@ -58,7 +58,7 @@ function DashboardSellCarDialog({ t }) {
 
     return (
         <div>
-            <Button size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleClickOpen}>
+            <Button disabled={myVehicles.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleClickOpen}>
                 {t('SellCarDashboardBtn')}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

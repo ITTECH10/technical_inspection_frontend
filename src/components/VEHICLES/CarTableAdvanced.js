@@ -59,6 +59,8 @@ function CarTableAdvanced({ t }) {
                                 ? t('LeasingVehicles') : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab'
                                     ? 'Service läuft in 30 Tagen ab' : null
 
+    console.log(dashboardAdaptiveTitle)
+
     return (
         <>
             {selectedUser && <UserInfoBlock />}
@@ -75,7 +77,7 @@ function CarTableAdvanced({ t }) {
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
                                 <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                {user.role === 'admin' && <TableCell>TÜV, AU und Service fällig?</TableCell>}
+                                {dashboardAdaptiveTitle !== 'Meine Fahrzeuge' && dashboardAdaptiveTitle !== '' && <TableCell>TÜV, AU und Service fällig?</TableCell>}
                                 {/* {
                                     dashboardAdaptiveTitle !== '' &&
                                     <TableCell>{t('Date')}</TableCell>

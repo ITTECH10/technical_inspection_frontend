@@ -117,7 +117,7 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
                             {
                                 image.documentPublisher &&
                                 <Chip
-                                    label={image.documentPublisher}
+                                    label={image.documentPublisher === 'user' ? 'Kunde' : 'Admin'}
                                     color="primary"
                                     size="medium"
                                     variant="default"
