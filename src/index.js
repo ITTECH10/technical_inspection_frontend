@@ -16,11 +16,11 @@ axios.defaults.baseURL = 'https://technical-inspection.herokuapp.com/api/v1'
 ReactDOM.render(
   // <React.StrictMode>
   <HelmetProvider>
-    <DataContextProvider>
-      <Router>
+    <Router>
+      <DataContextProvider>
         <App />
-      </Router>
-    </DataContextProvider>,
+      </DataContextProvider>,
+    </Router>
   </HelmetProvider>,
   // </React.StrictMode>,
   document.getElementById('root')

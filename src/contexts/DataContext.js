@@ -1,4 +1,5 @@
 import React, { useContext, useState, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const DataContext = React.createContext()
@@ -8,6 +9,7 @@ export const useData = () => {
 }
 
 const DataContextProvider = ({ children }) => {
+    const history = useHistory()
     // GENERAL
     const [authenticated, setAuthenticated] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -183,6 +185,9 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 setAppLoading(false)
                 // console.log(err.response)
+                if (err.response && err.response.data.message.includes('Ungültiges Token!')) {
+                    logout(history)
+                }
                 setGeneralAlertOptions({
                     open: true,
                     message: 'Es ist ein Fehler beim Laden Ihrer Kontodaten aufgetreten.',
