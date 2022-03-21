@@ -65,7 +65,7 @@ function App() {
   }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser, storageLanguage])
 
   useEffect(() => {
-    if (authenticated) {
+    if (authenticated && storageUser) {
       getUserData()
     }
   }, [getUserData, authenticated])
