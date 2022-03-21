@@ -71,7 +71,7 @@ function EditUserDetails({ userId, t }) {
     })
 
     React.useEffect(() => {
-        if (selectedUser) {
+        if (selectedUser && user.role === 'admin') {
             setFields({
                 firstName: selectedUser.firstName,
                 lastName: selectedUser.lastName,
