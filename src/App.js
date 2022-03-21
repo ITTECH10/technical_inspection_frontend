@@ -53,7 +53,6 @@ function App() {
   useEffect(() => {
     if (storageUser) {
       setUser(JSON.parse(storageUser))
-      getUserData()
     }
 
     if (storageSelectedUserRef.current) {
@@ -63,13 +62,13 @@ function App() {
     if (storageLanguage) {
       i18n.changeLanguage(storageLanguage)
     }
-  }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser, storageLanguage, getUserData])
+  }, [setUser, setSelectedUser, storageSelectedUserRef, storageUser, storageLanguage])
 
-  // useEffect(() => {
-  //   if (authenticated) {
-  //     getUserData()
-  //   }
-  // }, [getUserData, authenticated])
+  useEffect(() => {
+    if (authenticated) {
+      getUserData()
+    }
+  }, [getUserData, authenticated])
 
   useEffect(() => {
     if (storageUser && user && user.role === 'user') {
