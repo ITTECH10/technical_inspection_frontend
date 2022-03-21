@@ -78,20 +78,22 @@ const UserInfoBlock = ({ t }) => {
                         fullWidth
                     />
                 </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`${t('PhoneNumberInputLabel')}: ${selectedUser.phoneNumber}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`${t('SmartphoneLabel')}: ${selectedUser.smartphoneNumber ? selectedUser.smartphoneNumber : t('VehicleDetailsDataNotSetYet')}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
+                {selectedUser.phoneNumber &&
+                    <Box className={classes.userRow}>
+                        <TextField
+                            value={`${t('PhoneNumberInputLabel')}: ${selectedUser.phoneNumber}`}
+                            disabled
+                            fullWidth
+                        />
+                    </Box>}
+                {selectedUser.smartphoneNumber &&
+                    <Box className={classes.userRow}>
+                        <TextField
+                            value={`${t('SmartphoneLabel')}: ${selectedUser.smartphoneNumber ? selectedUser.smartphoneNumber : t('VehicleDetailsDataNotSetYet')}`}
+                            disabled
+                            fullWidth
+                        />
+                    </Box>}
                 <Box className={classes.userRow}>
                     <TextField
                         value={`${t('StreetInputLabel')}: ${selectedUser.street}`}

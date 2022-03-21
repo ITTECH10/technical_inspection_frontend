@@ -178,18 +178,19 @@ const AccountScreen = ({ t }) => {
                                         />
                                     </Box>
                                 </Box>
-                                <Box className={classes.inputSingleBox}>
-                                    <Box className={classes.inputContentVertical}>
-                                        <Typography style={{ fontWeight: '400' }}>
-                                            {t('BirthDateInputLabel')}
-                                        </Typography>
-                                        <TextField
-                                            variant="standard"
-                                            disabled
-                                            value={formatedBirthDate}
-                                        />
-                                    </Box>
-                                </Box>
+                                {user.birthDate &&
+                                    <Box className={classes.inputSingleBox}>
+                                        <Box className={classes.inputContentVertical}>
+                                            <Typography style={{ fontWeight: '400' }}>
+                                                {t('BirthDateInputLabel')}
+                                            </Typography>
+                                            <TextField
+                                                variant="standard"
+                                                disabled
+                                                value={formatedBirthDate}
+                                            />
+                                        </Box>
+                                    </Box>}
 
                                 <Box className={classes.inputSingleBox}>
                                     <Box className={classes.inputContentVertical}>
@@ -241,30 +242,71 @@ const AccountScreen = ({ t }) => {
                                         />
                                     </Box>
                                 </Box>
-                                <Box className={classes.inputSingleBox}>
-                                    <Box className={classes.inputContentVertical}>
-                                        <Typography style={{ fontWeight: '400' }}>
-                                            {`${t('PhoneNumberInputLabel')}`}
-                                        </Typography>
-                                        <TextField
-                                            variant="standard"
-                                            disabled
-                                            value={user.phoneNumber}
-                                        />
-                                    </Box>
-                                </Box>
-                                <Box className={classes.inputSingleBox}>
-                                    <Box className={classes.inputContentVertical}>
-                                        <Typography style={{ fontWeight: '400' }}>
-                                            {`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
-                                        </Typography>
-                                        <TextField
-                                            variant="standard"
-                                            disabled
-                                            value={user.smartphoneNumber}
-                                        />
-                                    </Box>
-                                </Box>
+                                {user.phoneNumber &&
+                                    <Box className={classes.inputSingleBox}>
+                                        <Box className={classes.inputContentVertical}>
+                                            <Typography style={{ fontWeight: '400' }}>
+                                                {`${t('PhoneNumberInputLabel')}`}
+                                            </Typography>
+                                            <TextField
+                                                variant="standard"
+                                                disabled
+                                                value={user.phoneNumber}
+                                            />
+                                        </Box>
+                                    </Box>}
+                                {user.smartphoneNumber &&
+                                    <Box className={classes.inputSingleBox}>
+                                        <Box className={classes.inputContentVertical}>
+                                            <Typography style={{ fontWeight: '400' }}>
+                                                {`${t('PhoneNumberInputLabel')} ${t('SmartphoneLabel')}`}
+                                            </Typography>
+                                            <TextField
+                                                variant="standard"
+                                                disabled
+                                                value={user.smartphoneNumber}
+                                            />
+                                        </Box>
+                                    </Box>}
+                                {user.protectionLetter &&
+                                    <Box className={classes.inputSingleBox}>
+                                        <Box className={classes.inputContentVertical}>
+                                            <Typography style={{ fontWeight: '400' }}>
+                                                Schutzbrief
+                                            </Typography>
+                                            <TextField
+                                                variant="standard"
+                                                disabled
+                                                value={user.protectionLetter ? 'Ja' : 'Nein'}
+                                            />
+                                        </Box>
+                                    </Box>}
+                                {user.ADAC &&
+                                    <Box className={classes.inputSingleBox}>
+                                        <Box className={classes.inputContentVertical}>
+                                            <Typography style={{ fontWeight: '400' }}>
+                                                ADAC
+                                            </Typography>
+                                            <TextField
+                                                variant="standard"
+                                                disabled
+                                                value={user.ADAC ? 'Ja' : 'Nein'}
+                                            />
+                                        </Box>
+                                    </Box>}
+                                {user.membershipNumber &&
+                                    <Box className={classes.inputSingleBox}>
+                                        <Box className={classes.inputContentVertical}>
+                                            <Typography style={{ fontWeight: '400' }}>
+                                                Mitgliedsnummer
+                                            </Typography>
+                                            <TextField
+                                                variant="standard"
+                                                disabled
+                                                value={user.membershipNumber ? 'Ja' : 'Nein'}
+                                            />
+                                        </Box>
+                                    </Box>}
                             </Box>
                         </Box>
                     </Paper>

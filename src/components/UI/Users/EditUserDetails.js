@@ -71,24 +71,46 @@ function EditUserDetails({ userId, t }) {
     })
 
     React.useEffect(() => {
-        setFields({
-            firstName: selectedUser.firstName,
-            lastName: selectedUser.lastName,
-            gender: selectedUser.gender,
-            email: selectedUser.email,
-            phoneNumber: selectedUser.phoneNumber,
-            smartphoneNumber: selectedUser.smartphoneNumber,
-            street: selectedUser.street,
-            postCode: selectedUser.postCode,
-            city: selectedUser.city,
-            birthDate: selectedUser.birthDate,
-            customerType: selectedUser.customerType,
-            customerPartner: selectedUser.corespondencePartner,
-            customerPartnerEmail: selectedUser.corespondencePartnerEmail,
-            companyName: selectedUser.companyName,
-            membershipNumber: selectedUser.membershipNumber
-        })
-    }, [selectedUser, open])
+        if (selectedUser) {
+            setFields({
+                firstName: selectedUser.firstName,
+                lastName: selectedUser.lastName,
+                gender: selectedUser.gender,
+                email: selectedUser.email,
+                phoneNumber: selectedUser.phoneNumber,
+                smartphoneNumber: selectedUser.smartphoneNumber,
+                street: selectedUser.street,
+                postCode: selectedUser.postCode,
+                city: selectedUser.city,
+                birthDate: selectedUser.birthDate,
+                customerType: selectedUser.customerType,
+                customerPartner: selectedUser.corespondencePartner,
+                customerPartnerEmail: selectedUser.corespondencePartnerEmail,
+                companyName: selectedUser.companyName,
+                membershipNumber: selectedUser.membershipNumber
+            })
+        }
+
+        if (!selectedUser) {
+            setFields({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                gender: user.gender,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                smartphoneNumber: user.smartphoneNumber,
+                street: user.street,
+                postCode: user.postCode,
+                city: user.city,
+                birthDate: user.birthDate,
+                customerType: user.customerType,
+                customerPartner: user.corespondencePartner,
+                customerPartnerEmail: user.corespondencePartnerEmail,
+                companyName: user.companyName,
+                membershipNumber: user.membershipNumber
+            })
+        }
+    }, [selectedUser, open, user])
 
     const handleChange = (e) => {
         setFields({
