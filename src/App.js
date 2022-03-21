@@ -124,7 +124,7 @@ function App() {
   const routes = (
     <React.Suspense fallback={<Loader />}>
       <Switch>
-        <Route exact path="/" component={Login} />
+        <GuardedRoute exact path="/" component={Login} condition={!authenticated} />
         <Route exact path="/resetPassword/:tokenId" component={ResetPasswordScreen} />
       </Switch>
     </React.Suspense>
@@ -142,7 +142,7 @@ function App() {
     <div className={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? classes.navbarFix : null}>
       {authenticated && user.policiesAccepted && !user.firstLogIn && !loading && <MenuCliped open={open} setOpen={setOpen} />}
       {authenticated && user.policiesAccepted && !user.firstLogIn && !loading && <ScrollToTopButton />}
-      {authenticated && !appLoading ? authRoutes : routes}
+      {authenticated ? authRoutes : routes}
     </div>
   ) : <Loader />
 
