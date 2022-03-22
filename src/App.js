@@ -142,7 +142,7 @@ function App() {
     <div className={authenticated && history.location.pathname !== '/privacyPolicy' && history.location.pathname !== '/changePassword' ? classes.navbarFix : null}>
       {authenticated && user.policiesAccepted && !user.firstLogIn && !loading && <MenuCliped open={open} setOpen={setOpen} />}
       {authenticated && user.policiesAccepted && !user.firstLogIn && !loading && <ScrollToTopButton />}
-      {authenticated ? authRoutes : routes}
+      {authenticated && storageUser ? authRoutes : !authenticated && !storageUser && routes}
     </div>
   ) : <Loader />
 
