@@ -35,7 +35,7 @@ jobs:
     - name: SFTP Deploy to App Folder
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: ${{ ftp_host }}
+        server: ${{ secrets.ftp_host }}
         port: 22
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
