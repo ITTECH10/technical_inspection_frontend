@@ -35,7 +35,7 @@ jobs:
     - name: SFTP Deploy to App Folder
       uses: Creepios/sftp-action@v1.0.3
       with:
-        host: 'access774016195.webspace-data.io'
+        host: ${{ secrets.ftp_host }}
         port: 22
         agent: ''
         username: ${{ secrets.ftp_username }}
