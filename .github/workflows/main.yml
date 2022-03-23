@@ -33,7 +33,7 @@ jobs:
       run: CI=false && npm run build --if-present
     
     - name: SFTP Deploy to App Folder
-      uses: Creepios/sftp-action@v1.0.3
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ ftp_host }}
         port: 22
