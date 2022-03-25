@@ -21,7 +21,7 @@ const Page = forwardRef(({ children, title = '', shouldNavigate = true, ...other
         } else if (user.firstLogIn) {
             history.push('/changePassword')
         }
-    }, [history, user])
+    }, [history, user, authenticated, shouldNavigate])
 
     return (
         !appLoading ?

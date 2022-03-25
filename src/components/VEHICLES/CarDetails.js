@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
-    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, carImages, setGeneralAlertOptions } = useData()
+    const { selectedCar, selectedUser, user, users, setSelectedCarInsurance, setSelectedUser, getSelectedCar, setGeneralAlertOptions } = useData()
     const classes = useStyles()
     const history = useHistory()
     const { insuranceHouse, vehicleOwner } = selectedCar
@@ -59,7 +59,7 @@ const CarDetails = ({ setOnHandleDeleteOpen, setOnHandleUpdateOpen, t }) => {
                 })
                 // console.log(err.response)
             })
-    }, [insuranceHouse, setSelectedCarInsurance])
+    }, [insuranceHouse, setSelectedCarInsurance, setGeneralAlertOptions])
 
     // OPTIONAL
     let carId = history.location.pathname.split('/')[2]

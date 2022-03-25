@@ -12,11 +12,11 @@ import { CSVLink } from "react-csv";
 const ExportUserData = ({ t }) => {
     const [data, setData] = React.useState('')
     const { users, vehicles, setGeneralAlertOptions } = useData()
-    let myData = []
+    // let myData = []
 
-    // let myData = React.useMemo(() => {
-    //     return []
-    // }, [])
+    let myData = React.useMemo(() => {
+        return []
+    }, [])
 
     React.useEffect(() => {
         if (vehicles) {
@@ -64,7 +64,7 @@ const ExportUserData = ({ t }) => {
                 setData(csv)
             }
         })
-    }, [myData])
+    }, [myData, setGeneralAlertOptions, vehicles])
 
     const listItemStyle = {
         border: 'none',

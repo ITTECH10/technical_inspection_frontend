@@ -195,7 +195,7 @@ const DataContextProvider = ({ children }) => {
                     hideAfter: 2500
                 })
             })
-    }, [])
+    }, [logout, history])
 
     const getSelectedUser = useCallback((id) => {
         axios(`/userst/${id}`).then(res => {

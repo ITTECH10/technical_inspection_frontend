@@ -125,7 +125,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                     <TextField className={classes.input} value={TSN ? TSN : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
-                    <Typography className={classes.inputTitle}>{t('AllowedYearlyKilometersInputLabel') + ' ' + '(km)'}</Typography>
+                    <Typography className={classes.inputTitle}>{`${t('AllowedYearlyKilometersInputLabel')} (km)`}</Typography>
                     {allowedYearlyKilometers ?
                         <NumberFormat
                             value={allowedYearlyKilometers}
