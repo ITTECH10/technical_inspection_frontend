@@ -7,6 +7,7 @@ import PlaceIcon from '@material-ui/icons/Place';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 // others
 import { Helmet } from 'react-helmet-async';
 import Page from '../components/Page'
