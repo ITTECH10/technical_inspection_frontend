@@ -179,7 +179,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             {fields.customerType === 'firmenkunde' &&
               <TextField
                 name="customerPartner"
-                required
                 margin="dense"
                 id="customerPartner"
                 label={t('ContactPartner')}
@@ -227,7 +226,6 @@ function NewCustomer({ handleAlertOpening, t }) {
               label={t('GenderNewUser')}
               onChange={handleChange}
               fullWidth
-              required
               style={{ margin: "8px 0" }}
               SelectProps={{
                 native: true,
@@ -292,7 +290,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="street"
-              required
               margin="dense"
               id="street"
               label={t('StreetInputLabel')}
@@ -302,7 +299,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="postCode"
-              required
               margin="dense"
               id="pwd"
               label={t("PostNumberInputLabel")}
@@ -312,7 +308,6 @@ function NewCustomer({ handleAlertOpening, t }) {
             />
             <TextField
               name="city"
-              required
               margin="dense"
               id="confirm-pwd"
               label={t('CityInputLabel')}
