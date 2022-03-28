@@ -42,7 +42,7 @@ function App() {
     }
   }))
 
-  const { authenticated, getAllVehicles, appLoading, loading, setAuthenticated, setSelectedUser, selectedUser, getUserVehicles, getUserData, user, getAllUsers, setUser } = useData()
+  const { authenticated, getAllVehicles, appLoading, loading, dashboardAdaptiveTitle, setAuthenticated, setSelectedUser, selectedUser, getUserVehicles, getUserData, user, getAllUsers, setUser } = useData()
   const classes = useStyles()
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
@@ -75,6 +75,12 @@ function App() {
       setAuthenticated(true)
     }
   }, [user, storageUser, setAuthenticated])
+
+  useEffect(() => {
+    if (dashboardAdaptiveTitle === 'Alle Fahrzeuge') {
+      getAllVehicles()
+    }
+  }, [getAllVehicles, dashboardAdaptiveTitle])
 
   useEffect(() => {
     if (storageUser && user && user.role === 'admin') {

@@ -11,7 +11,10 @@ const CustomersRow = ({ customer }) => {
     const onSelectUser = () => {
         const corelatedUser = users.find(u => u._id === customer._id)
         setSelectedUser(corelatedUser)
-        setCustomersVehicles(vehicles.filter(v => v.vehicleOwner._id === customer._id))
+
+        const updatedCustomerVehicles = vehicles.filter(v => v.vehicleOwner._id === customer._id)
+        setCustomersVehicles(updatedCustomerVehicles)
+
         setVehiclesPage('customersVehicles')
         history.push(`/cars`)
     }

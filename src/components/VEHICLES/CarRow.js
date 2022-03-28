@@ -44,11 +44,14 @@ const CarRow = ({ car, t }) => {
 
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()} key={car._id}>
+            <TableCell>{car.registrationNumber}</TableCell>
             <TableCell component="th" scope="row">
                 {car.mark}
             </TableCell>
             <TableCell>{car.model}</TableCell>
-            <TableCell>{car.registrationNumber}</TableCell>
+            <TableCell>
+                {car.driver}
+            </TableCell>
             {user.role === 'admin' &&
                 <TableCell>
                     {/* {car.TUVExpiresInTwoMonths &&

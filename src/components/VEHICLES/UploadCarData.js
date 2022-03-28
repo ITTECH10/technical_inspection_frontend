@@ -47,6 +47,7 @@ const UploadCarData = ({ t }) => {
 
     const [fields, setFields] = useState({
         photo: '',
+        driver: '',
         chassisNumber: '',
         mark: '',
         model: '',
@@ -89,6 +90,7 @@ const UploadCarData = ({ t }) => {
     }
 
     formData.append('photo', fields.photo)
+    formData.append('driver', fields.driver)
     formData.append('category', 'fa')
     formData.append('mark', fields.mark)
     formData.append('model', fields.model)
@@ -159,8 +161,6 @@ const UploadCarData = ({ t }) => {
             [e.target.name]: e.target.value
         })
     }
-
-    // console.log(fields)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -239,6 +239,14 @@ const UploadCarData = ({ t }) => {
                                     label={t('ModelInputLabel')}
                                     onChange={handleChange}
                                     required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="driver"
+                                    margin="dense"
+                                    id="vehicleDriver"
+                                    label="Fahrer"
+                                    onChange={handleChange}
                                     fullWidth
                                 />
                                 <TextField
@@ -449,6 +457,14 @@ const UploadCarData = ({ t }) => {
                                     label={t('ModelInputLabel')}
                                     onChange={handleChange}
                                     required
+                                    fullWidth
+                                />
+                                <TextField
+                                    name="driver"
+                                    margin="dense"
+                                    id="vehicleDriver"
+                                    label="Fahrer"
+                                    onChange={handleChange}
                                     fullWidth
                                 />
                                 <TextField

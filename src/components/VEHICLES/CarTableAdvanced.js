@@ -74,10 +74,12 @@ function CarTableAdvanced({ t }) {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
+                                <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
-                                <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                {dashboardAdaptiveTitle !== 'Meine Fahrzeuge' && dashboardAdaptiveTitle !== '' && <TableCell>TÜV, AU und Service fällig?</TableCell>}
+                                <TableCell>Fahrer</TableCell>
+                                {dashboardAdaptiveTitle !== 'Meine Fahrzeuge' && dashboardAdaptiveTitle !== '' &&
+                                    <TableCell>{dashboardAdaptiveTitle === 'Alle Fahrzeuge' ? 'TÜV, AU und Service fällig?' : 'Fallig am'}</TableCell>}
                                 {/* {
                                     dashboardAdaptiveTitle !== '' &&
                                     <TableCell>{t('Date')}</TableCell>

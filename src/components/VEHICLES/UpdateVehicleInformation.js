@@ -33,6 +33,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         chassisNumber: '',
         mark: '',
         model: '',
+        driver: '',
         registrationNumber: '',
         HSN: '',
         TSN: '',
@@ -58,6 +59,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
             chassisNumber: selectedCar.chassisNumber,
             mark: selectedCar.mark,
             model: selectedCar.model,
+            driver: selectedCar.driver,
+            varantyExpiresAt: selectedCar.varantyExpiresAt,
             registrationNumber: selectedCar.registrationNumber,
             HSN: selectedCar.HSN,
             TSN: selectedCar.TSN,
@@ -117,6 +120,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                 corespondingCar.TUV = res.data.updatedVehicle.TUV
                 corespondingCar.AU = res.data.updatedVehicle.AU
 
+                setOpen(false)
                 setVehicles(updatedVehicles)
                 setMyVehicles(updatedVehicles)
                 setSelectedCar(res.data.updatedVehicle)
@@ -182,6 +186,16 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             value={fields.model}
                         />
                         <TextField
+                            name="driver"
+                            margin="dense"
+                            id="update-vehicle-driver"
+                            label="Fahrer"
+                            onChange={handleChange}
+                            fullWidth
+                            required
+                            value={fields.driver}
+                        />
+                        <TextField
                             name="HSN"
                             margin="dense"
                             id="update-vehicle-HSN"
@@ -232,6 +246,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             required
+                            value={fields.varantyExpiresAt ? new Date(fields.varantyExpiresAt).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             className={classes.textField}
                             InputLabelProps={{
                                 shrink: true,

@@ -88,10 +88,11 @@ function VehiclesTableAdvanced({ t }) {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
+                                <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
                                 <TableCell>{t('MarkInputLabel')}</TableCell>
                                 <TableCell>{t('ModelInputLabel')}</TableCell>
-                                <TableCell>{t('RegistrationNumberInputLabel')}</TableCell>
-                                <TableCell>{t('VehicleOwner')}</TableCell>
+                                {/* <TableCell>{t('VehicleOwner')}</TableCell> */}
+                                <TableCell>Fahrer</TableCell>
                                 {
                                     dashboardAdaptiveTitle !== '' && dashboardAdaptiveTitle !== 'Alle Fahrzeuge' &&
                                     <TableCell TableCell > {t('Date')}</TableCell>

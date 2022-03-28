@@ -23,14 +23,15 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
 
     return (
         <TableRow className='table__row--root' onClick={() => onHandleCarRender()}>
+            <TableCell>{vehicle.registrationNumber}</TableCell>
             <TableCell component="th" scope="row">
                 {vehicle.mark}
             </TableCell>
             <TableCell>{vehicle.model}</TableCell>
-            <TableCell>{vehicle.registrationNumber}</TableCell>
-            <TableCell>
+            <TableCell>{vehicle.driver}</TableCell>
+            {/* <TableCell>
                 {`${vehicle.vehicleOwner.firstName} ${vehicle.vehicleOwner.lastName}`}
-            </TableCell>
+            </TableCell> */}
             {
                 dashboardAdaptiveTitle !== '' && dashboardAdaptiveTitle !== 'Alle Fahrzeuge' &&
                 <TableCell>

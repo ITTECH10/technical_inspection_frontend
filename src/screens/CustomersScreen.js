@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useData } from './../contexts/DataContext'
 import NewUserCreation from '../components/UI/NewUserCreation'
 import Alerts from '../components/UI/Alerts'
 import { withNamespaces } from 'react-i18next'
@@ -8,6 +9,11 @@ import Page from '../components/Page'
 
 const CustomersScreen = ({ t }) => {
     const [open, setOpen] = useState(false)
+    const { setDashboardAdaptiveTitle } = useData()
+
+    React.useEffect(() => {
+        setDashboardAdaptiveTitle('Alle Fahrzeuge')
+    }, [setDashboardAdaptiveTitle])
 
     return (
         <Page title="SE Carmanagement | Kundenbereich">
