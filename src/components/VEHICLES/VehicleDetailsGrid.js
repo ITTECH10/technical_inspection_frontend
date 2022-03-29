@@ -102,23 +102,23 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('NTIInputLabel')}</Typography>
-                    <TextField className={classes.input} value={formatedNextTehInsp} disabled />
+                    <TextField className={classes.input} value={nextTechnicalInspection ? formatedNextTehInsp : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('AUInputLabel')}</Typography>
-                    <TextField className={classes.input} value={formatedAu} disabled />
+                    <TextField className={classes.input} value={AU ? formatedAu : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('TUVInputLabel')}</Typography>
-                    <TextField className={classes.input} value={formatedTuv} disabled />
+                    <TextField className={classes.input} value={TUV ? formatedTuv : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('FVRInputLabel')}</Typography>
-                    <TextField className={classes.input} value={formatedFirstVehicleReg} disabled />
+                    <TextField className={classes.input} value={firstVehicleRegistration ? formatedFirstVehicleReg : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('FVROOInputLabel')}</Typography>
-                    <TextField className={classes.input} value={formatedFirstVehOnOwner} disabled />
+                    <TextField className={classes.input} value={firstVehicleRegistrationOnOwner ? formatedFirstVehOnOwner : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('HSNInputLabel')}</Typography>
@@ -155,7 +155,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                     <Typography className={classes.inputTitle}>{t('KilometersDrivenInputLabel')}</Typography>
                     {kilometersDriven ?
                         <NumberFormat
-                            value={kilometersDriven && kilometersDriven}
+                            value={kilometersDriven}
                             thousandSeparator={true}
                             customInput={TextField}
                             className={classes.input}
@@ -172,7 +172,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                             className={classes.input}
                             disabled
                             prefix="€"
-                        /> : <TextField className={classes.input} value={t('VehicleDetailsDataNotSetYet')} disabled />}
+                        /> : <TextField className={classes.input} value={yearlyTax ? yearlyTax : t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('MonthlyInsurancePaymentInputLabel')}</Typography>
@@ -184,7 +184,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                             className={classes.input}
                             disabled
                             prefix="€"
-                        /> : <TextField className={classes.input} value={t('VehicleDetailsDataNotSetYet')} disabled />}
+                        /> : <TextField className={classes.input} value={monthlyInsurancePayment ? monthlyInsurancePayment : t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
             </Paper>
         </Grid>

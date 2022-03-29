@@ -34,7 +34,7 @@ const PaymentVariants = () => {
     }, [getCorespondingPayment, selectedCar, setSelectedPayment, vehiclePaymentType])
 
     return (
-        user.role === 'admin' &&
+
         <Box className={classes.container}>
             <Box className={classes.flexContent}>
                 <BarDialog />

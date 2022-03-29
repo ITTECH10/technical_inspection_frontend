@@ -16,7 +16,7 @@ const InsurancePaymentVariants = () => {
     }, [getCorespondingInsurance, selectedCar, setSelectedCarInsurance, insuranceHouse])
 
     return (
-        user.role === 'admin' &&
+
         <Box>
             <InsurancePaymentDialog />
         </Box>

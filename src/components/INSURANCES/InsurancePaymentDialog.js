@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -20,6 +21,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Box from '@material-ui/core/Box';
 
 function InsurancePaymentDialog({ t }) {
+    const location = useLocation()
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
     const { user, selectedUser, setSelectedCar, selectedCar, selectedCarInsurance, setSelectedCarInsurance, setGeneralAlertOptions } = useData()
@@ -55,6 +57,9 @@ function InsurancePaymentDialog({ t }) {
     if (user.role === 'admin' && selectedUser && selectedCar) {
         userId = selectedUser._id
         vehicleId = selectedCar._id
+    } else {
+        userId = user._id
+        vehicleId = location.pathname.split('/')[2]
     }
 
     const handleClickOpen = () => {
