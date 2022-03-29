@@ -119,27 +119,6 @@ const UserInfoBlock = ({ t }) => {
                             fullWidth
                         />
                     </Box>}
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`Schutzbrief: ${selectedUser.protectionLetter ? 'Ja' : 'Nein'}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`ADAC: ${selectedUser.ADAC ? 'Ja' : 'Nein'}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`Mitgliedsnummer: ${selectedUser.membershipNumber ? selectedUser.membershipNumber : 'Nein'}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
             </Paper>
         </>
     )

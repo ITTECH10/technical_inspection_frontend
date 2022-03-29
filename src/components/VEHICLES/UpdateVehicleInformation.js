@@ -8,6 +8,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import Switch from '@material-ui/core/Switch';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles'
@@ -29,6 +34,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
     const [open, setOpen] = React.useState(false);
     const [btnLoading, setBtnLoading] = React.useState(false)
     const { vehicles, setVehicles, selectedCar, user, setSelectedCar, myVehicles, setMyVehicles, setGeneralAlertOptions } = useData()
+    const [protectionLetterChecked, setProtectionLetterChecked] = React.useState(selectedCar.protectionLetter)
+    const [adacChecked, setAdacChecked] = React.useState(selectedCar.ADAC)
     const [fields, setFields] = React.useState({
         chassisNumber: '',
         mark: '',
@@ -50,6 +57,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         monthlyInsurancePayment: '',
         allowedYearlyKilometers: '',
         yearlyTax: '',
+        membershipNumber: ''
     })
     const history = useHistory()
     const carId = history.location.pathname.split('/')[2]
@@ -76,8 +84,16 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
             monthlyInsurancePayment: selectedCar.monthlyInsurancePayment,
             allowedYearlyKilometers: selectedCar.allowedYearlyKilometers,
             yearlyTax: selectedCar.yearlyTax,
+            membershipNumber: selectedCar.membershipNumber,
         })
     }, [selectedCar, open])
+
+    const handleProtectionLetterSwitchOn = () => {
+        if (protectionLetterChecked) {
+            setAdacChecked(false)
+        }
+        setProtectionLetterChecked(prevState => !prevState)
+    }
 
     const handleChange = (e) => {
         setFields({
@@ -100,7 +116,12 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
 
         setBtnLoading(true)
 
-        const data = { ...fields }
+        const data = {
+            ...fields,
+            protectionLetter: protectionLetterChecked,
+            ADAC: adacChecked,
+            membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' ? fields.membershipNumber : undefined
+        }
         axios.put(`/cars/${carId}`, data).then(res => {
             if (res.status === 200) {
                 let updatedVehicles
@@ -192,7 +213,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label="Fahrer"
                             onChange={handleChange}
                             fullWidth
-                            required
                             value={fields.driver}
                         />
                         <TextField
@@ -386,6 +406,32 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             value={fields.yearlyTax}
                             required={user.role === 'admin'}
                         />
+                        <Box style={{ marginTop: 10 }}>
+                            <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
+                            <FormGroup style={{ flexDirection: 'row' }}>
+                                <FormControlLabel
+                                    control={<Switch checked={protectionLetterChecked} />}
+                                    onChange={handleProtectionLetterSwitchOn}
+                                    label="Schutzbrief"
+                                />
+                                <FormControlLabel
+                                    disabled={!protectionLetterChecked}
+                                    control={<Switch checked={adacChecked} />}
+                                    onChange={() => setAdacChecked(prevState => !prevState)}
+                                    label="ADAC"
+                                />
+                            </FormGroup>
+                        </Box>
+                        {protectionLetterChecked && adacChecked &&
+                            <TextField
+                                name="membershipNumber"
+                                margin="dense"
+                                id="membershipNumber"
+                                label="Mitgliedsnummer"
+                                onChange={handleChange}
+                                type="text"
+                                fullWidth
+                            />}
                         <DialogActions>
                             <Button variant="contained" onClick={handleClose} color="primary">
                                 {t('CancelButton')}

@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
-import Box from '@material-ui/core/Box';
-import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -44,8 +41,6 @@ function EditUserDetails({ userId, t }) {
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const { setSelectedUser, setUser, user, selectedUser, setGeneralAlertOptions } = useData()
-    const [protectionLetterChecked, setProtectionLetterChecked] = useState(selectedUser.protectionLetter)
-    const [adacChecked, setAdacChecked] = useState(selectedUser.ADAC)
     const classes = useStyles()
 
     if (user.role === 'user') {
@@ -65,8 +60,7 @@ function EditUserDetails({ userId, t }) {
         customerType: selectedUser.customerType,
         customerPartner: selectedUser.customerPartner,
         customerPartnerEmail: selectedUser.customerPartnerEmail,
-        companyName: selectedUser.companyName,
-        membershipNumber: selectedUser.membershipNumber,
+        companyName: selectedUser.companyName
     })
 
     React.useEffect(() => {
@@ -84,8 +78,7 @@ function EditUserDetails({ userId, t }) {
                 customerType: selectedUser.customerType,
                 customerPartner: selectedUser.corespondencePartner,
                 customerPartnerEmail: selectedUser.corespondencePartnerEmail,
-                companyName: selectedUser.companyName,
-                membershipNumber: selectedUser.membershipNumber
+                companyName: selectedUser.companyName
             })
         }
 
@@ -103,8 +96,7 @@ function EditUserDetails({ userId, t }) {
                 customerType: user.customerType,
                 customerPartner: user.corespondencePartner,
                 customerPartnerEmail: user.corespondencePartnerEmail,
-                companyName: user.companyName,
-                membershipNumber: user.membershipNumber
+                companyName: user.companyName
             })
         }
     }, [selectedUser, open, user])
@@ -115,14 +107,6 @@ function EditUserDetails({ userId, t }) {
             [e.target.name]: e.target.value
         })
     }
-
-    const handleProtectionLetterSwitchOn = () => {
-        if (protectionLetterChecked) {
-            setAdacChecked(false)
-        }
-        setProtectionLetterChecked(prevState => !prevState)
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(fields).every(val => val === '')) return
@@ -130,9 +114,6 @@ function EditUserDetails({ userId, t }) {
 
         const data = {
             ...fields,
-            protectionLetter: protectionLetterChecked,
-            ADAC: adacChecked,
-            membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' ? fields.membershipNumber : undefined,
             companyName: fields.customerType === 'firmenkunde' ? fields.companyName : undefined,
             customerPartner: fields.customerType === 'firmenkunde' ? fields.customerPartner : undefined,
             customerPartnerEmail: fields.customerType === 'firmenkunde' ? fields.customerPartnerEmail : undefined,
@@ -361,32 +342,6 @@ function EditUserDetails({ userId, t }) {
                             fullWidth
                             required
                         />
-                        <Box style={{ marginTop: 10 }}>
-                            <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
-                            <FormGroup style={{ flexDirection: 'row' }}>
-                                <FormControlLabel
-                                    control={<Switch checked={protectionLetterChecked} />}
-                                    onChange={handleProtectionLetterSwitchOn}
-                                    label="Schutzbrief"
-                                />
-                                <FormControlLabel
-                                    disabled={!protectionLetterChecked}
-                                    control={<Switch checked={adacChecked} />}
-                                    onChange={() => setAdacChecked(prevState => !prevState)}
-                                    label="ADAC"
-                                />
-                            </FormGroup>
-                        </Box>
-                        {protectionLetterChecked && adacChecked &&
-                            <TextField
-                                name="membershipNumber"
-                                margin="dense"
-                                id="membershipNumber"
-                                label="Mitgliedsnummer"
-                                onChange={handleChange}
-                                type="text"
-                                fullWidth
-                            />}
                         <DialogActions>
                             <Button onClick={handleClose} color="primary" variant="contained">
                                 {t('CancelButton')}

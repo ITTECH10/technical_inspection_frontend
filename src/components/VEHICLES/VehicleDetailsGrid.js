@@ -39,7 +39,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
+    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, protectionLetter, ADAC, membershipNumber, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toLocaleDateString()
     const formatedAu = new Date(AU).toLocaleDateString()
@@ -76,10 +76,11 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                     <Typography className={classes.inputTitle}>{t('ModelInputLabel')}</Typography>
                     <TextField className={classes.input} value={model} disabled />
                 </Box>
-                <Box>
-                    <Typography className={classes.inputTitle}>Fahrer</Typography>
-                    <TextField className={classes.input} value={driver} disabled />
-                </Box>
+                {driver &&
+                    <Box>
+                        <Typography className={classes.inputTitle}>Fahrer</Typography>
+                        <TextField className={classes.input} value={driver} disabled />
+                    </Box>}
                 <Box>
                     <Typography className={classes.inputTitle}>{t('RegistrationNumberInputLabel')}</Typography>
                     <TextField className={classes.input} value={registrationNumber} disabled />
@@ -127,6 +128,18 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 <Box>
                     <Typography className={classes.inputTitle}>{t('TSNInputLabel')}</Typography>
                     <TextField className={classes.input} value={TSN ? TSN : t('VehicleDetailsDataNotSetYet')} disabled />
+                </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>Schutzbrief</Typography>
+                    <TextField className={classes.input} value={protectionLetter ? 'Ja' : 'Nein'} disabled />
+                </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>ADAC</Typography>
+                    <TextField className={classes.input} value={ADAC ? 'Ja' : 'Nein'} disabled />
+                </Box>
+                <Box>
+                    <Typography className={classes.inputTitle}>Mitgliedsnummer</Typography>
+                    <TextField className={classes.input} value={membershipNumber ? membershipNumber : 'Nein'} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{`${t('AllowedYearlyKilometersInputLabel')} (km)`}</Typography>

@@ -5,9 +5,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import Box from '@material-ui/core/Box';
-import Switch from '@material-ui/core/Switch';
 import FormLabel from '@material-ui/core/FormLabel';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -28,15 +25,12 @@ const generatedPassword = generateId()
 function NewCustomer({ t }) {
   const { users, setUsers, setGeneralAlertOptions } = useData()
   const [open, setOpen] = React.useState(false);
-  const [adacChecked, setAdacChecked] = useState(false)
-  const [protectionLetterChecked, setProtectionLetterChecked] = useState(false)
   const [btnLoading, setBtnLoading] = useState(false)
   const [fields, setFields] = useState({
     firstName: undefined,
     lastName: undefined,
     gender: genders[0].text,
     email: undefined,
-    membershipNumber: undefined,
     phoneNumber: undefined,
     smartphoneNumber: undefined,
     street: undefined,
@@ -49,18 +43,6 @@ function NewCustomer({ t }) {
     customerPartner: undefined,
     customerPartnerEmail: undefined
   })
-
-  const handleProtectionLetterSwitchOn = () => {
-    if (protectionLetterChecked) {
-      setAdacChecked(false)
-    }
-    setProtectionLetterChecked(prevState => !prevState)
-  }
-
-  const resetSwitchStates = () => {
-    setProtectionLetterChecked(false)
-    setAdacChecked(false)
-  }
 
   const handleChange = (e) => {
     setFields({
@@ -76,9 +58,6 @@ function NewCustomer({ t }) {
     const data = {
       ...fields,
       confirmPassword: fields.password,
-      protectionLetter: protectionLetterChecked,
-      ADAC: adacChecked,
-      membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' ? fields.membershipNumber : undefined,
       companyName: fields.customerType === 'firmenkunde' ? fields.companyName : undefined,
       customerPartner: fields.customerType === 'firmenkunde' ? fields.customerPartner : undefined,
       customerPartnerEmail: fields.customerType === 'firmenkunde' ? fields.customerPartnerEmail : undefined,
@@ -117,7 +96,6 @@ function NewCustomer({ t }) {
 
   const handleClose = () => {
     setOpen(false);
-    resetSwitchStates()
   };
 
   return (
@@ -288,33 +266,6 @@ function NewCustomer({ t }) {
               onChange={handleChange}
               fullWidth
             />
-            <Box style={{ marginTop: 10 }}>
-              <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
-              <FormGroup style={{ flexDirection: 'row' }}>
-                <FormControlLabel
-                  control={<Switch checked={protectionLetterChecked} />}
-                  onChange={handleProtectionLetterSwitchOn}
-                  label="Schutzbrief"
-                />
-                <FormControlLabel
-                  disabled={!protectionLetterChecked}
-                  control={<Switch checked={adacChecked} />}
-                  onChange={() => setAdacChecked(prevState => !prevState)}
-                  label="ADAC"
-                />
-              </FormGroup>
-            </Box>
-            {protectionLetterChecked && adacChecked &&
-              <TextField
-                autoFocus
-                name="membershipNumber"
-                margin="dense"
-                id="membershipNumber"
-                label="Mitgliedsnummer"
-                onChange={handleChange}
-                type="text"
-                fullWidth
-              />}
             <DialogActions>
               <Button onClick={handleClose} color="primary" variant="contained">
                 {t('CancelButton')}
