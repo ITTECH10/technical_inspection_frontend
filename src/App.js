@@ -136,7 +136,6 @@ function App() {
     </React.Suspense>
   )
 
-  // OLD CODE
   // const navbarFix = {
   //   position: 'relative',
   //   top: !loading && 64,
