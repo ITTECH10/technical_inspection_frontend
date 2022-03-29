@@ -429,6 +429,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                                 id="membershipNumber"
                                 label="Mitgliedsnummer"
                                 onChange={handleChange}
+                                value={fields.membershipNumber}
                                 type="text"
                                 fullWidth
                             />}

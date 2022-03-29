@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useData } from '../contexts/DataContext'
 // mui
-import { Box, Typography, TextField, IconButton as Icon, useMediaQuery } from '@material-ui/core'
+import { Box, Typography, TextField, IconButton as Icon, useMediaQuery, InputAdornment } from '@material-ui/core'
 import PlaceIcon from '@material-ui/icons/Place';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 // others
 import { Helmet } from 'react-helmet-async';
@@ -17,6 +19,7 @@ import ForgotPasswordForm from './../components/UI/Users/ForgotPasswordForm'
 import PoliciesFooter from '../components/UI/Users/PoliciesFooter'
 
 const NewLogin = ({ history, t }) => {
+    const [passwordVisible, setPasswordVisible] = React.useState(false)
     const [fields, setFields] = useState({
         email: '',
         password: ''
@@ -25,6 +28,10 @@ const NewLogin = ({ history, t }) => {
     const [disableSubmiting, setDisableSubmiting] = useState(false)
 
     const matches = useMediaQuery('(min-width:900px)');
+
+    const passwordVisibilityHandler = () => {
+        setPasswordVisible(prevState => !prevState)
+    }
 
     const handleChange = (e) => {
         setFields({
@@ -134,7 +141,7 @@ const NewLogin = ({ history, t }) => {
                                         onChange={handleChange}
                                         variant="outlined"
                                         size="small"
-                                        type="password"
+                                        type={passwordVisible ? 'text' : 'password'}
                                         style={{
                                             backgroundColor: '#fff',
                                             borderRadius: 5,
@@ -145,6 +152,13 @@ const NewLogin = ({ history, t }) => {
                                         fullWidth
                                         placeholder="Passwort"
                                         autoComplete="on"
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment style={{ cursor: 'pointer' }} position="end" onClick={passwordVisibilityHandler}>
+                                                    {passwordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                                                </InputAdornment>
+                                            )
+                                        }}
                                     />
                                 </Box>
                                 <button className="button login__submit" type="submit">
