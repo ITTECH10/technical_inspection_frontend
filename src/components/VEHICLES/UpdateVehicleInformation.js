@@ -163,7 +163,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
 
     return (
         <div style={{ marginRight: 10 }}>
-            <Tooltip title="Update Vehicle?">
+            <Tooltip title="Fahrzeugdaten bearbeiten">
                 <IconButton className={classes.btnRoot} size="small" variant="contained" color="secondary" onClick={handleClickOpen}>
                     <EditIcon />
                 </IconButton>
