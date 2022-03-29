@@ -8,7 +8,8 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import Box from '@material-ui/core/Box';
 import Switch from '@material-ui/core/Switch';
-import FormLabel from '@material-ui/core/FormLabel'; import Dialog from '@material-ui/core/Dialog';
+import FormLabel from '@material-ui/core/FormLabel';
+import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -17,28 +18,19 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import { useData } from './../../contexts/DataContext'
 import FloatingButton from './FloatingButton';
-import { makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { generateId } from './../../utils/helpers'
 import { withNamespaces } from 'react-i18next';
 import { genders } from './../../utils/helpers'
 
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginTop: theme.spacing(1),
-    width: '100%'
-  },
-}))
-
 const generatedPassword = generateId()
 
-function NewCustomer({ handleAlertOpening, t }) {
+function NewCustomer({ t }) {
   const { users, setUsers, setGeneralAlertOptions } = useData()
   const [open, setOpen] = React.useState(false);
   const [adacChecked, setAdacChecked] = useState(false)
   const [protectionLetterChecked, setProtectionLetterChecked] = useState(false)
   const [btnLoading, setBtnLoading] = useState(false)
-  const classes = useStyles()
   const [fields, setFields] = useState({
     firstName: undefined,
     lastName: undefined,
@@ -50,7 +42,6 @@ function NewCustomer({ handleAlertOpening, t }) {
     street: undefined,
     postCode: undefined,
     city: undefined,
-    birthDate: undefined,
     password: generatedPassword,
     confirmPassword: undefined,
     customerType: 'firmenkunde',
@@ -100,7 +91,12 @@ function NewCustomer({ handleAlertOpening, t }) {
         setUsers(updatedUsers)
         setBtnLoading(false)
         setOpen(false)
-        handleAlertOpening(true)
+        setGeneralAlertOptions({
+          open: true,
+          message: t('AlertGeneralSuccessful'),
+          severity: 'success',
+          hideAfter: 5000
+        })
       }
     })
       .catch(err => {
@@ -238,17 +234,6 @@ function NewCustomer({ handleAlertOpening, t }) {
               ))}
             </TextField>
             <TextField
-              name="birthDate"
-              id="birthDate"
-              label={t('BirthDateInputLabel')}
-              onChange={handleChange}
-              type="date"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
               name="email"
               required
               margin="dense"
@@ -258,7 +243,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               type="email"
               fullWidth
             />
-            {<TextField
+            <TextField
               name="phoneNumber"
               margin="dense"
               id="phoneNumber"
@@ -266,19 +251,7 @@ function NewCustomer({ handleAlertOpening, t }) {
               onChange={handleChange}
               type="text"
               fullWidth
-            />}
-            {/*<NumberFormat*/}
-            {/*  name="phoneNumber"*/}
-            {/*  onChange={handleChange}*/}
-            {/*  format="+49 (###) ######"*/}
-            {/*  mask="_"*/}
-            {/*  allowEmptyFormatting*/}
-            {/*  customInput={TextField}*/}
-            {/*  fullWidth*/}
-            {/*  label={`${t('PhoneNumberInputLabel')}`}*/}
-            {/*  required*/}
-            {/*  style={{ marginTop: 16 }}*/}
-            {/*/>*/}
+            />
             <TextField
               name="smartphoneNumber"
               margin="dense"

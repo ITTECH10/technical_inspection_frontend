@@ -115,7 +115,6 @@ const AccountScreen = ({ t }) => {
     const classes = useStyles()
     const { user } = useData()
 
-    const formatedBirthDate = new Date(user.birthDate).toLocaleDateString()
     const matches = useMediaQuery('(max-width: 600px)')
 
     return (
@@ -178,19 +177,6 @@ const AccountScreen = ({ t }) => {
                                         />
                                     </Box>
                                 </Box>
-                                {user.birthDate &&
-                                    <Box className={classes.inputSingleBox}>
-                                        <Box className={classes.inputContentVertical}>
-                                            <Typography style={{ fontWeight: '400' }}>
-                                                {t('BirthDateInputLabel')}
-                                            </Typography>
-                                            <TextField
-                                                variant="standard"
-                                                disabled
-                                                value={formatedBirthDate}
-                                            />
-                                        </Box>
-                                    </Box>}
 
                                 <Box className={classes.inputSingleBox}>
                                     <Box className={classes.inputContentVertical}>

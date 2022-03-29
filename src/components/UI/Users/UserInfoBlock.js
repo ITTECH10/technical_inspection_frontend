@@ -64,13 +64,14 @@ const UserInfoBlock = ({ t }) => {
                         fullWidth
                     />
                 </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`${t('GenderNewUser')}: ${selectedUser.gender === 'Mr' ? t('GenderMale') : t('GenderFemale')}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
+                {selectedUser.gender &&
+                    <Box className={classes.userRow}>
+                        <TextField
+                            value={`${t('GenderNewUser')}: ${selectedUser.gender === 'Mr' ? t('GenderMale') : t('GenderFemale')}`}
+                            disabled
+                            fullWidth
+                        />
+                    </Box>}
                 <Box className={classes.userRow}>
                     <TextField
                         value={`E-mail: ${selectedUser.email}`}
@@ -94,27 +95,30 @@ const UserInfoBlock = ({ t }) => {
                             fullWidth
                         />
                     </Box>}
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`${t('StreetInputLabel')}: ${selectedUser.street}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`${t('PostNumberInputLabel')}: ${selectedUser.postCode}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
-                <Box className={classes.userRow}>
-                    <TextField
-                        value={`${t('CityInputLabel')}: ${selectedUser.city}`}
-                        disabled
-                        fullWidth
-                    />
-                </Box>
+                {selectedUser.street &&
+                    <Box className={classes.userRow}>
+                        <TextField
+                            value={`${t('StreetInputLabel')}: ${selectedUser.street}`}
+                            disabled
+                            fullWidth
+                        />
+                    </Box>}
+                {selectedUser.postCode &&
+                    <Box className={classes.userRow}>
+                        <TextField
+                            value={`${t('PostNumberInputLabel')}: ${selectedUser.postCode}`}
+                            disabled
+                            fullWidth
+                        />
+                    </Box>}
+                {selectedUser.city &&
+                    <Box className={classes.userRow}>
+                        <TextField
+                            value={`${t('CityInputLabel')}: ${selectedUser.city}`}
+                            disabled
+                            fullWidth
+                        />
+                    </Box>}
                 <Box className={classes.userRow}>
                     <TextField
                         value={`Schutzbrief: ${selectedUser.protectionLetter ? 'Ja' : 'Nein'}`}

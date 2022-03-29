@@ -58,7 +58,6 @@
     "EmailInputLabel": "E-Mail",
     "FirstNameInputLabel": "Vorname",
     "LastNameInputLabel": "Nachname",
-    "BirthDateInputLabel": "Geburtsdatum",
     "PhoneNumberInputLabel": "Telefonnummer",
     "AdressInputLabel": "Adresse",
     "InsuranceHouseNameInputLabel": "Name der Versicherung",

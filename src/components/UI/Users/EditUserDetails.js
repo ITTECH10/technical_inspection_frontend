@@ -62,7 +62,6 @@ function EditUserDetails({ userId, t }) {
         street: selectedUser.street,
         postCode: selectedUser.postCode,
         city: selectedUser.city,
-        birthDate: selectedUser.birthDate,
         customerType: selectedUser.customerType,
         customerPartner: selectedUser.customerPartner,
         customerPartnerEmail: selectedUser.customerPartnerEmail,
@@ -82,7 +81,6 @@ function EditUserDetails({ userId, t }) {
                 street: selectedUser.street,
                 postCode: selectedUser.postCode,
                 city: selectedUser.city,
-                birthDate: selectedUser.birthDate,
                 customerType: selectedUser.customerType,
                 customerPartner: selectedUser.corespondencePartner,
                 customerPartnerEmail: selectedUser.corespondencePartnerEmail,
@@ -102,7 +100,6 @@ function EditUserDetails({ userId, t }) {
                 street: user.street,
                 postCode: user.postCode,
                 city: user.city,
-                birthDate: user.birthDate,
                 customerType: user.customerType,
                 customerPartner: user.corespondencePartner,
                 customerPartnerEmail: user.corespondencePartnerEmail,
@@ -308,19 +305,6 @@ function EditUserDetails({ userId, t }) {
                             disabled={user.role === 'user'}
                             fullWidth
                             required
-                        />
-                        <TextField
-                            name="birthDate"
-                            id="birthDate-edit"
-                            label={t('BirthDateInputLabel')}
-                            value={fields.birthDate ? new Date(fields.birthDate).toISOString().split('T')[0] : '1970/12/31'}
-                            onChange={handleChange}
-                            type="date"
-                            required
-                            className={classes.textField}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
                         />
                         <TextField
                             name="phoneNumber"
