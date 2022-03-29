@@ -71,7 +71,7 @@
     "HSNInputLabel": "HSN (Herstellernummer)",
     "TSNInputLabel": "TSN (Typschlüsselnummer)",
     "RegistrationNumberInputLabel": "Kennzeichen",
-    "KilometersDrivenInputLabel": "Kilometerleistung",
+    "KilometersDrivenInputLabel": "Aktueller Kilometerstand",
     "FVRInputLabel": "Erstzulassung des Fahrzeugs",
     "FVROOInputLabel": "Zulassung auf den Besitzer",
     "LTIInputLabel": "Letzter Service am",
