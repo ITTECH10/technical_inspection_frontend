@@ -307,7 +307,6 @@ const UploadCarData = ({ t }) => {
                                     id="kilometersDriven"
                                     label={t('KilometersDrivenInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <TextField
@@ -532,7 +531,6 @@ const UploadCarData = ({ t }) => {
                                     id="kilometersDriven"
                                     label={t('KilometersDrivenInputLabel')}
                                     onChange={handleChange}
-                                    required
                                     fullWidth
                                 />
                                 <DialogActions>

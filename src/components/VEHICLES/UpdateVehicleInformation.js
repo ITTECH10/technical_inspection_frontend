@@ -183,7 +183,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('ChassisNumber')}
                             onChange={handleChange}
                             fullWidth
-                            required={user.role === 'admin'}
                             value={fields.chassisNumber}
                         />
                         <TextField
@@ -222,7 +221,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('HSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            required={user.role === 'admin'}
                             value={fields.HSN && fields.HSN}
                             error={fields.HSN && fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
                             helperText={fields.HSN && fields.HSN.length > 4 ? 'Die HSN darf nicht länger als 4 Zeichen sein...' : null}
@@ -234,7 +232,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('TSNInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            required={user.role === 'admin'}
                             value={fields.TSN && fields.TSN}
                             error={fields.TSN && fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
                             helperText={fields.TSN && fields.TSN.length > 3 ? 'Die TSN darf nicht länger als 3 Zeichen sein...' : null}
@@ -256,7 +253,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('KilometersDrivenInputLabel')}
                             onChange={handleChange}
                             fullWidth
-                            required
                             value={fields.kilometersDriven}
                         />
                         <TextField
@@ -265,7 +261,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label="Garantie Ablaufdatum"
                             onChange={handleChange}
                             type="date"
-                            required
                             value={fields.varantyExpiresAt ? new Date(fields.varantyExpiresAt).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             className={classes.textField}
                             InputLabelProps={{
@@ -278,8 +273,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('FVRInputLabel')}
                             onChange={handleChange}
                             type="date"
-                            className={classes.textField}
                             required
+                            className={classes.textField}
                             value={fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -292,7 +287,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            required={user.role === 'admin'}
                             value={fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -305,7 +299,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            required={user.role === 'admin'}
                             value={fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -317,8 +310,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('FVROOInputLabel')}
                             onChange={handleChange}
                             type="date"
-                            className={classes.textField}
                             required
+                            className={classes.textField}
                             value={fields.firstVehicleRegistrationOnOwner ? new Date(fields.firstVehicleRegistrationOnOwner).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -331,7 +324,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            required={user.role === 'admin'}
                             value={fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -343,8 +335,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('NTIInputLabel')}
                             onChange={handleChange}
                             type="date"
-                            className={classes.textField}
                             required
+                            className={classes.textField}
                             value={fields.nextTechnicalInspection ? new Date(fields.nextTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -356,9 +348,9 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('TUVInputLabel')}
                             onChange={handleChange}
                             type="date"
+                            required
                             className={classes.textField}
                             value={fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
-                            required
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -369,8 +361,8 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label={t('AUInputLabel')}
                             onChange={handleChange}
                             type="date"
-                            className={classes.textField}
                             required
+                            className={classes.textField}
                             value={fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : 'mm/dd/yyyy'}
                             InputLabelProps={{
                                 shrink: true,
@@ -384,7 +376,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             value={fields.monthlyInsurancePayment}
-                            required={user.role === 'admin'}
                         />
                         <TextField
                             name="allowedYearlyKilometers"
@@ -394,7 +385,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             value={fields.allowedYearlyKilometers}
-                            required={user.role === 'admin'}
                         />
                         <TextField
                             name="yearlyTax"
@@ -404,7 +394,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             fullWidth
                             value={fields.yearlyTax}
-                            required={user.role === 'admin'}
                         />
                         <Box style={{ marginTop: 10 }}>
                             <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
