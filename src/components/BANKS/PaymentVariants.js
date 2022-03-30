@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const PaymentVariants = () => {
     const classes = useStyles()
-    const { selectedCar, getCorespondingPayment, setSelectedPayment, user } = useData()
+    const { selectedCar, getCorespondingPayment, setSelectedPayment } = useData()
     const { vehiclePaymentType } = selectedCar
 
     React.useEffect(() => {

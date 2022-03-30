@@ -136,7 +136,7 @@ function BarDialog({ t }) {
                             id="payedAt-bar"
                             onChange={handleChange}
                             label={t('Payment.cash.payedAt')}
-                            value={fields.payedAt ? new Date(fields.payedAt).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.payedAt ? new Date(fields.payedAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             type="date"
                             className={classes.textField}
                             required

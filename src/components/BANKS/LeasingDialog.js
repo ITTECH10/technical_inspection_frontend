@@ -209,7 +209,7 @@ function LeasingDialog({ t }) {
                             id="leasingStartDate-leasing"
                             label={t('LeasingStartDateInputLabel')}
                             type="date"
-                            value={fields.leasingStartDate ? new Date(fields.leasingStartDate).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.leasingStartDate ? new Date(fields.leasingStartDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             onChange={handleChange}
                             required
                             className={classes.textField}

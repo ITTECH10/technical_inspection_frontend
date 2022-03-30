@@ -171,7 +171,7 @@ function FinansesDialog({ t }) {
                         <TextField
                             name="creditStartDate"
                             margin="dense"
-                            value={fields.creditStartDate ? new Date(fields.creditStartDate).toISOString().split('T')[0] : '1970/12/31'}
+                            value={fields.creditStartDate ? new Date(fields.creditStartDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             onChange={handleChange}
                             id="creditStartDate-finanses"
                             label={t('CreditStartDateInputLabel')}

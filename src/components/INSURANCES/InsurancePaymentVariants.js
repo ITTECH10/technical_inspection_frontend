@@ -4,7 +4,7 @@ import { useData } from '../../contexts/DataContext'
 import InsurancePaymentDialog from './InsurancePaymentDialog'
 
 const InsurancePaymentVariants = () => {
-    const { selectedCar, getCorespondingInsurance, setSelectedCarInsurance, user } = useData()
+    const { selectedCar, getCorespondingInsurance, setSelectedCarInsurance } = useData()
     const { insuranceHouse } = selectedCar
 
     React.useEffect(() => {
