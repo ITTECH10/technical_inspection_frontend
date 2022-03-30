@@ -261,7 +261,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             label="Garantie Ablaufdatum"
                             onChange={handleChange}
                             type="date"
-                            value={fields.varantyExpiresAt ? new Date(fields.varantyExpiresAt).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.varantyExpiresAt ? new Date(fields.varantyExpiresAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             className={classes.textField}
                             InputLabelProps={{
                                 shrink: true,
@@ -275,7 +275,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             required
                             className={classes.textField}
-                            value={fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.firstVehicleRegistration ? new Date(fields.firstVehicleRegistration).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -287,7 +287,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            value={fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.lastUUV ? new Date(fields.lastUUV).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -299,7 +299,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            value={fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.nextUUV ? new Date(fields.nextUUV).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -312,7 +312,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             required
                             className={classes.textField}
-                            value={fields.firstVehicleRegistrationOnOwner ? new Date(fields.firstVehicleRegistrationOnOwner).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.firstVehicleRegistrationOnOwner ? new Date(fields.firstVehicleRegistrationOnOwner).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -324,7 +324,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={handleChange}
                             type="date"
                             className={classes.textField}
-                            value={fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.lastTechnicalInspection ? new Date(fields.lastTechnicalInspection).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -337,7 +337,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             required
                             className={classes.textField}
-                            value={fields.nextTechnicalInspection ? new Date(fields.nextTechnicalInspection).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.nextTechnicalInspection ? new Date(fields.nextTechnicalInspection).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -350,7 +350,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             required
                             className={classes.textField}
-                            value={fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -363,7 +363,7 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             type="date"
                             required
                             className={classes.textField}
-                            value={fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : 'mm/dd/yyyy'}
+                            value={fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
                             InputLabelProps={{
                                 shrink: true,
                             }}

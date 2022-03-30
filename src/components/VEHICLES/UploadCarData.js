@@ -76,6 +76,8 @@ const UploadCarData = ({ t }) => {
         membershipNumber: ''
     })
 
+    console.log(fields.varantyExpiresAt)
+
     const formData = new FormData()
 
     if (user.role === 'admin') {
@@ -316,6 +318,7 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     type="date"
                                     className={classes.textField}
+                                    value={fields.varantyExpiresAt ? fields.varantyExpiresAt : new Date().toISOString().split('T')[0]}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -327,6 +330,7 @@ const UploadCarData = ({ t }) => {
                                         label={t('LastUUVInputLabel')}
                                         onChange={handleChange}
                                         type="date"
+                                        value={fields.lastUUV ? fields.lastUUV : new Date().toISOString().split('T')[0]}
                                         className={classes.textField}
                                         InputLabelProps={{
                                             shrink: true,
@@ -339,6 +343,7 @@ const UploadCarData = ({ t }) => {
                                         label={t('NextUUVInputLabel')}
                                         onChange={handleChange}
                                         type="date"
+                                        value={fields.nextUUV ? fields.nextUUV : new Date().toISOString().split('T')[0]}
                                         className={classes.textField}
                                         InputLabelProps={{
                                             shrink: true,
@@ -351,6 +356,7 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     required
                                     type="date"
+                                    value={fields.firstVehicleRegistration ? fields.firstVehicleRegistration : new Date().toISOString().split('T')[0]}
                                     className={classes.textField}
                                     InputLabelProps={{
                                         shrink: true,
@@ -363,6 +369,7 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     required
                                     type="date"
+                                    value={fields.firstVehicleRegistrationOnOwner ? fields.firstVehicleRegistrationOnOwner : new Date().toISOString().split('T')[0]}
                                     className={classes.textField}
                                     InputLabelProps={{
                                         shrink: true,
@@ -374,6 +381,7 @@ const UploadCarData = ({ t }) => {
                                     label={t('LTIInputLabel')}
                                     onChange={handleChange}
                                     type="date"
+                                    value={fields.lastTechnicalInspection ? fields.lastTechnicalInspection : new Date().toISOString().split('T')[0]}
                                     className={classes.textField}
                                     InputLabelProps={{
                                         shrink: true,
@@ -386,6 +394,7 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     required
                                     type="date"
+                                    value={fields.nextTechnicalInspection ? fields.nextTechnicalInspection : new Date().toISOString().split('T')[0]}
                                     className={classes.textField}
                                     InputLabelProps={{
                                         shrink: true,
@@ -398,6 +407,7 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     required
                                     type="date"
+                                    value={fields.TUV ? fields.TUV : new Date().toISOString().split('T')[0]}
                                     className={classes.textField}
                                     InputLabelProps={{
                                         shrink: true,
@@ -410,6 +420,7 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     required
                                     type="date"
+                                    value={fields.AU ? fields.AU : new Date().toISOString().split('T')[0]}
                                     className={classes.textField}
                                     InputLabelProps={{
                                         shrink: true,
