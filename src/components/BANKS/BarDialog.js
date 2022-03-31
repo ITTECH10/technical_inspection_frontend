@@ -1,4 +1,6 @@
 import React from 'react';
+import { DatePicker } from '@material-ui/pickers';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -131,13 +133,15 @@ function BarDialog({ t }) {
                         {t('BarDialogTitle')}
                     </DialogContentText>
                     <form onSubmit={!selectedPayment.cashPayment ? handlePostSubmit : handlePutSubmit} style={{ marginBottom: 10 }}>
-                        <TextField
+                        <DatePicker
                             name="payedAt"
                             id="payedAt-bar"
-                            onChange={handleChange}
+                            autoOk
+                            format="dd/MM/yyyy"
                             label={t('Payment.cash.payedAt')}
-                            value={fields.payedAt ? new Date(fields.payedAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
-                            type="date"
+                            placeholder="tt/mm/jjjj"
+                            onChange={(e) => setFields({ ...fields, payedAt: e })}
+                            value={fields.payedAt !== '' ? new Date(fields.payedAt).toISOString().split('T')[0] : null}
                             className={classes.textField}
                             required
                             InputLabelProps={{

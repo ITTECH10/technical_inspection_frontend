@@ -59,7 +59,6 @@ function CarTableAdvanced({ t }) {
                                 ? t('LeasingVehicles') : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab'
                                     ? 'Service läuft in 30 Tagen ab' : null
 
-    console.log(dashboardAdaptiveTitle)
 
     return (
         <>

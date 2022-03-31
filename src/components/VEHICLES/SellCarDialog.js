@@ -13,6 +13,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router';
 import { useData } from '../../contexts/DataContext';
 import Alerts from './../UI/Alerts'
+import { DatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -48,6 +49,11 @@ function SellCarDialog({ t }) {
 
     const handleClose = () => {
         setOpen(false);
+        setFields({
+            carIsSold: false,
+            carIsSoldTo: '',
+            carIsSoldDate: ''
+        })
     };
 
     const handleChange = (e) => {
@@ -116,14 +122,17 @@ function SellCarDialog({ t }) {
                             required
                             onChange={handleChange}
                         />
-                        <TextField
+                        <DatePicker
+                            autoOk
+                            format="dd/MM/yyyy"
+                            placeholder="tt/mm/jjjj"
                             name="carIsSoldDate"
                             id="sell-car-car-is-sold-date"
                             label={t('SellCarDialogDate')}
-                            onChange={handleChange}
-                            type="date"
+                            onChange={(e) => setFields({ ...fields, carIsSoldDate: e })}
                             className={classes.textField}
                             required
+                            value={fields.carIsSoldDate ? new Date(fields.carIsSoldDate).toISOString().split('T')[0] : null}
                             InputLabelProps={{
                                 shrink: true,
                             }}

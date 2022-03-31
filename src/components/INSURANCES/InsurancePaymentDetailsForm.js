@@ -34,12 +34,12 @@ const InsurancePaymentDetailsForm = ({ t }) => {
                         <Typography className={classes.inputTitle}>{t('ContractNumberInputLabel')}</Typography>
                         <TextField className={classes.input} label={selectedCarInsurance.contractNumber} disabled fullWidth />
                     </Box>
-                    {selectedCarInsurance.fullKasko !== "0" &&
+                    {selectedCarInsurance.fullKasko !== undefined &&
                         <Box>
                             <Typography className={classes.inputTitle}>{t('FullKasko')}</Typography>
                             <NumberFormat
                                 customInput={TextField}
-                                value={selectedCarInsurance.fullKasko}
+                                value={selectedCarInsurance.fullKasko === undefined ? '0' : selectedCarInsurance.fullKasko}
                                 prefix="€"
                                 className={classes.input}
                                 disabled
@@ -51,7 +51,7 @@ const InsurancePaymentDetailsForm = ({ t }) => {
                         <Typography className={classes.inputTitle}>{t('PartKasko')}</Typography>
                         <NumberFormat
                             customInput={TextField}
-                            value={selectedCarInsurance.partKasko}
+                            value={selectedCarInsurance.partKasko === undefined ? '0' : selectedCarInsurance.partKasko}
                             prefix="€"
                             className={classes.input}
                             disabled

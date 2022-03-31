@@ -15,6 +15,7 @@ import axios from 'axios'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import banksInfoProvider from './BankInfoProvider'
 import { withNamespaces } from 'react-i18next';
+import { DatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -203,14 +204,16 @@ function LeasingDialog({ t }) {
                                 </option>
                             ))}
                         </TextField>
-                        <TextField
+                        <DatePicker
+                            autoOk
+                            placeholder='tt/mm/jjjj'
                             name="leasingStartDate"
                             margin="dense"
                             id="leasingStartDate-leasing"
                             label={t('LeasingStartDateInputLabel')}
-                            type="date"
-                            value={fields.leasingStartDate ? new Date(fields.leasingStartDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
-                            onChange={handleChange}
+                            value={fields.leasingStartDate ? new Date(fields.leasingStartDate).toISOString().split('T')[0] : null}
+                            onChange={(e) => setFields({ ...fields, leasingStartDate: e })}
+                            format="dd/MM/yyyy"
                             required
                             className={classes.textField}
                             InputLabelProps={{

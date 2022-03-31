@@ -131,12 +131,8 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 <Box>
                     <Typography className={classes.inputTitle}>Schutzbrief</Typography>
                     <TextField className={classes.input} value={protectionLetter ? 'Ja' : 'Nein'} disabled />
-                </Box>
-                <Box>
                     <Typography className={classes.inputTitle}>ADAC</Typography>
                     <TextField className={classes.input} value={ADAC ? 'Ja' : 'Nein'} disabled />
-                </Box>
-                <Box>
                     <Typography className={classes.inputTitle}>Mitgliedsnummer</Typography>
                     <TextField className={classes.input} value={membershipNumber ? membershipNumber : 'Nein'} disabled />
                 </Box>

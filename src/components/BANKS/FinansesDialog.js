@@ -13,6 +13,7 @@ import axios from 'axios'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { withNamespaces } from 'react-i18next';
 import banksInfoProvider from './BankInfoProvider'
+import { DatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -168,14 +169,16 @@ function FinansesDialog({ t }) {
                             type="text"
                             fullWidth
                         />
-                        <TextField
+                        <DatePicker
                             name="creditStartDate"
+                            autoOk
+                            format="dd/MM/yyyy"
+                            placeholder="tt/mm/jjjj"
                             margin="dense"
-                            value={fields.creditStartDate ? new Date(fields.creditStartDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}
-                            onChange={handleChange}
+                            value={fields.creditStartDate ? new Date(fields.creditStartDate).toISOString().split('T')[0] : null}
+                            onChange={(e) => setFields({ ...fields, creditStartDate: e })}
                             id="creditStartDate-finanses"
                             label={t('CreditStartDateInputLabel')}
-                            type="date"
                             required
                             className={classes.textField}
                             InputLabelProps={{

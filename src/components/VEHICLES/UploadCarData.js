@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { DatePicker } from "@material-ui/pickers";
+
 import FloatingButton from '../UI/FloatingButton'
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import { makeStyles } from '@material-ui/core/styles'
@@ -59,24 +61,22 @@ const UploadCarData = ({ t }) => {
         model: '',
         HSN: '',
         TSN: '',
-        varantyExpiresAt: '',
-        lastUUV: '',
-        nextUUV: '',
-        firstVehicleRegistration: '',
-        firstVehicleRegistrationOnOwner: '',
+        varantyExpiresAt: null,
+        lastUUV: null,
+        nextUUV: null,
+        firstVehicleRegistration: null,
+        firstVehicleRegistrationOnOwner: null,
         kilometersDriven: '',
-        lastTechnicalInspection: '',
+        lastTechnicalInspection: null,
         registrationNumber: '',
-        nextTechnicalInspection: '',
-        TUV: '',
-        AU: '',
+        nextTechnicalInspection: null,
+        TUV: null,
+        AU: null,
         monthlyInsurancePayment: '',
         allowedYearlyKilometers: '',
         yearlyTax: '',
         membershipNumber: ''
     })
-
-    console.log(fields.varantyExpiresAt)
 
     const formData = new FormData()
 
@@ -311,117 +311,130 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     fullWidth
                                 />
-                                <TextField
+                                <DatePicker
                                     name="varantyExpiresAt"
                                     id="varantyExpiresAt"
+                                    autoOk
+                                    format="dd/MM/yyyy"
                                     label="Garantie Ablaufdatum"
-                                    onChange={handleChange}
-                                    type="date"
+                                    placeholder='tt/mm/jjjj'
+                                    onChange={(e) => setFields({ ...fields, varantyExpiresAt: e })}
                                     className={classes.textField}
-                                    value={fields.varantyExpiresAt ? fields.varantyExpiresAt : new Date().toISOString().split('T')[0]}
+                                    value={fields.varantyExpiresAt !== '' && fields.varantyExpiresAt}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
                                 {selectedUser.customerType === 'firmenkunde' &&
-                                    <TextField
+                                    <DatePicker
                                         name="lastUUV"
                                         id="lastUUV"
+                                        autoOk
+                                        format="dd/MM/yyyy"
+                                        placeholder='tt/mm/jjjj'
                                         label={t('LastUUVInputLabel')}
-                                        onChange={handleChange}
-                                        type="date"
-                                        value={fields.lastUUV ? fields.lastUUV : new Date().toISOString().split('T')[0]}
+                                        onChange={(e) => setFields({ ...fields, lastUUV: e })}
                                         className={classes.textField}
+                                        value={fields.lastUUV !== '' && fields.lastUUV}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                     />}
                                 {selectedUser.customerType === 'firmenkunde' &&
-                                    <TextField
+                                    <DatePicker
                                         name="nextUUV"
                                         id="nextUUV"
+                                        autoOk
+                                        format="dd/MM/yyyy"
+                                        placeholder='tt/mm/jjjj'
                                         label={t('NextUUVInputLabel')}
-                                        onChange={handleChange}
-                                        type="date"
-                                        value={fields.nextUUV ? fields.nextUUV : new Date().toISOString().split('T')[0]}
+                                        onChange={(e) => setFields({ ...fields, nextUUV: e })}
                                         className={classes.textField}
+                                        value={fields.nextUUV !== '' && fields.nextUUV}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                     />}
-                                <TextField
+                                <DatePicker
                                     name="firstVehicleRegistration"
                                     id="firstVehicleRegistration"
+                                    autoOk
+                                    format="dd/MM/yyyy"
+                                    placeholder='tt/mm/jjjj'
                                     label={t('FVRInputLabel')}
-                                    onChange={handleChange}
-                                    required
-                                    type="date"
-                                    value={fields.firstVehicleRegistration ? fields.firstVehicleRegistration : new Date().toISOString().split('T')[0]}
+                                    onChange={(e) => setFields({ ...fields, firstVehicleRegistration: e })}
                                     className={classes.textField}
+                                    value={fields.firstVehicleRegistration !== '' && fields.firstVehicleRegistration}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <TextField
+                                <DatePicker
                                     name="firstVehicleRegistrationOnOwner"
                                     id="firstVehicleRegistrationOnOwner"
+                                    autoOk
+                                    format="dd/MM/yyyy"
                                     label={t('FVROOInputLabel')}
-                                    onChange={handleChange}
-                                    required
-                                    type="date"
-                                    value={fields.firstVehicleRegistrationOnOwner ? fields.firstVehicleRegistrationOnOwner : new Date().toISOString().split('T')[0]}
+                                    onChange={(e) => setFields({ ...fields, firstVehicleRegistrationOnOwner: e })}
                                     className={classes.textField}
+                                    value={fields.firstVehicleRegistrationOnOwner !== '' && fields.firstVehicleRegistrationOnOwner}
+                                    placeholder="tt/mm/jjjj"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <TextField
+                                <DatePicker
                                     name="lastTechnicalInspection"
                                     id="lastTechnicalInspection"
+                                    autoOk
+                                    format="dd/MM/yyyy"
                                     label={t('LTIInputLabel')}
-                                    onChange={handleChange}
-                                    type="date"
-                                    value={fields.lastTechnicalInspection ? fields.lastTechnicalInspection : new Date().toISOString().split('T')[0]}
+                                    placeholder='tt/mm/jjjj'
+                                    onChange={(e) => setFields({ ...fields, lastTechnicalInspection: e })}
                                     className={classes.textField}
+                                    value={fields.lastTechnicalInspection !== '' && fields.lastTechnicalInspection}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <TextField
+                                <DatePicker
                                     name="nextTechnicalInspection"
                                     id="nextTechnicalInspection"
+                                    autoOk
+                                    format="dd/MM/yyyy"
                                     label={t('NTIInputLabel')}
-                                    onChange={handleChange}
-                                    required
-                                    type="date"
-                                    value={fields.nextTechnicalInspection ? fields.nextTechnicalInspection : new Date().toISOString().split('T')[0]}
+                                    placeholder='tt/mm/jjjj'
+                                    onChange={(e) => setFields({ ...fields, nextTechnicalInspection: e })}
                                     className={classes.textField}
+                                    value={fields.nextTechnicalInspection !== '' && fields.nextTechnicalInspection}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <TextField
+                                <DatePicker
                                     name="TUV"
                                     id="TUV"
+                                    autoOk
+                                    format="dd/MM/yyyy"
+                                    placeholder='tt/mm/jjjj'
                                     label={t('TUVInputLabel')}
-                                    onChange={handleChange}
-                                    required
-                                    type="date"
-                                    value={fields.TUV ? fields.TUV : new Date().toISOString().split('T')[0]}
+                                    onChange={(e) => setFields({ ...fields, TUV: e })}
                                     className={classes.textField}
+                                    value={fields.TUV !== '' && fields.TUV}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <TextField
+                                <DatePicker
                                     name="AU"
                                     id="AU"
+                                    autoOk
+                                    format="dd/MM/yyyy"
+                                    placeholder='tt/mm/jjjj'
                                     label={t('AUInputLabel')}
-                                    onChange={handleChange}
-                                    required
-                                    type="date"
-                                    value={fields.AU ? fields.AU : new Date().toISOString().split('T')[0]}
+                                    onChange={(e) => setFields({ ...fields, AU: e })}
                                     className={classes.textField}
+                                    value={fields.AU !== '' && fields.AU}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}

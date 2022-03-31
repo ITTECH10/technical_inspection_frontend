@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import deLocale from "date-fns/locale/de";
+
 import './App.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Loader from './utils/Loader'
@@ -152,9 +156,11 @@ function App() {
   ) : <Loader />
 
   return (
-    <ThemeProvider theme={theme}>
-      {app}
-    </ThemeProvider>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={deLocale}>
+      <ThemeProvider theme={theme}>
+        {app}
+      </ThemeProvider>
+    </MuiPickersUtilsProvider>
   );
 }
 
