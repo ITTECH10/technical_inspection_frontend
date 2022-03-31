@@ -113,7 +113,7 @@ const PaymentDetailsForm = ({ t }) => {
                             className={classes.input}
                             fullWidth
                             disabled
-                            prefix="€"
+                            prefix="%"
                         />
                     </Box>
                     <Box>
