@@ -82,6 +82,7 @@ const GalleryContent = ({ image, setOnHandleDeleteOpen, t }) => {
         link.href = image.url
         link.target = '_blank'
         link.download = 'file.pdf'
+        console.log(link)
         link.dispatchEvent(new MouseEvent('click'));
     }
 

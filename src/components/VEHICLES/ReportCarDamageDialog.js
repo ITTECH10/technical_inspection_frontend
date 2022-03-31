@@ -28,7 +28,7 @@ function ReportCarDamageDialog({ t }) {
     const { myVehicles, setGeneralAlertOptions } = useData()
 
     const [fields, setFields] = React.useState({
-        damagedVehicle: '',
+        damagedVehicle: myVehicles.length > 0 ? myVehicles[0]._id : '',
         damageDescription: ''
     })
 
@@ -92,15 +92,16 @@ function ReportCarDamageDialog({ t }) {
                             onChange={handleChange}
                             fullWidth
                             required
+                            value={fields.damagedVehicle}
                             SelectProps={{
                                 native: true,
                             }}
                         >
-                            {myVehicles.map((option, idx) => (
-                                <option key={option._id} value={option._id}>
+                            {myVehicles.map((option, idx) => {
+                                return <option key={option._id} value={option._id}>
                                     {option.mark} {option.model}
                                 </option>
-                            ))}
+                            })}
                         </TextField>
                         <TextField
                             name="damageDescription"
