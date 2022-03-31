@@ -133,7 +133,7 @@ const CarRow = ({ car, t }) => {
                         dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' && car.contractExpirationDate ? LeasingDate.toLocaleDateString('de-DE')
                             : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' && car.nextTechnicalInspection ? NTIDate.toLocaleDateString('de-DE')
                                 : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' && car.nextTechnicalInspection ? NTIDate.toLocaleDateString('de-DE')
-                                    : car.TUV && TUVDate.toLocaleDateString('de-DE')}
+                                    : car.TUV && car.AU && `${TUVDate.toLocaleDateString('de-DE')} (TUV), ${AUDate.toLocaleDateString('de-DE')} (AU)`}
                 </TableCell>
             )}
         </TableRow>

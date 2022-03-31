@@ -170,7 +170,10 @@ const DashboardScreen = ({ t }) => {
 
     // NOT OKAY ->> see dashboardScreen
     // const UserTUVExpiresInThirtyDays = myVehicles.filter(v => v.TUVExpiresInOneMonth)
-    const UserTUVExpiresInThirtyDays = myVehicles.filter(myVehicle => new Date(myVehicle.TUV) > new Date() && new Date(myVehicle.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
+    const UserTUVOrAuExpiresInThirtyDays = myVehicles.filter(
+        myVehicle => (new Date(myVehicle.TUV) > new Date() && new Date(myVehicle.TUV) < new Date(new Date().setMonth(new Date().getMonth() + 1))) ||
+            (new Date(myVehicle.AU) > new Date() && new Date(myVehicle.AU) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
+    )
     const UserNTIExpiresInThirtyDays = myVehicles.filter(v => new Date(v.nextTechnicalInspection) > new Date() && new Date(v.nextTechnicalInspection) < new Date(new Date().setMonth(new Date().getMonth() + 1)))
     // MIGRATE TO BACKEND
     const UserTUVExpired = myVehicles.filter(v => new Date(v.TUV) < new Date())
@@ -200,11 +203,11 @@ const DashboardScreen = ({ t }) => {
     }
 
     const handleNavigateTuvThirtyDaysVehicles = () => {
-        setMyVehicles(UserTUVExpiresInThirtyDays)
+        setMyVehicles(UserTUVOrAuExpiresInThirtyDays)
         setSelectedIndex(1)
 
         history.push('/cars')
-        dashboardGeneratedTitle('TÜV läuft in 30 Tagen ab')
+        dashboardGeneratedTitle('TÜV/AU läuft in 30 Tagen ab')
     }
 
     const handleNavigateNtiExpiredVehicles = () => {
@@ -273,9 +276,9 @@ const DashboardScreen = ({ t }) => {
                             <Box className={classes.tuvBoxBtnsFlex}>
                                 <Box className={classes.dashboardContentFlexTuv}>
                                     <Typography className={classes.countTitle} variant="h4" component="h4">
-                                        {UserTUVExpiresInThirtyDays.length}
+                                        {UserTUVOrAuExpiresInThirtyDays.length}
                                     </Typography>
-                                    <Button disabled={UserTUVExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
+                                    <Button disabled={UserTUVOrAuExpiresInThirtyDays.length === 0} size="small" variant="text" style={{ marginTop: 20 }} color="secondary" onClick={handleNavigateTuvThirtyDaysVehicles}>
                                         {t('Dashboard.tuvBtn30')}
                                     </Button>
                                 </Box>

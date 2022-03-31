@@ -52,7 +52,7 @@ function CarTableAdvanced({ t }) {
     const AdaptiveTitle = dashboardAdaptiveTitle === 'Meine Fahrzeuge'
         ? t('MyVehicles') : dashboardAdaptiveTitle === 'TÜV überfällig'
             ? t('TUVExpiredTitle') : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig'
-                ? t('Dashboard.ntiBox') : dashboardAdaptiveTitle === 'TÜV läuft in 30 Tagen ab'
+                ? t('Dashboard.ntiBox') : dashboardAdaptiveTitle === 'TÜV/AU läuft in 30 Tagen ab'
                     ? t('TUVExpiresIn30Days') : dashboardAdaptiveTitle === ''
                         ? t('MyVehicles') : dashboardAdaptiveTitle === 'Finanzierung'
                             ? t('FinanzierungVehicles') : dashboardAdaptiveTitle === 'Leasing'
