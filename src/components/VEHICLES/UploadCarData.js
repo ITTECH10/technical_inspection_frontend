@@ -500,6 +500,7 @@ const UploadCarData = ({ t }) => {
                                 </DialogActions>
                             </form> :
                             <form onSubmit={handleSubmit} encType="multipart/form-data">
+                                <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
                                 <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufügen - Pflichtfeld</Button>
                                 <TextField
                                     name="mark"
