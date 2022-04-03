@@ -23,7 +23,6 @@ import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExportUserData from './Users/ExportUserData';
 import Logo from './../../assets/images/logo.png'
-import LanguageMenu from './LanguageMenu'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CloseIcon from '@material-ui/icons/Close';
 import PersonIcon from '@material-ui/icons/Person';
@@ -212,7 +211,6 @@ function ClippedDrawer({ open, setOpen, t }) {
                         {history.location.pathname !== '/' && history.location.pathname !== '/banks' && history.location.pathname !== '/insurances' && <IconButton style={{ color: '#fff' }} onClick={() => history.goBack()}><ArrowBackIcon /></IconButton>}
                         <Button onClick={() => logout(history)} color="inherit">{t('LogoutButton')}</Button>
                     </Box>
-                    <LanguageMenu />
                 </Toolbar>
             </AppBar>
             <Drawer
