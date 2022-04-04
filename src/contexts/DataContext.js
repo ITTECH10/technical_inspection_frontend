@@ -87,7 +87,6 @@ const DataContextProvider = ({ children }) => {
         })
     }, [])
 
-
     const acceptPrivacyPolicy = useCallback((id) => {
         axios(`/users/me/privacyPolicy/${id}`)
             .then(res => {
@@ -185,7 +184,7 @@ const DataContextProvider = ({ children }) => {
             .catch(err => {
                 setAppLoading(false)
                 // console.log(err.response)
-                if (err.response && err.response.data.message.includes('Ungültiges Token!')) {
+                if (err.response && (err.response.data.message.includes('Ungültiges Token.' || err.response.data.message.includes('Ungültiges Token!')))) {
                     logout(history)
                 }
                 setGeneralAlertOptions({

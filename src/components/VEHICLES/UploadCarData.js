@@ -84,15 +84,15 @@ const UploadCarData = ({ t }) => {
         formData.append('chassisNumber', fields.chassisNumber)
         fields.HSN !== '' && formData.append('HSN', fields.HSN)
         fields.TSN !== '' && formData.append('TSN', fields.TSN)
-        fields.varantyExpiresAt !== '' && formData.append('varantyExpiresAt', fields.varantyExpiresAt)
-        fields.lastUUV !== '' && formData.append('lastUUV', fields.lastUUV)
-        fields.nextUUV !== '' && formData.append('nextUUV', fields.nextUUV)
-        formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
-        formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
-        fields.lastTechnicalInspection !== '' && formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
-        formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
-        formData.append('AU', fields.AU)
-        formData.append('TUV', fields.TUV)
+        fields.varantyExpiresAt !== null && formData.append('varantyExpiresAt', fields.varantyExpiresAt)
+        fields.lastUUV !== null && formData.append('lastUUV', fields.lastUUV)
+        fields.nextUUV !== null && formData.append('nextUUV', fields.nextUUV)
+        fields.firstVehicleRegistration !== null && formData.append('firstVehicleRegistration', fields.firstVehicleRegistration)
+        fields.firstVehicleRegistrationOnOwner !== null && formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
+        fields.lastTechnicalInspection !== null && formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
+        fields.nextTechnicalInspection !== null && formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
+        fields.AU !== null && formData.append('AU', fields.AU)
+        fields.TUV !== null && formData.append('TUV', fields.TUV)
         fields.monthlyInsurancePayment !== '' && formData.append('monthlyInsurancePayment', fields.monthlyInsurancePayment)
         fields.allowedYearlyKilometers !== '' && formData.append('allowedYearlyKilometers', fields.allowedYearlyKilometers)
         fields.yearlyTax !== '' && formData.append('yearlyTax', fields.yearlyTax)
@@ -123,8 +123,6 @@ const UploadCarData = ({ t }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // if (!Object.values(fields).slice(1, 16).every(el => el !== '')) return
-
         setBtnLoading(true)
 
         axios({
