@@ -41,7 +41,8 @@ function NewCustomer({ t }) {
     customerType: 'firmenkunde',
     companyName: undefined,
     customerPartner: undefined,
-    customerPartnerEmail: undefined
+    customerPartnerEmail: undefined,
+    loginCredentialsRecipient: 'kunde'
   })
 
   const handleChange = (e) => {
@@ -135,6 +136,35 @@ function NewCustomer({ t }) {
                       onChange={handleChange}
                     />}
                   label={t('NonCoorporateClient')}
+                  labelPlacement="end"
+                />
+              </RadioGroup>
+            </FormControl>
+            <FormControl component="fieldset" style={{ display: 'block', marginTop: '.5rem' }}>
+              <FormLabel component="legend">An wen geht die Registrierungs-E-Mail?</FormLabel>
+              <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                <FormControlLabel
+                  value="kunde"
+                  control={
+                    <Radio
+                      name="loginCredentialsRecipient"
+                      color="secondary"
+                      checked={fields.loginCredentialsRecipient === 'kunde'}
+                      onChange={handleChange}
+                    />}
+                  label="Kunde"
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="admin"
+                  control={
+                    <Radio
+                      name="loginCredentialsRecipient"
+                      color="secondary"
+                      checked={fields.loginCredentialsRecipient === 'admin'}
+                      onChange={handleChange}
+                    />}
+                  label="Administrator"
                   labelPlacement="end"
                 />
               </RadioGroup>
