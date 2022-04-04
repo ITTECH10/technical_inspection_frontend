@@ -54,7 +54,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         TUV: '',
         AU: '',
         kilometersDriven: '',
-        monthlyInsurancePayment: '',
         yearlyTax: ''
     })
     const history = useHistory()
@@ -79,7 +78,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
             nextTechnicalInspection: selectedCar.nextTechnicalInspection,
             TUV: selectedCar.TUV,
             AU: selectedCar.AU,
-            monthlyInsurancePayment: selectedCar.monthlyInsurancePayment,
             yearlyTax: selectedCar.yearlyTax
         })
     }, [selectedCar, open])
@@ -367,15 +365,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                        />
-                        <TextField
-                            name="monthlyInsurancePayment"
-                            margin="dense"
-                            id="update-vehicle-monthlyInsurancePayment"
-                            label={t('MonthlyInsurancePaymentInputLabel')}
-                            onChange={handleChange}
-                            fullWidth
-                            value={fields.monthlyInsurancePayment}
                         />
                         <TextField
                             name="yearlyTax"

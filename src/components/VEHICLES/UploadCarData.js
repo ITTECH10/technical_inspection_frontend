@@ -70,7 +70,6 @@ const UploadCarData = ({ t }) => {
         nextTechnicalInspection: null,
         TUV: null,
         AU: null,
-        monthlyInsurancePayment: '',
         yearlyTax: ''
     })
 
@@ -89,7 +88,6 @@ const UploadCarData = ({ t }) => {
         fields.nextTechnicalInspection !== null && formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
         fields.AU !== null && formData.append('AU', fields.AU)
         fields.TUV !== null && formData.append('TUV', fields.TUV)
-        fields.monthlyInsurancePayment !== '' && formData.append('monthlyInsurancePayment', fields.monthlyInsurancePayment)
         fields.yearlyTax !== '' && formData.append('yearlyTax', fields.yearlyTax)
     }
 
@@ -415,14 +413,6 @@ const UploadCarData = ({ t }) => {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                />
-                                <TextField
-                                    name="monthlyInsurancePayment"
-                                    margin="dense"
-                                    id="monthlyInsurancePayment"
-                                    label={t('MonthlyInsurancePaymentInputLabel')}
-                                    onChange={handleChange}
-                                    fullWidth
                                 />
                                 <TextField
                                     name="yearlyTax"

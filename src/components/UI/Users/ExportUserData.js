@@ -42,7 +42,6 @@ const ExportUserData = ({ t }) => {
                     ErstzulassungDesFahrzeugs: el.firstVehicleRegistration,
                     ZulassungAufDenBesitzer: el.firstVehicleRegistrationOnOwner,
                     Laufleistung: el.kilometersDriven,
-                    MonatlicheVersicherungsleistung: el.monthlyInsurancePayment,
                     JährlicheSteuer: el.yearlyTax
                 })
             })

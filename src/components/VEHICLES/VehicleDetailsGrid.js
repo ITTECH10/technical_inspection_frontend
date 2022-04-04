@@ -39,7 +39,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
+    const { AU, HSN, TSN, TUV, model, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toLocaleDateString()
     const formatedAu = new Date(AU).toLocaleDateString()
@@ -150,18 +150,6 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                             disabled
                             prefix="€"
                         /> : <TextField className={classes.input} value={yearlyTax ? yearlyTax : t('VehicleDetailsDataNotSetYet')} disabled />}
-                </Box>
-                <Box>
-                    <Typography className={classes.inputTitle}>{t('MonthlyInsurancePaymentInputLabel')}</Typography>
-                    {monthlyInsurancePayment ?
-                        <NumberFormat
-                            value={monthlyInsurancePayment}
-                            thousandSeparator={true}
-                            customInput={TextField}
-                            className={classes.input}
-                            disabled
-                            prefix="€"
-                        /> : <TextField className={classes.input} value={monthlyInsurancePayment ? monthlyInsurancePayment : t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
             </Paper>
         </Grid>
