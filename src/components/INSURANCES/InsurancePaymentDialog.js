@@ -251,17 +251,6 @@ function InsurancePaymentDialog({ t }) {
                             value={fields.insuranceCost}
                             prefix="€"
                         />
-                        <NumberFormat
-                            name='allowedYearlyKilometers'
-                            onChange={handleChange}
-                            id="insurance-allowed-yearly-kilometers"
-                            thousandSeparator={true}
-                            customInput={TextField}
-                            label="Voraussichtliche Jahresfahrleistung (km)"
-                            fullWidth
-                            margin="dense"
-                            value={fields.allowedYearlyKilometers}
-                        />
                         <TextField
                             name="insuranceCostType"
                             id="insuranceHouse-cost-type"
@@ -282,6 +271,17 @@ function InsurancePaymentDialog({ t }) {
                                 </option>
                             ))}
                         </TextField>
+                        <NumberFormat
+                            name='allowedYearlyKilometers'
+                            onChange={handleChange}
+                            id="insurance-allowed-yearly-kilometers"
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            label="Voraussichtliche Jahresfahrleistung (km)"
+                            fullWidth
+                            margin="dense"
+                            value={fields.allowedYearlyKilometers}
+                        />
                         <FormControl component="fieldset" style={{ marginTop: 30, width: '100%' }}>
                             {/* <FormLabel color="secondary" component="legend">Kasko</FormLabel> */}
                             <RadioGroup aria-label="kasko" name="VK/TK" value="VK/TK" onChange={handleKaskoChange}>
