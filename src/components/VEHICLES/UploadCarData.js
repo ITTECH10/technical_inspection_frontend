@@ -499,17 +499,6 @@ const UploadCarData = ({ t }) => {
                             </form> :
                             <form onSubmit={handleSubmit} encType="multipart/form-data">
                                 <input name="photo" onChange={handleImageChange} id="photo" type="file" hidden />
-                                <Box sx={{ marginTop: 10 }}>
-                                    <FormControlLabel
-                                        control={<Switch checked={showDummyVehicleRegistration} onChange={handleShowDummyVehicleRegistration} />}
-                                        label={t("FahrzeugscheinErklaerungsLink")}
-                                    />
-                                    <Box>
-                                        <div>
-                                            <Collapse in={showDummyVehicleRegistration}>{dummyVehicleRegistration}</Collapse>
-                                        </div>
-                                    </Box>
-                                </Box>
                                 <Button variant="contained" color="primary" size="small" onClick={handleImageClick} >Fahrzeugschein hinzufügen - Pflichtfeld</Button>
                                 <TextField
                                     name="mark"
