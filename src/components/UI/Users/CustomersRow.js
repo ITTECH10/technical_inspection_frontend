@@ -26,6 +26,7 @@ const CustomersRow = ({ customer }) => {
             </TableCell>
             <TableCell>{customer.lastName}</TableCell>
             <TableCell>{customer.email}</TableCell>
+            <TableCell>{customer.customerType === 'firmenkunde' ? customer.companyName : ''}</TableCell>
         </TableRow>
     )
 }
