@@ -37,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
 const UploadCarData = ({ t }) => {
     const [open, setOpen] = useState(false)
     const [showDummyVehicleRegistration, setShowDummyVehicleRegistration] = React.useState(false);
-    const [adacChecked, setAdacChecked] = useState(false)
-    const [protectionLetterChecked, setProtectionLetterChecked] = useState(false)
     const [alertOpen, setAlertOpen] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const { selectedUser, myVehicles, setMyVehicles, setCustomersVehicles, customersVehicles, user, setVehicles, vehicles, setGeneralAlertOptions } = useData()
@@ -73,9 +71,7 @@ const UploadCarData = ({ t }) => {
         TUV: null,
         AU: null,
         monthlyInsurancePayment: '',
-        allowedYearlyKilometers: '',
-        yearlyTax: '',
-        membershipNumber: ''
+        yearlyTax: ''
     })
 
     const formData = new FormData()
@@ -94,11 +90,7 @@ const UploadCarData = ({ t }) => {
         fields.AU !== null && formData.append('AU', fields.AU)
         fields.TUV !== null && formData.append('TUV', fields.TUV)
         fields.monthlyInsurancePayment !== '' && formData.append('monthlyInsurancePayment', fields.monthlyInsurancePayment)
-        fields.allowedYearlyKilometers !== '' && formData.append('allowedYearlyKilometers', fields.allowedYearlyKilometers)
         fields.yearlyTax !== '' && formData.append('yearlyTax', fields.yearlyTax)
-        formData.append('protectionLetter', protectionLetterChecked)
-        formData.append('ADAC', adacChecked)
-        adacChecked && protectionLetterChecked && fields.membershipNumber !== '' && formData.append('membershipNumber', fields.membershipNumber)
     }
 
     formData.append('photo', fields.photo)
@@ -108,18 +100,6 @@ const UploadCarData = ({ t }) => {
     formData.append('model', fields.model)
     formData.append('registrationNumber', fields.registrationNumber)
     formData.append('kilometersDriven', fields.kilometersDriven)
-
-    const handleProtectionLetterSwitchOn = () => {
-        if (protectionLetterChecked) {
-            setAdacChecked(false)
-        }
-        setProtectionLetterChecked(prevState => !prevState)
-    }
-
-    const resetSwitchStates = () => {
-        setProtectionLetterChecked(false)
-        setAdacChecked(false)
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -190,7 +170,6 @@ const UploadCarData = ({ t }) => {
 
     const handleClose = () => {
         setOpen(false);
-        resetSwitchStates()
     };
 
     const handleShowDummyVehicleRegistration = () => {
@@ -446,14 +425,6 @@ const UploadCarData = ({ t }) => {
                                     fullWidth
                                 />
                                 <TextField
-                                    name="allowedYearlyKilometers"
-                                    margin="dense"
-                                    id="allowedYearlyKilometers"
-                                    label={t('AllowedYearlyKilometersInputLabel')}
-                                    onChange={handleChange}
-                                    fullWidth
-                                />
-                                <TextField
                                     name="yearlyTax"
                                     margin="dense"
                                     id="yearlyTax"
@@ -461,33 +432,6 @@ const UploadCarData = ({ t }) => {
                                     onChange={handleChange}
                                     fullWidth
                                 />
-                                <Box style={{ marginTop: 10 }}>
-                                    <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
-                                    <FormGroup style={{ flexDirection: 'row' }}>
-                                        <FormControlLabel
-                                            control={<Switch checked={protectionLetterChecked} />}
-                                            onChange={handleProtectionLetterSwitchOn}
-                                            label="Schutzbrief"
-                                        />
-                                        <FormControlLabel
-                                            disabled={!protectionLetterChecked}
-                                            control={<Switch checked={adacChecked} />}
-                                            onChange={() => setAdacChecked(prevState => !prevState)}
-                                            label="ADAC"
-                                        />
-                                    </FormGroup>
-                                </Box>
-                                {protectionLetterChecked && adacChecked &&
-                                    <TextField
-                                        autoFocus
-                                        name="membershipNumber"
-                                        margin="dense"
-                                        id="membershipNumber"
-                                        label="Mitgliedsnummer"
-                                        onChange={handleChange}
-                                        type="text"
-                                        fullWidth
-                                    />}
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary" variant="contained">
                                         {t('CancelButton')}

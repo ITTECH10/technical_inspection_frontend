@@ -43,7 +43,6 @@ const ExportUserData = ({ t }) => {
                     ZulassungAufDenBesitzer: el.firstVehicleRegistrationOnOwner,
                     Laufleistung: el.kilometersDriven,
                     MonatlicheVersicherungsleistung: el.monthlyInsurancePayment,
-                    ZulässigeJahreskilometer: el.allowedYearlyKilometers,
                     JährlicheSteuer: el.yearlyTax
                 })
             })

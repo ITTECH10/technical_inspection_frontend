@@ -59,6 +59,73 @@ const InsurancePaymentDetailsForm = ({ t }) => {
                             fullWidth
                         />
                     </Box>
+                    {selectedCarInsurance.insuranceCost !== undefined &&
+                        <Box>
+                            <Typography className={classes.inputTitle}>Versicherungsbeitrag</Typography>
+                            <NumberFormat
+                                customInput={TextField}
+                                value={selectedCarInsurance.insuranceCost}
+                                prefix="€"
+                                className={classes.input}
+                                disabled
+                                style={{ marginTop: '1rem' }}
+                                fullWidth
+                            />
+                        </Box>}
+                    {selectedCarInsurance.insuranceCostType !== undefined &&
+                        <Box>
+                            <Typography className={classes.inputTitle}>Zahlweise</Typography>
+                            <TextField
+                                value={
+                                    selectedCarInsurance.insuranceCostType === 'monthly'
+                                        ? 'monatlich' : selectedCarInsurance.insuranceCostType === 'yearQuarter'
+                                            ? 'vierteljährlich' : selectedCarInsurance.insuranceCostType === 'halfYearly'
+                                                ? 'halbjährlich' : selectedCarInsurance.insuranceCostType === 'yearly'
+                                                    ? 'jährlich' : null
+                                }
+                                className={classes.input}
+                                margin="dense"
+                                disabled
+                                fullWidth
+                            />
+                        </Box>}
+                    {selectedCarInsurance.allowedYearlyKilometers !== undefined &&
+                        <Box>
+                            <Typography className={classes.inputTitle}>Voraussichtliche Jahresfahrleistung (km)</Typography>
+                            <TextField
+                                value={selectedCarInsurance.allowedYearlyKilometers}
+                                className={classes.input}
+                                margin="dense"
+                                disabled
+                                fullWidth
+                            />
+                        </Box>}
+                    <Box>
+                        <Typography className={classes.inputTitle}>Schutzbrief</Typography>
+                        <TextField
+                            className={classes.input}
+                            value={selectedCarInsurance.protectionLetter ? 'Ja' : 'Nein'}
+                            disabled
+                            fullWidth
+                            margin="dense"
+                        />
+                        <Typography className={classes.inputTitle}>ADAC</Typography>
+                        <TextField
+                            className={classes.input}
+                            value={selectedCarInsurance.ADAC ? 'Ja' : 'Nein'}
+                            disabled
+                            fullWidth
+                            margin="dense"
+                        />
+                        <Typography className={classes.inputTitle}>Mitgliedsnummer</Typography>
+                        <TextField
+                            className={classes.input}
+                            value={selectedCarInsurance.membershipNumber ? selectedCarInsurance.membershipNumber : 'Nein'}
+                            disabled
+                            fullWidth
+                            margin="dense"
+                        />
+                    </Box>
                 </>
             )}
         </Paper>

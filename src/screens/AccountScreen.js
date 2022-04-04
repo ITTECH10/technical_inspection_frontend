@@ -254,45 +254,6 @@ const AccountScreen = ({ t }) => {
                                             />
                                         </Box>
                                     </Box>}
-                                {user.protectionLetter &&
-                                    <Box className={classes.inputSingleBox}>
-                                        <Box className={classes.inputContentVertical}>
-                                            <Typography style={{ fontWeight: '400' }}>
-                                                Schutzbrief
-                                            </Typography>
-                                            <TextField
-                                                variant="standard"
-                                                disabled
-                                                value={user.protectionLetter ? 'Ja' : 'Nein'}
-                                            />
-                                        </Box>
-                                    </Box>}
-                                {user.ADAC &&
-                                    <Box className={classes.inputSingleBox}>
-                                        <Box className={classes.inputContentVertical}>
-                                            <Typography style={{ fontWeight: '400' }}>
-                                                ADAC
-                                            </Typography>
-                                            <TextField
-                                                variant="standard"
-                                                disabled
-                                                value={user.ADAC ? 'Ja' : 'Nein'}
-                                            />
-                                        </Box>
-                                    </Box>}
-                                {user.membershipNumber &&
-                                    <Box className={classes.inputSingleBox}>
-                                        <Box className={classes.inputContentVertical}>
-                                            <Typography style={{ fontWeight: '400' }}>
-                                                Mitgliedsnummer
-                                            </Typography>
-                                            <TextField
-                                                variant="standard"
-                                                disabled
-                                                value={user.membershipNumber ? 'Ja' : 'Nein'}
-                                            />
-                                        </Box>
-                                    </Box>}
                             </Box>
                         </Box>
                     </Paper>

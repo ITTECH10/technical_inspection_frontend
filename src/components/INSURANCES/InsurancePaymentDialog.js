@@ -8,6 +8,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress'
+import FormLabel from '@material-ui/core/FormLabel'
+import FormGroup from '@material-ui/core/FormGroup'
+import Switch from '@material-ui/core/Switch'
 import { withNamespaces } from 'react-i18next';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useData } from './../../contexts/DataContext'
@@ -19,10 +22,37 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 // import FormLabel from '@material-ui/core/FormLabel';
 import Box from '@material-ui/core/Box';
+// 3rdparty
+import NumberFormat from 'react-number-format'
+
+const insuranceCostVariants = [
+    {
+        id: 0,
+        name: 'monatlich',
+        value: 'monthly'
+    },
+    {
+        id: 1,
+        name: 'vierteljährlich',
+        value: 'yearQuarter'
+    },
+    {
+        id: 2,
+        name: 'halbjährlich',
+        value: 'halfYearly'
+    },
+    {
+        id: 3,
+        name: 'jährlich',
+        value: 'yearly'
+    }
+]
 
 function InsurancePaymentDialog({ t }) {
     const location = useLocation()
     const [open, setOpen] = React.useState(false);
+    const [adacChecked, setAdacChecked] = React.useState(false)
+    const [protectionLetterChecked, setProtectionLetterChecked] = React.useState(false)
     const [btnLoading, setBtnLoading] = React.useState(false)
     const { user, selectedUser, setSelectedCar, selectedCar, selectedCarInsurance, setSelectedCarInsurance, setGeneralAlertOptions } = useData()
     const [insuranceAddedAlert, setInsuranceAddedAlert] = React.useState(false)
@@ -32,17 +62,24 @@ function InsurancePaymentDialog({ t }) {
         insuranceHouse: '',
         contractNumber: '',
         vk: "0",
-        tk: "0"
+        tk: "0",
+        insuranceCost: '',
+        insuranceCostType: '',
+        allowedYearlyKilometers: '',
+        membershipNumber: ''
     })
 
     let userId, vehicleId
 
     React.useEffect(() => {
         setFields({
-            insuranceHouse: selectedCarInsurance ? selectedCarInsurance.insuranceHouse : '',
-            contractNumber: selectedCarInsurance ? selectedCarInsurance.contractNumber : '',
-            vk: selectedCarInsurance ? selectedCarInsurance.fullKasko : '',
-            tk: selectedCarInsurance ? selectedCarInsurance.partKasko : '',
+            insuranceHouse: selectedCarInsurance.insuranceHouse ? selectedCarInsurance.insuranceHouse : '',
+            contractNumber: selectedCarInsurance.contractNumber ? selectedCarInsurance.contractNumber : '',
+            vk: selectedCarInsurance.fullKasko ? selectedCarInsurance.fullKasko : '',
+            tk: selectedCarInsurance.partKasko ? selectedCarInsurance.partKasko : '',
+            insuranceCost: selectedCarInsurance.insuranceCost ? selectedCarInsurance.insuranceCost : '',
+            allowedYearlyKilometers: selectedCarInsurance.allowedYearlyKilometers ? selectedCarInsurance.allowedYearlyKilometers : '',
+            insuranceCostType: selectedCarInsurance.insuranceCostType ? selectedCarInsurance.insuranceCostType : insuranceCostVariants[0].value,
         })
     }, [selectedCarInsurance, open])
 
@@ -68,6 +105,7 @@ function InsurancePaymentDialog({ t }) {
 
     const handleClose = () => {
         setOpen(false);
+        resetSwitchStates()
     };
 
     const handleChange = (e) => {
@@ -75,6 +113,18 @@ function InsurancePaymentDialog({ t }) {
             ...fields,
             [e.target.name]: e.target.value
         })
+    }
+
+    const handleProtectionLetterSwitchOn = () => {
+        if (protectionLetterChecked) {
+            setAdacChecked(false)
+        }
+        setProtectionLetterChecked(prevState => !prevState)
+    }
+
+    const resetSwitchStates = () => {
+        setProtectionLetterChecked(false)
+        setAdacChecked(false)
     }
 
     const handleKaskoChange = (e) => {
@@ -85,7 +135,15 @@ function InsurancePaymentDialog({ t }) {
         e.preventDefault()
         setBtnLoading(true)
 
-        const data = { ...fields }
+        const data = {
+            ...fields,
+            protectionLetter: protectionLetterChecked,
+            ADAC: adacChecked,
+            allowedYearlyKilometers: fields.allowedYearlyKilometers !== '' ? +fields.allowedYearlyKilometers.replaceAll(',', '') : undefined,
+            insuranceCost: fields.insuranceCost !== '' ? +fields.insuranceCost.split('€')[1].replaceAll(',', '') : undefined,
+            membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' && fields.membershipNumber,
+            insuranceCostType: fields.insuranceCost.trim() !== '' ? fields.insuranceCostType : undefined
+        }
 
         axios.post(`/insuranceHouse/${userId}/${vehicleId}`, data).then(res => {
             if (res.status === 201) {
@@ -112,7 +170,15 @@ function InsurancePaymentDialog({ t }) {
         e.preventDefault()
         setBtnLoading(true)
 
-        const data = { ...fields }
+        const data = {
+            ...fields,
+            protectionLetter: protectionLetterChecked,
+            ADAC: adacChecked,
+            allowedYearlyKilometers: fields.allowedYearlyKilometers !== '' ? +fields.allowedYearlyKilometers.replaceAll(',', '') : undefined,
+            insuranceCost: fields.insuranceCost !== '' ? +fields.insuranceCost.split('€')[1].replaceAll(',', '') : undefined,
+            membershipNumber: adacChecked && protectionLetterChecked && fields.membershipNumber !== '' && fields.membershipNumber,
+            insuranceCostType: fields.insuranceCost.trim() !== '' ? fields.insuranceCostType : undefined
+        }
 
         axios.put(`/insuranceHouse/${selectedCarInsurance._id}`, data).then(res => {
             if (res.status === 200) {
@@ -173,6 +239,49 @@ function InsurancePaymentDialog({ t }) {
                             type="number"
                             fullWidth
                         />
+                        <NumberFormat
+                            name='insuranceCost'
+                            onChange={handleChange}
+                            id="insurance-insurance-cost"
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            label="Versicherungsbeitrag (in Euro)"
+                            fullWidth
+                            margin="dense"
+                            value={fields.insuranceCost}
+                            prefix="€"
+                        />
+                        <NumberFormat
+                            name='allowedYearlyKilometers'
+                            onChange={handleChange}
+                            id="insurance-allowed-yearly-kilometers"
+                            thousandSeparator={true}
+                            customInput={TextField}
+                            label="Voraussichtliche Jahresfahrleistung (km)"
+                            fullWidth
+                            margin="dense"
+                            value={fields.allowedYearlyKilometers}
+                        />
+                        <TextField
+                            name="insuranceCostType"
+                            id="insuranceHouse-cost-type"
+                            select
+                            style={{ marginTop: 16, marginRight: 15 }}
+                            onChange={handleChange}
+                            fullWidth
+                            value={fields.insuranceCostType}
+                            disabled={!fields.insuranceCost}
+                            SelectProps={{
+                                native: true
+                            }}
+                            helperText="Zahlweise"
+                        >
+                            {insuranceCostVariants.map((option, idx) => (
+                                <option key={option.id} value={option.value}>
+                                    {option.name}
+                                </option>
+                            ))}
+                        </TextField>
                         <FormControl component="fieldset" style={{ marginTop: 30, width: '100%' }}>
                             {/* <FormLabel color="secondary" component="legend">Kasko</FormLabel> */}
                             <RadioGroup aria-label="kasko" name="VK/TK" value="VK/TK" onChange={handleKaskoChange}>
@@ -256,6 +365,33 @@ function InsurancePaymentDialog({ t }) {
                                 </Box>
                             </RadioGroup>
                         </FormControl>
+                        <Box style={{ marginTop: 20 }}>
+                            <FormLabel component="legend">Schutzbrief/ADAC</FormLabel>
+                            <FormGroup style={{ flexDirection: 'row' }}>
+                                <FormControlLabel
+                                    control={<Switch checked={protectionLetterChecked} />}
+                                    onChange={handleProtectionLetterSwitchOn}
+                                    label="Schutzbrief"
+                                />
+                                <FormControlLabel
+                                    disabled={!protectionLetterChecked}
+                                    control={<Switch checked={adacChecked} />}
+                                    onChange={() => setAdacChecked(prevState => !prevState)}
+                                    label="ADAC"
+                                />
+                            </FormGroup>
+                        </Box>
+                        {protectionLetterChecked && adacChecked &&
+                            <TextField
+                                autoFocus
+                                name="membershipNumber"
+                                margin="dense"
+                                id="membershipNumber"
+                                label="Mitgliedsnummer"
+                                onChange={handleChange}
+                                type="text"
+                                fullWidth
+                            />}
                     </DialogContent>
                     <DialogActions>
                         <Button variant="contained" onClick={handleClose} color="primary">

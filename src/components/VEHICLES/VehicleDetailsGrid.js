@@ -39,7 +39,7 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, allowedYearlyKilometers, protectionLetter, ADAC, membershipNumber, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
+    const { AU, HSN, TSN, TUV, model, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, monthlyInsurancePayment, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toLocaleDateString()
     const formatedAu = new Date(AU).toLocaleDateString()
@@ -127,25 +127,6 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 <Box>
                     <Typography className={classes.inputTitle}>{t('TSNInputLabel')}</Typography>
                     <TextField className={classes.input} value={TSN ? TSN : t('VehicleDetailsDataNotSetYet')} disabled />
-                </Box>
-                <Box>
-                    <Typography className={classes.inputTitle}>Schutzbrief</Typography>
-                    <TextField className={classes.input} value={protectionLetter ? 'Ja' : 'Nein'} disabled />
-                    <Typography className={classes.inputTitle}>ADAC</Typography>
-                    <TextField className={classes.input} value={ADAC ? 'Ja' : 'Nein'} disabled />
-                    <Typography className={classes.inputTitle}>Mitgliedsnummer</Typography>
-                    <TextField className={classes.input} value={membershipNumber ? membershipNumber : 'Nein'} disabled />
-                </Box>
-                <Box>
-                    <Typography className={classes.inputTitle}>{`${t('AllowedYearlyKilometersInputLabel')} (km)`}</Typography>
-                    {allowedYearlyKilometers ?
-                        <NumberFormat
-                            value={allowedYearlyKilometers}
-                            thousandSeparator={true}
-                            customInput={TextField}
-                            className={classes.input}
-                            disabled
-                        /> : <TextField className={classes.input} value={t('VehicleDetailsDataNotSetYet')} disabled />}
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('KilometersDrivenInputLabel')}</Typography>

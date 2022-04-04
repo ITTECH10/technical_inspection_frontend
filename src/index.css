@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -53,7 +55,8 @@ code {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: url(https://example.com/MaterialIcons-Regular.eot);
+  /* For IE6-8 */
   src: local('Material Icons'),
     local('MaterialIcons-Regular'),
     url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
@@ -65,9 +68,9 @@ code {
   height: calc(100vh - 56px);
   width: 100vw;
   display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
   background: url('./assets/SECAR/background.jpeg');
   background-position-x: center;
   background-position-y: center;
@@ -92,9 +95,9 @@ footer a {
 }
 
 footer a:hover {
-  color:red; 
-  text-decoration:none; 
-  cursor:pointer;  
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .copyright {
@@ -108,7 +111,8 @@ footer a:hover {
   color: #999999;
   margin-right: 35px;
 }
-.links > div > span {
+
+.links>div>span {
   color: white;
   margin-left: 5px;
   margin-right: 5px;
@@ -161,7 +165,7 @@ footer a:hover {
   margin-right: 40px;
 }
 
-.info > *{
+.info>* {
   margin: 20px;
   align-items: center;
   display: flex;
@@ -173,9 +177,9 @@ footer a:hover {
 }
 
 .info a:hover {
-  color:red; 
-  text-decoration:none; 
-  cursor:pointer;  
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 
@@ -190,28 +194,28 @@ footer a:hover {
 main {
   flex: 1;
   display: flex;
-align-items: center;
-justify-content: center;
-  background-image: linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,1));
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 }
 
 .logo {
   width: 180px;
 }
 
-.screen {		
-/* background: linear-gradient(90deg, #5D54A4, #7C78B8); */
-position: relative;	
-height: 450px;
-width: 360px;	
-/* box-shadow: 2px 2px 5px black; */
+.screen {
+  /* background: linear-gradient(90deg, #5D54A4, #7C78B8); */
+  position: relative;
+  height: 450px;
+  width: 360px;
+  /* box-shadow: 2px 2px 5px black; */
   font-family: Eurostile, sans-serif;
 }
 
 .screen__content {
-z-index: 1;
-position: relative;	
-height: 100%;
+  z-index: 1;
+  position: relative;
+  height: 100%;
   background-color: #414447;
   border-radius: 25px;
   box-shadow: 0px 0px 5px black;
@@ -230,34 +234,34 @@ clip-path: inset(0 0 0 0);
 } */
 
 .screen__background__shape {
-transform: rotate(45deg);
-position: absolute;
+  transform: rotate(45deg);
+  position: absolute;
 }
 
 .screen__background__shape1 {
-height: 520px;
-width: 520px;
-background: #FFF;	
-top: -50px;
-right: 120px;	
-border-radius: 0 72px 0 0;
+  height: 520px;
+  width: 520px;
+  background: #FFF;
+  top: -50px;
+  right: 120px;
+  border-radius: 0 72px 0 0;
 }
 
 .login {
-/* width: 320px; */
-padding: 30px;
-padding-top: 100px;
+  /* width: 320px; */
+  padding: 30px;
+  padding-top: 100px;
 }
 
 .login__field {
-padding: 10px 0px;	
-position: relative;	
+  padding: 10px 0px;
+  position: relative;
 }
 
 .login__icon {
-position: absolute;
-top: 30px;
-color: #7875B5;
+  position: absolute;
+  top: 30px;
+  color: #7875B5;
 }
 
 .login__heading {
@@ -272,14 +276,14 @@ color: #7875B5;
 }
 
 .login__input {
-border: none;
+  border: none;
   border-radius: 5px;
-background: white;
-padding: 10px;
-padding-left: 24px;
-font-weight: 700;
-width: 75%;
-transition: .2s;
+  background: white;
+  padding: 10px;
+  padding-left: 24px;
+  font-weight: 700;
+  width: 75%;
+  transition: .2s;
   font-size: medium;
   width: 100%;
   /* border: 2px lightgray solid; */
@@ -289,29 +293,29 @@ transition: .2s;
 .login__input:active,
 .login__input:focus,
 .login__input:hover {
-outline: none;
-border-bottom-color: #6A679E;
+  outline: none;
+  border-bottom-color: #6A679E;
 }
 
 .login__submit {
-background: #FA413C;
-font-size: 16px;
+  background: #FA413C;
+  font-size: 16px;
   font-family: Eurostile;
-margin-top: 40px;
-border-radius: 5px;
-font-weight: 700;
-display: flex;
-align-items: center;
+  margin-top: 40px;
+  border-radius: 5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
   justify-content: center;
-width: 100%;
-color: white;
-cursor: pointer;
+  width: 100%;
+  color: white;
+  cursor: pointer;
   border: 0;
   box-shadow: none;
   height: 45px;
 }
 
-.login__submit > .material-icons {
+.login__submit>.material-icons {
   margin-right: 10px;
   font-size: large;
   font-weight: bold;
@@ -329,43 +333,47 @@ cursor: pointer;
 }
 
 .forgot_password a:hover {
-  color:white; 
-  text-decoration:none; 
-  cursor:pointer;  
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 
 .button__icon {
-font-size: 24px;
-margin-left: auto;
-color: #7875B5;
+  font-size: 24px;
+  margin-left: auto;
+  color: #7875B5;
 }
 
-.social-login {	
-position: absolute;
-height: 140px;
-width: 160px;
-text-align: center;
-bottom: 0px;
-right: 0px;
-color: #fff;
+.social-login {
+  position: absolute;
+  height: 140px;
+  width: 160px;
+  text-align: center;
+  bottom: 0px;
+  right: 0px;
+  color: #fff;
 }
 
 .social-icons {
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .social-login__icon {
-padding: 20px 10px;
-color: #fff;
-text-decoration: none;	
-text-shadow: 0px 0px 8px #7875B5;
+  padding: 20px 10px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0px 0px 8px #7875B5;
 }
 
 .social-login__icon:hover {
-transform: scale(1.5);	
+  transform: scale(1.5);
+}
+
+.MuiInputBase-input.Mui-disabled {
+  color: rgba(0, 0, 0, 0.42) !important;
 }
 
 @media only screen and (min-width: 600px) {
