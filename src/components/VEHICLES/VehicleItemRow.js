@@ -16,7 +16,6 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
     }
 
     const TuvDate = new Date(vehicle.TUV).toLocaleDateString('de-DE')
-    const AuDate = new Date(vehicle.AU).toLocaleDateString('de-DE')
     const LeasingDate = vehicle.contractExpirationDate ? new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE') : ''
     const CreditDate = vehicle.contractExpirationDate ? new Date(vehicle.contractExpirationDate).toLocaleDateString('de-DE') : ''
 
@@ -38,7 +37,8 @@ const VehicleItemRow = ({ vehicle, dashboardAdaptiveTitle }) => {
                 <TableCell>
                     {dashboardAdaptiveTitle === 'Finanzierung' && vehicle.vehiclePaymentTypeVariant === 'credit' && vehicle.contractExpirationDate ? CreditDate :
                         dashboardAdaptiveTitle === 'Leasing' && vehicle.vehiclePaymentTypeVariant === 'leasing' && vehicle.contractExpirationDate ? LeasingDate
-                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' && vehicle.nextTechnicalInspection ? NtiServiceDate : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' && vehicle.nextTechnicalInspection ? NtiServiceDate : vehicle.TUV && vehicle.AU && `${TuvDate} (TUV), ${AuDate} (AU)`}
+                            : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' && vehicle.nextTechnicalInspection ? NtiServiceDate : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig'
+                                && vehicle.nextTechnicalInspection ? NtiServiceDate : vehicle.TUV && `${TuvDate}`}
                 </TableCell>
             }
         </TableRow>

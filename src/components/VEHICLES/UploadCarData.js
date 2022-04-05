@@ -16,9 +16,7 @@ import {
     Box,
     FormControlLabel,
     Switch,
-    Collapse,
-    FormGroup,
-    FormLabel
+    Collapse
 } from '@material-ui/core';
 import Alerts from './../UI/Alerts'
 import axios from 'axios'
@@ -69,7 +67,6 @@ const UploadCarData = ({ t }) => {
         registrationNumber: '',
         nextTechnicalInspection: null,
         TUV: null,
-        AU: null,
         yearlyTax: ''
     })
 
@@ -86,7 +83,6 @@ const UploadCarData = ({ t }) => {
         fields.firstVehicleRegistrationOnOwner !== null && formData.append('firstVehicleRegistrationOnOwner', fields.firstVehicleRegistrationOnOwner)
         fields.lastTechnicalInspection !== null && formData.append('lastTechnicalInspection', fields.lastTechnicalInspection)
         fields.nextTechnicalInspection !== null && formData.append('nextTechnicalInspection', fields.nextTechnicalInspection)
-        fields.AU !== null && formData.append('AU', fields.AU)
         fields.TUV !== null && formData.append('TUV', fields.TUV)
         fields.yearlyTax !== '' && formData.append('yearlyTax', fields.yearlyTax)
     }
@@ -396,20 +392,6 @@ const UploadCarData = ({ t }) => {
                                     onChange={(e) => setFields({ ...fields, TUV: e })}
                                     className={classes.textField}
                                     value={fields.TUV !== '' && fields.TUV}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                                <DatePicker
-                                    name="AU"
-                                    id="AU"
-                                    autoOk
-                                    format="dd/MM/yyyy"
-                                    placeholder='tt/mm/jjjj'
-                                    label={t('AUInputLabel')}
-                                    onChange={(e) => setFields({ ...fields, AU: e })}
-                                    className={classes.textField}
-                                    value={fields.AU !== '' && fields.AU}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}

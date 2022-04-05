@@ -5,14 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { useData } from '../../contexts/DataContext';
 import Chip from '@material-ui/core/Chip';
 import { withNamespaces } from 'react-i18next';
-// import BuildIcon from '@material-ui/icons/Build';
 
 const CarRow = ({ car, t }) => {
     const history = useHistory()
     const { vehicles, setSelectedCar, myVehicles, user, dashboardAdaptiveTitle } = useData()
     let selectedCar
-
-    // console.log(dashboardAdaptiveTitle)
 
     if (user.role === 'admin') {
         selectedCar = vehicles.find(v => v._id === car._id)
@@ -39,7 +36,6 @@ const CarRow = ({ car, t }) => {
     const HUDiff = Math.round(Math.abs((curDate - AUDate) / oneDay)) + 1;
 
     const carTuvExpired = new Date(car.TUV) < new Date()
-    const carAuExpired = new Date(car.AU) < new Date()
     const NTIExpired = new Date(car.nextTechnicalInspection) < new Date()
 
     return (
@@ -54,15 +50,6 @@ const CarRow = ({ car, t }) => {
             </TableCell>
             {user.role === 'admin' &&
                 <TableCell>
-                    {/* {car.TUVExpiresInTwoMonths &&
-                        <Chip
-                            label={`TÜV in ${TUVDiff} ${t('DaysPlural')}`}
-                            color="primary"
-                            size="small"
-                            variant="default"
-                            style={{ cursor: 'pointer', marginRight: 5 }}
-                        />
-                    } */}
                     {new Date(TUVDate) > new Date() && new Date(TUVDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
                             label={`TÜV fällig in ${TUVDiff} Tag(en)`}
@@ -72,15 +59,6 @@ const CarRow = ({ car, t }) => {
                             style={{ cursor: 'pointer', marginRight: 5 }}
                         />
                     }
-                    {/* {car.AUExpiresInTwoMonths &&
-                        <Chip
-                            label={`HU in ${HUDiff} ${t('DaysPlural')}`}
-                            color="primary"
-                            size="small"
-                            variant="default"
-                            style={{ cursor: 'pointer', marginRight: 5 }}
-                        />
-                    } */}
                     {new Date(AUDate) > new Date() && new Date(AUDate) < new Date().setMonth(new Date().getMonth() + 1) &&
                         <Chip
                             label={`AU fällig in ${HUDiff} Tag(en)`}
@@ -108,15 +86,6 @@ const CarRow = ({ car, t }) => {
                             style={{ cursor: 'pointer', marginLeft: 5 }}
                         />
                     }
-                    {carAuExpired &&
-                        <Chip
-                            label="AU abgelaufen"
-                            color="primary"
-                            size="small"
-                            variant="default"
-                            style={{ cursor: 'pointer', marginLeft: 5 }}
-                        />
-                    }
                     {NTIExpired &&
                         <Chip
                             label="Service abgelaufen"
@@ -133,7 +102,7 @@ const CarRow = ({ car, t }) => {
                         dashboardAdaptiveTitle === 'Leasing' && car.vehiclePaymentTypeVariant === 'leasing' && car.contractExpirationDate ? LeasingDate.toLocaleDateString('de-DE')
                             : dashboardAdaptiveTitle === 'Service läuft in 30 Tagen ab' && car.nextTechnicalInspection ? NTIDate.toLocaleDateString('de-DE')
                                 : dashboardAdaptiveTitle === 'SERVICE (NTI) überfällig' && car.nextTechnicalInspection ? NTIDate.toLocaleDateString('de-DE')
-                                    : car.TUV && car.AU && `${TUVDate.toLocaleDateString('de-DE')} (TUV), ${AUDate.toLocaleDateString('de-DE')} (AU)`}
+                                    : car.TUV ? `${TUVDate.toLocaleDateString('de-DE')}` : null}
                 </TableCell>
             )}
         </TableRow>

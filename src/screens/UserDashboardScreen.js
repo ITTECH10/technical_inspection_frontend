@@ -207,7 +207,7 @@ const DashboardScreen = ({ t }) => {
         setSelectedIndex(1)
 
         history.push('/cars')
-        dashboardGeneratedTitle('TÜV/AU läuft in 30 Tagen ab')
+        dashboardGeneratedTitle('TÜV läuft in 30 Tagen ab')
     }
 
     const handleNavigateNtiExpiredVehicles = () => {

@@ -115,7 +115,7 @@
     "Dashboard.title": "Dashboard",
     "Dashboard.customersBox": "Customers",
     "Dashboard.vehicleBox": "Vehicles",
-    "Dashboard.tuvBox": "TUV/AU Status (expired)",
+    "Dashboard.tuvBox": "TUV Status (expired)",
     "Dashboard.ntiBox": "Service status (expired)",
     "Dashboard.ntiBoxSingle": "Service status",
     "Dashboard.financingStatusBox": "Financing status (8 month calculations)",

@@ -10,11 +10,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import Switch from '@material-ui/core/Switch';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles'
@@ -52,7 +47,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
         lastTechnicalInspection: '',
         nextTechnicalInspection: '',
         TUV: '',
-        AU: '',
         kilometersDriven: '',
         yearlyTax: ''
     })
@@ -77,7 +71,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
             lastTechnicalInspection: selectedCar.lastTechnicalInspection,
             nextTechnicalInspection: selectedCar.nextTechnicalInspection,
             TUV: selectedCar.TUV,
-            AU: selectedCar.AU,
             yearlyTax: selectedCar.yearlyTax
         })
     }, [selectedCar, open])
@@ -124,7 +117,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                 corespondingCar.nextTechnicalInspection = res.data.updatedVehicle.nextTechnicalInspection
                 corespondingCar.technicalInspectionInNextTwoMonths = res.data.updatedVehicle.technicalInspectionInNextTwoMonths
                 corespondingCar.TUV = res.data.updatedVehicle.TUV
-                corespondingCar.AU = res.data.updatedVehicle.AU
 
                 setOpen(false)
                 setVehicles(updatedVehicles)
@@ -348,20 +340,6 @@ function UpdateVehicleInformation({ t, setOnHandleUpdateOpen }) {
                             onChange={(e) => setFields({ ...fields, TUV: e })}
                             className={classes.textField}
                             value={fields.TUV ? new Date(fields.TUV).toISOString().split('T')[0] : null}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <DatePicker
-                            name="AU"
-                            id="AU"
-                            autoOk
-                            format="dd/MM/yyyy"
-                            label={t('AUInputLabel')}
-                            placeholder='tt/mm/jjjj'
-                            onChange={(e) => setFields({ ...fields, AU: e })}
-                            className={classes.textField}
-                            value={fields.AU ? new Date(fields.AU).toISOString().split('T')[0] : null}
                             InputLabelProps={{
                                 shrink: true,
                             }}

@@ -39,10 +39,9 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
     const classes = useStyles()
     const { selectedCar } = useData()
 
-    const { AU, HSN, TSN, TUV, model, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
+    const { HSN, TSN, TUV, model, firstVehicleRegistration, lastUUV, nextUUV, driver, registrationNumber, varantyExpiresAt, firstVehicleRegistrationOnOwner, kilometersDriven, mark, nextTechnicalInspection, yearlyTax, lastTechnicalInspection, chassisNumber } = selectedCar
 
     const formatedLastTechnicalInspection = new Date(lastTechnicalInspection).toLocaleDateString()
-    const formatedAu = new Date(AU).toLocaleDateString()
     const formatedTuv = new Date(TUV).toLocaleDateString()
     const formatedFirstVehicleReg = new Date(firstVehicleRegistration).toLocaleDateString()
     const formatedFirstVehOnOwner = new Date(firstVehicleRegistrationOnOwner).toLocaleDateString()
@@ -103,10 +102,6 @@ const VehicleDetailsGrid = ({ t, setOnHandleDeleteOpen, setOnHandleUpdateOpen })
                 <Box>
                     <Typography className={classes.inputTitle}>{t('NTIInputLabel')}</Typography>
                     <TextField className={classes.input} value={nextTechnicalInspection ? formatedNextTehInsp : t('VehicleDetailsDataNotSetYet')} disabled />
-                </Box>
-                <Box>
-                    <Typography className={classes.inputTitle}>{t('AUInputLabel')}</Typography>
-                    <TextField className={classes.input} value={AU ? formatedAu : t('VehicleDetailsDataNotSetYet')} disabled />
                 </Box>
                 <Box>
                     <Typography className={classes.inputTitle}>{t('TUVInputLabel')}</Typography>
