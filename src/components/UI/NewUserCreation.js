@@ -111,35 +111,6 @@ function NewCustomer({ t }) {
             {t('NewCustomerFormHint')}
           </DialogContentText>
           <form onSubmit={handleSubmit}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">{t('CustomerType')}</FormLabel>
-              <RadioGroup row aria-label="position" name="position" defaultValue="top">
-                <FormControlLabel
-                  value="firmenkunde"
-                  control={
-                    <Radio
-                      name="customerType"
-                      color="secondary"
-                      checked={fields.customerType === 'firmenkunde'}
-                      onChange={handleChange}
-                    />}
-                  label={t('CoorporateClient')}
-                  labelPlacement="end"
-                />
-                <FormControlLabel
-                  value="privat"
-                  control={
-                    <Radio
-                      name="customerType"
-                      color="secondary"
-                      checked={fields.customerType === 'privat'}
-                      onChange={handleChange}
-                    />}
-                  label={t('NonCoorporateClient')}
-                  labelPlacement="end"
-                />
-              </RadioGroup>
-            </FormControl>
             <FormControl component="fieldset" style={{ display: 'block', marginTop: '.5rem' }}>
               <FormLabel component="legend">An wen geht die Registrierungs-E-Mail?</FormLabel>
               <RadioGroup row aria-label="position" name="position" defaultValue="top">
@@ -165,6 +136,36 @@ function NewCustomer({ t }) {
                       onChange={handleChange}
                     />}
                   label="Administrator"
+                  labelPlacement="end"
+                />
+              </RadioGroup>
+            </FormControl>
+            
+            <FormControl component="fieldset">
+              <FormLabel component="legend">{t('CustomerType')}</FormLabel>
+              <RadioGroup row aria-label="position" name="position" defaultValue="top">
+                <FormControlLabel
+                  value="firmenkunde"
+                  control={
+                    <Radio
+                      name="customerType"
+                      color="secondary"
+                      checked={fields.customerType === 'firmenkunde'}
+                      onChange={handleChange}
+                    />}
+                  label={t('CoorporateClient')}
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  value="privat"
+                  control={
+                    <Radio
+                      name="customerType"
+                      color="secondary"
+                      checked={fields.customerType === 'privat'}
+                      onChange={handleChange}
+                    />}
+                  label={t('NonCoorporateClient')}
                   labelPlacement="end"
                 />
               </RadioGroup>
