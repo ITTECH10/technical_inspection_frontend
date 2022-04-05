@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom'
 import { useData } from './../../contexts/DataContext'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { withNamespaces } from 'react-i18next';
+import NumberFormat from 'react-number-format'
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -77,7 +78,11 @@ function BarDialog({ t }) {
     const handlePostSubmit = (e) => {
         e.preventDefault()
 
-        const data = { ...fields }
+        const data = {
+            ...fields,
+            cashSum: fields.cashSum !== '' ? fields.cashSum.split('€')[1].replaceAll(',', '') : undefined
+        }
+
         axios.post(`/cars/${carId}/contracts/cash`, data)
             .then(res => {
                 if (res.status === 201) {
@@ -99,7 +104,12 @@ function BarDialog({ t }) {
     const handlePutSubmit = (e) => {
         e.preventDefault()
 
-        const data = { ...fields, vehiclePayedFor: carId }
+        const data = {
+            ...fields,
+            vehiclePayedFor: carId,
+            cashSum: fields.cashSum !== '' ? +fields.cashSum.split('€')[1].replaceAll(',', '') : undefined
+        }
+
         axios.put(`/contracts/cash/${cashPaymentId}`, data)
             .then(res => {
                 if (res.status === 202) {
@@ -159,11 +169,14 @@ function BarDialog({ t }) {
                             type="text"
                             fullWidth
                         />
-                        <TextField
+                        <NumberFormat
+                            customInput={TextField}
                             name="cashSum"
                             margin="dense"
                             id="cashSum"
+                            thousandSeparator
                             value={fields.cashSum}
+                            prefix="€"
                             onChange={handleChange}
                             required
                             label={t('Payment.cash.sum')}
