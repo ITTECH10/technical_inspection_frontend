@@ -205,7 +205,6 @@ function EditUserDetails({ userId, t }) {
                                 id="companyName"
                                 label={t('companynameLabel')}
                                 onChange={handleChange}
-                                required
                                 type="text"
                                 fullWidth
                             />}
@@ -217,7 +216,6 @@ function EditUserDetails({ userId, t }) {
                                 id="customerPartner"
                                 label={t('ContactPartner')}
                                 onChange={handleChange}
-                                required
                                 type="text"
                                 fullWidth
                             />}
@@ -263,7 +261,6 @@ function EditUserDetails({ userId, t }) {
                             label={t('GenderNewUser')}
                             onChange={handleChange}
                             fullWidth
-                            required
                             style={{ margin: "8px 0" }}
                             SelectProps={{
                                 native: true,
@@ -294,7 +291,6 @@ function EditUserDetails({ userId, t }) {
                             id="phone-number"
                             label={t('PhoneNumberInputLabel')}
                             type="text"
-                            required
                             onChange={handleChange}
                             fullWidth
                         />
@@ -305,7 +301,6 @@ function EditUserDetails({ userId, t }) {
                             id="smartphoneNumber-number"
                             label={`${t('SmartphoneLabel')}`}
                             type="text"
-                            required
                             onChange={handleChange}
                             fullWidth
                         />
@@ -318,7 +313,6 @@ function EditUserDetails({ userId, t }) {
                             type="text"
                             onChange={handleChange}
                             fullWidth
-                            required
                         />
                         <TextField
                             name="postCode"
@@ -329,7 +323,6 @@ function EditUserDetails({ userId, t }) {
                             type="text"
                             onChange={handleChange}
                             fullWidth
-                            required
                         />
                         <TextField
                             name="city"
@@ -340,7 +333,6 @@ function EditUserDetails({ userId, t }) {
                             type="text"
                             onChange={handleChange}
                             fullWidth
-                            required
                         />
                         <DialogActions>
                             <Button onClick={handleClose} color="primary" variant="contained">
