@@ -111,7 +111,7 @@ function NewCustomer({ t }) {
             {t('NewCustomerFormHint')}
           </DialogContentText>
           <form onSubmit={handleSubmit}>
-            <FormControl component="fieldset" style={{ display: 'block', marginTop: '.5rem' }}>
+            <FormControl component="fieldset" style={{ display: 'block', marginTop: '20px', marginBottom: '20px' }}>
               <FormLabel component="legend">An wen geht die Registrierungs-E-Mail?</FormLabel>
               <RadioGroup row aria-label="position" name="position" defaultValue="top">
                 <FormControlLabel
