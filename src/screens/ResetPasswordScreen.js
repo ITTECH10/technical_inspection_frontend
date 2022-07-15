@@ -109,16 +109,16 @@ const ResetPasswordScreen = ({ t }) => {
                 <Grid item xs={12} sm={6} className={classes.gridChildTwo}>
                     <Paper elevation={2} className={classes.mainPaper}>
                         <Box className={classes.mainBox}>
-                            <Typography align="center" variant="h4">Reset Your Password</Typography>
+                            <Typography align="center" variant="h4">Passwort zurücksetzen</Typography>
                             <Box className={classes.inputContainer}>
                                 <form onSubmit={handleSubmit} className={classes.inputForm}>
-                                    <TextField autoFocus name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Password" type="password" />
-                                    <TextField name="confirmPassword" className={classes.input} id="confirmPwd-standard" onChange={handleChange} label="Confirm Password" type="password" />
+                                    <TextField autoFocus name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Passwort" type="password" />
+                                    <TextField name="confirmPassword" className={classes.input} id="confirmPwd-standard" onChange={handleChange} label="Bestätigen" type="password" />
 
                                     <Button className={classes.btnSubmit} color="primary" variant="contained" type="submit">
-                                        {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Reset'}
+                                        {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Zurücksetzen'}
                                     </Button>
-                                    <Link style={{ textAlign: 'center', cursor: 'pointer', marginTop: 5 }} onClick={() => history.push('/')}>Return to home</Link>
+                                    <Link style={{ textAlign: 'center', cursor: 'pointer', marginTop: 5 }} onClick={() => history.push('/')}>Zurück zum Startbildschirm</Link>
                                 </form>
                             </Box>
                         </Box>
