@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     },
     btnSubmit: {
         marginTop: 10,
-        width: 80,
+        width: 110,
         margin: '0 auto'
     }
 }))
@@ -112,8 +112,8 @@ const ResetPasswordScreen = ({ t }) => {
                             <Typography align="center" variant="h4">Passwort zurücksetzen</Typography>
                             <Box className={classes.inputContainer}>
                                 <form onSubmit={handleSubmit} className={classes.inputForm}>
-                                    <TextField autoFocus name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Passwort" type="password" />
-                                    <TextField name="confirmPassword" className={classes.input} id="confirmPwd-standard" onChange={handleChange} label="Bestätigen" type="password" />
+                                    <TextField autoFocus name="password" className={classes.input} id="pwd-standard" onChange={handleChange} label="Neues Passwort" type="password" />
+                                    <TextField name="confirmPassword" className={classes.input} id="confirmPwd-standard" onChange={handleChange} label="Passwort wiederholen" type="password" />
 
                                     <Button className={classes.btnSubmit} color="primary" variant="contained" type="submit">
                                         {buttonLoading ? <CircularProgress style={{ height: 25, width: 25, color: '#fff' }} /> : 'Zurücksetzen'}
